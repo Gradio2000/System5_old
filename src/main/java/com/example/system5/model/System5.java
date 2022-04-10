@@ -1,19 +1,31 @@
 package com.example.system5.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.hateoas.RepresentationModel;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "system5")
-public class System5 {
+public class System5 extends RepresentationModel<System5> {
     @Id
     @Column(name = "system5_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private int system5Id;
 
-    @Column(name = "month_id")
-    private int monthId;
+//    @Column(name = "month_id")
+//    private int monthId;
+
+    private String monthName;
+
+    public String getMonthName() {
+        return monthName;
+    }
+
+    public void setMonthName(String monthName) {
+        this.monthName = monthName;
+    }
 
     @Column(name = "res1")
     private String res1;
@@ -34,13 +46,13 @@ public class System5 {
         this.system5Id = system5Id;
     }
 
-    public int getMonthId() {
-        return monthId;
-    }
-
-    public void setMonthId(int monthId) {
-        this.monthId = monthId;
-    }
+//    public int getMonthId() {
+//        return monthId;
+//    }
+//
+//    public void setMonthId(int monthId) {
+//        this.monthId = monthId;
+//    }
 
     public String getRes1() {
         return res1;

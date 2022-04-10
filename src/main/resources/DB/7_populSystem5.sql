@@ -5,7 +5,7 @@ create table system5
     system5_id serial
         constraint system5_pk
             primary key,
-    month_id   char(1) not null,
+    month_id   int not null,
     res1       char(1) not null,
     res2       char(1) not null,
     res3       char(1) not null,
