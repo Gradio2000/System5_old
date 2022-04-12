@@ -24,7 +24,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class System5Controller {
 
     private final System5Repository system5Repository;
-    private System5 system5;
 
     public System5Controller(System5Repository system5Repository) {
         this.system5Repository = system5Repository;

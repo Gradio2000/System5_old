@@ -38,8 +38,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .anyRequest()
                 .authenticated()
+
                 .and()
-                .httpBasic();
+                .httpBasic()
+
+                .and()
+                .formLogin()
+                .loginProcessingUrl("/perform_login")
+                .defaultSuccessUrl("/home.html", true)
+                .failureUrl("/login.html?error=true")
+
+                .and()
+                .logout()
+                .logoutUrl("/perform_logout")
+                .deleteCookies("JSESSIONID");
     }
 
     @Bean
