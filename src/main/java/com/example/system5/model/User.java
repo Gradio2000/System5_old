@@ -48,8 +48,8 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="position_id")
+    @OneToOne(targetEntity = Position.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "position_id", referencedColumnName = "position_id")
     private Position position;
 
     public int getUserId() {
@@ -92,5 +92,11 @@ public class User {
         this.roles = roles;
     }
 
+    public Position getPosition() {
+        return position;
+    }
 
+    public void setPosition(Position position) {
+        this.position = position;
+    }
 }

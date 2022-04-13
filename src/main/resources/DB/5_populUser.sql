@@ -26,6 +26,6 @@ create index idx_user_name
     on users (name);
 
 
-INSERT INTO USERS (EMAIL, NAME, PASSWORD)
-VALUES ('aa@aa.aa', 'user', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi'),
-       ('bb@bb.bb', 'admin', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi')
+INSERT INTO USERS (EMAIL, NAME, PASSWORD, position_id)
+VALUES ('aa@aa.aa', 'user', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 2),
+       ('bb@bb.bb', 'admin', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 1)
