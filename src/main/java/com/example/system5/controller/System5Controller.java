@@ -2,22 +2,22 @@ package com.example.system5.controller;
 
 
 import com.example.system5.model.System5;
+import com.example.system5.model.User;
 import com.example.system5.repository.System5Repository;
+import com.example.system5.util.AuthUser;
 import com.sun.istack.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
-import org.springframework.hateoas.RepresentationModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 
 @RestController
@@ -37,31 +37,20 @@ public class System5Controller {
                 }
             };
 
-    @GetMapping(value = "/start", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<EntityModel<System5>> getStart(int id){
-        return new ResponseEntity<>(ASSEMBLER.toModel(system5Repository.getById(id)), HttpStatus.OK);
-    }
-
-
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public CollectionModel<System5> getAll(){
-        List<System5> system5List = system5Repository.findAll();
-        for (System5 system5 : system5List){
-            Link selfLink = linkTo(methodOn(System5Controller.class)
-                    .getStart(system5.getSystem5Id())).withSelfRel();
-
-            system5.add(selfLink);
-        }
-        Link link = linkTo(methodOn(System5Controller.class)).withSelfRel();
-
-        return CollectionModel.of(system5List, link);
+    public CollectionModel<System5> getAll(@AuthenticationPrincipal AuthUser authUser){
+        User user = authUser.getUser();
+        List<System5> system5List = system5Repository.findAll(user.getUserId());
+        return CollectionModel.of(system5List);
     }
 
-    @PostMapping(value = "/start", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<EntityModel<System5>> addMark(@RequestBody System5 system5){
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<EntityModel<System5>> addMark(@RequestBody System5 system5,
+                                                        @AuthenticationPrincipal AuthUser authUser){
+
+        User user = authUser.getUser();
+        system5.setUserId(user.getUserId());
         system5Repository.save(system5);
         return new ResponseEntity<>(ASSEMBLER.toModel(system5), HttpStatus.OK);
     }
-
-
 }

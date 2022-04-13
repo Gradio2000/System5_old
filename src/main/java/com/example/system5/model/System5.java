@@ -14,18 +14,12 @@ public class System5 extends RepresentationModel<System5> {
     @JsonIgnore
     private int system5Id;
 
-//    @Column(name = "month_id")
-//    private int monthId;
+    @Column(name = "user_id")
+    @JsonIgnore
+    private int userId;
 
-    private String monthName;
-
-    public String getMonthName() {
-        return monthName;
-    }
-
-    public void setMonthName(String monthName) {
-        this.monthName = monthName;
-    }
+    @Column(name = "month")
+    private String month;
 
     @Column(name = "res1")
     private String res1;
@@ -45,14 +39,6 @@ public class System5 extends RepresentationModel<System5> {
     public void setSystem5Id(int system5Id) {
         this.system5Id = system5Id;
     }
-
-//    public int getMonthId() {
-//        return monthId;
-//    }
-//
-//    public void setMonthId(int monthId) {
-//        this.monthId = monthId;
-//    }
 
     public String getRes1() {
         return res1;
@@ -92,5 +78,22 @@ public class System5 extends RepresentationModel<System5> {
 
     public void setRes5(String res5) {
         this.res5 = res5;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int user_id) {
+        this.userId = user_id;
+    }
+
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String monthName) {
+        this.month = monthName;
     }
 }
