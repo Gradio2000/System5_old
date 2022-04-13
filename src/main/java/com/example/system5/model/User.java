@@ -48,28 +48,9 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    public User() {
-    }
-
-    public User(String name, String email, String password, Set<Role> roles) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
-
-    public User(int id, String name, String email, String password) {
-        this.userId = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-
-    public User(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="position_id")
+    private Position position;
 
     public int getUserId() {
         return userId;

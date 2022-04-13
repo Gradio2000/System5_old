@@ -50,8 +50,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .and()
                 .logout()
+                .logoutSuccessUrl("/login.html")
                 .logoutUrl("/perform_logout")
-                .deleteCookies("JSESSIONID");
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+
+                .and()
+                .rememberMe().key("uniqueAndSecret")
+                .rememberMeParameter("remember-me-new");
     }
 
     @Bean
