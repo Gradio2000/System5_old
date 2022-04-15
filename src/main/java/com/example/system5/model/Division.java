@@ -3,6 +3,7 @@ package com.example.system5.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "divisions")
@@ -17,6 +18,9 @@ public class Division {
     @Column(name = "division")
     private String division;
 
+    @OneToMany(targetEntity = Position.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "division_id", referencedColumnName = "division_id")
+    private Set<Position> positions;
 
     public int getDivisionId() {
         return divisionId;
@@ -34,23 +38,11 @@ public class Division {
         this.division = division;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Division division = (Division) o;
-
-        if (divisionId != division.divisionId) return false;
-        if (this.division != null ? !this.division.equals(division.division) : division.division != null) return false;
-
-        return true;
+    public Set<Position> getPositions() {
+        return positions;
     }
 
-    @Override
-    public int hashCode() {
-        int result = divisionId;
-        result = 31 * result + (division != null ? division.hashCode() : 0);
-        return result;
+    public void setPositions(Set<Position> positions) {
+        this.positions = positions;
     }
 }

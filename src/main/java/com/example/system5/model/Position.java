@@ -16,6 +16,10 @@ public class Position {
     @Column(name = "position")
     private String position;
 
+    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "position_id", referencedColumnName = "position_id")
+    private User user;
+
     public int getPosition_id() {
         return position_id;
     }
@@ -30,5 +34,13 @@ public class Position {
 
     public void setPosition(String position) {
         this.position = position;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
