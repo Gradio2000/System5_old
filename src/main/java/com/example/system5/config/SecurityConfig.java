@@ -49,6 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/perform_login")
                 .defaultSuccessUrl("/home.html", true)
                 .failureUrl("/login.html?error=true")
+                .usernameParameter("login")
+                .passwordParameter("password")
 
                 .and()
                 .logout()
@@ -56,6 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutUrl("/perform_logout")
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
+
 
                 .and()
                 .rememberMe().key("uniqueAndSecret")

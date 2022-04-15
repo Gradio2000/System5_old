@@ -5,18 +5,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "users", indexes = {
-        @Index(name = "idx_user_name", columnList = "name"),
-        @Index(name = "idx_user_user_id", columnList = "user_id")
-}, uniqueConstraints = {
-        @UniqueConstraint(name = "user_email_unique", columnNames = {"email"})
-})
+@Table(name = "users",
+        indexes = {@Index(name = "idx_user_user_id", columnList = "user_id")})
 public class User {
     @Id
     @Column(name = "user_id")
@@ -29,11 +24,10 @@ public class User {
     @NotEmpty(message = "name mustn't be empty")
     private String name;
 
-    @Column(name = "email")
-    @Email(message = "email isn't valid")
-    @NotEmpty(message = "email mustn't be empty")
+    @Column(name = "login")
+    @NotEmpty(message = "login mustn't be empty")
     @Size(max = 128, message = "size is too much")
-    private String email;
+    private String login;
 
     @Column(name = "password")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
@@ -68,12 +62,12 @@ public class User {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {
@@ -92,11 +86,4 @@ public class User {
         this.roles = roles;
     }
 
-//    public Position getPosition() {
-//        return position;
-//    }
-//
-//    public void setPosition(Position position) {
-//        this.position = position;
-//    }
 }
