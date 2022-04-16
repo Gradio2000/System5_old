@@ -42,10 +42,6 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-//    @OneToOne(targetEntity = Position.class, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "position_id", referencedColumnName = "position_id")
-//    private Position position;
-
     public int getUserId() {
         return userId;
     }

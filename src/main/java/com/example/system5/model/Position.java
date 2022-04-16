@@ -16,9 +16,13 @@ public class Position {
     @Column(name = "position")
     private String position;
 
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "position_id", referencedColumnName = "position_id")
-    private User user;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name = "position_user",
+            joinColumns =
+                    { @JoinColumn(name = "position_id", referencedColumnName = "position_id") },
+            inverseJoinColumns =
+                    { @JoinColumn(name = "user_id", referencedColumnName = "user_id") })
+    public User user;
 
     public int getPosition_id() {
         return position_id;

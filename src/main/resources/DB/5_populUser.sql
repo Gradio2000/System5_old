@@ -27,5 +27,5 @@ create index idx_user_name
 
 
 INSERT INTO USERS (login, NAME, PASSWORD, position_id)
-VALUES ('aa', 'user', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 2),
-       ('bb', 'admin', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 1)
+VALUES ('aa', 'user', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 1),
+       ('bb', 'admin', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 9)

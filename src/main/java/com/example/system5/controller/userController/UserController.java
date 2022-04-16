@@ -1,5 +1,6 @@
-package com.example.system5.controller;
+package com.example.system5.controller.userController;
 
+import com.example.system5.dto.UserDTO;
 import com.example.system5.model.User;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
@@ -19,8 +20,10 @@ public class UserController {
     }
 
     @GetMapping(value = "/getUser", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> getById(@AuthenticationPrincipal AuthUser authUser){
+    public ResponseEntity<UserDTO> getById(@AuthenticationPrincipal AuthUser authUser){
         User user = userRepository.getById(authUser.getUser().getUserId());
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        UserDTO userDTO = new UserDTO(user.getName());
+        return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
+
 }
