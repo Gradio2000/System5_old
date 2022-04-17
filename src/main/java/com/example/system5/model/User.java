@@ -42,6 +42,9 @@ public class User {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
+    @Column(name = "position_id")
+    private int position_id;
+
     public int getUserId() {
         return userId;
     }
@@ -82,4 +85,11 @@ public class User {
         this.roles = roles;
     }
 
+    public int getPosition_id() {
+        return position_id;
+    }
+
+    public void setPosition_id(int position_id) {
+        this.position_id = position_id;
+    }
 }

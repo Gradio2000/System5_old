@@ -3,6 +3,7 @@ package com.example.system5.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "positions")
@@ -23,6 +24,15 @@ public class Position {
             inverseJoinColumns =
                     { @JoinColumn(name = "user_id", referencedColumnName = "user_id") })
     public User user;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "commander_employee",
+            joinColumns =
+                    { @JoinColumn(name = "commander_position_id", referencedColumnName = "position_id")},
+        inverseJoinColumns =
+                    { @JoinColumn(name = "position_id", referencedColumnName = "position_id")})
+    List<Position> employersList;
+
 
     public int getPosition_id() {
         return position_id;
@@ -46,5 +56,13 @@ public class Position {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Position> getEmployersList() {
+        return employersList;
+    }
+
+    public void setEmployersList(List<Position> employersList) {
+        this.employersList = employersList;
     }
 }
