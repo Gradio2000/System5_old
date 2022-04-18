@@ -20,12 +20,6 @@ public class DivisionController {
         this.divisionRepository = divisionRepository;
     }
 
-//    @GetMapping("/shtat")
-//    public CollectionModel<Division> getStat(){
-//        List<Division> divisions = divisionRepository.findAll();
-//        return CollectionModel.of(divisions);
-//    }
-
     @GetMapping("/shtat")
     public ResponseEntity<CollectionModel<Division>> getStat(){
         List<Division> divisions = divisionRepository.findAll();

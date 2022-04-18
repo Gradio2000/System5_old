@@ -17,7 +17,7 @@ public class Position {
     @Column(name = "position")
     private String position;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "position_user",
             joinColumns =
                     { @JoinColumn(name = "position_id", referencedColumnName = "position_id") },
