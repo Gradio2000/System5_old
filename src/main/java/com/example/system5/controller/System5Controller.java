@@ -53,4 +53,10 @@ public class System5Controller {
         system5Repository.save(system5);
         return new ResponseEntity<>(ASSEMBLER.toModel(system5), HttpStatus.OK);
     }
+
+    @GetMapping("/{id}/list")
+    public CollectionModel<System5> getByUserId(@PathVariable Integer id){
+        List<System5> system5List = system5Repository.findByUserId(id);
+        return CollectionModel.of(system5List);
+    }
 }

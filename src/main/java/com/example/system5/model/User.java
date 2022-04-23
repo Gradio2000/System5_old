@@ -3,6 +3,7 @@ package com.example.system5.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -12,7 +13,7 @@ import java.util.Set;
 @Entity
 @Table(name = "users",
         indexes = {@Index(name = "idx_user_user_id", columnList = "user_id")})
-public class User {
+public class User extends RepresentationModel<User> {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

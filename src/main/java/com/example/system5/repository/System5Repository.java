@@ -22,4 +22,5 @@ public interface System5Repository extends JpaRepository<System5, Integer> {
                     " FROM system5 WHERE user_id = :user_id")
     List<System5> findAll(Integer user_id);
 
+    List<System5> findByUserId(int id);
 }

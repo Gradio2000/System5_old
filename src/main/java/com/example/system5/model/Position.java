@@ -1,13 +1,14 @@
 package com.example.system5.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Table(name = "positions")
-public class Position {
+public class Position extends RepresentationModel<Position> {
     @Column(name = "position_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
