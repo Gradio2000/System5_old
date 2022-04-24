@@ -5,15 +5,13 @@ create table users
     user_id     serial
         constraint users_pk
             primary key,
-    login       varchar(128)
-        constraint user_email_unique
-            unique,
+    login       varchar(128),
     name        varchar(128),
     password    varchar(256),
     position_id integer
-        constraint users_positions_position_id_fk
-            references positions
-            on update cascade on delete set null
+--         constraint users_positions_position_id_fk
+--             references positions
+--             on update cascade on delete set null
 );
 
 alter table users

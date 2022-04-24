@@ -54,7 +54,7 @@ public class System5Controller {
         return new ResponseEntity<>(ASSEMBLER.toModel(system5), HttpStatus.OK);
     }
 
-    @GetMapping("/{id}/list")
+    @GetMapping("/list/{id}")
     public CollectionModel<System5> getByUserId(@PathVariable Integer id){
         List<System5> system5List = system5Repository.findByUserId(id);
         return CollectionModel.of(system5List);

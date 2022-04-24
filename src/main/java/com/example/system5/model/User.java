@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -45,6 +46,16 @@ public class User extends RepresentationModel<User> {
 
     @Column(name = "position_id")
     private int position_id;
+
+    public User() {
+    }
+
+    public User(String name, String login, String password) {
+        this.userId = 0;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+    }
 
     public int getUserId() {
         return userId;

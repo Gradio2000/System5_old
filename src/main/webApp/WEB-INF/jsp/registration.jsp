@@ -1,130 +1,35 @@
-<!DOCTYPE html>
-<html lang="en" >
+<%--
+  Created by IntelliJ IDEA.
+  User: aleksejlaskin
+  Date: 23.04.2022
+  Time: 23:13
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"      prefix="c"   %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"       prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql"       prefix="sql" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/xml"       prefix="x"   %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"  %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"  %>
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Registration</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-
-
 </head>
 <body>
     <div class="log-form">
         <h2>Registration</h2>
-        <form id="myForm" class="myForm">
-            <input id="name" type="text" title="name" placeholder="name" name="name" class="field name"/>
-            <input type="email" title="email" placeholder="email" name="email" class="field email"/>
+        <form id="myForm" class="myForm" name="myForm" method="post" action="/adduser">
+            <input type="text" title="name" placeholder="name" name="name" class="field name"/>
+            <sf:errors path="name" cssClass="error" element="div"/>
+
+            <input type="text" title="email" placeholder="email" name="login" class="field email"/>
             <input type="password" title="password" placeholder="password" name="password" class="field password"/>
-            <input type="password" title="password" placeholder="confirm password" class="field confpass"/>
+            <input type="password" title="password" placeholder="confirm password" name="confpass" class="field confpass"/>
             <button type="submit" class="btn" id="but">Registration</button>
         </form>
     </div>
 </body>
-
-<script>
-    document.getElementById("but").addEventListener("click", registr);
-    const form = document.querySelector('.myForm');
-    const password = form.querySelector('.password');
-    const passwordConfirmation = form.querySelector('.confpass');
-    const button = form.querySelector('.btn');
-    const email = form.querySelector('.email');
-    const fields = document.querySelectorAll('.field');
-
-    async function registr(e) {
-        e.preventDefault();
-        if (validateForm()){
-            const data = {};
-            // переберём все элементы input c формы с id="myForm "
-            $('#myForm').find ('input').each(function() {
-                // добавим новое свойство к объекту data
-                // имя свойства – значение атрибута name элемента
-                // значение свойства – значение свойство value элемента
-                data[this.name] = $(this).val();
-            });
-
-           // await fetch('/api/users/add', {
-           //             method: 'POST',
-           //             headers: {
-           //                 'Accept': 'application/json',
-           //                 'Content-Type': 'application/json'
-           //             },
-           //             body: JSON.stringify(data)
-           //         })
-           //      .then(function (response) {
-           //          console.log(response)
-           //          return response.json()
-           //      })
-           //      .then(function (data) {
-           //          console.log(data)
-           //      })
-
-          $.ajax({
-                url:       "/api/users/add",
-                type:      "POST",
-                dataType:  "json",
-                data:      JSON.stringify(data),
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                success: function() {
-                    window.location = "/login"
-                },
-                error: function(xhr) {
-                    // $('#myForm').html('Ошибка. Данные не отправлены.');
-                    const err = JSON.parse(xhr.responseText);
-                    console.log('ошибка= ' + err.email);
-                    const error = generateError(err.email);
-                    email.parentElement.insertBefore(error, email)
-                }
-            });
-
-        }
-    }
-
-    function validateForm(){
-        removeValidation();
-        checkFieldsPresence();
-        checkPasswordMatch();
-        return document.querySelectorAll('.error').length === 0;
-    }
-
-    const removeValidation = function() {
-        const errors = form.querySelectorAll('.error');
-
-        for (let i = 0; i < errors.length; i++) {
-            errors[i].remove()
-        }
-    };
-
-    const checkFieldsPresence = function(){
-        for (let i = 0; i < fields.length; i++) {
-            if (!fields[i].value) {
-                const error = generateError('Cant be blank');
-                fields[i].parentElement.insertBefore(error, fields[i]);
-            }
-        }
-    };
-
-    const checkPasswordMatch = function() {
-        if (password.value !== passwordConfirmation.value) {
-            console.log('not equals');
-            const error = generateError('Password doesnt match');
-            password.parentElement.insertBefore(error, password);
-        }
-    };
-
-    const generateError = function(text) {
-        const error = document.createElement('div');
-        error.className = 'error'
-        error.style.color = 'red'
-        error.innerHTML = text
-        return error
-    };
-
-</script>
-
 <style>
     @font-face {
         font-family: 'Open Sans';
@@ -265,5 +170,4 @@
         color: #1ba0a9;
     }
 </style>
-
 </html>
