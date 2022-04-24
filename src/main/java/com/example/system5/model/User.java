@@ -23,7 +23,6 @@ public class User extends RepresentationModel<User> {
 
     @Column(name = "name")
     @Size(max = 128, message = "size is too much")
-    @NotEmpty(message = "name mustn't be empty")
     private String name;
 
     @Column(name = "login")
@@ -50,9 +49,7 @@ public class User extends RepresentationModel<User> {
     public User() {
     }
 
-    public User(String name, String login, String password) {
-        this.userId = 0;
-        this.name = name;
+    public User(String login, String password) {
         this.login = login;
         this.password = password;
     }

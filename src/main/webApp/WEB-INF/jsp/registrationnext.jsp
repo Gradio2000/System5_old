@@ -19,10 +19,16 @@
 <body>
     <div class="log-form">
         <h2>Registration</h2>
-        <form id="myForm" class="myForm" name="myForm" method="post" action="/adduser">
-            <input type="text" title="email" placeholder="email" name="login" class="field email"/>
-            <input type="password" title="password" placeholder="password" name="password" class="field password"/>
-            <input type="password" title="password" placeholder="confirm password" name="confpass" class="field confpass"/>
+        <form id="myForm" class="myForm" name="myForm" method="post" action="/finishreg">
+            <input type="text" title="name" placeholder="name" name="name" class="field name"/>
+            <sf:errors path="name" cssClass="error" element="div"/>
+
+            <select id="select" name="position_id">
+                <option value="" disabled selected>Выберите должность</option>
+                <c:forEach var="position" items="${positionList}">
+                    <option value="${position.position_id}">${position.position}</option>
+                </c:forEach>
+            </select>
             <button type="submit" class="btn" id="but">Registration</button>
         </form>
     </div>

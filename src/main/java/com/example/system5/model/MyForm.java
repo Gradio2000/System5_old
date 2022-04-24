@@ -12,20 +12,10 @@ import javax.validation.constraints.NotNull;
 public class MyForm {
 
     @NotEmpty
-    private String name;
     private String login;
-
-
     private String password;
     private String confpass;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getLogin() {
         return login;
