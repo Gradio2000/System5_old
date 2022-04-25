@@ -1,7 +1,12 @@
 package com.example.system5.model;
 
+import javax.validation.constraints.NotEmpty;
+
 public class FormFinishReg {
+    @NotEmpty(message = "заполните поле")
     private String name;
+
+    @NotEmpty(message = "заполните поле")
     private int position_id;
 
     public FormFinishReg(String name, int position_id) {

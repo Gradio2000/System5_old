@@ -11,23 +11,37 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql"       prefix="sql" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"       prefix="x"   %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"  %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"  %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
 <html>
 <head>
     <title>Registration</title>
 </head>
 <body>
     <div class="log-form">
-        <h2>Registration</h2>
-        <form id="myForm" class="myForm" name="myForm" method="post" action="/adduser">
-            <input type="text" title="email" placeholder="email" name="login" class="field email"/>
-            <input type="password" title="password" placeholder="password" name="password" class="field password"/>
-            <input type="password" title="password" placeholder="confirm password" name="confpass" class="field confpass"/>
-            <button type="submit" class="btn" id="but">Registration</button>
-        </form>
+        <h2>Регистрация</h2>
+        <form:form method="post" action="/adduser" modelAttribute="myForm">
+            <form:input path="login" type="text" title="login" placeholder="логин" class="field email"/>
+            <form:errors path="login" cssClass="errorMsg"/>
+            <form:input path="password" type="password" title="password" placeholder="пароль" class="field password"/>
+            <form:errors path="password" cssClass="errorMsg"/>
+            <form:input path="confpass" type="password" title="password" placeholder="подтвердите пароль" class="field confpass"/>
+            <form:errors path="confpass" cssClass="errorMsg"/>
+            <br/>
+            <button type="submit" class="btn" id="but">Регистрация</button>
+        </form:form>
     </div>
 </body>
 <style>
+    .errorMsg {
+        /*position: absolute;*/
+        /*left: 0;*/
+        /*top: 40px;*/
+        /*width: 200px;*/
+        color: red;
+        font-size: 12px;
+        font-style: italic;
+    }
+
     @font-face {
         font-family: 'Open Sans';
         font-style: normal;
@@ -121,9 +135,10 @@
     }
     .log-form input {
         display: block;
-        margin: auto auto;
+        /*margin: auto auto;*/
         width: 100%;
-        margin-bottom: 2em;
+        /*margin-bottom: 2em;*/
+        margin-top: 2em;
         padding: 0.5em 0;
         border: none;
         border-bottom: 1px solid #eaeaea;
@@ -135,6 +150,7 @@
     }
     .log-form .btn {
         display: inline-block;
+        margin-top: 2em;
         background: #1fb5bf;
         border: 1px solid #1ba0a9;
         padding: 0.5em 2em;

@@ -11,9 +11,13 @@ import javax.validation.constraints.NotNull;
 @Validated
 public class MyForm {
 
-    @NotEmpty
+    @NotEmpty(message = "заполните поле")
     private String login;
+
+    @NotEmpty(message = "заполните поле")
     private String password;
+
+    @NotEmpty(message = "заполните поле")
     private String confpass;
 
 

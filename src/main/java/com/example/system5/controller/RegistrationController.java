@@ -77,7 +77,11 @@ public class RegistrationController {
     }
 
     @PostMapping("/finishreg")
-    public String finishRegistration(@ModelAttribute FormFinishReg formFinishReg){
+    public String finishRegistration(@ModelAttribute @Valid FormFinishReg formFinishReg, BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()){
+            return "registrationnext";
+        }
         AuthUser authUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getById(authUser.getUser().getUserId());
         user.setName(formFinishReg.getName());
