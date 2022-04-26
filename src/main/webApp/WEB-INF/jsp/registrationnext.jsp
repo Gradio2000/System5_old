@@ -6,31 +6,29 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core"      prefix="c"   %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt"       prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/sql"       prefix="sql" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/xml"       prefix="x"   %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"  %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"  %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Registration</title>
 </head>
 <body>
     <div class="log-form">
-        <h2>Registration</h2>
-        <form id="myForm" class="myForm" name="myForm" method="post" action="/finishreg">
-            <input type="text" title="name" placeholder="name" name="name" class="field name"/>
-            <sf:errors path="name" cssClass="error" element="div"/>
-
-            <select id="select" name="position_id">
+        <h2>Регистрация - шаг 2</h2>
+        <form:form method="post" action="/finishreg" modelAttribute="formFinishReg">
+            <form:input type="text" title="name" placeholder="Фамилия И.О." path="name" class="field name"/>
+            <form:errors path="name" cssClass="errorMsg" />
+            <br/>
+            <select id="select" name="position_id" style="margin-top: 2em">
                 <option value="" disabled selected>Выберите должность</option>
                 <c:forEach var="position" items="${positionList}">
                     <option value="${position.position_id}">${position.position}</option>
                 </c:forEach>
             </select>
-            <button type="submit" class="btn" id="but">Registration</button>
-        </form>
+            <form:errors path="position_id" cssClass="errorMsg"/>
+            <br/>
+            <button type="submit" class="btn" id="but">Регистрация</button>
+        </form:form>
     </div>
 </body>
 <style>

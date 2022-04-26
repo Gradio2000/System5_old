@@ -1,18 +1,15 @@
 package com.example.system5.model;
 
+import org.springframework.validation.annotation.Validated;
+
 import javax.validation.constraints.NotEmpty;
 
+@Validated
 public class FormFinishReg {
     @NotEmpty(message = "заполните поле")
     private String name;
 
-    @NotEmpty(message = "заполните поле")
     private int position_id;
-
-    public FormFinishReg(String name, int position_id) {
-        this.name = name;
-        this.position_id = position_id;
-    }
 
     public String getName() {
         return name;

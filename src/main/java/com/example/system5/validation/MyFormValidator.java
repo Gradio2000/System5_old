@@ -16,7 +16,7 @@ public class MyFormValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
         MyForm myForm = (MyForm) target;
-        String password = myForm.getLogin();
+        String password = myForm.getPassword();
         String conpass = myForm.getConfpass();
         if (!password.equals(conpass)){
             errors.rejectValue("confpass", "", "пароли не совпадают");

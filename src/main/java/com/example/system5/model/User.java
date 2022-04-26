@@ -1,16 +1,12 @@
 package com.example.system5.model;
 
 
-import com.example.system5.validation.AdvanceInfo;
-import com.example.system5.validation.BasicInfo;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
@@ -26,20 +22,13 @@ public class User extends RepresentationModel<User> {
 
     @Column(name = "name")
     @Size(max = 128, message = "size is too much")
-    @NotEmpty(groups = AdvanceInfo.class, message = "name mustn't be empty")
-    @NotBlank(groups = AdvanceInfo.class, message = "name mustn't be empty")
-    @NotNull(groups = AdvanceInfo.class, message = "name mustn't be empty")
     private String name;
 
     @Column(name = "login")
-    @NotEmpty(groups = BasicInfo.class, message = "login mustn't be empty")
-    @Size(groups = BasicInfo.class, max = 128, message = "size is too much")
     private String login;
 
     @Column(name = "password")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Size(groups = BasicInfo.class, max = 256, message = "size is too much")
-    @NotEmpty(groups = BasicInfo.class, message = "password mustn't be empty")
     private String password;
 
     @Enumerated(EnumType.STRING)
@@ -50,7 +39,6 @@ public class User extends RepresentationModel<User> {
     private Set<Role> roles;
 
     @Column(name = "position_id")
-    @NotEmpty(groups = AdvanceInfo.class, message = "Необходимо выбрать должность")
     private int position_id;
 
     public User() {

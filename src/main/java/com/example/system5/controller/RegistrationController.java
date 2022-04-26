@@ -6,6 +6,7 @@ import com.example.system5.model.*;
 import com.example.system5.repository.PositionRepository;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
+import com.example.system5.validation.FormFinishRegValidator;
 import com.example.system5.validation.MyFormValidator;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,18 +33,26 @@ public class RegistrationController {
     private final PasswordEncoder passwordEncoder;
     private final PositionRepository positionRepository;
     private final MyFormValidator myFormValidator;
+    private final FormFinishRegValidator formFinishRegValidator;
 
     public RegistrationController(UserRepository userRepository, PasswordEncoder passwordEncoder,
-                                  PositionRepository positionRepository, MyFormValidator myFormValidator) {
+                                  PositionRepository positionRepository, MyFormValidator myFormValidator,
+                                  FormFinishRegValidator formFinishRegValidator) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.positionRepository = positionRepository;
         this.myFormValidator = myFormValidator;
+        this.formFinishRegValidator = formFinishRegValidator;
     }
 
     @InitBinder("myForm")
-    public void initBinder(WebDataBinder binder){
+    public void initBinderMyForm(WebDataBinder binder){
         binder.addValidators(myFormValidator);
+    }
+
+    @InitBinder("formFinishReg")
+    public void initBinderFormFinishReg(WebDataBinder binder){
+        binder.addValidators(formFinishRegValidator);
     }
 
 
@@ -54,7 +63,8 @@ public class RegistrationController {
     }
 
     @PostMapping("/adduser")
-    public String addUser(@ModelAttribute @Valid MyForm myForm, BindingResult bindingResult, Model model, HttpServletRequest request) {
+    public String addUser(@ModelAttribute @Valid MyForm myForm, BindingResult bindingResult,
+                          Model model, HttpServletRequest request) {
 
         if (bindingResult.hasErrors()){
             return "registration";
@@ -72,8 +82,6 @@ public class RegistrationController {
 
         userRepository.save(user);
 
-
-
         try {
             request.login(login, password);
         } catch (ServletException e) {
@@ -82,13 +90,20 @@ public class RegistrationController {
 
         List<Position> positionList = positionRepository.findAll();
         model.addAttribute(positionList);
+
+        FormFinishReg formFinishReg = new FormFinishReg();
+        model.addAttribute(formFinishReg);
         return "registrationnext";
     }
 
     @PostMapping("/finishreg")
-    public String finishRegistration(@ModelAttribute @Valid FormFinishReg formFinishReg, BindingResult bindingResult){
+    public String finishRegistration(@ModelAttribute @Valid FormFinishReg formFinishReg,
+                                     BindingResult bindingResult,
+                                     Model model){
 
         if (bindingResult.hasErrors()){
+            List<Position> positionList = positionRepository.findAll();
+            model.addAttribute(positionList);
             return "registrationnext";
         }
         AuthUser authUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
