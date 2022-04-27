@@ -12,11 +12,15 @@
     <title>Login Form</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 </head>
 <body>
 <div class="log-form">
     <h2>Вход в систему</h2>
     <form action="/perform_login" method="post">
+        <label style="color: crimson"><c:if test="${param.get('error')}">Ошибка логина и пароля</c:if></label>
         <input type="text" title="Логин" placeholder="логин" name="login"/>
         <input type="password" title="Пароль" placeholder="пароль" name="password" />
         <button type="submit" class="btn">Войти</button>

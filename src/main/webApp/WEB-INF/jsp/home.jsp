@@ -19,6 +19,6 @@
     <br/>
     <a href="/my_employers">Посмотреть подчиненных сотрудников</a>
     <br/>
-    <a href="/perform_logout">Выйти</a>
+    <a href="/logout">Выйти</a>
 </body>
 </html>

@@ -1,8 +1,6 @@
 package com.example.system5.controller;
 
 import com.example.system5.model.*;
-
-
 import com.example.system5.repository.PositionRepository;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
@@ -13,9 +11,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
