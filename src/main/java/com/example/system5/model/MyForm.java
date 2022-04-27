@@ -1,23 +1,19 @@
 package com.example.system5.model;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.validation.annotation.Validated;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Validated
 public class MyForm {
 
-    @NotEmpty(message = "заполните поле")
+    @NotEmpty(message = "Заполните поле")
     private String login;
 
-    @NotEmpty(message = "заполните поле")
+    @NotEmpty(message = "Заполните поле")
     private String password;
 
-    @NotEmpty(message = "заполните поле")
+    @NotEmpty(message = "Заполните поле")
     private String confpass;
 
 

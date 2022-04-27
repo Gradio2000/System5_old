@@ -20,5 +20,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Override
     User getById(Integer id);
 
+    boolean existsUserByLogin(String login);
 
+    @Query(nativeQuery = true,
+    value = "SELECT EXISTS(SELECT user_id FROM users WHERE position_id = :position_id)")
+    boolean existsUserByPosition_id(Integer position_id);
 }

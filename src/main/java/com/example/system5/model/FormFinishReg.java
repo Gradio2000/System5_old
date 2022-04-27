@@ -6,7 +6,7 @@ import javax.validation.constraints.NotEmpty;
 
 @Validated
 public class FormFinishReg {
-    @NotEmpty(message = "заполните поле")
+    @NotEmpty(message = "Заполните поле")
     private String name;
 
     private int position_id;
