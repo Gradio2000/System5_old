@@ -20,4 +20,6 @@ create unique index system5_system5_id_uindex
 
 
 insert into system5 (user_id, month, res1, res2, res3, res4, res5)
-values ('1', 'Январь', 'A', 'B', 'C', 'D', 'E')
+values ('1', 'Январь', 'A', 'B', 'C', 'D', 'E'),
+       ('1', 'Февраль', 'A', 'B', 'C', 'D', 'E'),
+       ('1', 'Март', 'A', 'B', 'C', 'D', 'E')

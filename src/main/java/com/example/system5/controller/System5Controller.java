@@ -9,10 +9,9 @@ import com.sun.istack.NotNull;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,7 +19,7 @@ import java.util.List;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 
-@RestController
+@Controller
 public class System5Controller {
 
     private final System5Repository system5Repository;
@@ -37,21 +36,24 @@ public class System5Controller {
                 }
             };
 
-    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public CollectionModel<System5> getAll(@AuthenticationPrincipal AuthUser authUser){
+    @GetMapping(value = "/list")
+    public String getAll(@AuthenticationPrincipal AuthUser authUser, Model model){
         User user = authUser.getUser();
         List<System5> system5List = system5Repository.findAll(user.getUserId());
-        return CollectionModel.of(system5List);
+        System5 system5 = new System5();
+        model.addAttribute(system5List);
+        model.addAttribute(system5);
+        return "lists";
     }
 
-    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<EntityModel<System5>> addMark(@RequestBody System5 system5,
-                                                        @AuthenticationPrincipal AuthUser authUser){
 
-        User user = authUser.getUser();
-        system5.setUserId(user.getUserId());
-        system5Repository.save(system5);
-        return new ResponseEntity<>(ASSEMBLER.toModel(system5), HttpStatus.OK);
+    @PostMapping("/adds")
+    public String add(@AuthenticationPrincipal AuthUser authUser,
+                      @ModelAttribute System5 system5){
+         User user = authUser.getUser();
+         system5.setUserId(user.getUserId());
+         system5Repository.save(system5);
+         return "redirect:/list";
     }
 
     @GetMapping("/list/{id}")
