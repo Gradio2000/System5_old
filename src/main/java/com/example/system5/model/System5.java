@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 
 @Entity
 @Table(name = "system5")
@@ -22,14 +25,28 @@ public class System5 extends RepresentationModel<System5> {
     private String month;
 
     @Column(name = "res1")
+    @NotEmpty(message = "Заполните поле")
+    @Pattern(regexp = "[A-Ea-e]")
     private String res1;
+
     @Column(name = "res2")
+    @NotEmpty(message = "Заполните поле")
+    @Pattern(regexp = "[A-Ea-e]")
     private String res2;
+
+    @NotEmpty(message = "Заполните поле")
+    @Pattern(regexp = "[A-Ea-e]")
     @Column(name = "res3")
     private String res3;
+
     @Column(name = "res4")
+    @NotEmpty(message = "Заполните поле")
+    @Pattern(regexp = "[A-Ea-e]")
     private String res4;
+
+    @NotEmpty(message = "Заполните поле")
     @Column(name = "res5")
+    @Pattern(regexp = "[A-Ea-e]")
     private String res5;
 
     public int getSystem5Id() {

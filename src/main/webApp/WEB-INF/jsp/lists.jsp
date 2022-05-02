@@ -67,8 +67,13 @@
             <div class="modal-body">
                 <form:form method="post" action="/adds" modelAttribute="system5">
                     <form:input type="hidden" path="userId"/>
-                    <form:input type="hidden" path="month"/>
+                    <form:select path="month">
+                        <form:option value="--Выберите месяц--"/>
+                        <form:options items="${monthList}"/>
+                    </form:select>
+                    <br/>
                     <label>Показатель 1 <form:input path="res1"/></label>
+                    <form:errors path="res1" cssClass="errorMsg"/>
                     <br/>
                     <label>Показатель 2 <form:input path="res2"/></label>
                     <br/>
@@ -86,6 +91,8 @@
 
 <!-- openModal - id модального окна (элемента div) -->
 <a href="#openModal">Добавить самооценку</a>
+<br/>
+<c:if test="${param.get('error')}">Ошибка при заполнении полей самооценки. Попробуйте еще раз!</c:if>
 </body>
 </html>
 <style>
