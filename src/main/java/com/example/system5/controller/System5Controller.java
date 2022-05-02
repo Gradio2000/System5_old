@@ -6,23 +6,16 @@ import com.example.system5.model.System5;
 import com.example.system5.model.User;
 import com.example.system5.repository.System5Repository;
 import com.example.system5.util.AuthUser;
-import com.sun.istack.NotNull;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 
 @Controller
@@ -34,20 +27,18 @@ public class System5Controller {
         this.system5Repository = system5Repository;
     }
 
-    private static final RepresentationModelAssemblerSupport<System5, EntityModel<System5>> ASSEMBLER =
-            new RepresentationModelAssemblerSupport<>(System5Controller.class, (Class<EntityModel<System5>>) (Class<?>) EntityModel.class) {
-                @Override
-                public @NotNull EntityModel<System5> toModel(@NotNull System5 system5) {
-                    return EntityModel.of(system5, linkTo(System5Controller.class).withSelfRel());
-                }
-            };
-
     @GetMapping(value = "/list")
     public String getAll(@AuthenticationPrincipal AuthUser authUser, Model model){
         User user = authUser.getUser();
         List<System5> system5List = system5Repository.findAll(user.getUserId());
+        List<Month> monthList = new ArrayList<>(List.of(Month.values()));
+
+        for(System5 system5 : system5List){
+            monthList.removeIf(m -> (m.name().equals(system5.getMonth())));
+        }
+
         System5 system5 = new System5();
-        List<Month> monthList = List.of(Month.values());
+
         model.addAttribute(system5List);
         model.addAttribute(system5);
         model.addAttribute(monthList);

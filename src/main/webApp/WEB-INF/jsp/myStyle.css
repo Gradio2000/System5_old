@@ -45,8 +45,8 @@
     box-sizing: border-box;
 }
 body {
-    font-family: 'open sans', helvetica, arial, sans;
-    background: url(http://farm8.staticflickr.com/7064/6858179818_5d652f531c_h.jpg) no-repeat center center fixed;
+    font-family: 'open sans', helvetica, arial, sans, serif;
+    background: url(https://farm8.staticflickr.com/7064/6858179818_5d652f531c_h.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -65,14 +65,14 @@ body {
     -o-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
 }
 @media (max-width: 40em) {
     .log-form {
         width: 95%;
         position: relative;
         margin: 2.5% auto 0 auto;
-        left: 0%;
+        left: 0;
         -webkit-transform: translate(0%, 0%);
         -moz-transform: translate(0%, 0%);
         -o-transform: translate(0%, 0%);
@@ -87,14 +87,14 @@ body {
 }
 .log-form h2 {
     color: #5d5d5d;
-    font-family: 'open sans condensed';
+    font-family: 'open sans condensed', serif;
     font-size: 1.35em;
     display: block;
     background: #2a2a2a;
     width: 100%;
     text-transform: uppercase;
     padding: 0.75em 1em 0.75em 1.5em;
-    box-shadow: inset 0px 1px 1px rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.05);
     border: 1px solid #1d1d1d;
     margin: 0;
     font-weight: 200;
@@ -105,10 +105,9 @@ body {
     width: 100%;
     /*margin-bottom: 2em;*/
     margin-top: 2em;
-    padding: 0.5em 0;
     border: none;
     border-bottom: 1px solid #eaeaea;
-    padding-bottom: 1.25em;
+    padding: 0.5em 0 1.25em;
     color: #757575;
 }
 .log-form input:focus {
@@ -122,15 +121,47 @@ body {
     padding: 0.5em 2em;
     color: white;
     margin-right: 0.5em;
-    box-shadow: inset 0px 1px 0px rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
+
+.btn {
+    display: inline-block;
+    margin-top: 2em;
+    background: #1fb5bf;
+    border: 1px solid #1ba0a9;
+    padding: 0.5em 2em;
+    color: white;
+    margin-right: 0.5em;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.btn:hover {
+    background: #23cad5;
+}
+
+.btn:active {
+    background: #1fb5bf;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
 .log-form .btn:hover {
     background: #23cad5;
 }
+
+.btn:active {
+    background: #1fb5bf;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
 .log-form .btn:active {
     background: #1fb5bf;
-    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
 }
+
+.btn:focus {
+    outline: none;
+}
+
 .log-form .btn:focus {
     outline: none;
 }
@@ -148,4 +179,165 @@ body {
 .log-form .forgot:hover {
     color: #1ba0a9;
 }
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+table td {
+    width: 100%;
+}
+table {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table td, table th {
+    text-align: center;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table tr:nth-child(even){
+    text-align: center;
+    background-color: #f2f2f2;
+}
+
+
+table th {
+    text-align: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #1fb5bf;
+    color: white;
+    font-weight: normal;
+}
+
+
+/* стилизация содержимого страницы */
+body {
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #292b2c;
+    background-color: #fff;
+}
+
+/* свойства модального окна по умолчанию */
+.modal {
+    position: fixed; /* фиксированное положение */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5); /* цвет фона */
+    z-index: 1050;
+    opacity: 0; /* по умолчанию модальное окно прозрачно */
+    -webkit-transition: opacity 200ms ease-in;
+    -moz-transition: opacity 200ms ease-in;
+    transition: opacity 200ms ease-in; /* анимация перехода */
+    pointer-events: none; /* элемент невидим для событий мыши */
+    margin: 0;
+    padding: 0;
+}
+/* при отображении модального окно */
+.modal:target {
+    opacity: 1; /* делаем окно видимым */
+    pointer-events: auto; /* элемент видим для событий мыши */
+    overflow-y: auto; /* добавляем прокрутку по y, когда элемент не помещается на страницу */
+}
+/* ширина модального окна и его отступы от экрана */
+.modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px;
+}
+@media (min-width: 576px) {
+    .modal-dialog {
+        max-width: 500px;
+        margin: 30px auto; /* для отображения модального окна по центру */
+    }
+}
+/* свойства для блока, содержащего контент модального окна */
+.modal-content {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+}
+@media (min-width: 768px) {
+    .modal-content {
+        -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
+        box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    }
+}
+/* свойства для заголовка модального окна */
+.modal-header {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #eceeef;
+}
+.modal-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+/* свойства для кнопки "Закрыть" */
+.close {
+    float: right;
+    font-family: sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    text-decoration: none;
+}
+/* свойства для кнопки "Закрыть" при нахождении её в фокусе или наведении */
+.close:focus, .close:hover {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: .75;
+}
+/* свойства для блока, содержащего основное содержимое окна */
+.modal-body {
+    position: relative;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 15px;
+    overflow: auto;
+}
+
 
