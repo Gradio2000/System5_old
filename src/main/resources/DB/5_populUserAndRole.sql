@@ -9,9 +9,6 @@ create table users
     name        varchar(128),
     password    varchar(256),
     position_id integer
---         constraint users_positions_position_id_fk
---             references positions
---             on update cascade on delete set null
 );
 
 alter table users
@@ -28,7 +25,7 @@ INSERT INTO USERS (login, NAME, PASSWORD, position_id)
 VALUES ('aa', 'Ласкин', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 2),
        ('bb', 'Даянов', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 3),
        ('cc', 'Степанов', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 4),
---        ('dd', 'Першина', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 4),
+       ('dd', 'Першина', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 5),
        ('ee', 'Лапшина', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 6),
        ('ff', 'Сытник', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 7),
        ('gg', 'Маликов', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 8),

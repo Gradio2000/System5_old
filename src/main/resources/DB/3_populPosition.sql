@@ -9,7 +9,7 @@ CREATE TABLE positions
 create unique index positions_position_id_uindex
     on positions ("position_id");
 
-INSERT INTO positions (position, division_id) VALUES ('Администратор', 0);
+
 INSERT INTO positions (position, division_id) VALUES ('Начальник банка', 1);
 INSERT INTO positions (position, division_id) VALUES ('Заместитель начальника банка', 1);
 INSERT INTO positions (position, division_id) VALUES ('Заместитель начальника банка (ОР)', 1);
@@ -18,3 +18,4 @@ INSERT INTO positions (position, division_id) VALUES ('Ведущий эконо
 INSERT INTO positions (position, division_id) VALUES ('Экономист 1 категории', 2);
 INSERT INTO positions (position, division_id) VALUES ('Ведущий инженер',4);
 INSERT INTO positions (position, division_id) VALUES ('Водитель автомобиля',5);
+INSERT INTO positions (position, division_id) VALUES ('Администратор', 0);

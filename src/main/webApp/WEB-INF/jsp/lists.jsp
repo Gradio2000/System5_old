@@ -91,6 +91,7 @@
 
 <!-- openModal - id модального окна (элемента div) -->
 <button type="button" class="btn" onclick="document.location='#openModal'">Добавить самооценку</button>
+<button type="button" class="btn" onclick="document.location='/home'">Назад</button>
 <br/>
 <label style="color: crimson">
     <c:if test="${param.get('error')}">Ошибка при заполнении полей самооценки. Попробуйте еще раз!</c:if>
