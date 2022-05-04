@@ -32,9 +32,9 @@
             url: "/my_employers"
         }).then(function(data) {
             const data1 = data._embedded.positions;
+            console.log(data1);
             for (let i = 0; i < data1.length; i++){
                 let position = data1[i].position;
-                console.log(data1);
                 $(".zzz").append(data1[i].position + ` ` + data1[i].user.name + `<br/>`);
             }
         });

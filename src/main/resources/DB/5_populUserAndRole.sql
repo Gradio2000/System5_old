@@ -7,8 +7,7 @@ create table users
             primary key,
     login       varchar(128),
     name        varchar(128),
-    password    varchar(256),
-    position_id integer
+    password    varchar(256)
 );
 
 alter table users
@@ -21,16 +20,16 @@ create index idx_user_name
     on users (name);
 
 
-INSERT INTO USERS (login, NAME, PASSWORD, position_id)
-VALUES ('aa', 'Ласкин', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 2),
-       ('bb', 'Даянов', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 3),
-       ('cc', 'Степанов', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 4),
-       ('dd', 'Першина', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 5),
-       ('ee', 'Лапшина', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 6),
-       ('ff', 'Сытник', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 7),
-       ('gg', 'Маликов', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 8),
-       ('hh', 'Кузнецов', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 9),
-       ('zz', 'admin', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi', 1);
+INSERT INTO USERS (login, NAME, PASSWORD)
+VALUES ('aa', 'Ласкин', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi'),
+       ('bb', 'Даянов', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi'),
+       ('cc', 'Степанов', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi'),
+       ('dd', 'Першина', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi'),
+       ('ee', 'Лапшина', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi'),
+       ('ff', 'Сытник', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi'),
+       ('gg', 'Маликов', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi'),
+       ('hh', 'Кузнецов', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi'),
+       ('zz', 'admin', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidNfKoZJ.hxFSi');
 
 DROP TABLE IF EXISTS USER_ROLE CASCADE;
 

@@ -1,7 +1,7 @@
 package com.example.system5.model;
 
 
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.RepresentationModel;
@@ -38,8 +38,12 @@ public class User extends RepresentationModel<User> {
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    @Column(name = "position_id")
-    private int position_id;
+    @OneToOne
+    @JoinTable(name = "position_user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "position_id"))
+    @JsonBackReference
+    private Position position;
 
     public User() {
     }
@@ -89,11 +93,11 @@ public class User extends RepresentationModel<User> {
         this.roles = roles;
     }
 
-    public int getPosition_id() {
-        return position_id;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setPosition_id(int position_id) {
-        this.position_id = position_id;
+    public void setPosition(Position position) {
+        this.position = position;
     }
 }

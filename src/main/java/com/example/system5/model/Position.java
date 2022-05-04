@@ -1,6 +1,7 @@
 package com.example.system5.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
@@ -18,18 +19,17 @@ public class Position extends RepresentationModel<Position> {
     @Column(name = "position")
     private String position;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne
     @JoinTable(name = "position_user",
-            joinColumns =
-                    { @JoinColumn(name = "position_id", referencedColumnName = "position_id") },
-            inverseJoinColumns =
-                    { @JoinColumn(name = "user_id", referencedColumnName = "user_id") })
+            joinColumns = @JoinColumn(name = "position_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    @JsonManagedReference
     public User user;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "commander_employee",
             joinColumns =
-                    { @JoinColumn(name = "commander_position_id", referencedColumnName = "position_id")},
+                    { @JoinColumn(name = "commander_position_id")},
         inverseJoinColumns =
                     { @JoinColumn(name = "position_id", referencedColumnName = "position_id")})
     List<Position> employersList;
@@ -51,13 +51,13 @@ public class Position extends RepresentationModel<Position> {
         this.position = position;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public List<Position> getEmployersList() {
         return employersList;

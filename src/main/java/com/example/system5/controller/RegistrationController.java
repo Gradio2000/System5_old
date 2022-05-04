@@ -109,7 +109,6 @@ public class RegistrationController {
         AuthUser authUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getById(authUser.getUser().getUserId());
         user.setName(formFinishReg.getName());
-        user.setPosition_id(formFinishReg.getPosition_id());
         userRepository.save(user);
         return "redirect:/home";
     }

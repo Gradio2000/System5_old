@@ -16,9 +16,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("select u from User u where u.login = :login")
     Optional<User> findByLogin(String login);
 
-    @Query(nativeQuery = true, value = "SELECT * FROM USERS WHERE USER_ID = :id")
-    @Override
-    User getById(Integer id);
+    User getUserByUserId(int id);
 
     boolean existsUserByLogin(String login);
 
