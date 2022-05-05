@@ -18,7 +18,7 @@
     <br/>
     <a href="/admin/shtat">Получить штатное расписание</a>
     <br/>
-    <button type="button" onclick="get_employers()">Посмотреть подчиненных сотрудников</button>
+    <a href="javascript:get_employers()">Посмотреть подчиненных сотрудников</a>
     <br/>
     <p class="zzz"></p>
     <br/>

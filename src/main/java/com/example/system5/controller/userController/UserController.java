@@ -28,7 +28,7 @@ public class UserController {
 
     @GetMapping(value = "/getUser", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> getById(@AuthenticationPrincipal AuthUser authUser){
-        User user = userRepository.getById(authUser.getUser().getUserId());
+        User user = authUser.getUser();
         UserDTO userDTO = new UserDTO(user.getName());
         return new ResponseEntity<>(userDTO, HttpStatus.OK);
     }
