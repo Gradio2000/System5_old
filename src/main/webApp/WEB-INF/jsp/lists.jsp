@@ -61,16 +61,26 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Самооценка</h3>
+                <c:if test="${employer == false}">
+                    <h3 class="modal-title">Самооценка</h3>
+                </c:if>
+                <c:if test="${employer == true}">
+                    <h3 class="modal-title">Оценка сотрудника</h3>
+                </c:if>
+
                 <a href="#close" title="Close" class="close">×</a>
             </div>
             <div class="modal-body">
                 <form:form method="post" action="/adds" modelAttribute="system5">
                     <form:input type="hidden" path="userId"/>
-                    <label>Выберите месяц</label>
-                    <br/>
-                    <form:select path="month" items="${monthList}"/>
-                    <br/>
+
+                    <c:if test="${employer == false}">
+                        <label>Выберите месяц</label>
+                        <br/>
+                        <form:select path="month" items="${monthList}"/>
+                        <br/>
+                    </c:if>
+
                     <label>Показатель 1 <form:input path="res1"/></label>
                     <form:errors path="res1" cssClass="errorMsg"/>
                     <br/>
@@ -88,6 +98,7 @@
         </div>
     </div>
 </div>
+
 
 <!-- openModal - id модального окна (элемента div) -->
 <c:if test="${employer == false}">
