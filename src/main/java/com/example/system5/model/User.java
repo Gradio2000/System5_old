@@ -2,7 +2,6 @@ package com.example.system5.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.RepresentationModel;
 
@@ -17,7 +16,6 @@ public class User extends RepresentationModel<User> {
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private int userId;
 
     @Column(name = "name")

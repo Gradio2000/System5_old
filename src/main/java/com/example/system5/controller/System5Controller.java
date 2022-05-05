@@ -6,12 +6,14 @@ import com.example.system5.model.System5;
 import com.example.system5.model.User;
 import com.example.system5.repository.System5Repository;
 import com.example.system5.util.AuthUser;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -67,8 +69,11 @@ public class System5Controller {
     }
 
     @GetMapping("/list/{id}")
-    public CollectionModel<System5> getByUserId(@PathVariable Integer id){
+    public String getByUserId(@PathVariable Integer id,
+                              @ModelAttribute System5 system5,
+                              BindingResult bindingResult, Model model){
         List<System5> system5List = system5Repository.findByUserId(id);
-        return CollectionModel.of(system5List);
+        model.addAttribute(system5List);
+        return "lists";
     }
 }

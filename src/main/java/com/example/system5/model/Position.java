@@ -51,13 +51,13 @@ public class Position extends RepresentationModel<Position> {
         this.position = position;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public List<Position> getEmployersList() {
         return employersList;

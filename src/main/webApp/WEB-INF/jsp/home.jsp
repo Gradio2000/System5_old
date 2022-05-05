@@ -23,6 +23,8 @@
     <p class="zzz"></p>
     <br/>
     <a href="/logout">Выйти</a>
+
+
 </body>
 
 <script>
@@ -35,7 +37,8 @@
             console.log(data1);
             for (let i = 0; i < data1.length; i++){
                 let position = data1[i].position;
-                $(".zzz").append(data1[i].position + ` ` + data1[i].user.name + `<br/>`);
+                $(".zzz").append(`<a href="/list/` + data1[i].user.userId + `">` +
+                    data1[i].position + " " + data1[i].user.name + `</a>` + `<br/>`);
             }
         });
     };
