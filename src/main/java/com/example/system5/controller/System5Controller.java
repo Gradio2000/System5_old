@@ -40,10 +40,12 @@ public class System5Controller {
         }
 
         System5 system5 = new System5();
+        boolean employer = false;
 
         model.addAttribute(system5List);
         model.addAttribute(system5);
         model.addAttribute(monthList);
+        model.addAttribute("employer", employer);
         return "lists";
     }
 
@@ -73,7 +75,9 @@ public class System5Controller {
                               @ModelAttribute System5 system5,
                               BindingResult bindingResult, Model model){
         List<System5> system5List = system5Repository.findByUserId(id);
+        boolean employer = true;
         model.addAttribute(system5List);
+        model.addAttribute("employer", employer);
         return "lists";
     }
 }
