@@ -94,9 +94,11 @@ public class System5Controller {
                               @ModelAttribute System5 system5,
                               BindingResult bindingResult, Model model){
         List<System5> system5List = system5Repository.findByUserId(id);
+        List<Month> monthList = new ArrayList<>(List.of(Month.values()));
         boolean employer = true;
         model.addAttribute(system5List);
         model.addAttribute("employer", employer);
+        model.addAttribute(monthList);
         return "lists";
     }
 }
