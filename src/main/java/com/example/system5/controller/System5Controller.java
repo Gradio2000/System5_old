@@ -99,6 +99,7 @@ public class System5Controller {
         model.addAttribute(system5List);
         model.addAttribute("employer", employer);
         model.addAttribute(monthList);
+        model.addAttribute("userId", id);
         return "lists";
     }
 }
