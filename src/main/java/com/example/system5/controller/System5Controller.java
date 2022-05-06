@@ -86,8 +86,6 @@ public class System5Controller {
         system5.setResempl4(system5.getResempl4().toUpperCase());
         system5.setResempl5(system5.getResempl5().toUpperCase());
 
-        system5Repository.updateSistem5(system5.getResempl1(), system5.getMonth());
-
         return null;
     }
 
@@ -96,12 +94,9 @@ public class System5Controller {
                               @ModelAttribute System5 system5,
                               BindingResult bindingResult, Model model){
         List<System5> system5List = system5Repository.findByUserId(id);
-        List<Month> monthList = new ArrayList<>(List.of(Month.values()));
         boolean employer = true;
         model.addAttribute(system5List);
         model.addAttribute("employer", employer);
-        model.addAttribute(monthList);
-        model.addAttribute("userId", id);
         return "lists";
     }
 }
