@@ -25,29 +25,54 @@ public class System5 extends RepresentationModel<System5> {
     private String month;
 
     @Column(name = "res1")
-    @NotEmpty(message = "Заполните поле")
-    @Pattern(regexp = "[A-Ea-e]")
+//    @NotEmpty(message = "Заполните поле")
+//    @Pattern(regexp = "[A-Ea-e]")
     private String res1;
 
     @Column(name = "res2")
-    @NotEmpty(message = "Заполните поле")
-    @Pattern(regexp = "[A-Ea-e]")
+//    @NotEmpty(message = "Заполните поле")
+//    @Pattern(regexp = "[A-Ea-e]")
     private String res2;
 
-    @NotEmpty(message = "Заполните поле")
-    @Pattern(regexp = "[A-Ea-e]")
+//    @NotEmpty(message = "Заполните поле")
+//    @Pattern(regexp = "[A-Ea-e]")
     @Column(name = "res3")
     private String res3;
 
     @Column(name = "res4")
-    @NotEmpty(message = "Заполните поле")
-    @Pattern(regexp = "[A-Ea-e]")
+//    @NotEmpty(message = "Заполните поле")
+//    @Pattern(regexp = "[A-Ea-e]")
     private String res4;
 
-    @NotEmpty(message = "Заполните поле")
+//    @NotEmpty(message = "Заполните поле")
     @Column(name = "res5")
-    @Pattern(regexp = "[A-Ea-e]")
+//    @Pattern(regexp = "[A-Ea-e]")
     private String res5;
+
+    @Column(name = "resempl1")
+//    @NotEmpty(message = "Заполните поле")
+//    @Pattern(regexp = "[A-Ea-e]")
+    private String resempl1;
+
+    @Column(name = "resempl2")
+//    @NotEmpty(message = "Заполните поле")
+//    @Pattern(regexp = "[A-Ea-e]")
+    private String resempl2;
+
+    @Column(name = "resempl3")
+//    @NotEmpty(message = "Заполните поле")
+//    @Pattern(regexp = "[A-Ea-e]")
+    private String resempl3;
+
+    @Column(name = "resempl4")
+//    @NotEmpty(message = "Заполните поле")
+//    @Pattern(regexp = "[A-Ea-e]")
+    private String resempl4;
+
+    @Column(name = "resempl5")
+//    @NotEmpty(message = "Заполните поле")
+//    @Pattern(regexp = "[A-Ea-e]")
+    private String resempl5;
 
     public int getSystem5Id() {
         return system5Id;
@@ -105,12 +130,51 @@ public class System5 extends RepresentationModel<System5> {
         this.userId = user_id;
     }
 
-
     public String getMonth() {
         return month;
     }
 
     public void setMonth(String monthName) {
         this.month = monthName;
+    }
+
+    public String getResempl1() {
+        return resempl1;
+    }
+
+    public void setResempl1(String resempl1) {
+        this.resempl1 = resempl1;
+    }
+
+    public String getResempl2() {
+        return resempl2;
+    }
+
+    public void setResempl2(String resempl2) {
+        this.resempl2 = resempl2;
+    }
+
+    public String getResempl3() {
+        return resempl3;
+    }
+
+    public void setResempl3(String resempl3) {
+        this.resempl3 = resempl3;
+    }
+
+    public String getResempl4() {
+        return resempl4;
+    }
+
+    public void setResempl4(String resempl4) {
+        this.resempl4 = resempl4;
+    }
+
+    public String getResempl5() {
+        return resempl5;
+    }
+
+    public void setResempl5(String resempl5) {
+        this.resempl5 = resempl5;
     }
 }

@@ -32,7 +32,7 @@ public class System5Controller {
     @GetMapping(value = "/list")
     public String getAll(@AuthenticationPrincipal AuthUser authUser, Model model){
         User user = authUser.getUser();
-        List<System5> system5List = system5Repository.findAll(user.getUserId());
+        List<System5> system5List = system5Repository.findAllByUserId(user.getUserId());
         List<Month> monthList = new ArrayList<>(List.of(Month.values()));
 
         for(System5 system5 : system5List){
@@ -70,14 +70,38 @@ public class System5Controller {
          return "redirect:/list";
     }
 
+    @PostMapping("/addsempl")
+    public String addempl(@AuthenticationPrincipal AuthUser authUser,
+                      @ModelAttribute @Valid System5 system5,
+                      BindingResult bindingResult){
+
+        if (bindingResult.hasErrors()){
+            return "redirect:/list?error=true";
+        }
+
+        system5.setUserId(system5.getUserId());
+        system5.setResempl1(system5.getResempl1().toUpperCase());
+        system5.setResempl2(system5.getResempl2().toUpperCase());
+        system5.setResempl3(system5.getResempl3().toUpperCase());
+        system5.setResempl4(system5.getResempl4().toUpperCase());
+        system5.setResempl5(system5.getResempl5().toUpperCase());
+
+        system5Repository.updateSistem5(system5.getResempl1(), system5.getMonth());
+
+        return null;
+    }
+
     @GetMapping("/list/{id}")
     public String getByUserId(@PathVariable Integer id,
                               @ModelAttribute System5 system5,
                               BindingResult bindingResult, Model model){
         List<System5> system5List = system5Repository.findByUserId(id);
+        List<Month> monthList = new ArrayList<>(List.of(Month.values()));
         boolean employer = true;
         model.addAttribute(system5List);
         model.addAttribute("employer", employer);
+        model.addAttribute(monthList);
+        model.addAttribute("userId", id);
         return "lists";
     }
 }

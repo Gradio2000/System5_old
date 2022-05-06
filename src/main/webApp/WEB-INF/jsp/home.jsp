@@ -34,7 +34,7 @@
             url: "/my_employers"
         }).then(function(data) {
             const data1 = data._embedded.positions;
-            console.log(data1);
+            console.log(data);
             for (let i = 0; i < data1.length; i++){
                 let position = data1[i].position;
                 $(".zzz").append(`<a href="/list/` + data1[i].user.userId + `">` +

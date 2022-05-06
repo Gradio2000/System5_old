@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 
 // Эта хрень нужна для того, что бы JSON сериализовал id у Entity
 @Configuration
-class Config implements RepositoryRestConfigurer {
+class RepositoryConfig implements RepositoryRestConfigurer {
 
     @Autowired
     private EntityManager entityManager;

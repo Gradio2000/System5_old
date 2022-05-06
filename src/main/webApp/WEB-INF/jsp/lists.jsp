@@ -57,48 +57,91 @@
     </tbody>
 </table>
 
-<div id="openModal" class="modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <c:if test="${employer == false}">
+<c:if test="${employer == false}">
+    <div id="openModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
                     <h3 class="modal-title">Самооценка</h3>
-                </c:if>
-                <c:if test="${employer == true}">
-                    <h3 class="modal-title">Оценка сотрудника</h3>
-                </c:if>
+
 
                 <a href="#close" title="Close" class="close">×</a>
             </div>
-            <div class="modal-body">
-                <form:form method="post" action="/adds" modelAttribute="system5">
-                    <form:input type="hidden" path="userId"/>
-
-                    <c:if test="${employer == false}">
-                        <label>Выберите месяц</label>
-                        <br/>
-                        <form:select path="month" items="${monthList}"/>
-                        <br/>
-                    </c:if>
-
-                    <label>Показатель 1 <form:input path="res1"/></label>
-                    <form:errors path="res1" cssClass="errorMsg"/>
-                    <br/>
-                    <label>Показатель 2 <form:input path="res2"/></label>
-                    <br/>
-                    <label>Показатель 3 <form:input path="res3"/></label>
-                    <br/>
-                    <label>Показатель 4 <form:input path="res4"/></label>
-                    <br/>
-                    <label>Показатель 5 <form:input path="res5"/></label>
-                    <br/>
-                    <button type="submit" class="btn">Отправить</button>
-                </form:form>
+                    <div class="modal-body">
+                        <form:form method="post" action="/adds" modelAttribute="system5">
+                            <form:input type="hidden" path="userId"/>
+                            <form:input type="hidden" path="resempl1"/>
+                            <form:input type="hidden" path="resempl2"/>
+                            <form:input type="hidden" path="resempl3"/>
+                            <form:input type="hidden" path="resempl4"/>
+                            <form:input type="hidden" path="resempl5"/>
+                            <label>Выберите месяц</label>
+                            <br/>
+                            <form:select path="month" items="${monthList}"/>
+                            <br/>
+                            <label>Показатель 1 <form:input path="res1"/></label>
+                            <form:errors path="res1" cssClass="errorMsg"/>
+                            <br/>
+                            <label>Показатель 2 <form:input path="res2"/></label>
+                            <br/>
+                            <label>Показатель 3 <form:input path="res3"/></label>
+                            <br/>
+                            <label>Показатель 4 <form:input path="res4"/></label>
+                            <br/>
+                            <label>Показатель 5 <form:input path="res5"/></label>
+                            <br/>
+                            <button type="submit" class="btn">Отправить</button>
+                        </form:form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</c:if>
 
+<c:if test="${employer == true}">
+    <div id="openModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h3 class="modal-title">Самооценка</h3>
+
+
+                    <a href="#close" title="Close" class="close">×</a>
+                </div>
+                    <div class="modal-body">
+                        <form:form method="post" action="/addsempl" modelAttribute="system5">
+                            <form:input type="hidden" path="userId" value="${userId}"/>
+                            <form:input type="hidden" path="res1"/>
+                            <form:input type="hidden" path="res2"/>
+                            <form:input type="hidden" path="res3"/>
+                            <form:input type="hidden" path="res4"/>
+                            <form:input type="hidden" path="res5"/>
+                            <label>Выберите месяц</label>
+                            <br/>
+                            <form:select path="month" items="${monthList}"/>
+                            <br/>
+                            <label>Показатель 1 <form:input path="resempl1"/></label>
+                            <form:errors path="res1" cssClass="errorMsg"/>
+                            <br/>
+                            <label>Показатель 2 <form:input path="resempl2"/></label>
+                            <br/>
+                            <label>Показатель 3 <form:input path="resempl3"/></label>
+                            <br/>
+                            <label>Показатель 4 <form:input path="resempl4"/></label>
+                            <br/>
+                            <label>Показатель 5 <form:input path="resempl5"/></label>
+                            <br/>
+                            <button type="submit" class="btn">Отправить</button>
+                        </form:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
 
 <!-- openModal - id модального окна (элемента div) -->
 <c:if test="${employer == false}">
