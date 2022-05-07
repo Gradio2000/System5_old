@@ -49,6 +49,27 @@ public class System5Controller {
         return "lists";
     }
 
+    @GetMapping("/list/{id}")
+    public String getByUserId(@PathVariable Integer id,
+                              @ModelAttribute System5 system5,
+                              BindingResult bindingResult, Model model){
+        List<System5> system5List = system5Repository.findByUserId(id);
+
+        List<Month> monthList = new ArrayList<>();
+        for (System5 system51 : system5List){
+            if (system51.getRated() == 0){
+                monthList.add(Month.valueOf(system51.getMonth()));
+            }
+        }
+
+        boolean employer = true;
+        model.addAttribute(system5List);
+        model.addAttribute("employer", employer);
+        model.addAttribute("months", monthList);
+        model.addAttribute("userId", id);
+        return "lists";
+    }
+
 
     @PostMapping("/adds")
     public String add(@AuthenticationPrincipal AuthUser authUser,
@@ -89,17 +110,5 @@ public class System5Controller {
         return null;
     }
 
-    @GetMapping("/list/{id}")
-    public String getByUserId(@PathVariable Integer id,
-                              @ModelAttribute System5 system5,
-                              BindingResult bindingResult, Model model){
-        List<System5> system5List = system5Repository.findByUserId(id);
-        List<Month> monthList = new ArrayList<>(List.of(Month.values()));
-        boolean employer = true;
-        model.addAttribute(system5List);
-        model.addAttribute("employer", employer);
-        model.addAttribute(monthList);
-        model.addAttribute("userId", id);
-        return "lists";
-    }
+
 }

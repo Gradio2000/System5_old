@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 
 
 @Entity
@@ -73,6 +71,17 @@ public class System5 extends RepresentationModel<System5> {
 //    @NotEmpty(message = "Заполните поле")
 //    @Pattern(regexp = "[A-Ea-e]")
     private String resempl5;
+
+    @Column(name = "rated")
+    private int rated;
+
+    public int getRated() {
+        return rated;
+    }
+
+    public void setRated(int rated) {
+        this.rated = rated;
+    }
 
     public int getSystem5Id() {
         return system5Id;

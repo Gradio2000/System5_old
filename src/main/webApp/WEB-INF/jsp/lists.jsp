@@ -43,15 +43,15 @@
     <tr>
         <td>${system5.month}</td>
         <td>${system5.res1}</td>
-        <td></td>
+        <td>${system5.resempl1}</td>
         <td>${system5.res2}</td>
-        <td></td>
+        <td>${system5.resempl2}</td>
         <td>${system5.res3}</td>
-        <td></td>
+        <td>${system5.resempl3}</td>
         <td>${system5.res4}</td>
-        <td></td>
+        <td>${system5.resempl4}</td>
         <td>${system5.res5}</td>
-        <td></td>
+        <td>${system5.resempl5}</td>
     </tr>
     </c:forEach>
     </tbody>
@@ -106,7 +106,7 @@
             <div class="modal-content">
                 <div class="modal-header">
 
-                    <h3 class="modal-title">Самооценка</h3>
+                    <h3 class="modal-title">Оценка</h3>
 
 
                     <a href="#close" title="Close" class="close">×</a>
@@ -121,7 +121,7 @@
                             <form:input type="hidden" path="res5"/>
                             <label>Выберите месяц</label>
                             <br/>
-                            <form:select path="month" items="${monthList}"/>
+                            <form:select path="month" items="${months}"/>
                             <br/>
                             <label>Показатель 1 <form:input path="resempl1"/></label>
                             <form:errors path="res1" cssClass="errorMsg"/>
