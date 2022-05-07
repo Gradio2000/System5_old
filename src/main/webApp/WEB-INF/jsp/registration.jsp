@@ -28,6 +28,7 @@
             <form:errors path="confpass" cssClass="errorMsg"/>
             <br/>
             <button type="submit" class="btn" id="but">Регистрация</button>
+            <button type="button" class="btn" id="but" onclick="document.location='/logout'">Отмена</button>
         </form:form>
     </div>
 </body>

@@ -113,4 +113,12 @@ public class RegistrationController {
         return "redirect:/home";
     }
 
+    @GetMapping("/cancel")
+    public String cancelReg(){
+        AuthUser authUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = authUser.getUser();
+        userRepository.delete(user);
+        return "redirect:/logout";
+    }
+
 }

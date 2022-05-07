@@ -28,6 +28,7 @@
             <form:errors path="position_id" cssClass="errorMsg"/>
             <br/>
             <button type="submit" class="btn" id="but">Регистрация</button>
+            <button type="button" class="btn" id="but" onclick="document.location='/cancel'">Отмена</button>
         </form:form>
     </div>
 </body>
