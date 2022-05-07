@@ -106,8 +106,11 @@ public class System5Controller {
         system5.setResempl3(system5.getResempl3().toUpperCase());
         system5.setResempl4(system5.getResempl4().toUpperCase());
         system5.setResempl5(system5.getResempl5().toUpperCase());
-
-        return null;
+        system5.setRated(1);
+        system5Repository.updateSystem5(system5.getResempl1(), system5.getResempl2(),
+                system5.getResempl3(), system5.getResempl4(), system5.getResempl5(),
+                system5.getRated(), system5.getUserId(), system5.getMonth());
+        return "redirect:/list/" + system5.getUserId();
     }
 
 
