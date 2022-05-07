@@ -7,13 +7,9 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import java.util.Optional;
 
-@RepositoryRestResource
+@RepositoryRestResource(exported = false)
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query("select u from User u where u.name = :name")
-    Optional<User> findByName(String name);
-
-    @Query("select u from User u where u.login = :login")
     Optional<User> findByLogin(String login);
 
     User getUserByUserId(int id);
