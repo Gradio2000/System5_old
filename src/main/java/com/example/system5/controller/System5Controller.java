@@ -77,7 +77,7 @@ public class System5Controller {
                       BindingResult bindingResult){
 
         if (bindingResult.hasErrors()){
-            return "redirect:/list?error=true";
+            return "redirect:/list?error=1";
         }
 
          User user = authUser.getUser();
@@ -97,7 +97,7 @@ public class System5Controller {
                       BindingResult bindingResult){
 
         if (bindingResult.hasErrors()){
-            return "redirect:/list?error=true";
+            return "redirect:/list/" + system5.getUserId()+ "?error=2";
         }
 
         system5.setUserId(system5.getUserId());

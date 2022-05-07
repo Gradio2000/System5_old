@@ -147,13 +147,20 @@
 <c:if test="${employer == false}">
     <button type="button" class="btn" onclick="document.location='#openModal'">Добавить самооценку</button>
 </c:if>
-<c:if test="${employer == true}">
-    <button type="button" class="btn" onclick="document.location='#openModal'">Добавить оценку</button>
+<c:if test="${months.size() != 0}">
+    <c:if test="${employer == true}">
+        <button type="button" class="btn" onclick="document.location='#openModal'">Добавить оценку</button>
+    </c:if>
 </c:if>
+
+
 <button type="button" class="btn" onclick="document.location='/home'">Назад</button>
 <br/>
 <label style="color: crimson; font: bold italic 110% serif">
-    <c:if test="${param.get('error')}">Ошибка при заполнении полей самооценки. Попробуйте еще раз!</c:if>
+    <c:if test="${param.get('error') == 1}">Ошибка при заполнении полей самооценки. Попробуйте еще раз!</c:if>
+</label>
+<label style="color: crimson; font: bold italic 110% serif">
+    <c:if test="${param.get('error') == 2}">Ошибка при заполнении полей оценки. Попробуйте еще раз!</c:if>
 </label>
 
 </body>

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 
 
 @Entity
@@ -23,53 +24,43 @@ public class System5 extends RepresentationModel<System5> {
     private String month;
 
     @Column(name = "res1")
-//    @NotEmpty(message = "Заполните поле")
-//    @Pattern(regexp = "[A-Ea-e]")
+    @Pattern(regexp = "[A-Ea-e]?")
     private String res1;
 
     @Column(name = "res2")
-//    @NotEmpty(message = "Заполните поле")
-//    @Pattern(regexp = "[A-Ea-e]")
+    @Pattern(regexp = "[A-Ea-e]?")
     private String res2;
 
-//    @NotEmpty(message = "Заполните поле")
-//    @Pattern(regexp = "[A-Ea-e]")
     @Column(name = "res3")
+    @Pattern(regexp = "[A-Ea-e]?")
     private String res3;
 
     @Column(name = "res4")
-//    @NotEmpty(message = "Заполните поле")
-//    @Pattern(regexp = "[A-Ea-e]")
+    @Pattern(regexp = "[A-Ea-e]?")
     private String res4;
 
-//    @NotEmpty(message = "Заполните поле")
     @Column(name = "res5")
-//    @Pattern(regexp = "[A-Ea-e]")
+    @Pattern(regexp = "[A-Ea-e]?")
     private String res5;
 
     @Column(name = "resempl1")
-//    @NotEmpty(message = "Заполните поле")
-//    @Pattern(regexp = "[A-Ea-e]")
+    @Pattern(regexp = "[A-Ea-e]?")
     private String resempl1;
 
     @Column(name = "resempl2")
-//    @NotEmpty(message = "Заполните поле")
-//    @Pattern(regexp = "[A-Ea-e]")
+    @Pattern(regexp = "[A-Ea-e]?")
     private String resempl2;
 
     @Column(name = "resempl3")
-//    @NotEmpty(message = "Заполните поле")
-//    @Pattern(regexp = "[A-Ea-e]")
+    @Pattern(regexp = "[A-Ea-e]?")
     private String resempl3;
 
     @Column(name = "resempl4")
-//    @NotEmpty(message = "Заполните поле")
-//    @Pattern(regexp = "[A-Ea-e]")
+    @Pattern(regexp = "[A-Ea-e]?")
     private String resempl4;
 
     @Column(name = "resempl5")
-//    @NotEmpty(message = "Заполните поле")
-//    @Pattern(regexp = "[A-Ea-e]")
+    @Pattern(regexp = "[A-Ea-e]?")
     private String resempl5;
 
     @Column(name = "rated")
