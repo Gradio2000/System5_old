@@ -16,13 +16,8 @@ public interface System5Repository extends JpaRepository<System5, Integer> {
     List<System5> findAllByUserId(Integer user_id);
     List<System5> findByUserId(int id);
 
+    @Query(nativeQuery = true, value = "UPDATE system5 SET rated = 1 WHERE system5_id = :system5_id")
     @Transactional
     @Modifying
-    @Query(nativeQuery = true,
-    value = "UPDATE system5 SET resempl1 = :resempl1, resempl2 = :resempl2, resempl3 = :resempl3, " +
-            "resempl4 = :resempl4, resempl5 = :resempl5, rated = :rated " +
-            "WHERE user_id = :user_id AND month = :month")
-    void updateSystem5(String resempl1, String resempl2, String resempl3,
-                       String resempl4, String resempl5, int rated, int user_id,
-                       String month);
+    void updateRated(int system5_id);
 }

@@ -3,8 +3,10 @@ package com.example.system5.controller;
 
 import com.example.system5.model.Month;
 import com.example.system5.model.System5;
+import com.example.system5.model.System5empl;
 import com.example.system5.model.User;
 import com.example.system5.repository.System5Repository;
+import com.example.system5.repository.System5emplRepository;
 import com.example.system5.util.AuthUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -17,16 +19,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Controller
 public class System5Controller {
 
     private final System5Repository system5Repository;
+    private final System5emplRepository system5emplRepository;
 
-    public System5Controller(System5Repository system5Repository) {
+    public System5Controller(System5Repository system5Repository, System5emplRepository system5emplRepository) {
         this.system5Repository = system5Repository;
+        this.system5emplRepository = system5emplRepository;
     }
 
     @GetMapping(value = "/list")
@@ -40,9 +46,11 @@ public class System5Controller {
         }
 
         System5 system5 = new System5();
+        System5empl system5empl = new System5empl();
         boolean employer = false;
 
         model.addAttribute(system5List);
+        model.addAttribute(system5empl);
         model.addAttribute(system5);
         model.addAttribute(monthList);
         model.addAttribute("employer", employer);
@@ -52,20 +60,24 @@ public class System5Controller {
     @GetMapping("/list/{id}")
     public String getByUserId(@PathVariable Integer id,
                               @ModelAttribute System5 system5,
-                              BindingResult bindingResult, Model model){
+                              BindingResult bindingResult,
+                              @ModelAttribute System5empl system5empl,
+                              BindingResult bindingResult1,
+                              Model model){
+
         List<System5> system5List = system5Repository.findByUserId(id);
 
-        List<Month> monthList = new ArrayList<>();
+        Map<Integer, Month> monthMap = new HashMap();
         for (System5 system51 : system5List){
             if (system51.getRated() == 0){
-                monthList.add(Month.valueOf(system51.getMonth()));
+                monthMap.put(system51.getSystem5Id(), Month.valueOf(system51.getMonth()));
             }
         }
 
         boolean employer = true;
         model.addAttribute(system5List);
         model.addAttribute("employer", employer);
-        model.addAttribute("months", monthList);
+        model.addAttribute("months", monthMap);
         model.addAttribute("userId", id);
         return "lists";
     }
@@ -93,24 +105,22 @@ public class System5Controller {
 
     @PostMapping("/addsempl")
     public String addempl(@AuthenticationPrincipal AuthUser authUser,
-                      @ModelAttribute @Valid System5 system5,
-                      BindingResult bindingResult){
+                          @ModelAttribute @Valid System5empl system5empl,
+                          BindingResult bindingResult){
 
         if (bindingResult.hasErrors()){
-            return "redirect:/list/" + system5.getUserId()+ "?error=2";
+            return "redirect:/list/" + authUser.getUser().getUserId()+ "?error=2";
         }
 
-        system5.setUserId(system5.getUserId());
-        system5.setResempl1(system5.getResempl1().toUpperCase());
-        system5.setResempl2(system5.getResempl2().toUpperCase());
-        system5.setResempl3(system5.getResempl3().toUpperCase());
-        system5.setResempl4(system5.getResempl4().toUpperCase());
-        system5.setResempl5(system5.getResempl5().toUpperCase());
-        system5.setRated(1);
-        system5Repository.updateSystem5(system5.getResempl1(), system5.getResempl2(),
-                system5.getResempl3(), system5.getResempl4(), system5.getResempl5(),
-                system5.getRated(), system5.getUserId(), system5.getMonth());
-        return "redirect:/list/" + system5.getUserId();
+        int userId= system5empl.getUser_id();
+        system5empl.setResempl1(system5empl.getResempl1().toUpperCase());
+        system5empl.setResempl2(system5empl.getResempl2().toUpperCase());
+        system5empl.setResempl3(system5empl.getResempl3().toUpperCase());
+        system5empl.setResempl4(system5empl.getResempl4().toUpperCase());
+        system5empl.setResempl5(system5empl.getResempl5().toUpperCase());
+        system5emplRepository.save(system5empl);
+        system5Repository.updateRated(system5empl.getSystem5Id());
+        return "redirect:/list/" + userId;
     }
 
 

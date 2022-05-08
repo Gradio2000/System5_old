@@ -43,15 +43,15 @@
     <tr>
         <td>${system5.month}</td>
         <td>${system5.res1}</td>
-        <td>${system5.resempl1}</td>
+        <td>${system5.system5empl.resempl1}</td>
         <td>${system5.res2}</td>
-        <td>${system5.resempl2}</td>
+        <td>${system5.system5empl.resempl2}</td>
         <td>${system5.res3}</td>
-        <td>${system5.resempl3}</td>
+        <td>${system5.system5empl.resempl3}</td>
         <td>${system5.res4}</td>
-        <td>${system5.resempl4}</td>
+        <td>${system5.system5empl.resempl4}</td>
         <td>${system5.res5}</td>
-        <td>${system5.resempl5}</td>
+        <td>${system5.system5empl.resempl5}</td>
     </tr>
     </c:forEach>
     </tbody>
@@ -70,12 +70,6 @@
             </div>
                     <div class="modal-body">
                         <form:form method="post" action="/adds" modelAttribute="system5">
-                            <form:input type="hidden" path="userId"/>
-                            <form:input type="hidden" path="resempl1"/>
-                            <form:input type="hidden" path="resempl2"/>
-                            <form:input type="hidden" path="resempl3"/>
-                            <form:input type="hidden" path="resempl4"/>
-                            <form:input type="hidden" path="resempl5"/>
                             <label>Выберите месяц</label>
                             <br/>
                             <form:select path="month" items="${monthList}"/>
@@ -112,19 +106,17 @@
                     <a href="#close" title="Close" class="close">×</a>
                 </div>
                     <div class="modal-body">
-                        <form:form method="post" action="/addsempl" modelAttribute="system5">
-                            <form:input type="hidden" path="userId" value="${userId}"/>
-                            <form:input type="hidden" path="res1"/>
-                            <form:input type="hidden" path="res2"/>
-                            <form:input type="hidden" path="res3"/>
-                            <form:input type="hidden" path="res4"/>
-                            <form:input type="hidden" path="res5"/>
+                        <form:form method="post" action="/addsempl" modelAttribute="system5empl">
+                            <form:input path="user_id" type="hidden" value="${userId}"/>
                             <label>Выберите месяц</label>
                             <br/>
-                            <form:select path="month" items="${months}"/>
+                            <form:select path="system5Id">
+                                <c:forEach items="${months}" var="month">
+                                    <form:option value="${month.key}">${month.value}</form:option>
+                                </c:forEach>
+                            </form:select>
                             <br/>
                             <label>Показатель 1 <form:input path="resempl1"/></label>
-                            <form:errors path="res1" cssClass="errorMsg"/>
                             <br/>
                             <label>Показатель 2 <form:input path="resempl2"/></label>
                             <br/>
