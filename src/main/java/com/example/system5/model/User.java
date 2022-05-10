@@ -3,16 +3,18 @@ package com.example.system5.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.springframework.hateoas.RepresentationModel;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "users",
-        indexes = {@Index(name = "idx_user_user_id", columnList = "user_id")})
-public class User extends RepresentationModel<User> {
+@Table(name = "users")
+@Getter
+@Setter
+public class User{
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,53 +51,5 @@ public class User extends RepresentationModel<User> {
     public User(String login, String password) {
         this.login = login;
         this.password = password;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int id) {
-        this.userId = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
-
-    public Position getPosition() {
-        return position;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
     }
 }

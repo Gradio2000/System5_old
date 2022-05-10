@@ -2,6 +2,8 @@ package com.example.system5.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
@@ -9,7 +11,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "positions")
-public class Position extends RepresentationModel<Position> {
+@Getter
+@Setter
+public class Position {
     @Column(name = "position_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,36 +38,4 @@ public class Position extends RepresentationModel<Position> {
                     { @JoinColumn(name = "position_id", referencedColumnName = "position_id")})
     List<Position> employersList;
 
-
-    public int getPosition_id() {
-        return position_id;
-    }
-
-    public void setPosition_id(int position_id) {
-        this.position_id = position_id;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public List<Position> getEmployersList() {
-        return employersList;
-    }
-
-    public void setEmployersList(List<Position> employersList) {
-        this.employersList = employersList;
-    }
 }

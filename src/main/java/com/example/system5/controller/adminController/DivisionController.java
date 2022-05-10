@@ -2,16 +2,14 @@ package com.example.system5.controller.adminController;
 
 import com.example.system5.model.Division;
 import com.example.system5.repository.DivisionRepository;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/admin")
 public class DivisionController {
     private final DivisionRepository divisionRepository;
@@ -21,8 +19,9 @@ public class DivisionController {
     }
 
     @GetMapping("/shtat")
-    public ResponseEntity<CollectionModel<Division>> getStat(){
+    public String getStat(Model model){
         List<Division> divisions = divisionRepository.findAll();
-        return new ResponseEntity<>( CollectionModel.of(divisions), HttpStatus.OK);
+        model.addAttribute(divisions);
+        return "/shtat";
     }
 }
