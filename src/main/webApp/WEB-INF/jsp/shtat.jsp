@@ -12,6 +12,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"       prefix="x"   %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"  %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 
 <html>
 <head>
@@ -19,68 +21,74 @@
 </head>
 <body>
 
-<table class="iksweb">
+
+<table class="iksweb" >
     <tbody>
-        <c:forEach var="division" items="${divisionList}">
-            <tr>
-                <th colspan="3">${division.division}</th>
-            </tr>
-            <c:forEach var="position" items="${division.positions}">
-                <tr>
-                    <td>${position.position}</td>
-                    <td>${position.user.name}</td>
-                    <td>
-                        <c:forEach items="${position.employersList}" var="empoloer">
-                            <p>${empoloer.position} ${empoloer.user.name}</p>
-                        </c:forEach>
-                    </td>
-                </tr>
-            </c:forEach>
-        </c:forEach>
-    <tr><a href="">Добавить подразделение</a> </tr>
+    <tr>
+        <th class="tblsht">Структурное подразделение</th>
+    </tr>
+    <c:forEach var="division" items="${divisionList}">
+    <tr>
+        <td class="tblsht">
+            <a href= "javascript:getPositions(${division.divisionId - 1})">${division.division}</a>
+        </td>
+    </tr>
+    </c:forEach>
+    <tr>
+        <td class="tblsht"><button name="addDiv" type="button" class="btn">Добавить</button></td>
+    </tr>
+    </tbody>
+</table>
+<br/>
+<table class="iksweb" id="myTable">
+    <tbody >
+    <tr>
+        <th class="tblsht">Должности</th>
+        <th class="tblsht">Работники</th>
+    </tr>
     </tbody>
 </table>
 
 
 </body>
+
+<script>
+    function getPositions(id){
+       $('.insert').remove();
+
+
+        $.ajax({
+            url: "/positions/" + id
+            }).then(function(data) {
+                const data1 = data._embedded.positions;
+                for (let i = 0; i < data1.length; i++){
+                    let position = data1[i].position;
+
+                    $('#myTable > tbody:last-child').append(`
+                            <tr class="insert">
+                                <td class="tblsht">
+                                    <a href="/list/` + data1[i].user.userId + `">` +
+                                        data1[i].position +`
+                                    </a>
+                                </td>
+                                <td class="tblsht">` +
+                                      data1[i].user.name +
+                                `</td>
+                            </tr>
+
+                        `);
+                }
+
+            $('#myTable > tbody:last-child').append(`<tr>
+            <td colspan="2" class="tblsht insert"><button name="addDiv" type="button" class="btn">Добавить</button></td>
+            </tr>`);
+            });
+        };
+
+
+</script>
+
 <style>
-    /* Стили таблицы (IKSWEB) */
-    table.iksweb{
-        text-decoration: none;
-        border-collapse:collapse;
-        width:100%;
-        text-align:left;
-        table-layout: fixed;
-    }
-
-    table.iksweb th{
-        font-weight:normal;
-        font-size:14px;
-        color:#ffffff;
-        background-color:#354251;
-        width: 100%;
-    }
-
-    table.iksweb td{
-        font-size:13px;
-        color:#354251;
-        width: 100%;
-    }
-
-    table.iksweb td,table.iksweb th{
-        white-space:pre-wrap;
-        padding:10px 5px;
-        line-height:13px;
-        vertical-align: middle;
-        border: 1px solid #354251;
-    }
-
-    table.iksweb tr:hover{
-        background-color:#f9fafb
-    }
-
-    table.iksweb tr:hover td{
-        color:#354251;
-        cursor:default;}
+    <%@include file="myStyle.css"%>
 </style>
 </html>
