@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 public class PositionController {
-    private DivisionRepository divisionRepository;
+    private final DivisionRepository divisionRepository;
 
     public PositionController(DivisionRepository divisionRepository) {
         this.divisionRepository = divisionRepository;

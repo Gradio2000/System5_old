@@ -35,8 +35,12 @@
     </tr>
     </c:forEach>
     <tr>
-        <td class="tblsht"><button name="addDiv" type="button" class="btn">Добавить</button></td>
+        <label style="color: crimson; font: bold italic 110% serif">
+            <c:if test="${param.get('errordivision') == true}">Введите название структурного подразделения!</c:if>
+        </label>
+        <td class="tblsht" id="insbtn"><button name="addDiv" id="mybtn" type="button" class="btn" onclick="insertInputText()">Добавить</button></td>
     </tr>
+
     </tbody>
 </table>
 <br/>
@@ -50,21 +54,40 @@
 </table>
 
 
+<form id="addDivision" name="addDivision" method="post" action="/admin/division">
+</form>
+
+
 </body>
 
 <script>
-    function getPositions(id){
+    //рабочая функция на потом
+    // function call(){
+    //     const msg = $('#addDivision').serialize();
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/admin/division',
+    //         data: msg,
+    //         success: function (data) {
+    //             // запустится при успешном выполнении запроса и в data будет ответ скрипта
+    //         },
+    //         error: function () {
+    //             alert('Ошибка!');
+    //             console.log(msg);
+    //         }
+    //     });
+    // }
+
+
+        function getPositions(id){
        $('.insert').remove();
-
-
-        $.ajax({
-            url: "/positions/" + id
-            }).then(function(data) {
-                const data1 = data._embedded.positions;
-                for (let i = 0; i < data1.length; i++){
-                    let position = data1[i].position;
-
-                    $('#myTable > tbody:last-child').append(`
+       $.ajax({
+           url: "/positions/" + id
+       }).then(function(data) {
+           const data1 = data._embedded.positions;
+           for (let i = 0; i < data1.length; i++){
+               let position = data1[i].position;
+               $('#myTable > tbody:last-child').append(`
                             <tr class="insert">
                                 <td class="tblsht">
                                     <a href="/list/` + data1[i].user.userId + `">` +
@@ -77,7 +100,7 @@
                             </tr>
 
                         `);
-                }
+           }
 
             $('#myTable > tbody:last-child').append(`<tr>
             <td colspan="2" class="tblsht insert"><button name="addDiv" type="button" class="btn">Добавить</button></td>
@@ -85,7 +108,14 @@
             });
         };
 
-
+        function insertInputText(){
+        $('#mybtn').hide();
+        $('#insbtn')
+            .prepend('<input class="myinput" form="addDivision" name="division" placeholder="Введите подразделение"/>')
+            .append('</br>')
+            .append('<button type="submit" id="sendButton" class="btn" form="addDivision">OK</button>')
+            .append('<button type="button" class="btncancel">Отмена</button>');
+        }
 </script>
 
 <style>

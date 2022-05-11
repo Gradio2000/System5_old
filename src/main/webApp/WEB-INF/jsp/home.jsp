@@ -28,7 +28,7 @@
 </body>
 
 <script>
-   async function get_employers()
+   function get_employers()
     {
         $.ajax({
             url: "/my_employers"

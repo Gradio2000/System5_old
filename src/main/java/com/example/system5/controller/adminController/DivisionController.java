@@ -5,7 +5,9 @@ import com.example.system5.repository.DivisionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -23,5 +25,16 @@ public class DivisionController {
         List<Division> divisions = divisionRepository.findAll();
         model.addAttribute(divisions);
         return "/shtat";
+    }
+
+    @PostMapping(value = "/division")
+    public String addDivision(@RequestParam String division){
+        if (division.isEmpty()){
+            return "redirect:/admin/shtat?errordivision=true";
+        }
+        Division divisionEntity = new Division();
+        divisionEntity.setDivision(division);
+        divisionRepository.save(divisionEntity);
+        return "redirect:/admin/shtat";
     }
 }
