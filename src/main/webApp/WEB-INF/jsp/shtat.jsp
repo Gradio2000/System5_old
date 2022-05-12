@@ -111,11 +111,15 @@
         function insertInputText(){
         $('#mybtn').hide();
         $('#insbtn')
-            .prepend('<input class="myinput" form="addDivision" name="division" placeholder="Введите подразделение"/>')
-            .append('</br>')
-            .append('<button type="submit" id="sendButton" class="btn" form="addDivision">OK</button>')
-            .append('<button type="button" class="btncancel">Отмена</button>');
+            .prepend('<input class="myinput rem" form="addDivision" name="division" placeholder="Введите подразделение"/>')
+            .append('<button type="submit" id="sendButton" class="btn rem" form="addDivision">OK</button>')
+            .append('<button type="button" class="btncancel rem" onclick=getShtat()>Отмена</button>');
         }
+
+    function getShtat() {
+        $('.rem').remove();
+        $('#mybtn').show();
+    }
 </script>
 
 <style>
