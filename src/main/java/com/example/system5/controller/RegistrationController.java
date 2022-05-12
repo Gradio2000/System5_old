@@ -6,6 +6,7 @@ import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
 import com.example.system5.validation.FormFinishRegValidator;
 import com.example.system5.validation.MyFormValidator;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -97,7 +98,8 @@ public class RegistrationController {
     }
 
     @PostMapping("/finishreg")
-    public String finishRegistration(@ModelAttribute @Valid FormFinishReg formFinishReg,
+    public String finishRegistration(@AuthenticationPrincipal AuthUser authUser,
+                                     @ModelAttribute @Valid FormFinishReg formFinishReg,
                                      BindingResult bindingResult,
                                      Model model){
 
@@ -106,10 +108,11 @@ public class RegistrationController {
             model.addAttribute(positionList);
             return "registrationnext";
         }
-        AuthUser authUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = userRepository.getById(authUser.getUser().getUserId());
+
+        User user = authUser.getUser();
         user.setName(formFinishReg.getName());
         userRepository.save(user);
+        userRepository.appoint(formFinishReg.getPosition_id(), user.getUserId());
         return "redirect:/home";
     }
 
