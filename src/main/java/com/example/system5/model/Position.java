@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,6 +21,9 @@ public class Position {
 
     @Column(name = "position")
     private String position;
+
+    @Column(name = "division_id")
+    private int divisionId;
 
     @OneToOne
     @JoinTable(name = "position_user",

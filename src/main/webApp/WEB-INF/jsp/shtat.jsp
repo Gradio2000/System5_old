@@ -44,6 +44,7 @@
     </tbody>
 </table>
 <br/>
+<br/>
 <table class="iksweb" id="myTable">
     <tbody >
     <tr>
@@ -54,8 +55,8 @@
 </table>
 
 
-<form id="addDivision" name="addDivision" method="post" action="/admin/division">
-</form>
+<form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
+<form id="addPosition" name="addPosition" method="post" ></form>
 
 
 </body>
@@ -80,30 +81,30 @@
 
 
         function getPositions(id){
-       $('.insert').remove();
-       $.ajax({
-           url: "/positions/" + id
+            $('.insert').remove();
+            let elem = $('#myTable > tbody:last-child');
+            $.ajax({
+           url: "/admin/positions/" + id
        }).then(function(data) {
            const data1 = data._embedded.positions;
+           let userName;
            for (let i = 0; i < data1.length; i++){
                let position = data1[i].position;
-               $('#myTable > tbody:last-child').append(`
+               if (data1[i].user == null){
+                   userName = "";
+               }
+               else userName = data1[i].user.name;
+               elem.append(`
                             <tr class="insert">
-                                <td class="tblsht">
-                                    <a href="/list/` + data1[i].user.userId + `">` +
-                                        data1[i].position +`
-                                    </a>
-                                </td>
-                                <td class="tblsht">` +
-                                      data1[i].user.name +
-                                `</td>
+                                <td class="tblsht">` + data1[i].position + `</a> </td>
+                                <td class="tblsht">` + userName + `</td>
                             </tr>
 
                         `);
            }
 
-            $('#myTable > tbody:last-child').append(`<tr>
-            <td colspan="2" class="tblsht insert"><button name="addDiv" type="button" class="btn">Добавить</button></td>
+            elem.append(`<tr>
+            <td id="insbtnPos" colspan="2" class="tblsht insert"><button id=` +id + ` name="addDiv" type="button" class="btn" onclick="insertInputTextForPositions(this.id)">Добавить</button></td>
             </tr>`);
             });
         };
@@ -116,10 +117,27 @@
             .append('<button type="button" class="btncancel rem" onclick=getShtat()>Отмена</button>');
         }
 
+    function insertInputTextForPositions(id){
+        const posId = Number(id) + 1;
+        $('#mybtnPos').hide();
+        $('#insbtnPos')
+            .prepend('<input class="myinputPos remPos" form="addPosition" name="position" placeholder="Введите должность"/>')
+            .append('<button type="submit" id="sendButtonPos" class="btn remPos" form="addPosition">OK</button>')
+            .append('<button type="button" class="btncancel remPos" onclick=getShtatPos()>Отмена</button>');
+        $('#addPosition').attr("action", "/admin/position/" + posId);
+
+    }
+
     function getShtat() {
         $('.rem').remove();
         $('#mybtn').show();
     }
+
+    function getShtatPos() {
+        $('.remPos').remove();
+        $('#mybtnPos').show();
+    }
+
 </script>
 
 <style>

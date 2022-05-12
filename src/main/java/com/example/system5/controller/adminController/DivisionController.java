@@ -2,6 +2,7 @@ package com.example.system5.controller.adminController;
 
 import com.example.system5.model.Division;
 import com.example.system5.repository.DivisionRepository;
+import com.example.system5.repository.PositionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import java.util.List;
 @RequestMapping("/admin")
 public class DivisionController {
     private final DivisionRepository divisionRepository;
+
 
     public DivisionController(DivisionRepository divisionRepository) {
         this.divisionRepository = divisionRepository;
@@ -37,4 +39,6 @@ public class DivisionController {
         divisionRepository.save(divisionEntity);
         return "redirect:/admin/shtat";
     }
+
+
 }
