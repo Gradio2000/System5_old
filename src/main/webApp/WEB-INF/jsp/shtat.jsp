@@ -34,9 +34,10 @@
         </td>
     </tr>
     </c:forEach>
-    <tr>
+    <tr >
         <label style="color: crimson; font: bold italic 110% serif">
             <c:if test="${param.get('errordivision') == true}">Введите название структурного подразделения!</c:if>
+            <c:if test="${param.get('errorposition') == true}">Введите название должности!</c:if>
         </label>
         <td class="tblsht" id="insbtn"><button name="addDiv" id="mybtn" type="button" class="btn" onclick="insertInputText()">Добавить</button></td>
     </tr>
@@ -104,8 +105,11 @@
            }
 
             elem.append(`<tr>
-            <td id="insbtnPos" colspan="2" class="tblsht insert"><button id=` +id + ` name="addDiv" type="button" class="btn" onclick="insertInputTextForPositions(this.id)">Добавить</button></td>
-            </tr>`);
+                            <td id="insbtnPos" colspan="2" class="tblsht insert">
+                                <button id=` +id + ` name="addDiv" type="button" class="btn mybtnPos" onclick="insertInputTextForPositions(this.id)">Добавить
+                                </button>
+                            </td>
+                         </tr>`);
             });
         };
 
@@ -119,9 +123,9 @@
 
     function insertInputTextForPositions(id){
         const posId = Number(id) + 1;
-        $('#mybtnPos').hide();
+        $('.mybtnPos').hide();
         $('#insbtnPos')
-            .prepend('<input class="myinputPos remPos" form="addPosition" name="position" placeholder="Введите должность"/>')
+            .prepend('<input class="myinput remPos" form="addPosition" name="position" placeholder="Введите должность"/>')
             .append('<button type="submit" id="sendButtonPos" class="btn remPos" form="addPosition">OK</button>')
             .append('<button type="button" class="btncancel remPos" onclick=getShtatPos()>Отмена</button>');
         $('#addPosition').attr("action", "/admin/position/" + posId);
