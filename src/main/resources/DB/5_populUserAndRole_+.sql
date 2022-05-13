@@ -2,12 +2,12 @@ DROP TABLE IF EXISTS users CASCADE ;
 
 create table users
 (
-    user_id     serial
+    user_id  serial
         constraint users_pk
             primary key,
-    login       varchar(128),
-    name        varchar(128),
-    password    varchar(256)
+    login    varchar(128),
+    name     varchar(128),
+    password varchar(256)
 );
 
 alter table users
@@ -33,7 +33,7 @@ VALUES ('aa', 'Ласкин', '$2a$12$WIr/8OS3JN02CakLS9RiyuQuWm8Fk7XybV7WyVzidN
 
 DROP TABLE IF EXISTS USER_ROLE CASCADE;
 
-create table USER_ROLE
+create table user_role
 (
     user_id integer not null
         constraint fk
@@ -43,6 +43,9 @@ create table USER_ROLE
     constraint user_roles_unique
         unique (user_id, role)
 );
+
+alter table user_role
+    owner to aleksejlaskin;
 
 insert into user_role (USER_ID, ROLE)
 VALUES (1, 'USER'), (2, 'USER'), (3, 'USER'),  (4, 'USER'),

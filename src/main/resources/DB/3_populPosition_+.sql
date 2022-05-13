@@ -1,13 +1,19 @@
 DROP TABLE IF EXISTS positions cascade;
 
-CREATE TABLE positions
+create table positions
 (
-    position_id serial not null primary key,
-    position VARCHAR not null,
-    division_id int not null
+    position_id serial
+        constraint positions_pkey
+            primary key,
+    position    varchar not null,
+    division_id integer
 );
+
+alter table positions
+    owner to aleksejlaskin;
+
 create unique index positions_position_id_uindex
-    on positions ("position_id");
+    on positions (position_id);
 
 
 INSERT INTO positions (position, division_id) VALUES ('Начальник банка', 1);

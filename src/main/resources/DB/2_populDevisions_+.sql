@@ -1,13 +1,20 @@
 DROP TABLE IF EXISTS divisions cascade;
 
-CREATE TABLE divisions (
-                division_id serial not null primary key,
-                division VARCHAR not null,
-                commander_position_id int
+create table divisions
+(
+    division_id           serial
+        constraint divisions_pkey
+            primary key,
+    division              varchar not null,
+    commander_position_id integer
 );
 
+alter table divisions
+    owner to aleksejlaskin;
+
 create unique index divisions_division_id_uindex
-    on divisions ("division_id");
+    on divisions (division_id);
+
 
 INSERT INTO divisions (division, commander_position_id) VALUES ('Руководство', 1);
 INSERT INTO divisions (division, commander_position_id) VALUES ('Операционный аппарат', 3);

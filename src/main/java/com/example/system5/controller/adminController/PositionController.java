@@ -28,14 +28,19 @@ public class PositionController {
     @ResponseBody
     public Object getPositions(@PathVariable int id){
         List<Division> divisions = divisionRepository.findAll();
-        List<Position> positions = null;
+        List<Position> positions;
+        Map<String, Boolean> error = new HashMap();
         try {
             positions = divisions.get(id).getPositions();
         } catch (IndexOutOfBoundsException e) {
-            Map<String, Boolean> error = new HashMap();
             error.put("myer", true);
             return CollectionModel.of(error);
         }
+        if (positions.size() == 0){
+            error.put("myer", true);
+            return CollectionModel.of(error);
+        }
+
         return CollectionModel.of(positions);
     }
 

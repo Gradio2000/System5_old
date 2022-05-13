@@ -43,7 +43,7 @@
 </table>
 
 <button name="addDiv" id="mybtn" type="button" class="btn" onclick="insertInputText()">Добавить</button>
-<button name="addDiv" id="mybtnDel" type="button" class="btncancel" onclick="deleteDivision()">Удалить</button>
+<button name="addDiv" id="mybtnDel" type="button" class="btncancel btndel" onclick="deleteDivision()">Удалить</button>
 <div id="ins"></div>
 
 <br/>
@@ -60,8 +60,6 @@
 
 <form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
 <form id="addPosition" name="addPosition" method="post" ></form>
-
-
 
 </body>
 
@@ -82,7 +80,6 @@
         $.ajax({
             url: "/admin/positions/" + id
        }).then(function(data) {
-           console.log(data)
             if (data.myer === true){
                 insertButton(id);
             } else {
@@ -101,6 +98,7 @@
 
                         `);
                 }
+                $('#mybtnDel').show();
             }
         });
 
@@ -108,7 +106,7 @@
 
         }
 
-        function insertButton(id){
+    function insertButton(id){
         $('.mybtnPos').remove();
         let el = document.getElementById("insbtn");
         let but = document.createElement("button");
@@ -127,6 +125,7 @@
 
     function insertInputText(){
         $('#mybtn').hide();
+        $('#mybtnDel').hide();
         $('#ins')
             .append('<input class="myinput rem" form="addDivision" name="division" placeholder="Введите подразделение"/>')
             .append('<button type="submit" id="sendButton" class="btn rem" form="addDivision">OK</button>')
@@ -136,7 +135,7 @@
     function insertInputTextForPositions(id){
         const posId = Number(id) + 1;
         $('.mybtnPos').hide();
-        $('#insbtnPos')
+        $('#insbtn')
             .prepend('<input class="myinput remPos" form="addPosition" name="position" placeholder="Введите должность"/>')
             .append('<button type="submit" id="sendButtonPos" class="btn remPos" form="addPosition">OK</button>')
             .append('<button type="button" class="btncancel remPos" onclick=getShtatPos()>Отмена</button>');
@@ -155,6 +154,7 @@
     }
 
     function highlight_Table_Rows(table_Id, hover_Class, click_Class, multiple) {
+        $('#mybtnDel').show();
         var table = document.getElementById(table_Id);
         if (typeof multiple == 'undefined') multiple = false;
 
@@ -210,9 +210,6 @@
             }
         };
     }
-
-
-
 
 
 </script>
