@@ -236,10 +236,10 @@ table td, table th {
     padding: 8px;
 }
 
-table tr:nth-child(even){
-    text-align: center;
-    background-color: #f2f2f2;
-}
+/*table tr:nth-child(even){*/
+/*    text-align: center;*/
+/*    background-color: #f2f2f2;*/
+/*}*/
 
 
 table th {
