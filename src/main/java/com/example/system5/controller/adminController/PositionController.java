@@ -9,7 +9,9 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
@@ -24,10 +26,17 @@ public class PositionController {
 
     @GetMapping(value = "/positions/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public CollectionModel<Position> getPositions(@PathVariable int id){
+    public Object getPositions(@PathVariable int id){
         List<Division> divisions = divisionRepository.findAll();
-        List<Position> positions = divisions.get(id).getPositions();
-        return CollectionModel.of(positions) ;
+        List<Position> positions = null;
+        try {
+            positions = divisions.get(id).getPositions();
+        } catch (IndexOutOfBoundsException e) {
+            Map<String, Boolean> error = new HashMap();
+            error.put("myer", true);
+            return CollectionModel.of(error);
+        }
+        return CollectionModel.of(positions);
     }
 
 

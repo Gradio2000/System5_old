@@ -30,21 +30,22 @@
     <c:forEach var="division" items="${divisionList}">
     <tr>
         <td class="tblsht">
-<%--            <a href= "javascript:getPositions(${division.divisionId - 1})">${division.division}</a>--%>
-            <a id="${division.divisionId - 1}">${division.division}</a>
+            <a id=${division.divisionId - 1}>${division.division}</a>
         </td>
-    </tr>
+    </tr
     </c:forEach>
 
         <label style="color: crimson; font: bold italic 110% serif">
             <c:if test="${param.get('errordivision') == true}">Введите название структурного подразделения!</c:if>
             <c:if test="${param.get('errorposition') == true}">Введите название должности!</c:if>
         </label>
-        <td class="tblsht" id="insbtn"><button name="addDiv" id="mybtn" type="button" class="btn" onclick="insertInputText()">Добавить</button></td>
-
-
     </tbody>
 </table>
+
+<button name="addDiv" id="mybtn" type="button" class="btn" onclick="insertInputText()">Добавить</button>
+<button name="addDiv" id="mybtnDel" type="button" class="btncancel" onclick="deleteDivision()">Удалить</button>
+<div id="ins"></div>
+
 <br/>
 <br/>
 <table class="iksweb" id="myTable">
@@ -55,10 +56,11 @@
     </tr>
     </tbody>
 </table>
-
+<div id="insbtn"></div>
 
 <form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
 <form id="addPosition" name="addPosition" method="post" ></form>
+
 
 
 </body>
@@ -72,43 +74,61 @@
     function getPositions(){
         let el = document.getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
         let id = el.id;
-        console.log(el);
 
-            $('.insert').remove();
-            let elem = $('#myTable > tbody:last-child');
-            $.ajax({
-           url: "/admin/positions/" + id
+        $('.insert').remove();
+
+        let elem = $('#myTable > tbody:last-child');
+
+        $.ajax({
+            url: "/admin/positions/" + id
        }).then(function(data) {
-           const data1 = data._embedded.positions;
-           let userName;
-           for (let i = 0; i < data1.length; i++){
-               let position = data1[i].position;
-               if (data1[i].user == null){
-                   userName = "";
-               }
-               else userName = data1[i].user.name;
-               elem.append(`
+           console.log(data)
+            if (data.myer === true){
+                insertButton(id);
+            } else {
+                const data1 = data._embedded.positions;
+                let userName;
+                for (let i = 0; i < data1.length; i++) {
+                    let position = data1[i].position;
+                    if (data1[i].user == null) {
+                        userName = "";
+                    } else userName = data1[i].user.name;
+                    elem.append(`
                             <tr class="insert">
                                 <td class="tblsht">` + data1[i].position + `</a> </td>
                                 <td class="tblsht">` + userName + `</td>
                             </tr>
 
                         `);
-           }
+                }
+            }
+        });
 
-            elem.append(`<tr>
-                            <td id="insbtnPos" colspan="2" class="tblsht insert">
-                                <button id=` +id + ` name="addDiv" type="button" class="btn mybtnPos" onclick="insertInputTextForPositions(this.id)">Добавить
-                                </button>
-                            </td>
-                         </tr>`);
-            });
+        insertButton(id);
+
         }
+
+        function insertButton(id){
+        $('.mybtnPos').remove();
+        let el = document.getElementById("insbtn");
+        let but = document.createElement("button");
+        but.setAttribute("type", "button");
+        but.setAttribute("onclick", "insertInputTextForPositions(" + id + ")");
+        but.setAttribute("class", "btn mybtnPos");
+        but.innerText = "Добавить";
+        el.append(but);
+        }
+
+    function deleteDivision(){
+        let el = document.getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
+        let id = Number(el.id) + 1;
+        document.location.href = '/admin/division/' + id;
+    }
 
     function insertInputText(){
         $('#mybtn').hide();
-        $('#insbtn')
-            .prepend('<input class="myinput rem" form="addDivision" name="division" placeholder="Введите подразделение"/>')
+        $('#ins')
+            .append('<input class="myinput rem" form="addDivision" name="division" placeholder="Введите подразделение"/>')
             .append('<button type="submit" id="sendButton" class="btn rem" form="addDivision">OK</button>')
             .append('<button type="button" class="btncancel rem" onclick=getShtat()>Отмена</button>');
         }

@@ -2,13 +2,9 @@ package com.example.system5.controller.adminController;
 
 import com.example.system5.model.Division;
 import com.example.system5.repository.DivisionRepository;
-import com.example.system5.repository.PositionRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -37,6 +33,12 @@ public class DivisionController {
         Division divisionEntity = new Division();
         divisionEntity.setDivision(division);
         divisionRepository.save(divisionEntity);
+        return "redirect:/admin/shtat";
+    }
+
+    @GetMapping(value = "/division/{id}")
+    public String deleteDivision(@PathVariable int id){
+        divisionRepository.deleteById(id);
         return "redirect:/admin/shtat";
     }
 
