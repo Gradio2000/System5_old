@@ -1,6 +1,5 @@
 package com.example.system5.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +15,6 @@ public class Position {
     @Column(name = "position_id")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     private int position_id;
 
     @Column(name = "position")

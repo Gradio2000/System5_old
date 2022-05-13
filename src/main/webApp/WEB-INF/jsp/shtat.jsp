@@ -48,7 +48,7 @@
 
 <br/>
 <br/>
-<table class="iksweb" id="myTable">
+<table class="iksweb" id="color_table1">
     <tbody >
     <tr>
         <th class="tblsht">Должности</th>
@@ -57,6 +57,7 @@
     </tbody>
 </table>
 <div id="insbtn"></div>
+<div id="insdelbtn"></div>
 
 <form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
 <form id="addPosition" name="addPosition" method="post" ></form>
@@ -66,16 +67,22 @@
 <script>
 
     highlight_Table_Rows("color_table", "hover_Row", "clicked_Row");
+    highlight_Table_Rows("color_table1", "hover_Row", "clicked_Row");
+
     let el = document.getElementById("color_table");
     el.addEventListener("click", getPositions);
 
-    function getPositions(){
-        let el = document.getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
+    let el1 = document.getElementById("color_table1");
+    el1.addEventListener("click", selectPosition);
+
+        function getPositions(){
+            $('#butdel').remove();
+        let el = document.getElementById("color_table").getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
         let id = el.id;
 
         $('.insert').remove();
 
-        let elem = $('#myTable > tbody:last-child');
+        let elem = $('#color_table1 > tbody:last-child');
 
         $.ajax({
             url: "/admin/positions/" + id
@@ -84,6 +91,7 @@
                 insertButton(id);
             } else {
                 const data1 = data._embedded.positions;
+                console.log(data);
                 let userName;
                 for (let i = 0; i < data1.length; i++) {
                     let position = data1[i].position;
@@ -92,7 +100,7 @@
                     } else userName = data1[i].user.name;
                     elem.append(`
                             <tr class="insert">
-                                <td class="tblsht">` + data1[i].position + `</a> </td>
+                                <td class="tblsht" id="`+ data1[i].position_id + `">` + data1[i].position + `</a> </td>
                                 <td class="tblsht">` + userName + `</td>
                             </tr>
 
@@ -106,24 +114,49 @@
 
         }
 
-    function insertButton(id){
-        $('.mybtnPos').remove();
-        let el = document.getElementById("insbtn");
-        let but = document.createElement("button");
-        but.setAttribute("type", "button");
-        but.setAttribute("onclick", "insertInputTextForPositions(" + id + ")");
-        but.setAttribute("class", "btn mybtnPos");
-        but.innerText = "Добавить";
-        el.append(but);
+        function selectPosition(){
+            $('#butdel').remove();
+            let table = document.getElementById("color_table1");
+            let el = table.getElementsByClassName("clicked_Row").item(0).children.item(0);
+            let id = el.id;
+            insertDeleteButton(id);
+            console.log(el);
         }
 
-    function deleteDivision(){
+        function insertButton(id) {
+            $('.mybtnPos').remove();
+            let el = document.getElementById("insbtn");
+            let but = document.createElement("button");
+            but.setAttribute("type", "button");
+            but.setAttribute("onclick", "insertInputTextForPositions(" + id + ")");
+            but.setAttribute("class", "btn mybtnPos");
+            but.innerText = "Добавить";
+            el.append(but);
+        }
+
+        function insertDeleteButton(id){
+        let el = document.getElementById("insbtn");
+        let butdel = document.createElement("button");
+            butdel.setAttribute("id", "butdel");
+            butdel.setAttribute("type", "button");
+            butdel.setAttribute("onclick", "deletePosition(" + id + ")");
+            butdel.setAttribute("class", "btncancel btndel");
+            butdel.innerText = "Удалить";
+            el.append(butdel);
+            $('#butdel').show();
+        }
+
+        function deleteDivision(){
         let el = document.getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
         let id = Number(el.id) + 1;
         document.location.href = '/admin/division/' + id;
     }
 
-    function insertInputText(){
+        function deletePosition(id){
+            document.location.href = '/admin/position/delete/' + id;
+        }
+
+        function insertInputText(){
         $('#mybtn').hide();
         $('#mybtnDel').hide();
         $('#ins')
@@ -132,7 +165,7 @@
             .append('<button type="button" class="btncancel rem" onclick=getShtat()>Отмена</button>');
         }
 
-    function insertInputTextForPositions(id){
+        function insertInputTextForPositions(id){
         const posId = Number(id) + 1;
         $('.mybtnPos').hide();
         $('#insbtn')
@@ -143,17 +176,17 @@
 
     }
 
-    function getShtat() {
+        function getShtat() {
         $('.rem').remove();
         $('#mybtn').show();
     }
 
-    function getShtatPos() {
+        function getShtatPos() {
         $('.remPos').remove();
-        $('#mybtnPos').show();
+        $('.mybtnPos').show();
     }
 
-    function highlight_Table_Rows(table_Id, hover_Class, click_Class, multiple) {
+        function highlight_Table_Rows(table_Id, hover_Class, click_Class, multiple) {
         $('#mybtnDel').show();
         var table = document.getElementById(table_Id);
         if (typeof multiple == 'undefined') multiple = false;
