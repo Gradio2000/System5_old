@@ -62,6 +62,7 @@
 
 <form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
 <form id="changeDivision" name=changeDivision" method="post" action="/admin/division/change"></form>
+<form id="changePosition" name=changePosition" method="post" action="/admin/position/change"></form>
 <form id="addPosition" name="addPosition" method="post" ></form>
 
 </body>
@@ -127,7 +128,6 @@
             $('#mybtnCh').hide();
             $('#mybtnDel').hide();
             let table = document.getElementById("color_table1");
-        console.log(table.getElementsByClassName("clicked_Row"));
             let el = table.getElementsByClassName("clicked_Row").item(0).children.item(0);
             let id = el.id;
 
@@ -157,7 +157,7 @@
         let butch = document.createElement("button");
             butch.setAttribute("id", "butch");
             butch.setAttribute("type", "button");
-            butch.setAttribute("onclick", "changePosition(" + id + ")");
+            butch.setAttribute("onclick", "changePosition()");
             butch.setAttribute("class", "buttonch btnch");
             butch.innerText = "Изменить";
 
@@ -184,6 +184,13 @@
             document.location.href = '/admin/position/delete/' + id;
         }
 
+    function changePosition(){
+        let el = document.getElementById("color_table1").getElementsByClassName("clicked_Row").item(0).children.item(0);
+        let id = el.id;
+        console.log(id);
+        insertInputTextForChangePositions(id);
+    }
+
     function insertInputText(){
         $('#mybtn').hide();
         $('#mybtnDel').hide();
@@ -206,13 +213,25 @@
     }
 
     function insertInputTextForPositions(id){
-        const posId = id;
         $('.mybtnPos').hide();
         $('#insbtn')
             .prepend('<input class="myinput remPos" form="addPosition" name="position" placeholder="Введите должность"/>')
             .append('<button type="submit" id="sendButtonPos" class="btn remPos" form="addPosition">OK</button>')
             .append('<button type="button" class="btncancel remPos" onclick=getShtatPos()>Отмена</button>');
-        $('#addPosition').attr("action", "/admin/position/" + posId);
+        $('#addPosition').attr("action", "/admin/position/" + id);
+
+    }
+
+    function insertInputTextForChangePositions(id){
+        $('.mybtnPos').hide();
+        $('#butch').remove();
+        $('#butdel').remove();
+        $('#insbtn')
+            .prepend('<input class="myinput remPos" form="changePosition" name="position" placeholder="Введите новое название"/>')
+            .append('<button type="submit" id="sendButtonPos" class="btn remPos" form="changePosition">OK</button>')
+            .append('<input type="hidden" name="id" form="changePosition" value="' + id +'"/>')
+            .append('<button type="button" class="btncancel remPos" form="changePosition" onclick=getShtatPos()>Отмена</button>');
+        $('#sendButtonPos').attr("action", "/admin/position/change/");
 
     }
 

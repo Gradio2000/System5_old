@@ -61,5 +61,16 @@ public class PositionController {
         return "redirect:/admin/shtat";
     }
 
+    @PostMapping("/position/change")
+    public String changePosition(@RequestParam String position, @RequestParam int id){
+        Position positionForChange = positionRepository.findById(id).orElse(null);
+        if (position.isEmpty()){
+            return "redirect:/admin/shtat?errorPositionChange=true";
+        }
+        assert positionForChange != null;
+        positionForChange.setPosition(position);
+        positionRepository.save(positionForChange);
+        return "redirect:/admin/shtat";
+    }
 
 }
