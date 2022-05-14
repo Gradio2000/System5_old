@@ -63,4 +63,5 @@ public class PositionController {
         return "redirect:/admin/shtat";
     }
 
+
 }

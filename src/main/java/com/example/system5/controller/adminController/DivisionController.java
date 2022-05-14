@@ -42,5 +42,16 @@ public class DivisionController {
         return "redirect:/admin/shtat";
     }
 
-
+    @PostMapping("/division/change")
+    public String chanheDivision(@RequestParam String divisionName,
+                                 @RequestParam int id){
+        Division division = divisionRepository.findById(id).orElse(null);
+        if (divisionName.isEmpty()){
+            return "redirect:/admin/shtat?errorDivisionChange=true";
+        }
+        assert division != null;
+        division.setDivision(divisionName);
+        divisionRepository.save(division);
+        return "redirect:/admin/shtat";
+    }
 }

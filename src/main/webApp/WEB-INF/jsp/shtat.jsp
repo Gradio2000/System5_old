@@ -43,6 +43,7 @@
 </table>
 
 <button name="addDiv" id="mybtn" type="button" class="btn" onclick="insertInputText()">Добавить</button>
+<button name="addDiv" id="mybtnCh" type="button" class="buttonch btnch" onclick="changeDivision()">Изменить</button>
 <button name="addDiv" id="mybtnDel" type="button" class="btncancel btndel" onclick="deleteDivision()">Удалить</button>
 <div id="ins"></div>
 
@@ -60,6 +61,7 @@
 <div id="insdelbtn"></div>
 
 <form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
+<form id="changeDivision" name=changeDivision" method="post" action="/admin/division/change"></form>
 <form id="addPosition" name="addPosition" method="post" ></form>
 
 </body>
@@ -75,8 +77,10 @@
     let el1 = document.getElementById("color_table1");
     el1.addEventListener("click", selectPosition);
 
-        function getPositions(){
-            $('#butdel').remove();
+
+
+    function getPositions(){
+        $('#butdel').remove();
         let el = document.getElementById("color_table").getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
         let id = el.id;
 
@@ -107,6 +111,7 @@
                         `);
                 }
                 $('#mybtnDel').show();
+                $('#mybtnCh').show();
             }
         });
 
@@ -114,7 +119,7 @@
 
         }
 
-        function selectPosition(){
+    function selectPosition(){
             $('#butdel').remove();
             let table = document.getElementById("color_table1");
             let el = table.getElementsByClassName("clicked_Row").item(0).children.item(0);
@@ -123,7 +128,7 @@
             console.log(el);
         }
 
-        function insertButton(id) {
+    function insertButton(id) {
             $('.mybtnPos').remove();
             let el = document.getElementById("insbtn");
             let but = document.createElement("button");
@@ -134,7 +139,7 @@
             el.append(but);
         }
 
-        function insertDeleteButton(id){
+    function insertDeleteButton(id){
         let el = document.getElementById("insbtn");
         let butdel = document.createElement("button");
             butdel.setAttribute("id", "butdel");
@@ -146,26 +151,44 @@
             $('#butdel').show();
         }
 
-        function deleteDivision(){
+    function deleteDivision(){
         let el = document.getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
         let id = Number(el.id) + 1;
         document.location.href = '/admin/division/' + id;
     }
 
-        function deletePosition(id){
+    function changeDivision(){
+        let el = document.getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
+        let id = Number(el.id) + 1;
+        insertInputTextForChangeDivision(id);
+    }
+
+    function deletePosition(id){
             document.location.href = '/admin/position/delete/' + id;
         }
 
-        function insertInputText(){
+    function insertInputText(){
         $('#mybtn').hide();
         $('#mybtnDel').hide();
+        $('#mybtnCh').hide();
         $('#ins')
             .append('<input class="myinput rem" form="addDivision" name="division" placeholder="Введите подразделение"/>')
             .append('<button type="submit" id="sendButton" class="btn rem" form="addDivision">OK</button>')
             .append('<button type="button" class="btncancel rem" onclick=getShtat()>Отмена</button>');
         }
 
-        function insertInputTextForPositions(id){
+    function insertInputTextForChangeDivision(id){
+        $('#mybtn').hide();
+        $('#mybtnDel').hide();
+        $('#mybtnCh').hide();
+        $('#ins')
+            .append('<input type="hidden" class="myinput rem" form="changeDivision" name="id" value="' + id +'"/>')
+            .append('<input class="myinput rem" form="changeDivision" name="divisionName" placeholder="Введите новое название"/>')
+            .append('<button type="submit" id="sendButton" class="btn rem" form="changeDivision">OK</button>')
+            .append('<button type="button" class="btncancel rem" onclick=getShtat()>Отмена</button>');
+    }
+
+    function insertInputTextForPositions(id){
         const posId = Number(id) + 1;
         $('.mybtnPos').hide();
         $('#insbtn')
@@ -176,18 +199,19 @@
 
     }
 
-        function getShtat() {
+    function getShtat() {
         $('.rem').remove();
         $('#mybtn').show();
     }
 
-        function getShtatPos() {
+    function getShtatPos() {
         $('.remPos').remove();
         $('.mybtnPos').show();
     }
 
-        function highlight_Table_Rows(table_Id, hover_Class, click_Class, multiple) {
+    function highlight_Table_Rows(table_Id, hover_Class, click_Class, multiple) {
         $('#mybtnDel').show();
+        $('#mybtnCh').show();
         var table = document.getElementById(table_Id);
         if (typeof multiple == 'undefined') multiple = false;
 
