@@ -175,8 +175,9 @@
     }
 
     function changeDivision(){
-        let el = document.getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
+        let el = document.getElementById("color_table").getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
         let id = el.id;
+        console.log(el);
         insertInputTextForChangeDivision(id);
     }
 
@@ -217,8 +218,9 @@
         $('#insbtn')
             .prepend('<input class="myinput remPos" form="addPosition" name="position" placeholder="Введите должность"/>')
             .append('<button type="submit" id="sendButtonPos" class="btn remPos" form="addPosition">OK</button>')
+            .append('<input type="hidden" name="id" form="addPosition" value="' + id +'"/>')
             .append('<button type="button" class="btncancel remPos" onclick=getShtatPos()>Отмена</button>');
-        $('#addPosition').attr("action", "/admin/position/" + id);
+        $('#addPosition').attr("action", "/admin/position");
 
     }
 

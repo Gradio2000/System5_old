@@ -43,8 +43,8 @@ public class PositionController {
     }
 
 
-    @PostMapping(value = "/position/{id}")
-    public String addPosition(@RequestParam String position, @PathVariable int id){
+    @PostMapping(value = "/position")
+    public String addPosition(@RequestParam String position, @RequestParam int id){
         if (position.isEmpty()){
             return "redirect:/admin/shtat?errorposition=true";
         }
