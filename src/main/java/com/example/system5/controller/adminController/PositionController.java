@@ -56,4 +56,11 @@ public class PositionController {
         positionRepository.save(positionEntity);
         return "redirect:/admin/shtat";
     }
+
+    @GetMapping(value = "/position/delete/{id}")
+    public String deletePosition(@PathVariable int id){
+        positionRepository.deleteById(id);
+        return "redirect:/admin/shtat";
+    }
+
 }
