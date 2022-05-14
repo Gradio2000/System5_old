@@ -79,6 +79,7 @@
 
 
     function getPositions(){
+        getShtat();
         $('.insert').remove();
         $('#butdel').remove();
         $('#butch').remove();
@@ -119,8 +120,12 @@
         }
 
     function selectPosition(){
+            $('.rem').remove();
+            $('#mybtn').hide();
             $('#butdel').remove();
             $('#butch').remove();
+            $('#mybtnCh').hide();
+            $('#mybtnDel').hide();
             let table = document.getElementById("color_table1");
         console.log(table.getElementsByClassName("clicked_Row"));
             let el = table.getElementsByClassName("clicked_Row").item(0).children.item(0);
