@@ -84,6 +84,7 @@
         $('.insert').remove();
         $('#butdel').remove();
         $('#butch').remove();
+        $('.remPos').remove();
 
         let el = document.getElementById("color_table").getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
         let id = el.id;
