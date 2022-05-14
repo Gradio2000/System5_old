@@ -138,8 +138,8 @@ body {
 .btncancel {
     display: inline-block;
     margin-top: 2em;
-    background: #ec6868;
-    border: 1px solid #9a0303;
+    background: #e85b5b;
+    border: 1px solid #c15e5e;
     padding: 0.5em 2em;
     color: white;
     margin-right: 0.5em;
@@ -155,7 +155,7 @@ body {
     display: inline-block;
     margin-top: 2em;
     background: #e8d23f;
-    border: 1px solid #785b02;
+    border: 1px solid #d5c13a;
     padding: 0.5em 2em;
     color: white;
     margin-right: 0.5em;
@@ -171,7 +171,11 @@ body {
 }
 
 .btncancel:hover {
-    background: #dc4242;
+    background: #e79696;
+}
+
+.buttonch:hover {
+    background: #e7dc93;
 }
 
 .btn:active {

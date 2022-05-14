@@ -30,7 +30,7 @@
     <c:forEach var="division" items="${divisionList}">
     <tr>
         <td class="tblsht">
-            <a id=${division.divisionId - 1}>${division.division}</a>
+            <a id=${division.divisionId}>${division.division}</a>
         </td>
     </tr
     </c:forEach>
@@ -78,13 +78,13 @@
     el1.addEventListener("click", selectPosition);
 
 
-
     function getPositions(){
+        $('.insert').remove();
         $('#butdel').remove();
+        $('#butch').remove();
+
         let el = document.getElementById("color_table").getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
         let id = el.id;
-
-        $('.insert').remove();
 
         let elem = $('#color_table1 > tbody:last-child');
 
@@ -95,7 +95,6 @@
                 insertButton(id);
             } else {
                 const data1 = data._embedded.positions;
-                console.log(data);
                 let userName;
                 for (let i = 0; i < data1.length; i++) {
                     let position = data1[i].position;
@@ -121,11 +120,13 @@
 
     function selectPosition(){
             $('#butdel').remove();
+            $('#butch').remove();
             let table = document.getElementById("color_table1");
+        console.log(table.getElementsByClassName("clicked_Row"));
             let el = table.getElementsByClassName("clicked_Row").item(0).children.item(0);
             let id = el.id;
-            insertDeleteButton(id);
-            console.log(el);
+
+            insertDeleteAndChangeButton(id);
         }
 
     function insertButton(id) {
@@ -139,7 +140,7 @@
             el.append(but);
         }
 
-    function insertDeleteButton(id){
+    function insertDeleteAndChangeButton(id){
         let el = document.getElementById("insbtn");
         let butdel = document.createElement("button");
             butdel.setAttribute("id", "butdel");
@@ -147,19 +148,30 @@
             butdel.setAttribute("onclick", "deletePosition(" + id + ")");
             butdel.setAttribute("class", "btncancel btndel");
             butdel.innerText = "Удалить";
-            el.append(butdel);
+
+        let butch = document.createElement("button");
+            butch.setAttribute("id", "butch");
+            butch.setAttribute("type", "button");
+            butch.setAttribute("onclick", "changePosition(" + id + ")");
+            butch.setAttribute("class", "buttonch btnch");
+            butch.innerText = "Изменить";
+
+        el.append(butch);
+        el.append(butdel);
+
+            $('#butch').show();
             $('#butdel').show();
         }
 
     function deleteDivision(){
         let el = document.getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
-        let id = Number(el.id) + 1;
+        let id = el.id;
         document.location.href = '/admin/division/' + id;
     }
 
     function changeDivision(){
         let el = document.getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
-        let id = Number(el.id) + 1;
+        let id = el.id;
         insertInputTextForChangeDivision(id);
     }
 
@@ -189,7 +201,7 @@
     }
 
     function insertInputTextForPositions(id){
-        const posId = Number(id) + 1;
+        const posId = id;
         $('.mybtnPos').hide();
         $('#insbtn')
             .prepend('<input class="myinput remPos" form="addPosition" name="position" placeholder="Введите должность"/>')
@@ -233,7 +245,7 @@
             };
         }
 
-        if (click_Class) table.onclick = function(e) {
+         if (click_Class) table.onclick = function(e) {
             if (!e) e = window.event;
             var elem = e.target || e.srcElement;
             while (!elem.tagName || !elem.tagName.match(/td|th|table/i))
@@ -265,6 +277,13 @@
                     table.setAttribute("last_Clicked_Row", row.sectionRowIndex);
                 }
             }
+
+            // if (table_Id === "color_table"){
+            //     getPositions();
+            // }
+            // else if (table_Id === "color_table1"){
+            //     selectPosition();
+            // }
         };
     }
 

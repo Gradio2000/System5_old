@@ -1,6 +1,5 @@
 package com.example.system5.controller.adminController;
 
-import com.example.system5.model.Division;
 import com.example.system5.model.Position;
 import com.example.system5.repository.DivisionRepository;
 import com.example.system5.repository.PositionRepository;
@@ -27,11 +26,10 @@ public class PositionController {
     @GetMapping(value = "/positions/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public Object getPositions(@PathVariable int id){
-        List<Division> divisions = divisionRepository.findAll();
         List<Position> positions;
         Map<String, Boolean> error = new HashMap();
         try {
-            positions = divisions.get(id).getPositions();
+            positions = positionRepository.findAllByDivisionId(id);
         } catch (IndexOutOfBoundsException e) {
             error.put("myer", true);
             return CollectionModel.of(error);

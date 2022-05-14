@@ -22,7 +22,7 @@ public class Division {
     @Column(name = "division")
     private String division;
 
-    @OneToMany(targetEntity = Position.class, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Position.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "division_id", referencedColumnName = "division_id")
     private List<Position> positions;
 
