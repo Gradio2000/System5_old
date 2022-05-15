@@ -57,7 +57,11 @@
     </tr>
     </tbody>
 </table>
-<div id="insbtn"></div>
+<div>
+    <div id="insbtn" style="width: 50%; float: left"></div>
+    <div id="deluserbtn" style="width: 50%; float: right"></div>
+</div>
+
 <div id="insdelbtn"></div>
 
 <form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
@@ -85,6 +89,7 @@
         $('#butdel').remove();
         $('#butch').remove();
         $('.remPos').remove();
+        $('#butDelUser').remove();
 
         let el = document.getElementById("color_table").getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
         let id = el.id;
@@ -104,13 +109,30 @@
                     if (data1[i].user == null) {
                         userName = "";
                     } else userName = data1[i].user.name;
-                    elem.append(`
-                            <tr class="insert">
-                                <td class="tblsht" id="`+ data1[i].position_id + `">` + data1[i].position + `</a> </td>
-                                <td class="tblsht">` + userName + `</td>
-                            </tr>
 
-                        `);
+                    let elem1 = document.createElement("tr");
+                    elem1.setAttribute("class", "insert");
+
+                    let elem2 = document.createElement("td");
+                    elem2.setAttribute("class", "tblsht");
+                    elem2.setAttribute("id", data1[i].position_id);
+                    elem2.innerText = data1[i].position;
+
+                    let elem3 = document.createElement("td");
+                    elem3.setAttribute("class", "tblsht");
+
+                    if  (data1[i].user != null){
+                        let a = document.createElement("a");
+                        a.setAttribute("href", "/admin/user/" + data1[i].user.userId);
+                        a.setAttribute("id", "userNameInsert");
+                        a.innerText = userName;
+                        elem3.append(a);
+                    }
+
+                    elem1.append(elem2);
+                    elem1.append(elem3);
+                    elem.append(elem1);
+
                 }
                 $('#mybtnDel').show();
                 $('#mybtnCh').show();
@@ -122,14 +144,17 @@
         }
 
     function selectPosition(){
+            $('#butDelUser').remove();
             $('.rem').remove();
+            $('.remPos').remove();
             $('#mybtn').hide();
             $('#butdel').remove();
             $('#butch').remove();
             $('#mybtnCh').hide();
             $('#mybtnDel').hide();
-            let table = document.getElementById("color_table1");
-            let el = table.getElementsByClassName("clicked_Row").item(0).children.item(0);
+            $('#mybtnPos').show();
+
+            let el = document.getElementById("color_table1").getElementsByClassName("clicked_Row").item(0).children.item(0);
             let id = el.id;
 
             insertDeleteAndChangeButton(id);
@@ -139,6 +164,7 @@
             $('.mybtnPos').remove();
             let el = document.getElementById("insbtn");
             let but = document.createElement("button");
+            but.setAttribute("id", "mybtnPos");
             but.setAttribute("type", "button");
             but.setAttribute("onclick", "insertInputTextForPositions(" + id + ")");
             but.setAttribute("class", "btn mybtnPos");
@@ -148,6 +174,8 @@
 
     function insertDeleteAndChangeButton(id){
         let el = document.getElementById("insbtn");
+        let el1 = document.getElementById("deluserbtn");
+
         let butdel = document.createElement("button");
             butdel.setAttribute("id", "butdel");
             butdel.setAttribute("type", "button");
@@ -162,15 +190,27 @@
             butch.setAttribute("class", "buttonch btnch");
             butch.innerText = "Изменить";
 
+            if (document.getElementById("userNameInsert") != null) {
+                let butDelUser = document.createElement("button");
+                butDelUser.setAttribute("id", "butDelUser");
+                butDelUser.setAttribute("type", "button");
+                butDelUser.setAttribute("onclick", "deleteUser()");
+                butDelUser.setAttribute("class", "btncancel btndel");
+                butDelUser.innerText = "Уволить";
+                el1.append(butDelUser);
+            }
+
         el.append(butch);
         el.append(butdel);
 
+
             $('#butch').show();
             $('#butdel').show();
+            $('#butDelUser').show();
         }
 
     function deleteDivision(){
-        let el = document.getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
+        let el = document.getElementById("color_table").getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
         let id = el.id;
         document.location.href = '/admin/division/' + id;
     }
@@ -178,7 +218,6 @@
     function changeDivision(){
         let el = document.getElementById("color_table").getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
         let id = el.id;
-        console.log(el);
         insertInputTextForChangeDivision(id);
     }
 
@@ -189,7 +228,6 @@
     function changePosition(){
         let el = document.getElementById("color_table1").getElementsByClassName("clicked_Row").item(0).children.item(0);
         let id = el.id;
-        console.log(id);
         insertInputTextForChangePositions(id);
     }
 
