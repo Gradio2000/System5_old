@@ -144,6 +144,7 @@
         }
 
     function selectPosition(){
+            $('#butInsUser').remove();
             $('#butDelUser').remove();
             $('.rem').remove();
             $('.remPos').remove();
@@ -157,7 +158,7 @@
             let el = document.getElementById("color_table1").getElementsByClassName("clicked_Row").item(0).children.item(0);
             let id = el.id;
 
-            insertDeleteAndChangeButton(id);
+            insertDeleteAndChangeButton(el);
         }
 
     function insertButton(id) {
@@ -173,6 +174,12 @@
         }
 
     function insertDeleteAndChangeButton(id){
+        let userNameInTheTable = document
+            .getElementById("color_table1")
+            .getElementsByClassName("clicked_Row")
+            .item(0).children
+            .item(1).textContent;
+
         let el = document.getElementById("insbtn");
         let el1 = document.getElementById("deluserbtn");
 
@@ -188,9 +195,9 @@
             butch.setAttribute("type", "button");
             butch.setAttribute("onclick", "changePosition()");
             butch.setAttribute("class", "buttonch btnch");
-            butch.innerText = "Изменить";
+            butch.innerText = "Изменить"
 
-            if (document.getElementById("userNameInsert") != null) {
+            if (userNameInTheTable != "") {
                 let butDelUser = document.createElement("button");
                 butDelUser.setAttribute("id", "butDelUser");
                 butDelUser.setAttribute("type", "button");
@@ -199,10 +206,18 @@
                 butDelUser.innerText = "Уволить";
                 el1.append(butDelUser);
             }
+            if (userNameInTheTable == "") {
+                let butInsUser = document.createElement("button");
+                butInsUser.setAttribute("id", "butInsUser");
+                butInsUser.setAttribute("type", "button");
+                butInsUser.setAttribute("onclick", "insertUser()");
+                butInsUser.setAttribute("class", "btn");
+                butInsUser.innerText = "Принять";
+                el1.append(butInsUser);
+            }
 
         el.append(butch);
         el.append(butdel);
-
 
             $('#butch').show();
             $('#butdel').show();
@@ -232,8 +247,10 @@
     }
 
     function deleteUser(){
-        let el = document.getElementById("color_table").getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
+        let el = document.getElementById("color_table1").getElementsByClassName("clicked_Row").item(0).children.item(0);
+        console.log(el);
         let id = el.id;
+
         document.location.href = '/admin/user/delete/' + id;
     }
 
