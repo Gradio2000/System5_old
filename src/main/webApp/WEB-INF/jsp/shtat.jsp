@@ -145,6 +145,7 @@
         }
 
     function selectPosition(){
+            $('.userRem').remove();
             $('#butInsUser').remove();
             $('#butDelUser').remove();
             $('.rem').remove();

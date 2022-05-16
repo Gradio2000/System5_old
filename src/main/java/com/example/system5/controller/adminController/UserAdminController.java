@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 @RequestMapping("/admin/user")
 public class UserAdminController {
@@ -27,6 +30,9 @@ public class UserAdminController {
     @GetMapping("/get")
     @ResponseBody
     public CollectionModel<User> getUsers(){
-        return CollectionModel.of(userRepository.findAll());
+        List<User> userList = userRepository.findAll().stream()
+                .filter(user -> user.getPosition() == null)
+                .collect(Collectors.toList());
+        return CollectionModel.of(userList);
     }
 }
