@@ -65,6 +65,7 @@
 <div id="insdelbtn"></div>
 
 <form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
+<form id="insertUser" name="insertUser" method="post" action="/admin/user/insert"></form>
 <form id="changeDivision" name=changeDivision" method="post" action="/admin/division/change"></form>
 <form id="changePosition" name=changePosition" method="post" action="/admin/position/change"></form>
 <form id="addPosition" name="addPosition" method="post" ></form>
@@ -197,7 +198,7 @@
             butch.setAttribute("class", "buttonch btnch");
             butch.innerText = "Изменить"
 
-            if (userNameInTheTable != "") {
+            if (userNameInTheTable !== "") {
                 let butDelUser = document.createElement("button");
                 butDelUser.setAttribute("id", "butDelUser");
                 butDelUser.setAttribute("type", "button");
@@ -206,11 +207,11 @@
                 butDelUser.innerText = "Уволить";
                 el1.append(butDelUser);
             }
-            if (userNameInTheTable == "") {
+            if (userNameInTheTable === "") {
                 let butInsUser = document.createElement("button");
                 butInsUser.setAttribute("id", "butInsUser");
                 butInsUser.setAttribute("type", "button");
-                butInsUser.setAttribute("onclick", "insertUser()");
+                butInsUser.setAttribute("onclick", "insertUserInto()");
                 butInsUser.setAttribute("class", "btn");
                 butInsUser.innerText = "Принять";
                 el1.append(butInsUser);
@@ -252,6 +253,50 @@
         let id = el.id;
 
         document.location.href = '/admin/user/delete/' + id;
+    }
+
+    function insertUserInto(){
+        $('#butInsUser').hide();
+
+        let selectInput = document.createElement("select");
+        selectInput.className = "userRem select-css"
+        selectInput.form = "insertuser";
+        selectInput.name = "userName";
+        selectInput.id = "insertUser";
+
+        let br = document.createElement("br");
+        br.className = "userRem";
+
+        $('#deluserbtn')
+            .append(br)
+            .append(selectInput)
+            .append('<button type="submit" id="selectButton" class="btn userRem" form="insertUser">OK</button>')
+            .append('<button type="button" class="btncancel userRem" onclick=cancel()>Отмена</button>');
+
+        $.ajax({
+            type: 'GET',
+            url: '/admin/user/get',
+            success: function (data) {
+                let users = data._embedded.users
+                console.log(users);
+                for (let i = 0; i < users.length; i++) {
+                    let option = document.createElement("option");
+                    option.value = users[i].userId;
+                    option.innerText = users[i].name;
+                    selectInput.append(option);
+                }
+            },
+            error: function () {
+                alert('Ошибка получения списка польователей!');
+
+            }
+        });
+
+    }
+
+    function cancel(){
+        $('.userRem').remove();
+        $('#butInsUser').show();
     }
 
     function insertInputText(){
