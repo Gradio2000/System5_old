@@ -231,6 +231,12 @@
         insertInputTextForChangePositions(id);
     }
 
+    function deleteUser(){
+        let el = document.getElementById("color_table").getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
+        let id = el.id;
+        document.location.href = '/admin/user/delete/' + id;
+    }
+
     function insertInputText(){
         $('#mybtn').hide();
         $('#mybtnDel').hide();

@@ -3,7 +3,6 @@ package com.example.system5.controller.userController;
 import com.example.system5.dto.UserDTO;
 import com.example.system5.model.Position;
 import com.example.system5.model.User;
-import com.example.system5.repository.PositionRepository;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
 import org.springframework.hateoas.CollectionModel;
@@ -19,11 +18,9 @@ import java.util.List;
 @RestController
 public class UserController {
     private final UserRepository userRepository;
-    private final PositionRepository positionRepository;
 
-    public UserController(UserRepository userRepository, PositionRepository positionRepository) {
+    public UserController(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.positionRepository = positionRepository;
     }
 
     @GetMapping(value = "/getUser", produces = MediaType.APPLICATION_JSON_VALUE)

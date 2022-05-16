@@ -27,4 +27,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Transactional
     @Modifying
     void appoint(int position_id, int user_id);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true,
+    value = "delete from position_user where position_id = :id")
+    void deleteUser(int id);
 }
