@@ -250,7 +250,6 @@
 
     function deleteUser(){
         let el = document.getElementById("color_table1").getElementsByClassName("clicked_Row").item(0).children.item(0);
-        console.log(el);
         let id = el.id;
 
         document.location.href = '/admin/user/delete/' + id;
@@ -258,19 +257,31 @@
 
     function insertUserInto(){
         $('#butInsUser').hide();
+        let form = $('#insertUser');
+
+        let el = document.getElementById("color_table1").getElementsByClassName("clicked_Row").item(0).children.item(0);
+
+
+        let input = document.createElement("input");
+        input.type = "hidden";
+        input.form = "insertUser";
+        input.value = el.id;
+        input.name = "positionId";
+
+        form.append(input);
 
         let selectInput = document.createElement("select");
         selectInput.className = "userRem select-css"
-        selectInput.form = "insertuser";
-        selectInput.name = "userName";
-        selectInput.id = "insertUser";
+        selectInput.form = "insertUser";
+        selectInput.name = "userId";
+        selectInput.id = "insertUserInput";
 
         let br = document.createElement("br");
         br.className = "userRem";
 
         $('#deluserbtn')
             .append(br)
-            .append(selectInput)
+            .append(form)
             .append('<button type="submit" id="selectButton" class="btn userRem" form="insertUser">OK</button>')
             .append('<button type="button" class="btncancel userRem" onclick=cancel()>Отмена</button>');
 
@@ -286,12 +297,14 @@
                     option.innerText = users[i].name;
                     selectInput.append(option);
                 }
+                form.append(selectInput);
             },
             error: function () {
                 alert('Ошибка получения списка польователей!');
 
             }
         });
+
 
     }
 

@@ -1,13 +1,11 @@
 package com.example.system5.controller.adminController;
 
 import com.example.system5.model.User;
+import com.example.system5.repository.PositionRepository;
 import com.example.system5.repository.UserRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,9 +14,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/admin/user")
 public class UserAdminController {
     UserRepository userRepository;
+    PositionRepository positionRepository;
 
-    public UserAdminController(UserRepository userRepository) {
+    public UserAdminController(UserRepository userRepository, PositionRepository positionRepository) {
         this.userRepository = userRepository;
+        this.positionRepository = positionRepository;
     }
 
     @GetMapping("/delete/{id}")
@@ -34,5 +34,14 @@ public class UserAdminController {
                 .filter(user -> user.getPosition() == null)
                 .collect(Collectors.toList());
         return CollectionModel.of(userList);
+    }
+
+    @PostMapping("/insert")
+    public String insertUser(@RequestParam int positionId, @RequestParam int userId){
+        User user = userRepository.findById(userId).orElse(null);
+        assert user != null;
+        user.setPosition(positionRepository.getById(positionId));
+        userRepository.save(user);
+        return "redirect:/admin/shtat";
     }
 }
