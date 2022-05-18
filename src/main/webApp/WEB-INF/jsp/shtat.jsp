@@ -70,6 +70,11 @@
 <form id="changePosition" name=changePosition" method="post" action="/admin/position/change"></form>
 <form id="addPosition" name="addPosition" method="post" ></form>
 
+</br>
+<div>
+    <a href="/home">Вернуться на главную страницу</a>
+</div>
+
 </body>
 
 <script>
@@ -160,7 +165,7 @@
             let el = document.getElementById("color_table1").getElementsByClassName("clicked_Row").item(0).children.item(0);
             let id = el.id;
 
-            insertDeleteAndChangeButton(el);
+            insertDeleteAndChangeButton(id);
         }
 
     function insertButton(id) {
@@ -176,6 +181,7 @@
         }
 
     function insertDeleteAndChangeButton(id){
+        console.log(id);
         let userNameInTheTable = document
             .getElementById("color_table1")
             .getElementsByClassName("clicked_Row")
@@ -239,6 +245,7 @@
     }
 
     function deletePosition(id){
+
             document.location.href = '/admin/position/delete/' + id;
         }
 

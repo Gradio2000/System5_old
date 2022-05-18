@@ -111,8 +111,9 @@ public class RegistrationController {
 
         User user = authUser.getUser();
         user.setName(formFinishReg.getName());
+        Position position = positionRepository.findById(formFinishReg.getPosition_id()).orElse(null);
+        user.setPosition(position);
         userRepository.save(user);
-        userRepository.appoint(formFinishReg.getPosition_id(), user.getUserId());
         return "redirect:/home";
     }
 

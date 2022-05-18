@@ -22,11 +22,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             value = "SELECT EXISTS(SELECT user_id FROM position_user WHERE position_id = :position_id)")
     boolean existsUserByPosition_id(Integer position_id);
 
-    @Query(nativeQuery = true,
-    value = "INSERT INTO position_user (position_id, user_id) VALUES (:position_id, :user_id)")
-    @Transactional
-    @Modifying
-    void appoint(int position_id, int user_id);
 
     @Modifying
     @Transactional
@@ -34,4 +29,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     value = "delete from position_user where position_id = :id")
     void deleteUser(int id);
 
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true,
+            value = "INSERT INTO commander_employee (commander_position_id, position_id) VALUES (:comm_id, :position_id)")
+    void commEmpAdd(int comm_id, int position_id);
 }

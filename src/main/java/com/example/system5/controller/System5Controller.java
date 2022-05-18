@@ -7,21 +7,20 @@ import com.example.system5.model.System5empl;
 import com.example.system5.model.User;
 import com.example.system5.repository.System5Repository;
 import com.example.system5.repository.System5emplRepository;
+import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -29,31 +28,42 @@ public class System5Controller {
 
     private final System5Repository system5Repository;
     private final System5emplRepository system5emplRepository;
+    private final UserRepository userRepository;
 
-    public System5Controller(System5Repository system5Repository, System5emplRepository system5emplRepository) {
+
+    public System5Controller(System5Repository system5Repository, System5emplRepository system5emplRepository, UserRepository userRepository) {
         this.system5Repository = system5Repository;
         this.system5emplRepository = system5emplRepository;
+        this.userRepository = userRepository;
     }
 
     @GetMapping(value = "/list")
     public String getAll(@AuthenticationPrincipal AuthUser authUser, Model model){
         User user = authUser.getUser();
-        List<System5> system5List = system5Repository.findAllByUserId(user.getUserId());
-        List<Month> monthList = new ArrayList<>(List.of(Month.values()));
 
+        List<System5> system5List = system5Repository.findAllByUserId(user.getUserId());
+        model.addAttribute(system5List);
+
+        List<Month> monthList = new ArrayList<>(List.of(Month.values()));
         for(System5 system5 : system5List){
             monthList.removeIf(m -> (m.name().equals(system5.getMonth())));
         }
+        model.addAttribute(monthList);
 
         System5 system5 = new System5();
-        System5empl system5empl = new System5empl();
-        boolean employer = false;
-
-        model.addAttribute(system5List);
-        model.addAttribute(system5empl);
         model.addAttribute(system5);
-        model.addAttribute(monthList);
+
+        System5empl system5empl = new System5empl();
+        model.addAttribute(system5empl);
+
+        boolean employer = false;
         model.addAttribute("employer", employer);
+
+        List<User> userList = userRepository.findAll().stream()
+                .filter(u -> u.getUserId() != user.getUserId())
+                .collect(Collectors.toList());
+        model.addAttribute(userList);
+
         return "lists";
     }
 
@@ -86,7 +96,8 @@ public class System5Controller {
     @PostMapping("/adds")
     public String add(@AuthenticationPrincipal AuthUser authUser,
                       @ModelAttribute @Valid System5 system5,
-                      BindingResult bindingResult){
+                      BindingResult bindingResult,
+                      @RequestParam int comm_id){
 
         if (bindingResult.hasErrors()){
             return "redirect:/list?error=1";
@@ -99,6 +110,8 @@ public class System5Controller {
          system5.setRes3(system5.getRes3().toUpperCase());
          system5.setRes4(system5.getRes4().toUpperCase());
          system5.setRes5(system5.getRes5().toUpperCase());
+
+         userRepository.commEmpAdd(comm_id, authUser.getUser().getPosition().getPosition_id());
          system5Repository.save(system5);
          return "redirect:/list";
     }

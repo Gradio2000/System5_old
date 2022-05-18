@@ -21,11 +21,11 @@
     <tbody>
     <tr>
         <th rowspan="2">Месяц</th>
-        <th colspan="2">Показатель 1</th>
-        <th colspan="2">Показатель 2</th>
-        <th colspan="2">Показатель 3</th>
-        <th colspan="2">Показатель 4</th>
-        <th colspan="2">Показатель 5</th>
+        <th colspan="2">Личная результативность</th>
+        <th colspan="2">Инициативность</th>
+        <th colspan="2">Совершенствование профессиональных знаний</th>
+        <th colspan="2">Клиентоориентированность</th>
+        <th colspan="2">Работа в команде</th>
     </tr>
     <tr>
         <td>самооценка</td>
@@ -74,16 +74,25 @@
                             <br/>
                             <form:select path="month" items="${monthList}"/>
                             <br/>
-                            <label>Показатель 1 <form:input path="res1"/></label>
+                            <label>Личная результативность <form:input path="res1"/></label>
                             <form:errors path="res1" cssClass="errorMsg"/>
                             <br/>
-                            <label>Показатель 2 <form:input path="res2"/></label>
+                            <label>Инициативность <form:input path="res2"/></label>
                             <br/>
-                            <label>Показатель 3 <form:input path="res3"/></label>
+                            <label>Совершенствование профессиональных знаний <form:input path="res3"/></label>
                             <br/>
-                            <label>Показатель 4 <form:input path="res4"/></label>
+                            <label>Клиентоориентированность <form:input path="res4"/></label>
                             <br/>
-                            <label>Показатель 5 <form:input path="res5"/></label>
+                            <label>Работа в команде <form:input path="res5"/></label>
+                            <br/>
+                            <br/>
+                            <label>Выберите руководителя, которому отправите самооценку</label>
+                            <br/>
+                            <select name="comm_id">
+                                <c:forEach items="${userList}" var="user">
+                                    <option value="${user.position.position_id}">${user.name}</option>
+                                </c:forEach>
+                            </select>
                             <br/>
                             <button type="submit" class="btn">Отправить</button>
                         </form:form>
@@ -116,15 +125,15 @@
                                 </c:forEach>
                             </form:select>
                             <br/>
-                            <label>Показатель 1 <form:input path="resempl1"/></label>
+                            <label>Личная результативность <form:input path="resempl1"/></label>
                             <br/>
-                            <label>Показатель 2 <form:input path="resempl2"/></label>
+                            <label>Инициативность <form:input path="resempl2"/></label>
                             <br/>
-                            <label>Показатель 3 <form:input path="resempl3"/></label>
+                            <label>Совершенствование профессиональных знаний <form:input path="resempl3"/></label>
                             <br/>
-                            <label>Показатель 4 <form:input path="resempl4"/></label>
+                            <label>Клиентоориентированность <form:input path="resempl4"/></label>
                             <br/>
-                            <label>Показатель 5 <form:input path="resempl5"/></label>
+                            <label>Работа в команде <form:input path="resempl5"/></label>
                             <br/>
                             <button type="submit" class="btn">Отправить</button>
                         </form:form>
@@ -174,6 +183,4 @@
             document.querySelector('#openModal').style.marginLeft = '0px';
         });
     });
-
-
 </script>
