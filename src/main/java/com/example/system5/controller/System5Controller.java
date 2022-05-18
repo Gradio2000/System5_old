@@ -111,7 +111,13 @@ public class System5Controller {
          system5.setRes4(system5.getRes4().toUpperCase());
          system5.setRes5(system5.getRes5().toUpperCase());
 
-         userRepository.commEmpAdd(comm_id, authUser.getUser().getPosition().getPosition_id());
+         int positoin_id = authUser.getUser().getPosition().getPosition_id();
+         if (userRepository.existsCommanderPosition(positoin_id)){
+             userRepository.updateCommanderPosition(comm_id, positoin_id);
+         }
+         else {
+             userRepository.commEmpAdd(comm_id, positoin_id);
+         }
          system5Repository.save(system5);
          return "redirect:/list";
     }
@@ -121,11 +127,11 @@ public class System5Controller {
                           @ModelAttribute @Valid System5empl system5empl,
                           BindingResult bindingResult){
 
+        int userId= system5empl.getUser_id();
         if (bindingResult.hasErrors()){
-            return "redirect:/list/" + authUser.getUser().getUserId()+ "?error=2";
+            return "redirect:/list/" + userId + "?error=2";
         }
 
-        int userId= system5empl.getUser_id();
         system5empl.setResempl1(system5empl.getResempl1().toUpperCase());
         system5empl.setResempl2(system5empl.getResempl2().toUpperCase());
         system5empl.setResempl3(system5empl.getResempl3().toUpperCase());
