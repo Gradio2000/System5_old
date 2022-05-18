@@ -68,27 +68,20 @@
 
                 <a href="#close" title="Close" class="close">×</a>
             </div>
-                    <div class="modal-body">
+                    <div class="modal-body my-modal">
                         <form:form method="post" action="/adds" modelAttribute="system5">
                             <label>Выберите месяц</label>
-                            <br/>
-                            <form:select path="month" items="${monthList}"/>
-                            <br/>
-                            <label>Личная результативность <form:input path="res1"/></label>
+                            <form:select cssClass="select-css" path="month" items="${monthList}"/>
+                            <form:input path="res1" placeholder="Личная результативность"/>
                             <form:errors path="res1" cssClass="errorMsg"/>
-                            <br/>
-                            <label>Инициативность <form:input path="res2"/></label>
-                            <br/>
-                            <label>Совершенствование профессиональных знаний <form:input path="res3"/></label>
-                            <br/>
-                            <label>Клиентоориентированность <form:input path="res4"/></label>
-                            <br/>
-                            <label>Работа в команде <form:input path="res5"/></label>
+                            <form:input path="res2" placeholder="Инициативность"/>
+                            <form:input path="res3" placeholder="Совершенствование профессиональных знаний"/>
+                            <form:input path="res4" placeholder="Клиентоориентированность"/>
+                            <form:input path="res5" placeholder="Работа в команде"/>
                             <br/>
                             <br/>
                             <label>Выберите руководителя, которому отправите самооценку</label>
-                            <br/>
-                            <select name="comm_id">
+                            <select class="select-css" name="comm_id">
                                 <c:forEach items="${userList}" var="user">
                                     <option value="${user.position.position_id}">${user.name}</option>
                                 </c:forEach>
@@ -114,26 +107,22 @@
 
                     <a href="#close" title="Close" class="close">×</a>
                 </div>
-                    <div class="modal-body">
+                    <div class="modal-body my-modal">
                         <form:form method="post" action="/addsempl" modelAttribute="system5empl">
                             <form:input path="user_id" type="hidden" value="${userId}"/>
                             <label>Выберите месяц</label>
                             <br/>
-                            <form:select path="system5Id">
+                            <form:select cssClass="select-css" path="system5Id">
                                 <c:forEach items="${months}" var="month">
                                     <form:option value="${month.key}">${month.value}</form:option>
                                 </c:forEach>
                             </form:select>
                             <br/>
-                            <label>Личная результативность <form:input path="resempl1"/></label>
-                            <br/>
-                            <label>Инициативность <form:input path="resempl2"/></label>
-                            <br/>
-                            <label>Совершенствование профессиональных знаний <form:input path="resempl3"/></label>
-                            <br/>
-                            <label>Клиентоориентированность <form:input path="resempl4"/></label>
-                            <br/>
-                            <label>Работа в команде <form:input path="resempl5"/></label>
+                            <form:input path="resempl1" placeholder="Личная результативность"/>
+                            <form:input path="resempl2" placeholder="Инициативность"/>
+                            <form:input path="resempl3" placeholder="Совершенствование профессиональных знаний"/>
+                            <form:input path="resempl4" placeholder="Клиентоориентированность"/>
+                            <form:input path="resempl5" placeholder="Работа в команде"/>
                             <br/>
                             <button type="submit" class="btn">Отправить</button>
                         </form:form>
