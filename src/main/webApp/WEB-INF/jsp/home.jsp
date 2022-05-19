@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: aleksejlaskin
@@ -20,21 +21,46 @@
     <br/>
     <a href="javascript:get_employers()">Посмотреть подчиненных сотрудников</a>
     <br/>
+    <br/>
+    <p>Получить отчет за месяц</p>
+    <br/>
+    <form method="get" action="/admin/report">
+        <select id="monsel" name="month" class="select-css" style="width: max-content"></select>
+        <button type="submit" class="btn">Сформировать</button>
+    </form>
+
     <p class="zzz"></p>
     <br/>
     <a href="/logout">Выйти</a>
 
-
 </body>
 
+<style>
+    <%@include file="myStyle.css"%>
+</style>
+
 <script>
-   function get_employers()
-    {
+    document.addEventListener("DOMContentLoaded", ready);
+    function ready(){
+        $.ajax({
+            url: "/getMonth"
+        }).then(function (months){
+            console.log(months)
+            let select = document.getElementById("monsel");
+            for (let i = 0; i < months.length; i++) {
+                let option = document.createElement("option");
+                option.innerText = months[i];
+                select.append(option);
+            }
+        });
+    }
+
+
+   function get_employers() {
         $.ajax({
             url: "/my_employers"
         }).then(function(data) {
             const data1 = data._embedded.positions;
-            console.log(data);
             for (let i = 0; i < data1.length; i++){
                 let position = data1[i].position;
                 $(".zzz").append(`<a href="/list/` + data1[i].user.userId + `">` +

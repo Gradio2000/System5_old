@@ -20,4 +20,6 @@ public interface System5Repository extends JpaRepository<System5, Integer> {
     @Transactional
     @Modifying
     void updateRated(int system5_id);
+
+    List<System5> findAllByMonth(String month);
 }

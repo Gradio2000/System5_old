@@ -13,18 +13,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -123,6 +122,14 @@ public class RegistrationController {
         User user = authUser.getUser();
         userRepository.delete(user);
         return "redirect:/logout";
+    }
+
+    @GetMapping("/getMonth")
+    @ResponseBody
+    public List<String>getMonths(){
+        return Arrays.stream(Month.values())
+                .map(Enum::name)
+                .collect(Collectors.toList());
     }
 
 }
