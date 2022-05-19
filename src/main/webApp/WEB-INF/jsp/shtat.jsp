@@ -60,9 +60,15 @@
 <div>
     <div id="insbtn" style="width: 50%; float: left"></div>
     <div id="deluserbtn" style="width: 50%; float: right"></div>
+    <div>
+        <button type="button" class="btn" onclick="document.location='/home'">На главную</button>
+    </div>
 </div>
+</br>
 
 <div id="insdelbtn"></div>
+
+
 
 <form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
 <form id="insertUser" name="insertUser" method="post" action="/admin/user/insert"></form>
@@ -70,10 +76,7 @@
 <form id="changePosition" name=changePosition" method="post" action="/admin/position/change"></form>
 <form id="addPosition" name="addPosition" method="post" ></form>
 
-</br>
-<div>
-    <a href="/home">Вернуться на главную страницу</a>
-</div>
+
 
 </body>
 
