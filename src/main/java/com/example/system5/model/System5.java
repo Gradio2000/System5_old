@@ -54,4 +54,8 @@ public class System5 extends RepresentationModel<System5> {
     @PrimaryKeyJoinColumn
     @JsonManagedReference
     private System5empl system5empl;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private User user;
 }

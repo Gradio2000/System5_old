@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -44,6 +45,9 @@ public class User{
             inverseJoinColumns = @JoinColumn(name = "position_id"))
     @JsonBackReference
     private Position position;
+
+    @OneToMany(mappedBy = "user")
+    private List<System5> system5List;
 
     public User() {
     }

@@ -19,45 +19,43 @@
 </head>
 <body>
 <%--<c:set var="month" value="${month}"/>--%>
-<p>Оценка сотрудников полевого учреждения Банка России № 42667 за ${month}</p>
-<table class="table">
-    <tbody>
-    <tr>
-        <th rowspan="2">ФИО</th>
-        <th colspan="5">Самооценка</th>
-        <th rowspan="2">Итоговая оценка</th>
-        <th colspan="5">Оценка руководителя</th>
-        <th rowspan="2">Итоговая оценка</th>
-    </tr>
-    <tr>
-        <th>Личная результативность</th>
-        <th>Инициативность</th>
-        <th>Совершенствование профессиональных знаний</th>
-        <th>Клиентоориентированность</th>
-        <th>Работа в команде</th>
-        <th>Личная результативность</th>
-        <th>Инициативность</th>
-        <th>Совершенствование профессиональных знаний</th>
-        <th>Клиентоориентированность</th>
-        <th>Работа в команде</th>
-    </tr>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    </tbody>
-</table>
+<div style="text-align: center">
+    <p>Форма оценка работников полевого учреждения Банка России № 42667 за ${month}</p>
+</div>
+
+
+<div>
+    <table class="table" style="width: 75%; margin-left: auto; margin-right: auto">
+        <tbody>
+        <tr>
+            <th rowspan="2">ФИО</th>
+            <th rowspan="2">Должность</th>
+            <th colspan="5" style="width: 25%">Оценки по критериям</th>
+            <th rowspan="2" style="width: 10%">Итоговая оценка</th>
+        </tr>
+        <tr>
+            <th style="writing-mode: vertical-rl; width: 5%">Личная результативность</th>
+            <th style="writing-mode: vertical-rl; width: 5%">Инициативность</th>
+            <th style="writing-mode: vertical-rl; width: 5%">Совершенствование профессиональных знаний</th>
+            <th style="writing-mode: vertical-rl; width: 5%">Клиентоориентированность</th>
+            <th style="writing-mode: vertical-rl; width: 5%">Работа в команде</th>
+        </tr>
+        <c:forEach var="system5" items="${system5List}">
+            <tr>
+                <td>${system5.user.name}</td>
+                <td>${system5.user.position.position}</td>
+                <td>${system5.system5empl.resempl1}</td>
+                <td>${system5.system5empl.resempl2}</td>
+                <td>${system5.system5empl.resempl3}</td>
+                <td>${system5.system5empl.resempl4}</td>
+                <td>${system5.system5empl.resempl5}</td>
+                <td></td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+
+</div>
 </body>
 </html>
 <style>
