@@ -5,7 +5,6 @@ import com.example.system5.model.Position;
 import com.example.system5.model.User;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
-import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,10 +30,10 @@ public class UserController {
     }
 
     @GetMapping(value = "/my_employers")
-    public ResponseEntity<CollectionModel<Position>> getEmployersList(@AuthenticationPrincipal AuthUser authUser){
+    public List<Position> getEmployersList(@AuthenticationPrincipal AuthUser authUser){
         User user = userRepository.getUserByUserId(authUser.getUser().getUserId());
         List<Position> positionList = user.getPosition().getEmployersList();
-        return new ResponseEntity<>(CollectionModel.of(positionList), HttpStatus.OK);
+        return positionList;
     }
 
 }

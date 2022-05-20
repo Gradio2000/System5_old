@@ -45,7 +45,6 @@
         $.ajax({
             url: "/getMonth"
         }).then(function (months){
-            console.log(months)
             let select = document.getElementById("monsel");
             for (let i = 0; i < months.length; i++) {
                 let option = document.createElement("option");
@@ -60,11 +59,10 @@
         $.ajax({
             url: "/my_employers"
         }).then(function(data) {
-            const data1 = data._embedded.positions;
-            for (let i = 0; i < data1.length; i++){
-                let position = data1[i].position;
-                $(".zzz").append(`<a href="/list/` + data1[i].user.userId + `">` +
-                    data1[i].position + " " + data1[i].user.name + `</a>` + `<br/>`);
+            for (let i = 0; i < data.length; i++){
+                let position = data[i].position;
+                $(".zzz").append(`<a href="/list/` + data[i].user.userId + `">` +
+                    data[i].position + " " + data[i].user.name + `</a>` + `<br/>`);
             }
         });
     };
