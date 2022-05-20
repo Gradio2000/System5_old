@@ -20,25 +20,25 @@
 <body>
 <%--<c:set var="month" value="${month}"/>--%>
 <div style="text-align: center">
-    <p>Форма оценка работников полевого учреждения Банка России № 42667 за ${month}</p>
+    <p>Форма оценки работников полевого учреждения Банка России № 42667 за ${month}</p>
 </div>
 
 
 <div>
-    <table class="table" style="width: 75%; margin-left: auto; margin-right: auto">
+    <table class="table">
         <tbody>
         <tr>
             <th rowspan="2">ФИО</th>
             <th rowspan="2">Должность</th>
-            <th colspan="5" style="width: 25%">Оценки по критериям</th>
-            <th rowspan="2" style="width: 10%">Итоговая оценка</th>
+            <th colspan="5">Оценки по критериям</th>
+            <th rowspan="2">Итоговая оценка</th>
         </tr>
         <tr>
-            <th style="writing-mode: vertical-rl; width: 5%">Личная результативность</th>
-            <th style="writing-mode: vertical-rl; width: 5%">Инициативность</th>
-            <th style="writing-mode: vertical-rl; width: 5%">Совершенствование профессиональных знаний</th>
-            <th style="writing-mode: vertical-rl; width: 5%">Клиентоориентированность</th>
-            <th style="writing-mode: vertical-rl; width: 5%">Работа в команде</th>
+            <th>Личная результативность</th>
+            <th>Инициативность</th>
+            <th>Совершенствование профессиональных знаний</th>
+            <th>Клиенто ориентированность</th>
+            <th>Работа в команде</th>
         </tr>
         <c:forEach var="system5" items="${system5List}">
             <tr>
@@ -49,11 +49,13 @@
                 <td>${system5.system5empl.resempl3}</td>
                 <td>${system5.system5empl.resempl4}</td>
                 <td>${system5.system5empl.resempl5}</td>
-                <td></td>
+                <td>${system5.totalMark5.totalMarkEmpl}</td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <br/>
+    <button type="button" class="btn" onclick="document.location='/home'">На главную</button>
 
 </div>
 </body>

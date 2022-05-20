@@ -58,4 +58,9 @@ public class System5 extends RepresentationModel<System5> {
     @ManyToOne
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
+
+    @OneToOne(mappedBy = "system5", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    @JsonManagedReference
+    private TotalMark5 totalMark5;
 }

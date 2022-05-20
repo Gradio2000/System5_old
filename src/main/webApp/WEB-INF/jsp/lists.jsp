@@ -26,8 +26,11 @@
         <th colspan="2">Совершенствование профессиональных знаний</th>
         <th colspan="2">Клиентоориентированность</th>
         <th colspan="2">Работа в команде</th>
+        <th colspan="2">Итог</th>
     </tr>
     <tr>
+        <td>самооценка</td>
+        <td>оценка руководителя</td>
         <td>самооценка</td>
         <td>оценка руководителя</td>
         <td>самооценка</td>
@@ -52,6 +55,8 @@
         <td>${system5.system5empl.resempl4}</td>
         <td>${system5.res5}</td>
         <td>${system5.system5empl.resempl5}</td>
+        <td>${system5.totalMark5.totalMark}</td>
+        <td>${system5.totalMark5.totalMarkEmpl}</td>
     </tr>
     </c:forEach>
     </tbody>
