@@ -147,19 +147,19 @@ public class System5Controller {
         system5empl.setResempl4(system5empl.getResempl4().toUpperCase());
         system5empl.setResempl5(system5empl.getResempl5().toUpperCase());
 
-        system5emplRepository.save(system5empl);
-
-
-
         System5 system5 = system5Repository.findById(system5empl.getSystem5Id()).orElse(null);
+
         assert system5 != null;
         TotalMark5 totalMark5 = system5.getTotalMark5();
         totalMark5.setTotalMarkEmpl(system5Service.getTotalMarkEmpl(system5empl));
+
         system5.setTotalMark5(totalMark5);
         system5.setRated(1);
-        system5Repository.save(system5);
+        system5.setSystem5empl(system5empl);
 
-//        system5Repository.updateRated(system5empl.getSystem5Id());
+        system5empl.setSystem5(system5);
+
+        system5Repository.save(system5);
         return "redirect:/list/" + userId;
     }
 

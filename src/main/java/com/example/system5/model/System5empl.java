@@ -42,6 +42,7 @@ public class System5empl {
 
     @OneToOne
     @JoinColumn(name = "system5_id")
+    @MapsId
     private System5 system5;
 
 }
