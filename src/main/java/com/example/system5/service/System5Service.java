@@ -1,6 +1,7 @@
 package com.example.system5.service;
 
 import com.example.system5.model.System5;
+import com.example.system5.model.System5empl;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +14,23 @@ public class System5Service {
         massStr[3] = system5.getRes4();
         massStr[4] = system5.getRes5();
 
+        return getTotalProcess(massStr);
+    }
+
+
+
+    public String getTotalMarkEmpl(System5empl system5empl){
+        String[] massStr = new String[5];
+        massStr[0] = system5empl.getResempl1();
+        massStr[1] = system5empl.getResempl2();
+        massStr[2] = system5empl.getResempl3();
+        massStr[3] = system5empl.getResempl4();
+        massStr[4] = system5empl.getResempl5();
+
+        return getTotalProcess(massStr);
+    }
+
+    private String getTotalProcess(String[] massStr) {
         int[] massInt = new int[5];
         for (int i = 0; i < massStr.length; i++) {
             int res = 0;
