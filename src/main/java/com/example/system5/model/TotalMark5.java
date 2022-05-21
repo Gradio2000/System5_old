@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Setter
 public class TotalMark5 {
     @Id
-    @Column(name = "system5_id_total_mark")
     private int system5IdTotalMark;
 
     @Column(name = "total_mark")
@@ -22,6 +21,7 @@ public class TotalMark5 {
 
     @OneToOne
     @JoinColumn(name = "system5_id_total_mark")
+    @MapsId
     private System5 system5;
 
 }

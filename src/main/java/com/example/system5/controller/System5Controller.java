@@ -1,13 +1,11 @@
 package com.example.system5.controller;
 
 
-import com.example.system5.model.Month;
-import com.example.system5.model.System5;
-import com.example.system5.model.System5empl;
-import com.example.system5.model.User;
+import com.example.system5.model.*;
 import com.example.system5.repository.System5Repository;
 import com.example.system5.repository.System5emplRepository;
 import com.example.system5.repository.UserRepository;
+import com.example.system5.service.System5Service;
 import com.example.system5.util.AuthUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -29,12 +27,17 @@ public class System5Controller {
     private final System5Repository system5Repository;
     private final System5emplRepository system5emplRepository;
     private final UserRepository userRepository;
+    private final System5Service system5Service;
 
 
-    public System5Controller(System5Repository system5Repository, System5emplRepository system5emplRepository, UserRepository userRepository) {
+    public System5Controller(System5Repository system5Repository,
+                             System5emplRepository system5emplRepository,
+                             UserRepository userRepository,
+                             System5Service system5Service) {
         this.system5Repository = system5Repository;
         this.system5emplRepository = system5emplRepository;
         this.userRepository = userRepository;
+        this.system5Service = system5Service;
     }
 
     @GetMapping(value = "/list")
@@ -118,6 +121,12 @@ public class System5Controller {
          else {
              userRepository.commEmpAdd(comm_id, positoin_id);
          }
+
+         TotalMark5 totalMark5 = new TotalMark5();
+         totalMark5.setTotalMark(system5Service.getTotalMark(system5));
+         system5.setTotalMark5(totalMark5);
+         totalMark5.setSystem5(system5);
+
          system5Repository.save(system5);
          return "redirect:/list";
     }
