@@ -78,7 +78,7 @@ public class System5Controller {
                               BindingResult bindingResult1,
                               Model model){
 
-        List<System5> system5List = system5Repository.findByUserId(id);
+        List<System5> system5List = system5Repository.findByUserIdOrderBySystem5Id(id);
 
         Map<Integer, Month> monthMap = new HashMap();
         for (System5 system51 : system5List){

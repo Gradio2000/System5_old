@@ -54,14 +54,14 @@ public class System5Service {
             massInt[i] = res;
         }
 
-        int avr = 0;
+        float avr = 0;
         for (int m : massInt){
             avr += m;
         }
-        avr = avr / massInt.length;
+        avr = Math.round(avr / massInt.length);
 
         String result = null;
-        switch (avr){
+        switch ((int) avr){
             case (1):
                 result = "E";
                 break;
