@@ -20,8 +20,8 @@
     <title>Title</title>
 </head>
 <body>
-
-
+<jsp:include page="../includes/menu.jsp"/>
+<div class="main">
 <table  id="color_table">
     <tbody>
     <tr>
@@ -77,7 +77,7 @@
 <form id="addPosition" name="addPosition" method="post" ></form>
 
 
-
+</div>
 </body>
 
 <script>
@@ -132,7 +132,7 @@
 
                     if  (data1[i].user != null){
                         let a = document.createElement("a");
-                        a.setAttribute("href", "/admin/user/" + data1[i].user.userId);
+                        // a.setAttribute("href", "/admin/user/" + data1[i].user.userId);
                         a.setAttribute("id", "userNameInsert");
                         a.innerText = userName;
                         elem3.append(a);
@@ -310,7 +310,7 @@
                 form.append(selectInput);
             },
             error: function () {
-                alert('Ошибка получения списка польователей!');
+                alert('Ошибка получения списка пользователей!');
 
             }
         });

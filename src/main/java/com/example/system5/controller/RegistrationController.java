@@ -132,4 +132,8 @@ public class RegistrationController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/start")
+    public String start(){
+        return "start";
+    }
 }

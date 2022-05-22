@@ -13,62 +13,62 @@
     <title>Title</title>
 </head>
 <body>
-    <a href="/list">Посмотреть все оценки</a>
-    <br/>
-    <a href="/getUser">Сведения о пользователе</a>
-    <br/>
-    <a href="/admin/shtat">Получить штатное расписание</a>
-    <br/>
-    <a href="javascript:get_employers()">Посмотреть подчиненных сотрудников</a>
-    <br/>
-    <br/>
-    <p>Получить отчет за месяц</p>
-    <br/>
-    <form method="get" action="/admin/report">
-        <select id="monsel" name="month" class="select-css" style="width: max-content"></select>
-        <button type="submit" class="btn">Сформировать</button>
+<jsp:include page="../includes/menu.jsp"/>
+<div class="main">
+    <form id="monsel" method="get" action="/admin/report">
+<%--        <select  name="month" class="select-css" style="width: max-content"></select>--%>
+<%--        <button type="submit" class="btn">Сформировать</button>--%>
     </form>
-
-
-    <p class="zzz"></p>
-    <br/>
-    <a href="/logout">Выйти</a>
-
-
+</div>
 
 </body>
+</html>
 
 <style>
     <%@include file="myStyle.css"%>
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", ready);
-    function ready(){
+    function getReport(){
         $.ajax({
             url: "/getMonth"
         }).then(function (months){
-            let select = document.getElementById("monsel");
+            let el = document.getElementById("monsel");
+            let select = document.createElement("select");
+            select.name = "month";
+            select.className = "select-css";
+            select.style = "width: max-content";
             for (let i = 0; i < months.length; i++) {
                 let option = document.createElement("option");
                 option.innerText = months[i];
                 select.append(option);
             }
+            el.append(select);
+
+            let button = document.createElement("button");
+            button.type = "submit";
+            button.className = "btn";
+            el.append(button);
         });
     }
 
 
-   function get_employers() {
+    function get_employers(){
+        document.location="/home";
+        $(".employer").remove();
+        let p = document.createElement("p");
+        p.id = "employers";
+        p.innerText = "Оцените, пожалуйста, работу сотрудников:"
+        $(".main").append(p);
         $.ajax({
             url: "/my_employers"
         }).then(function(data) {
+            console.log(data)
             for (let i = 0; i < data.length; i++){
-                let position = data[i].position;
-                $(".zzz").append(`<a href="/list/` + data[i].user.userId + `">` +
-                    data[i].position + " " + data[i].user.name + `</a>` + `<br/>`);
+                $("#employers").append(`<br class="employer"/><a class="employer" href="/list/` + data[i].user.userId + `">` +
+                data[i].position + " " + data[i].user.name + `</a>`);
             }
         });
-    };
+    }
 
 </script>
-</html>

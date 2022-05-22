@@ -16,63 +16,66 @@
 <head>
     <title>Title</title>
 </head>
-<body>
-<table class="table">
-    <tbody>
-    <tr>
-        <th rowspan="2">Месяц</th>
-        <th colspan="2">Личная результативность</th>
-        <th colspan="2">Инициативность</th>
-        <th colspan="2">Совершенствование профессиональных знаний</th>
-        <th colspan="2">Клиентоориентированность</th>
-        <th colspan="2">Работа в команде</th>
-        <th colspan="2">Итог</th>
-    </tr>
-    <tr>
-        <td>самооценка</td>
-        <td>оценка руководителя</td>
-        <td>самооценка</td>
-        <td>оценка руководителя</td>
-        <td>самооценка</td>
-        <td>оценка руководителя</td>
-        <td>самооценка</td>
-        <td>оценка руководителя</td>
-        <td>самооценка</td>
-        <td>оценка руководителя</td>
-        <td>самооценка</td>
-        <td>оценка руководителя</td>
-    </tr>
-    <c:forEach var="system5" items="${system5List}">
-    <tr>
-        <td>${system5.month}</td>
-        <td>${system5.res1}</td>
-        <td>${system5.system5empl.resempl1}</td>
-        <td>${system5.res2}</td>
-        <td>${system5.system5empl.resempl2}</td>
-        <td>${system5.res3}</td>
-        <td>${system5.system5empl.resempl3}</td>
-        <td>${system5.res4}</td>
-        <td>${system5.system5empl.resempl4}</td>
-        <td>${system5.res5}</td>
-        <td>${system5.system5empl.resempl5}</td>
-        <td>${system5.totalMark5.totalMark}</td>
-        <td>${system5.totalMark5.totalMarkEmpl}</td>
-    </tr>
-    </c:forEach>
-    </tbody>
-</table>
 
-<c:if test="${employer == false}">
-    <div id="openModal" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+<body class="bod">
+<jsp:include page="../includes/menu.jsp"/>
 
-                    <h3 class="modal-title">Самооценка</h3>
+<div class="main">
+    <table class="table">
+        <tbody>
+        <tr>
+            <th rowspan="2">Месяц</th>
+            <th colspan="2">Личная результативность</th>
+            <th colspan="2">Инициативность</th>
+            <th colspan="2">Совершенствование профессиональных знаний</th>
+            <th colspan="2">Клиентоориентированность</th>
+            <th colspan="2">Работа в команде</th>
+            <th colspan="2">Итог</th>
+        </tr>
+        <tr>
+            <th>самооценка</th>
+            <th>оценка руководителя</th>
+            <th>самооценка</th>
+            <th>оценка руководителя</th>
+            <th>самооценка</th>
+            <th>оценка руководителя</th>
+            <th>самооценка</th>
+            <th>оценка руководителя</th>
+            <th>самооценка</th>
+            <th>оценка руководителя</th>
+            <th>самооценка</th>
+            <th>оценка руководителя</th>
+        </tr>
+        <c:forEach var="system5" items="${system5List}">
+            <tr>
+                <td>${system5.month}</td>
+                <td>${system5.res1}</td>
+                <td>${system5.system5empl.resempl1}</td>
+                <td>${system5.res2}</td>
+                <td>${system5.system5empl.resempl2}</td>
+                <td>${system5.res3}</td>
+                <td>${system5.system5empl.resempl3}</td>
+                <td>${system5.res4}</td>
+                <td>${system5.system5empl.resempl4}</td>
+                <td>${system5.res5}</td>
+                <td>${system5.system5empl.resempl5}</td>
+                <td>${system5.totalMark5.totalMark}</td>
+                <td>${system5.totalMark5.totalMarkEmpl}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    <c:if test="${employer == false}">
+        <div id="openModal" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h3 class="modal-title">Самооценка</h3>
 
 
-                <a href="#close" title="Close" class="close">×</a>
-            </div>
+                        <a href="#close" title="Close" class="close">×</a>
+                    </div>
                     <div class="modal-body my-modal">
                         <form:form method="post" action="/adds" modelAttribute="system5">
                             <label>Выберите месяц</label>
@@ -98,20 +101,18 @@
                 </div>
             </div>
         </div>
-    </div>
-</c:if>
+    </c:if>
+    <c:if test="${employer == true}">
+        <div id="openModal" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
 
-<c:if test="${employer == true}">
-    <div id="openModal" class="modal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h3 class="modal-title">Оценка</h3>
+                        <h3 class="modal-title">Оценка</h3>
 
 
-                    <a href="#close" title="Close" class="close">×</a>
-                </div>
+                        <a href="#close" title="Close" class="close">×</a>
+                    </div>
                     <div class="modal-body my-modal">
                         <form:form method="post" action="/addsempl" modelAttribute="system5empl">
                             <form:input path="user_id" type="hidden" value="${userId}"/>
@@ -135,28 +136,28 @@
                 </div>
             </div>
         </div>
-    </div>
-</c:if>
-
-<!-- openModal - id модального окна (элемента div) -->
-<c:if test="${employer == false}">
-    <button type="button" class="btn" onclick="document.location='#openModal'">Добавить самооценку</button>
-</c:if>
-<c:if test="${months.size() != 0}">
-    <c:if test="${employer == true}">
-        <button type="button" class="btn" onclick="document.location='#openModal'">Добавить оценку</button>
     </c:if>
-</c:if>
 
+    <!-- openModal - id модального окна (элемента div) -->
+    <c:if test="${employer == false}">
+        <button type="button" class="btn" onclick="document.location='#openModal'">Добавить самооценку</button>
+    </c:if>
+    <c:if test="${months.size() != 0}">
+        <c:if test="${employer == true}">
+            <button type="button" class="btn" onclick="document.location='#openModal'">Добавить оценку</button>
+        </c:if>
+    </c:if>
+    <button type="button" class="btn" onclick="document.location='/home'">Назад</button>
+    <br/>
+    <label style="color: crimson; font: bold italic 110% serif">
+        <c:if test="${param.get('error') == 1}">Ошибка при заполнении полей самооценки. Попробуйте еще раз!</c:if>
+    </label>
+    <label style="color: crimson; font: bold italic 110% serif">
+        <c:if test="${param.get('error') == 2}">Ошибка при заполнении полей оценки. Попробуйте еще раз!</c:if>
+    </label>
 
-<button type="button" class="btn" onclick="document.location='/home'">Назад</button>
-<br/>
-<label style="color: crimson; font: bold italic 110% serif">
-    <c:if test="${param.get('error') == 1}">Ошибка при заполнении полей самооценки. Попробуйте еще раз!</c:if>
-</label>
-<label style="color: crimson; font: bold italic 110% serif">
-    <c:if test="${param.get('error') == 2}">Ошибка при заполнении полей оценки. Попробуйте еще раз!</c:if>
-</label>
+</div>
+
 
 </body>
 </html>

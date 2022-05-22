@@ -268,6 +268,7 @@ table {
     font-family: Arial, Helvetica, sans-serif;
     border-collapse: collapse;
     width: 100%;
+    font-size: small;
 }
 
 table td, table th {
@@ -291,7 +292,7 @@ body {
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
     font-size: 16px;
     font-weight: 400;
-    line-height: 1.5;
+    /*line-height: 1.5;*/
     color: #292b2c;
     background-color: #fff;
 }
@@ -469,4 +470,38 @@ body {
 *[dir="rtl"] .select-css, :root:lang(ar) .select-css, :root:lang(iw) .select-css {
     background-position: left .7em top 50%, 0 0;
     padding: .6em .8em .5em 1.4em;
+}
+
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #1fb5bf;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a {
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    /*font-size: 25px;*/
+    color: #393939;
+    display: block;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 200px; /* Same as the width of the sidenav */
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
 }
