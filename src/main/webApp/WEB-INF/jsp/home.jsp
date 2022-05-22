@@ -13,23 +13,21 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="../includes/header.jsp"/>
 <jsp:include page="../includes/menu.jsp"/>
 <div class="main">
-    <form id="monsel" method="get" action="/admin/report">
-<%--        <select  name="month" class="select-css" style="width: max-content"></select>--%>
-<%--        <button type="submit" class="btn">Сформировать</button>--%>
-    </form>
+    <form id="monsel" method="get" action="/admin/report"></form>
 </div>
 
 </body>
 </html>
 
 <style>
-    <%@include file="myStyle.css"%>
+    <%@include file="../includes/myStyle.css"%>
 </style>
 
 <script>
-    function getReport(){
+    function get_report(){
         $.ajax({
             url: "/getMonth"
         }).then(function (months){
@@ -48,10 +46,10 @@
             let button = document.createElement("button");
             button.type = "submit";
             button.className = "btn";
+            button.innerText = "Сформировать";
             el.append(button);
         });
     }
-
 
     function get_employers(){
         document.location="/home";
@@ -70,5 +68,4 @@
             }
         });
     }
-
 </script>

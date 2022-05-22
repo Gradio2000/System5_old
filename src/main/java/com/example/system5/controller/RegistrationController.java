@@ -1,5 +1,6 @@
 package com.example.system5.controller;
 
+import com.example.system5.dto.UserDto1;
 import com.example.system5.model.*;
 import com.example.system5.repository.PositionRepository;
 import com.example.system5.repository.UserRepository;
@@ -132,8 +133,10 @@ public class RegistrationController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/start")
-    public String start(){
-        return "start";
+    @GetMapping("/home")
+    public String getHome(@AuthenticationPrincipal AuthUser authUser, Model model){
+        UserDto1 userDto1 = new UserDto1(authUser.getUser().getName());
+        model.addAttribute("user", userDto1);
+        return "home";
     }
 }

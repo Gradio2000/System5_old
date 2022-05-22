@@ -28,7 +28,7 @@
 </body>
 </html>
 <style>
-    <%@include file="myStyle.css"%>
+    <%@include file="../includes/myStyle.css"%>
 </style>
 <script>
     var link = document.querySelector('link[rel="import"]');

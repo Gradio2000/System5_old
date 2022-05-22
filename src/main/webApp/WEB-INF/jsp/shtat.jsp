@@ -20,6 +20,7 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="../includes/header.jsp"/>
 <jsp:include page="../includes/menu.jsp"/>
 <div class="main">
 <table  id="color_table">
@@ -447,7 +448,7 @@
 
 </script>
 <style>
-    <%@include file="myStyle.css"%>
+    <%@include file="../includes/myStyle.css"%>
     .hover_Row { background-color: #e0dfdf; }
     .clicked_Row { background-color: #b1b0b0; }
 </style>

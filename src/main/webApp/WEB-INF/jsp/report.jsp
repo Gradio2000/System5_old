@@ -18,7 +18,10 @@
     <title>Отчет</title>
 </head>
 <body>
-<%--<c:set var="month" value="${month}"/>--%>
+<jsp:include page="../includes/header.jsp"/>
+<jsp:include page="../includes/menu.jsp"/>
+
+<div class="main">
 <div style="text-align: center">
     <p>Форма оценки работников полевого учреждения Банка России № 42667 за ${month}</p>
 </div>
@@ -58,8 +61,9 @@
     <button type="button" class="btn" onclick="document.location='/home'">На главную</button>
 
 </div>
+</div>
 </body>
 </html>
 <style>
-    <%@include file="myStyle.css"%>
+    <%@include file="../includes/myStyle.css"%>
 </style>

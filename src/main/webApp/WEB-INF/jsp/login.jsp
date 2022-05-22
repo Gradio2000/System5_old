@@ -29,6 +29,6 @@
 </div>
 </body>
 <style>
-    <%@include file="myStyle.css"%>
+    <%@include file="../includes/myStyle.css"%>
 </style>
 </html>

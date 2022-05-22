@@ -18,6 +18,7 @@
 </head>
 
 <body class="bod">
+<jsp:include page="../includes/header.jsp"/>
 <jsp:include page="../includes/menu.jsp"/>
 
 <div class="main">
@@ -162,7 +163,7 @@
 </body>
 </html>
 <style>
-    <%@include file="myStyle.css"%>
+    <%@include file="../includes/myStyle.css"%>
 </style>
 
 <script>

@@ -1,7 +1,10 @@
 package com.example.system5.controller.adminController;
 
+import com.example.system5.dto.UserDto;
 import com.example.system5.model.Division;
 import com.example.system5.repository.DivisionRepository;
+import com.example.system5.util.AuthUser;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,9 +22,10 @@ public class DivisionController {
     }
 
     @GetMapping("/shtat")
-    public String getStat(Model model){
+    public String getStat(@AuthenticationPrincipal AuthUser authUser, Model model){
         List<Division> divisions = divisionRepository.findAll();
         model.addAttribute(divisions);
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         return "/shtat";
     }
 
