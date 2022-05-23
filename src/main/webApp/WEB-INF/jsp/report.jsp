@@ -58,7 +58,7 @@
         </tbody>
     </table>
     <br/>
-    <button type="button" class="btn" onclick="document.location='/home'">На главную</button>
+    <button type="button" class="btn" onclick="document.location='/admin/prepareReport'">Назад</button>
 
 </div>
 </div>

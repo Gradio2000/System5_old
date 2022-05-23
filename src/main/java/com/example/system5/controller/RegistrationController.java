@@ -1,6 +1,6 @@
 package com.example.system5.controller;
 
-import com.example.system5.dto.UserDto1;
+import com.example.system5.dto.UserDto;
 import com.example.system5.model.*;
 import com.example.system5.repository.PositionRepository;
 import com.example.system5.repository.UserRepository;
@@ -14,17 +14,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 
 @Controller
@@ -125,18 +126,11 @@ public class RegistrationController {
         return "redirect:/logout";
     }
 
-    @GetMapping("/getMonth")
-    @ResponseBody
-    public List<String>getMonths(){
-        return Arrays.stream(Month.values())
-                .map(Enum::name)
-                .collect(Collectors.toList());
-    }
 
     @GetMapping("/home")
     public String getHome(@AuthenticationPrincipal AuthUser authUser, Model model){
-        UserDto1 userDto1 = new UserDto1(authUser.getUser().getName());
-        model.addAttribute("user", userDto1);
+        UserDto userDto = new UserDto(authUser.getUser().getName());
+        model.addAttribute("user", userDto);
         return "home";
     }
 }

@@ -4,7 +4,7 @@
     <a href="/list">Мои оценки</a>
     <a href="/my_employers">Оценка работников</a>
     <a href="/admin/shtat">Штатное расписание</a>
-    <a href="javascript:get_report()">Отчет за месяц</a>
+    <a href="/admin/prepareReport">Отчет за месяц</a>
     <a href="/logout">Выйти</a>
 </div>
 
