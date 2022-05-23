@@ -143,13 +143,14 @@
     <c:if test="${employer == false}">
         <button type="button" class="btn" onclick="document.location='#openModal'">Добавить самооценку</button>
     </c:if>
-    <c:if test="${months.size() != 0}">
-        <c:if test="${employer == true}">
+    <c:if test="${employer == true}">
+        <c:if test="${months.size() != 0}">
             <button type="button" class="btn" onclick="document.location='#openModal'">Добавить оценку</button>
         </c:if>
+        <button type="button" class="btn" onclick="document.location='/my_employers'">Назад</button>
+        <br/>
     </c:if>
-    <button type="button" class="btn" onclick="document.location='/home'">Назад</button>
-    <br/>
+
     <label style="color: crimson; font: bold italic 110% serif">
         <c:if test="${param.get('error') == 1}">Ошибка при заполнении полей самооценки. Попробуйте еще раз!</c:if>
     </label>

@@ -1,6 +1,7 @@
 package com.example.system5.controller;
 
 
+import com.example.system5.dto.UserDto;
 import com.example.system5.model.*;
 import com.example.system5.repository.System5Repository;
 import com.example.system5.repository.System5emplRepository;
@@ -66,6 +67,8 @@ public class System5Controller {
                 .filter(u -> u.getUserId() != user.getUserId())
                 .collect(Collectors.toList());
         model.addAttribute(userList);
+
+        model.addAttribute("user", UserDto.getInstance(user));
 
         return "lists";
     }

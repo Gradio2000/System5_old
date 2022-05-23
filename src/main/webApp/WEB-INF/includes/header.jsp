@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <header>
   <div class="header">
-    <a href="#default" class="logo">CompanyLogo</a>
+    <a class="logo">ЛенИнформ</a>
     <div class="header-right">
       <a>${user.name}</a>
     </div>
@@ -12,7 +12,8 @@
   .header {
     overflow: hidden;
     background-color: #f1f1f1;
-    padding: 20px 10px;
+    padding: 10px 5px;
+    font-style: italic;
   }
 
   /* Style the header links */
