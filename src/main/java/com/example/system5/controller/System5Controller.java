@@ -75,7 +75,8 @@ public class System5Controller {
                               BindingResult bindingResult,
                               @ModelAttribute System5empl system5empl,
                               BindingResult bindingResult1,
-                              Model model){
+                              Model model,
+                              @AuthenticationPrincipal AuthUser authUser){
 
         List<System5> system5List = system5Repository.findByUserIdOrderBySystem5Id(id);
 
@@ -91,6 +92,7 @@ public class System5Controller {
         model.addAttribute("employer", employer);
         model.addAttribute("months", monthMap);
         model.addAttribute("userId", id);
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         return "lists";
     }
 

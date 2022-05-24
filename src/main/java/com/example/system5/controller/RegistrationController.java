@@ -115,7 +115,8 @@ public class RegistrationController {
         Position position = positionRepository.findById(formFinishReg.getPosition_id()).orElse(null);
         user.setPosition(position);
         userRepository.save(user);
-        return "redirect:/home";
+        model.addAttribute("user", UserDto.getInstance(user));
+        return "redirect:/list";
     }
 
     @GetMapping("/cancel")
