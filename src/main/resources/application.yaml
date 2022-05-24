@@ -1,7 +1,7 @@
 #  https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html
 spring:
   jpa:
-    show-sql: true
+#    show-sql: true
     open-in-view: false
 #   Настройка для автоматической инициализации БД. отключил
 #    hibernate:
@@ -14,21 +14,21 @@ spring:
         # https://stackoverflow.com/questions/21257819/what-is-the-difference-between-hibernate-jdbc-fetch-size-and-hibernate-jdbc-batc
         jdbc.batch_size: 20
   datasource:
-    url: jdbc:postgresql://localhost:5433/system5DB
+    url: jdbc:postgresql://localhost:5432/system5DB
     username:
     password:
 
-  data.rest:
     #  https://docs.spring.io/spring-data/rest/docs/current/reference/html/#getting-started.basic-settings
-    basePath: /api
-    defaultPageSize: 20
-    returnBodyOnCreate: true
+#  data.rest:
+#    basePath: /api
+#    defaultPageSize: 20
+#    returnBodyOnCreate: true
 
 
 logging:
   level:
     root: WARN
-    com.graduation.project: DEBUG
+    com.example.system5: DEBUG
 
 
     org:
@@ -45,7 +45,8 @@ server.servlet:
     enabled: true # Enable http encoding support
     force: true
 
-spring.jpa.defer-datasource-initialization: true
+#https://stackoverflow:com/questions/67695069/spring-boot-datasource-initialization-error-with-data-sql-script-after-2-5-0-upg:
+#spring.jpa.defer-datasource-initialization: true
 
 
 # https://stackoverflow.com/questions/70036953/springboot-2-6-0-spring-fox-3-failed-to-start-bean-documentationpluginsboot:

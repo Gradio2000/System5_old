@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/admin/**").hasRole("ADMIN")
                     .anyRequest().authenticated()
                 .and().httpBasic()
+                .and().exceptionHandling().accessDeniedPage("/accessDenied.jsp")
 
                 .and().formLogin()
                     .loginPage("/login").permitAll()

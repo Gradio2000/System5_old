@@ -17,7 +17,12 @@ public class UserController {
     @GetMapping(value = "/my_employers")
     public String getEmployersList(@AuthenticationPrincipal AuthUser authUser, Model model){
         User user = authUser.getUser();
-        List<Position> positionList = user.getPosition().getEmployersList();
+        List<Position> positionList = null;
+        try {
+            positionList = user.getPosition().getEmployersList();
+        } catch (Exception e) {
+            return "employers";
+        }
         model.addAttribute(positionList);
         model.addAttribute("user", UserDto.getInstance(user));
         return "employers";

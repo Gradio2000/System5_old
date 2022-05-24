@@ -157,7 +157,6 @@
     <label style="color: crimson; font: bold italic 110% serif">
         <c:if test="${param.get('error') == 2}">Ошибка при заполнении полей оценки. Попробуйте еще раз!</c:if>
     </label>
-
 </div>
 
 

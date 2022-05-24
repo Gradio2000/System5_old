@@ -4,7 +4,6 @@ package com.example.system5.controller;
 import com.example.system5.dto.UserDto;
 import com.example.system5.model.*;
 import com.example.system5.repository.System5Repository;
-import com.example.system5.repository.System5emplRepository;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.service.System5Service;
 import com.example.system5.util.AuthUser;
@@ -26,17 +25,14 @@ import java.util.stream.Collectors;
 public class System5Controller {
 
     private final System5Repository system5Repository;
-    private final System5emplRepository system5emplRepository;
     private final UserRepository userRepository;
     private final System5Service system5Service;
 
 
     public System5Controller(System5Repository system5Repository,
-                             System5emplRepository system5emplRepository,
                              UserRepository userRepository,
                              System5Service system5Service) {
         this.system5Repository = system5Repository;
-        this.system5emplRepository = system5emplRepository;
         this.userRepository = userRepository;
         this.system5Service = system5Service;
     }
