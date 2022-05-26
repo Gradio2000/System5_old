@@ -14,10 +14,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -44,7 +41,7 @@ public class System5Controller {
         List<System5> system5List = system5Repository.findAllByUserId(user.getUserId());
         model.addAttribute(system5List);
 
-        List<Month> monthList = new ArrayList<>(List.of(Month.values()));
+        List<Month> monthList = Arrays.stream(Month.values()).collect(Collectors.toList());
         for(System5 system5 : system5List){
             monthList.removeIf(m -> (m.name().equals(system5.getMonth())));
         }
