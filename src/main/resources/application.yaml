@@ -16,8 +16,8 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     url: jdbc:postgresql://localhost:5432/system5DB
-    username:
-    password:
+    username: admin
+    password: admin
 
     #  https://docs.spring.io/spring-data/rest/docs/current/reference/html/#getting-started.basic-settings
 #  data.rest:
