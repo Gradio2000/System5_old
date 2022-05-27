@@ -12,6 +12,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"       prefix="x"   %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"  %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
+<script type="text/javascript" src="../../js/jquery-3.6.0.js"></script>
 <html>
 <head>
     <title>Title</title>
@@ -169,7 +170,6 @@
 <script>
     document.addEventListener("DOMContentLoaded", function(){
         var scrollbar = document.body.clientWidth - window.innerWidth + 'px';
-        console.log(scrollbar);
         document.querySelector('[href="#openModal"]').addEventListener('click',function(){
             document.body.style.overflow = 'hidden';
             document.querySelector('#openModal').style.marginLeft = scrollbar;

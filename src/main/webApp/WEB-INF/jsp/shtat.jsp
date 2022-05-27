@@ -12,12 +12,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"       prefix="x"   %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"  %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/jquery-3.6.0.js"></script>
 
 
 <html>
 <head>
-    <title>Title</title>
+
+    <title>Оценки</title>
 </head>
 <body>
 <jsp:include page="../includes/header.jsp"/>
@@ -55,6 +56,7 @@
     <tr>
         <th class="tblsht">Должности</th>
         <th class="tblsht">Работники</th>
+        <th class="tblsht">Администратор</th>
     </tr>
     </tbody>
 </table>
@@ -62,7 +64,7 @@
     <div id="insbtn" style="width: 50%; float: left"></div>
     <div id="deluserbtn" style="width: 50%; float: right"></div>
     <div>
-        <button type="button" class="btn" onclick="document.location='/home'">На главную</button>
+        <button type="button" class="btn" onclick="document.location='/list'">На главную</button>
     </div>
 </div>
 </br>
@@ -131,16 +133,28 @@
                     let elem3 = document.createElement("td");
                     elem3.setAttribute("class", "tblsht");
 
+                    let elem4 = document.createElement("td");
+                    elem4.setAttribute("class", "tblsht");
+
+
                     if  (data1[i].user != null){
                         let a = document.createElement("a");
-                        // a.setAttribute("href", "/admin/user/" + data1[i].user.userId);
                         a.setAttribute("id", "userNameInsert");
                         a.innerText = userName;
                         elem3.append(a);
+
+                        let elcheck = document.createElement("input");
+                        elcheck.type = "checkbox";
+                        console.log(data1[i].user.roles);
+                        if (data1[i].user.roles.includes("ADMIN")){
+                            elcheck.checked = "checked";
+                        }
+                        elem4.append(elcheck);
                     }
 
                     elem1.append(elem2);
                     elem1.append(elem3);
+                    elem1.append(elem4);
                     elem.append(elem1);
 
                 }
