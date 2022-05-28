@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: aleksejlaskin
@@ -21,11 +20,16 @@
 <jsp:include page="../includes/header.jsp"/>
 <jsp:include page="../includes/menu.jsp"/>
 <div class="main">
-    <p>Оцените, пожалуйста, работу сотрудников:</p>
-    <c:forEach items="${positionList}" var="position">
-        <a href="/list/${position.user.userId}">${position.position} ${position.user.name}</a>
-        <br/>
-    </c:forEach>
+    <c:if test="${positionList.size() == 0}">
+        <a style="font-family: 'Arial Unicode MS',cursive; color: #dc4242">Работники не прислали оценки</a>
+    </c:if>
+    <c:if test="${positionList.size() != 0}">
+        <p>Оцените, пожалуйста, работу сотрудников:</p>
+        <c:forEach items="${positionList}" var="position">
+            <a href="/list/${position.user.userId}">${position.position} ${position.user.name}</a>
+            <br/>
+        </c:forEach>
+    </c:if>
 </div>
 
 </body>

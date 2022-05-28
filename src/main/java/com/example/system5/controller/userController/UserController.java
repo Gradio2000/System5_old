@@ -23,7 +23,7 @@ public class UserController {
         } catch (Exception e) {
             return "employers";
         }
-        model.addAttribute(positionList);
+        model.addAttribute("positionList", positionList);
         model.addAttribute("user", UserDto.getInstance(user));
         return "employers";
     }
