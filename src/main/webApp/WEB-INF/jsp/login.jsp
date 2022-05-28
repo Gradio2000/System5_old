@@ -9,7 +9,7 @@
 <html lang="en" >
 <head>
     <meta charset="UTF-8">
-    <title>Login Form</title>
+    <title>ЛенИнформ</title>
     <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 

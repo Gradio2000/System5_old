@@ -18,7 +18,7 @@
 <html>
 <head>
 
-    <title>Оценки</title>
+    <title>Штат</title>
 </head>
 <body>
 <jsp:include page="../includes/header.jsp"/>
@@ -61,15 +61,13 @@
     </tbody>
 </table>
 <div>
-    <div id="insbtn" style="width: 50%; float: left"></div>
-    <div id="deluserbtn" style="width: 50%; float: right"></div>
-    <div>
-        <button type="button" class="btn" onclick="document.location='/list'">На главную</button>
-    </div>
+    <div id="insbtn" style="width: 33.33%; float: left"></div>
+    <div id="deluserbtn" style="width: 33.33%; float: left"></div>
 </div>
 </br>
 
 <div id="insdelbtn"></div>
+
 
 
 
@@ -79,7 +77,9 @@
 <form id="changePosition" name=changePosition" method="post" action="/admin/position/change"></form>
 <form id="addPosition" name="addPosition" method="post" ></form>
 
-
+    <div style="position: absolute; margin-top: 40px">
+        <button type="button" class="btn" onclick="document.location='/list'">На главную</button>
+    </div>
 </div>
 </body>
 

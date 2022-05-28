@@ -14,7 +14,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
 <html>
 <head>
-    <title>Registration</title>
+    <title>Регистрация</title>
 </head>
 <body>
     <div class="log-form">

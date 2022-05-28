@@ -15,7 +15,7 @@
 <script type="text/javascript" src="../../js/jquery-3.6.0.js"></script>
 <html>
 <head>
-    <title>Title</title>
+    <title>Оценка</title>
 </head>
 
 <body class="bod">

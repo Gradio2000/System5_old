@@ -141,6 +141,8 @@ body {
 
 
 .btn {
+    width: auto;
+    height: 31px;
     display: inline-block;
     margin-top: 2em;
     background: #1fb5bf;

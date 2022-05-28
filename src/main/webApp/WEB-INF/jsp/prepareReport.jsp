@@ -15,7 +15,7 @@
 <html>
 <head>
 
-    <title>Title</title>
+    <title>Отчет</title>
 </head>
 <body>
 <jsp:include page="../includes/header.jsp"/>

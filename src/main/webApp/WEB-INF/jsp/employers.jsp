@@ -15,7 +15,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Работники</title>
 </head>
 <body>
 <jsp:include page="../includes/header.jsp"/>
