@@ -19,14 +19,11 @@
 <jsp:include page="../includes/header.jsp"/>
 <jsp:include page="../includes/menu.jsp"/>
 
-<div class="main">
-<div style="text-align: center">
-    <p>Форма оценки работников полевого учреждения Банка России № 42667 за ${month}</p>
-</div>
-
-
-<div>
-    <table class="table">
+    <div class="main" >
+        <div id="printableArea" style="text-align: center">
+        <p>Форма оценки работников полевого учреждения Банка России № 42667 за ${month}</p>
+            <div>
+            <table class="table">
         <tbody>
         <tr>
             <th rowspan="2">ФИО</th>
@@ -55,13 +52,29 @@
         </c:forEach>
         </tbody>
     </table>
-    <br/>
-    <button type="button" class="btn" onclick="document.location='/admin/prepareReport'">Назад</button>
+            <br/>
+            </div>
+        </div>
+            <div>
+            <button type="button" class="btn" onclick="document.location='/admin/prepareReport'">Назад</button>
+            <input type="button" onclick="printDiv('printableArea')" value="Печать" class="btn"/>
+        </div>
+    </div>
 
-</div>
-</div>
 </body>
 </html>
 <style>
     <%@include file="../includes/myStyle.css"%>
 </style>
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
