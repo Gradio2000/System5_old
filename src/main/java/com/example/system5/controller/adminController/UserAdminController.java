@@ -1,5 +1,7 @@
 package com.example.system5.controller.adminController;
 
+import com.example.system5.model.Position;
+import com.example.system5.model.Role;
 import com.example.system5.model.User;
 import com.example.system5.repository.PositionRepository;
 import com.example.system5.repository.UserRepository;
@@ -7,7 +9,10 @@ import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
@@ -43,5 +48,28 @@ public class UserAdminController {
         user.setPosition(positionRepository.getById(positionId));
         userRepository.save(user);
         return "redirect:/admin/shtat";
+    }
+
+    @PostMapping("/setrole")
+    @ResponseBody
+    public Map<String, String> setAdminRole(@RequestParam Integer id){
+        Map<String, String> result = new HashMap<>();
+        Position position = positionRepository.getByPosition_id(id);
+        User user = position.user;
+        Set<Role> roleSet = user.getRoles();
+        if (roleSet.contains(Role.ADMIN)){
+            roleSet.clear();
+            roleSet.add(Role.USER);
+            user.setRoles(roleSet);
+            userRepository.save(user);
+            result.put("res", "not admin");
+        }
+        else {
+            roleSet.add(Role.ADMIN);
+            user.setRoles(roleSet);
+            userRepository.save(user);
+            result.put("res", "admin");
+        }
+        return result;
     }
 }

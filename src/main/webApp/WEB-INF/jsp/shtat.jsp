@@ -135,6 +135,7 @@
 
                     let elem4 = document.createElement("td");
                     elem4.setAttribute("class", "tblsht");
+                    elem4.id="forrole";
 
 
                     if  (data1[i].user != null){
@@ -145,10 +146,11 @@
 
                         let elcheck = document.createElement("input");
                         elcheck.type = "checkbox";
-                        console.log(data1[i].user.roles);
+                        elcheck.name="checkrole";
                         if (data1[i].user.roles.includes("ADMIN")){
                             elcheck.checked = "checked";
                         }
+                        elcheck.setAttribute("onchange", "showbutrol(" + data1[i].position_id + ")");
                         elem4.append(elcheck);
                     }
 
@@ -164,6 +166,26 @@
         });
 
         insertButton(id);
+
+        }
+
+        function showbutrol(id){
+            $.ajax({
+                type: 'POST',
+                url: '/admin/user/setrole',
+                data: {"id": id},
+                success: function (data) {
+                    let elll = document.getElementById("forrole");
+                    let a = document.createElement("a");
+                    a.innerText = data.res;
+                    elll.append(a);
+                },
+                error: function () {
+                    alert('Ошибка!');
+                    console.log(msg);
+                }
+            });
+
 
         }
 
