@@ -127,11 +127,4 @@ public class RegistrationController {
         return "redirect:/logout";
     }
 
-
-    @GetMapping("/home")
-    public String getHome(@AuthenticationPrincipal AuthUser authUser, Model model){
-        UserDto userDto = new UserDto(authUser.getUser().getName());
-        model.addAttribute("user", userDto);
-        return "home";
-    }
 }
