@@ -14,6 +14,9 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
 <script type="text/javascript" src="../../js/jquery-3.6.0.js"></script>
 <html>
+<style>
+    <%@include file="../includes/myStyle.css"%>
+</style>
 <head>
     <title>Оценка</title>
 </head>
@@ -67,15 +70,14 @@
         </c:forEach>
         </tbody>
     </table>
+
+    <%--    модальное окно для самооценки--%>
     <c:if test="${employer == false}">
         <div id="openModal" class="modal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-
                         <h3 class="modal-title">Самооценка</h3>
-
-
                         <a href="#close" title="Close" class="close">×</a>
                     </div>
                     <div class="modal-body my-modal">
@@ -104,15 +106,14 @@
             </div>
         </div>
     </c:if>
+
+    <%--    модальное окно для оценки работника--%>
     <c:if test="${employer == true}">
         <div id="openModal" class="modal">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-
                         <h3 class="modal-title">Оценка</h3>
-
-
                         <a href="#close" title="Close" class="close">×</a>
                     </div>
                     <div class="modal-body my-modal">
@@ -140,6 +141,42 @@
         </div>
     </c:if>
 
+    <%--    модальное окно для изменения самооценки--%>
+    <div id="openModalEdit" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Изменение самооценки</h3>
+                    <a href="#close" title="Close" class="close">×</a>
+                </div>
+                <div class="modal-body my-modal">
+                    <form:form method="post" action="/adds" modelAttribute="system5">
+                        <label>Выберите месяц</label>
+                        <form:select id="selectMonthForEdit" cssClass="select-css" path="month"/>
+                        <form:input path="res1" placeholder="Личная результативность"/>
+                        <form:errors path="res1" cssClass="errorMsg"/>
+                        <form:input path="res2" placeholder="Инициативность"/>
+                        <form:input path="res3" placeholder="Совершенствование профессиональных знаний"/>
+                        <form:input path="res4" placeholder="Клиентоориентированность"/>
+                        <form:input path="res5" placeholder="Работа в команде"/>
+                        <br/>
+                        <br/>
+                        <label>Выберите руководителя, которому отправите самооценку</label>
+                        <select class="select-css" name="comm_id">
+                            <c:forEach items="${userList}" var="user">
+                                <option value="${user.position.position_id}">${user.name}</option>
+                            </c:forEach>
+                        </select>
+                        <br/>
+                        <button type="submit" class="btn">Отправить</button>
+                    </form:form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
     <!-- openModal - id модального окна (элемента div) -->
     <c:if test="${employer == false}">
         <button type="button" class="btn" onclick="document.location='#openModal'">Добавить самооценку</button>
@@ -160,7 +197,7 @@
         </c:if>
     </c:forEach>
     <c:if test="${let != 0}">
-        <button type="button" class="buttonch">Изменить</button>
+        <button type="button" class="buttonch" onclick="editSelfRated()">Изменить</button>
     </c:if>
     <%--    кнопка изменить--%>
 
@@ -178,20 +215,42 @@
 
 </body>
 </html>
-<style>
-    <%@include file="../includes/myStyle.css"%>
-</style>
+
 
 <script>
-    document.addEventListener("DOMContentLoaded", function(){
-        var scrollbar = document.body.clientWidth - window.innerWidth + 'px';
-        document.querySelector('[href="#openModal"]').addEventListener('click',function(){
-            document.body.style.overflow = 'hidden';
-            document.querySelector('#openModal').style.marginLeft = scrollbar;
+    // document.addEventListener("DOMContentLoaded", function(){
+    //     const scrollbar = document.body.clientWidth - window.innerWidth + 'px';
+    //     document.querySelector('[href="#openModal"]').addEventListener('click',function(){
+    //         document.body.style.overflow = 'hidden';
+    //         document.querySelector('#openModal').style.marginLeft = scrollbar;
+    //     });
+    //     document.querySelector('[href="#close"]').addEventListener('click',function(){
+    //         document.body.style.overflow = 'visible';
+    //         document.querySelector('#openModal').style.marginLeft = '0px';
+    //     });
+    // });
+
+    function editSelfRated(){
+        $.ajax({
+            type: 'GET',
+            url: '/getMonths',
+            success: function (data) {
+                let elem = document.getElementById('selectMonthForEdit');
+                for (let i = 0; i < data.length; i++) {
+                    let opt = document.createElement('option');
+                    opt.innerText = data[i];
+                    opt.setAttribute("value", data[i]);
+                    elem.append(opt);
+                }
+            },
+            error: function () {
+                alert('Ошибка получение данных с сервера!');
+            }
         });
-        document.querySelector('[href="#close"]').addEventListener('click',function(){
-            document.body.style.overflow = 'visible';
-            document.querySelector('#openModal').style.marginLeft = '0px';
-        });
-    });
+        document.location='#openModalEdit';
+    }
+
+    function createItems(data){
+
+    }
 </script>

@@ -161,5 +161,13 @@ public class System5Controller {
         return "redirect:/list/" + userId;
     }
 
-
+    @GetMapping("/getMonths")
+    @ResponseBody
+    public List<String> getMonthsForEditSelfRate(@AuthenticationPrincipal AuthUser authUser){
+         List<String> list = system5Repository.findAllByUserId(authUser.getUser().getUserId()).stream()
+                .filter(system5 -> system5.getRated() == 0)
+                .map(System5::getMonth)
+                .collect(Collectors.toList());
+         return list;
+    }
 }
