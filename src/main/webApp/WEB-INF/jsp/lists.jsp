@@ -152,11 +152,27 @@
         <br/>
     </c:if>
 
+    <%--    кнопка изменить--%>
+    <c:set var="let" value="0"/>
+    <c:forEach var="system5" items="${system5List}">
+        <c:if test="${system5.rated == 0}">
+            <c:set var="let" value="1"/>
+        </c:if>
+    </c:forEach>
+    <c:if test="${let != 0}">
+        <button type="button" class="buttonch">Изменить</button>
+    </c:if>
+    <%--    кнопка изменить--%>
+
+
     <label style="color: crimson; font: bold italic 110% serif">
-        <c:if test="${param.get('error') == 1}">Ошибка при заполнении полей самооценки. Попробуйте еще раз!</c:if>
+        <c:if test="${param.get('error') == 1}">Ошибка при заполнении полей самооценки.
+            Принимаются только латинские буквы A-E a-e.
+            Попробуйте еще раз!</c:if>
     </label>
     <label style="color: crimson; font: bold italic 110% serif">
-        <c:if test="${param.get('error') == 2}">Ошибка при заполнении полей оценки. Попробуйте еще раз!</c:if>
+        <c:if test="${param.get('error') == 2}">Ошибка при заполнении полей оценки.
+            Принимаются только латинские буквы A-E a-e. Попробуйте еще раз!</c:if>
     </label>
 </div>
 
