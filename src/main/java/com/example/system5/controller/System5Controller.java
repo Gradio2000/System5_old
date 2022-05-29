@@ -104,21 +104,39 @@ public class System5Controller {
             return "redirect:/list?error=1";
         }
 
+        System5Service.toUpperCase(system5);
+        int positoin_id = authUser.getUser().getPosition().getPosition_id();
+
+        System5 system51 = system5Repository.findByMonth(system5.getMonth());
+        if (system51 != null){
+            system51.setRes1(system5.getRes1());
+            system51.setRes2(system5.getRes2());
+            system51.setRes3(system5.getRes3());
+            system51.setRes4(system5.getRes4());
+            system51.setRes5(system5.getRes5());
+
+            TotalMark5 totalMark5 = system51.getTotalMark5();
+            totalMark5.setTotalMark(system5Service.getTotalMark(system51));
+            system51.setTotalMark5(totalMark5);
+
+            userRepository.updateCommanderPosition(comm_id, positoin_id);
+
+            system5Repository.save(system51);
+            return "redirect:/list";
+        }
+
          User user = authUser.getUser();
          system5.setUserId(user.getUserId());
-         system5.setRes1(system5.getRes1().toUpperCase());
-         system5.setRes2(system5.getRes2().toUpperCase());
-         system5.setRes3(system5.getRes3().toUpperCase());
-         system5.setRes4(system5.getRes4().toUpperCase());
-         system5.setRes5(system5.getRes5().toUpperCase());
 
-         int positoin_id = authUser.getUser().getPosition().getPosition_id();
+
          if (userRepository.existsCommanderPosition(positoin_id)){
              userRepository.updateCommanderPosition(comm_id, positoin_id);
          }
          else {
              userRepository.commEmpAdd(comm_id, positoin_id);
          }
+
+
 
          TotalMark5 totalMark5 = new TotalMark5();
          totalMark5.setTotalMark(system5Service.getTotalMark(system5));
@@ -159,6 +177,19 @@ public class System5Controller {
 
         system5Repository.save(system5);
         return "redirect:/list/" + userId;
+    }
+
+    @PostMapping("/editSelfRate")
+    public String editSelfRate(@AuthenticationPrincipal AuthUser authUser,
+                               @ModelAttribute @Valid System5 system5,
+                               BindingResult bindingResult,
+                               @RequestParam int comm_id){
+
+        if (bindingResult.hasErrors()){
+            return "redirect:/list?error=1";
+        }
+
+        return "redirect:/list";
     }
 
     @GetMapping("/getMonths")

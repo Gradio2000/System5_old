@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class System5Service {
-    public String getTotalMark(System5 system5){
+    public  String getTotalMark(System5 system5){
         String[] massStr = new String[5];
         massStr[0] = system5.getRes1();
         massStr[1] = system5.getRes2();
@@ -16,8 +16,6 @@ public class System5Service {
 
         return getTotalProcess(massStr);
     }
-
-
 
     public String getTotalMarkEmpl(System5empl system5empl){
         String[] massStr = new String[5];
@@ -79,5 +77,13 @@ public class System5Service {
                 break;
         }
         return result;
+    }
+
+    public static void toUpperCase(System5 system5){
+        system5.setRes1(system5.getRes1().toUpperCase());
+        system5.setRes2(system5.getRes2().toUpperCase());
+        system5.setRes3(system5.getRes3().toUpperCase());
+        system5.setRes4(system5.getRes4().toUpperCase());
+        system5.setRes5(system5.getRes5().toUpperCase());
     }
 }
