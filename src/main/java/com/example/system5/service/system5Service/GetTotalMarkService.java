@@ -1,11 +1,11 @@
-package com.example.system5.service;
+package com.example.system5.service.system5Service;
 
 import com.example.system5.model.System5;
 import com.example.system5.model.System5empl;
 import org.springframework.stereotype.Service;
 
 @Service
-public class System5Service {
+public class GetTotalMarkService {
     public  String getTotalMark(System5 system5){
         String[] massStr = new String[5];
         massStr[0] = system5.getRes1();
