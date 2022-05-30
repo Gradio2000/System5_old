@@ -104,29 +104,29 @@ public class System5Controller {
             return "redirect:/list?error=1";
         }
 
-         User user = authUser.getUser();
-         system5.setUserId(user.getUserId());
-         system5.setRes1(system5.getRes1().toUpperCase());
-         system5.setRes2(system5.getRes2().toUpperCase());
-         system5.setRes3(system5.getRes3().toUpperCase());
-         system5.setRes4(system5.getRes4().toUpperCase());
-         system5.setRes5(system5.getRes5().toUpperCase());
+        User user = authUser.getUser();
+        system5.setUserId(user.getUserId());
+        system5.setRes1(system5.getRes1().toUpperCase());
+        system5.setRes2(system5.getRes2().toUpperCase());
+        system5.setRes3(system5.getRes3().toUpperCase());
+        system5.setRes4(system5.getRes4().toUpperCase());
+        system5.setRes5(system5.getRes5().toUpperCase());
 
-         int positoin_id = authUser.getUser().getPosition().getPosition_id();
-         if (userRepository.existsCommanderPosition(positoin_id)){
-             userRepository.updateCommanderPosition(comm_id, positoin_id);
-         }
-         else {
-             userRepository.commEmpAdd(comm_id, positoin_id);
-         }
+        int positoin_id = authUser.getUser().getPosition().getPosition_id();
+        if (userRepository.existsCommanderPosition(positoin_id)){
+            userRepository.updateCommanderPosition(comm_id, positoin_id);
+        }
+        else {
+            userRepository.commEmpAdd(comm_id, positoin_id);
+        }
 
-         TotalMark5 totalMark5 = new TotalMark5();
-         totalMark5.setTotalMark(system5Service.getTotalMark(system5));
-         system5.setTotalMark5(totalMark5);
-         totalMark5.setSystem5(system5);
+        TotalMark5 totalMark5 = new TotalMark5();
+        totalMark5.setTotalMark(system5Service.getTotalMark(system5));
+        system5.setTotalMark5(totalMark5);
+        totalMark5.setSystem5(system5);
 
-         system5Repository.save(system5);
-         return "redirect:/list";
+        system5Repository.save(system5);
+        return "redirect:/list";
     }
 
     @PostMapping("/addsempl")
@@ -161,5 +161,13 @@ public class System5Controller {
         return "redirect:/list/" + userId;
     }
 
-
+    @GetMapping("/getMonths")
+    @ResponseBody
+    public List<String> getMonthsForEditSelfRate(@AuthenticationPrincipal AuthUser authUser){
+        List<String> list = system5Repository.findAllByUserId(authUser.getUser().getUserId()).stream()
+                .filter(system5 -> system5.getRated() == 0)
+                .map(System5::getMonth)
+                .collect(Collectors.toList());
+        return list;
+    }
 }
