@@ -190,14 +190,16 @@
     </c:if>
 
     <%--    кнопка изменить--%>
-    <c:set var="let" value="0"/>
-    <c:forEach var="system5" items="${system5List}">
-        <c:if test="${system5.rated == 0}">
-            <c:set var="let" value="1"/>
+    <c:if test="${employer == false}">
+        <c:set var="let" value="0"/>
+        <c:forEach var="system5" items="${system5List}">
+            <c:if test="${system5.rated == 0}">
+                <c:set var="let" value="1"/>
+            </c:if>
+        </c:forEach>
+        <c:if test="${let != 0}">
+            <button type="button" class="buttonch" onclick="editSelfRated()">Изменить</button>
         </c:if>
-    </c:forEach>
-    <c:if test="${let != 0}">
-        <button type="button" class="buttonch" onclick="editSelfRated()">Изменить</button>
     </c:if>
     <%--    кнопка изменить--%>
 

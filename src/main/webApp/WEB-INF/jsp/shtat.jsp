@@ -24,60 +24,60 @@
 <jsp:include page="../includes/header.jsp"/>
 <jsp:include page="../includes/menu.jsp"/>
 <div class="main">
-<table  id="color_table">
-    <tbody>
-    <tr>
-        <th class="tblsht">Структурное подразделение</th>
-    </tr>
-    <c:forEach var="division" items="${divisionList}">
-    <tr>
-        <td class="tblsht">
-            <a id=${division.divisionId}>${division.division}</a>
-        </td>
-    </tr
-    </c:forEach>
+    <table  id="color_table">
+        <tbody>
+        <tr>
+            <th class="tblsht">Структурное подразделение</th>
+        </tr>
+        <c:forEach var="division" items="${divisionList}">
+            <tr>
+                <td class="tblsht">
+                    <a id=${division.divisionId}>${division.division}</a>
+                </td>
+            </tr
+        </c:forEach>
 
         <label style="color: crimson; font: bold italic 110% serif">
             <c:if test="${param.get('errordivision') == true}">Введите название структурного подразделения!</c:if>
             <c:if test="${param.get('errorposition') == true}">Введите название должности!</c:if>
         </label>
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
-<button name="addDiv" id="mybtn" type="button" class="btn" onclick="insertInputText()">Добавить</button>
-<button name="addDiv" id="mybtnCh" type="button" class="buttonch btnch" onclick="changeDivision()">Изменить</button>
-<button name="addDiv" id="mybtnDel" type="button" class="btncancel btndel" onclick="deleteDivision()">Удалить</button>
-<div id="ins"></div>
+    <button name="addDiv" id="mybtn" type="button" class="btn" onclick="insertInputText()">Добавить</button>
+    <button name="addDiv" id="mybtnCh" type="button" class="buttonch btnch" onclick="changeDivision()">Изменить</button>
+    <button name="addDiv" id="mybtnDel" type="button" class="btncancel btndel" onclick="deleteDivision()">Удалить</button>
+    <div id="ins"></div>
 
-<br/>
-<br/>
-<table class="iksweb" id="color_table1">
-    <tbody >
-    <tr>
-        <th class="tblsht">Должности</th>
-        <th class="tblsht">Работники</th>
-        <th class="tblsht">Администратор</th>
-    </tr>
-    </tbody>
-</table>
-<div>
-    <div id="insbtn" style="width: 33.33%; float: left"></div>
-    <div id="deluserbtn" style="width: 33.33%; float: left"></div>
-</div>
-</br>
+    <br/>
+    <br/>
+    <table class="iksweb" id="color_table1">
+        <tbody >
+        <tr>
+            <th class="tblsht">Должности</th>
+            <th class="tblsht">Работники</th>
+            <th class="tblsht">Администратор</th>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <div id="insbtn" style="width: 33.33%; float: left"></div>
+        <div id="deluserbtn" style="width: 33.33%; float: left"></div>
+    </div>
+    </br>
 
-<div id="insdelbtn"></div>
-
-
+    <div id="insdelbtn"></div>
 
 
-<form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
-<form id="insertUser" name="insertUser" method="post" action="/admin/user/insert"></form>
-<form id="changeDivision" name=changeDivision" method="post" action="/admin/division/change"></form>
-<form id="changePosition" name=changePosition" method="post" action="/admin/position/change"></form>
-<form id="addPosition" name="addPosition" method="post" ></form>
 
-    <div style="position: absolute; margin-top: 40px">
+
+    <form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
+    <form id="insertUser" name="insertUser" method="post" action="/admin/user/insert"></form>
+    <form id="changeDivision" name=changeDivision" method="post" action="/admin/division/change"></form>
+    <form id="changePosition" name=changePosition" method="post" action="/admin/position/change"></form>
+    <form id="addPosition" name="addPosition" method="post" ></form>
+
+    <div style="position: absolute; margin-top: 100px">
         <button type="button" class="btn" onclick="document.location='/list'">На главную</button>
     </div>
 </div>
@@ -110,7 +110,7 @@
 
         $.ajax({
             url: "/admin/positions/" + id
-       }).then(function(data) {
+        }).then(function(data) {
             if (data.myer === true){
                 insertButton(id);
             } else {
@@ -167,58 +167,58 @@
 
         insertButton(id);
 
-        }
+    }
 
-        function showbutrol(id){
-            $.ajax({
-                type: 'POST',
-                url: '/admin/user/setrole',
-                data: {"id": id},
-                success: function (data) {
-                    let elll = document.getElementById("forrole");
-                    let a = document.createElement("a");
-                    a.innerText = data.res;
-                    elll.append(a);
-                },
-                error: function () {
-                    alert('Ошибка!');
-                    console.log(msg);
-                }
-            });
+    function showbutrol(id){
+        $.ajax({
+            type: 'POST',
+            url: '/admin/user/setrole',
+            data: {"id": id},
+            success: function (data) {
+                let elll = document.getElementById("forrole");
+                let a = document.createElement("a");
+                a.innerText = data.res;
+                elll.append(a);
+            },
+            error: function () {
+                alert('Ошибка!');
+                console.log(msg);
+            }
+        });
 
 
-        }
+    }
 
     function selectPosition(){
-            $('.userRem').remove();
-            $('#butInsUser').remove();
-            $('#butDelUser').remove();
-            $('.rem').remove();
-            $('.remPos').remove();
-            $('#mybtn').hide();
-            $('#butdel').remove();
-            $('#butch').remove();
-            $('#mybtnCh').hide();
-            $('#mybtnDel').hide();
-            $('#mybtnPos').show();
+        $('.userRem').remove();
+        $('#butInsUser').remove();
+        $('#butDelUser').remove();
+        $('.rem').remove();
+        $('.remPos').remove();
+        $('#mybtn').hide();
+        $('#butdel').remove();
+        $('#butch').remove();
+        $('#mybtnCh').hide();
+        $('#mybtnDel').hide();
+        $('#mybtnPos').show();
 
-            let el = document.getElementById("color_table1").getElementsByClassName("clicked_Row").item(0).children.item(0);
-            let id = el.id;
+        let el = document.getElementById("color_table1").getElementsByClassName("clicked_Row").item(0).children.item(0);
+        let id = el.id;
 
-            insertDeleteAndChangeButton(id);
-        }
+        insertDeleteAndChangeButton(id);
+    }
 
     function insertButton(id) {
-            $('.mybtnPos').remove();
-            let el = document.getElementById("insbtn");
-            let but = document.createElement("button");
-            but.setAttribute("id", "mybtnPos");
-            but.setAttribute("type", "button");
-            but.setAttribute("onclick", "insertInputTextForPositions(" + id + ")");
-            but.setAttribute("class", "btn mybtnPos");
-            but.innerText = "Добавить";
-            el.append(but);
-        }
+        $('.mybtnPos').remove();
+        let el = document.getElementById("insbtn");
+        let but = document.createElement("button");
+        but.setAttribute("id", "mybtnPos");
+        but.setAttribute("type", "button");
+        but.setAttribute("onclick", "insertInputTextForPositions(" + id + ")");
+        but.setAttribute("class", "btn mybtnPos");
+        but.innerText = "Добавить";
+        el.append(but);
+    }
 
     function insertDeleteAndChangeButton(id){
         console.log(id);
@@ -232,45 +232,45 @@
         let el1 = document.getElementById("deluserbtn");
 
         let butdel = document.createElement("button");
-            butdel.setAttribute("id", "butdel");
-            butdel.setAttribute("type", "button");
-            butdel.setAttribute("onclick", "deletePosition(" + id + ")");
-            butdel.setAttribute("class", "btncancel btndel");
-            butdel.innerText = "Удалить";
+        butdel.setAttribute("id", "butdel");
+        butdel.setAttribute("type", "button");
+        butdel.setAttribute("onclick", "deletePosition(" + id + ")");
+        butdel.setAttribute("class", "btncancel btndel");
+        butdel.innerText = "Удалить";
 
         let butch = document.createElement("button");
-            butch.setAttribute("id", "butch");
-            butch.setAttribute("type", "button");
-            butch.setAttribute("onclick", "changePosition()");
-            butch.setAttribute("class", "buttonch btnch");
-            butch.innerText = "Изменить"
+        butch.setAttribute("id", "butch");
+        butch.setAttribute("type", "button");
+        butch.setAttribute("onclick", "changePosition()");
+        butch.setAttribute("class", "buttonch btnch");
+        butch.innerText = "Изменить"
 
-            if (userNameInTheTable !== "") {
-                let butDelUser = document.createElement("button");
-                butDelUser.setAttribute("id", "butDelUser");
-                butDelUser.setAttribute("type", "button");
-                butDelUser.setAttribute("onclick", "deleteUser()");
-                butDelUser.setAttribute("class", "btncancel btndel");
-                butDelUser.innerText = "Уволить";
-                el1.append(butDelUser);
-            }
-            if (userNameInTheTable === "") {
-                let butInsUser = document.createElement("button");
-                butInsUser.setAttribute("id", "butInsUser");
-                butInsUser.setAttribute("type", "button");
-                butInsUser.setAttribute("onclick", "insertUserInto()");
-                butInsUser.setAttribute("class", "btn");
-                butInsUser.innerText = "Принять";
-                el1.append(butInsUser);
-            }
+        if (userNameInTheTable !== "") {
+            let butDelUser = document.createElement("button");
+            butDelUser.setAttribute("id", "butDelUser");
+            butDelUser.setAttribute("type", "button");
+            butDelUser.setAttribute("onclick", "deleteUser()");
+            butDelUser.setAttribute("class", "btncancel btndel");
+            butDelUser.innerText = "Уволить";
+            el1.append(butDelUser);
+        }
+        if (userNameInTheTable === "") {
+            let butInsUser = document.createElement("button");
+            butInsUser.setAttribute("id", "butInsUser");
+            butInsUser.setAttribute("type", "button");
+            butInsUser.setAttribute("onclick", "insertUserInto()");
+            butInsUser.setAttribute("class", "btn");
+            butInsUser.innerText = "Принять";
+            el1.append(butInsUser);
+        }
 
         el.append(butch);
         el.append(butdel);
 
-            $('#butch').show();
-            $('#butdel').show();
-            $('#butDelUser').show();
-        }
+        $('#butch').show();
+        $('#butdel').show();
+        $('#butDelUser').show();
+    }
 
     function deleteDivision(){
         let el = document.getElementById("color_table").getElementsByClassName("clicked_Row").item(0).children.item(0).children.item(0);
@@ -286,8 +286,8 @@
 
     function deletePosition(id){
 
-            document.location.href = '/admin/position/delete/' + id;
-        }
+        document.location.href = '/admin/position/delete/' + id;
+    }
 
     function changePosition(){
         let el = document.getElementById("color_table1").getElementsByClassName("clicked_Row").item(0).children.item(0);
@@ -368,7 +368,7 @@
             .append('<input class="myinput rem" form="addDivision" name="division" placeholder="Введите подразделение"/>')
             .append('<button type="submit" id="sendButton" class="btn rem" form="addDivision">OK</button>')
             .append('<button type="button" class="btncancel rem" onclick=getShtat()>Отмена</button>');
-        }
+    }
 
     function insertInputTextForChangeDivision(id){
         $('#mybtn').hide();
@@ -439,7 +439,7 @@
             };
         }
 
-         if (click_Class) table.onclick = function(e) {
+        if (click_Class) table.onclick = function(e) {
             if (!e) e = window.event;
             var elem = e.target || e.srcElement;
             while (!elem.tagName || !elem.tagName.match(/td|th|table/i))

@@ -5,7 +5,9 @@ import com.example.system5.dto.UserDto;
 import com.example.system5.model.*;
 import com.example.system5.repository.System5Repository;
 import com.example.system5.repository.UserRepository;
-import com.example.system5.service.System5Service;
+import com.example.system5.service.commanderEmployeeService.SaveOrUpdateCommEmplService;
+import com.example.system5.service.system5Service.GetTotalMarkService;
+import com.example.system5.service.system5Service.SaveOrUpdateSystem5Service;
 import com.example.system5.util.AuthUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -14,7 +16,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -23,15 +28,17 @@ public class System5Controller {
 
     private final System5Repository system5Repository;
     private final UserRepository userRepository;
-    private final System5Service system5Service;
+    private final GetTotalMarkService getTotalMarkService;
+    private final SaveOrUpdateSystem5Service saveOrUpdateSystem5Service;
+    private final SaveOrUpdateCommEmplService saveOrUpdateCommEmplService;
 
 
-    public System5Controller(System5Repository system5Repository,
-                             UserRepository userRepository,
-                             System5Service system5Service) {
+    public System5Controller(System5Repository system5Repository, UserRepository userRepository, GetTotalMarkService getTotalMarkService, SaveOrUpdateSystem5Service saveOrUpdateSystem5Service, SaveOrUpdateCommEmplService saveOrUpdateCommEmplService) {
         this.system5Repository = system5Repository;
         this.userRepository = userRepository;
-        this.system5Service = system5Service;
+        this.getTotalMarkService = getTotalMarkService;
+        this.saveOrUpdateSystem5Service = saveOrUpdateSystem5Service;
+        this.saveOrUpdateCommEmplService = saveOrUpdateCommEmplService;
     }
 
     @GetMapping(value = "/list")
@@ -105,29 +112,22 @@ public class System5Controller {
         }
 
         User user = authUser.getUser();
-        system5.setUserId(user.getUserId());
-        system5.setRes1(system5.getRes1().toUpperCase());
-        system5.setRes2(system5.getRes2().toUpperCase());
-        system5.setRes3(system5.getRes3().toUpperCase());
-        system5.setRes4(system5.getRes4().toUpperCase());
-        system5.setRes5(system5.getRes5().toUpperCase());
 
-        int positoin_id = authUser.getUser().getPosition().getPosition_id();
-        if (userRepository.existsCommanderPosition(positoin_id)){
-            userRepository.updateCommanderPosition(comm_id, positoin_id);
+        GetTotalMarkService.toUpperCase(system5);
+
+        System5 systemForUpdate = system5Repository.findByMonth(system5.getMonth());
+        if (systemForUpdate != null){
+            saveOrUpdateSystem5Service.updateSystem5(systemForUpdate, system5);
         }
         else {
-            userRepository.commEmpAdd(comm_id, positoin_id);
+            system5.setUserId(user.getUserId());
+            saveOrUpdateSystem5Service.saveSystem5(system5);
         }
 
-        TotalMark5 totalMark5 = new TotalMark5();
-        totalMark5.setTotalMark(system5Service.getTotalMark(system5));
-        system5.setTotalMark5(totalMark5);
-        totalMark5.setSystem5(system5);
-
-        system5Repository.save(system5);
+        saveOrUpdateCommEmplService.saveOrUpdateCommEmpl(comm_id, user);
         return "redirect:/list";
     }
+
 
     @PostMapping("/addsempl")
     public String addempl(@AuthenticationPrincipal AuthUser authUser,
@@ -149,7 +149,7 @@ public class System5Controller {
 
         assert system5 != null;
         TotalMark5 totalMark5 = system5.getTotalMark5();
-        totalMark5.setTotalMarkEmpl(system5Service.getTotalMarkEmpl(system5empl));
+        totalMark5.setTotalMarkEmpl(getTotalMarkService.getTotalMarkEmpl(system5empl));
 
         system5.setTotalMark5(totalMark5);
         system5.setRated(1);
@@ -159,6 +159,19 @@ public class System5Controller {
 
         system5Repository.save(system5);
         return "redirect:/list/" + userId;
+    }
+
+    @PostMapping("/editSelfRate")
+    public String editSelfRate(@AuthenticationPrincipal AuthUser authUser,
+                               @ModelAttribute @Valid System5 system5,
+                               BindingResult bindingResult,
+                               @RequestParam int comm_id){
+
+        if (bindingResult.hasErrors()){
+            return "redirect:/list?error=1";
+        }
+
+        return "redirect:/list";
     }
 
     @GetMapping("/getMonths")
