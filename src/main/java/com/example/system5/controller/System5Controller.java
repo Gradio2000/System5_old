@@ -9,6 +9,7 @@ import com.example.system5.service.commanderEmployeeService.SaveOrUpdateCommEmpl
 import com.example.system5.service.system5Service.GetTotalMarkService;
 import com.example.system5.service.system5Service.SaveOrUpdateSystem5Service;
 import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 
 
 @Controller
+@Slf4j
 public class System5Controller {
 
     private final System5Repository system5Repository;
@@ -44,6 +46,7 @@ public class System5Controller {
     @GetMapping(value = "/list")
     public String getAll(@AuthenticationPrincipal AuthUser authUser, Model model){
         User user = authUser.getUser();
+        log.info(user.getName() + " enter into controller /list");
 
         List<System5> system5List = system5Repository.findAllByUserId(user.getUserId());
         model.addAttribute(system5List);
@@ -81,6 +84,8 @@ public class System5Controller {
                               BindingResult bindingResult1,
                               Model model,
                               @AuthenticationPrincipal AuthUser authUser){
+        User user = authUser.getUser();
+        log.info(user.getName() + " enter into controller /list/" + id);
 
         List<System5> system5List = system5Repository.findByUserIdOrderBySystem5Id(id);
 
@@ -96,7 +101,7 @@ public class System5Controller {
         model.addAttribute("employer", employer);
         model.addAttribute("months", monthMap);
         model.addAttribute("userId", id);
-        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("user", UserDto.getInstance(user));
         return "lists";
     }
 
@@ -107,11 +112,12 @@ public class System5Controller {
                       BindingResult bindingResult,
                       @RequestParam int comm_id){
 
+        User user = authUser.getUser();
+        log.info(user.getName() + " enter into controller /adds");
+
         if (bindingResult.hasErrors()){
             return "redirect:/list?error=1";
         }
-
-        User user = authUser.getUser();
 
         GetTotalMarkService.toUpperCase(system5);
 
@@ -133,6 +139,9 @@ public class System5Controller {
     public String addempl(@AuthenticationPrincipal AuthUser authUser,
                           @ModelAttribute @Valid System5empl system5empl,
                           BindingResult bindingResult){
+
+        User user = authUser.getUser();
+        log.info(user.getName() + " enter into controller /addsempl");
 
         int userId= system5empl.getUser_id();
         if (bindingResult.hasErrors()){
@@ -161,26 +170,16 @@ public class System5Controller {
         return "redirect:/list/" + userId;
     }
 
-    @PostMapping("/editSelfRate")
-    public String editSelfRate(@AuthenticationPrincipal AuthUser authUser,
-                               @ModelAttribute @Valid System5 system5,
-                               BindingResult bindingResult,
-                               @RequestParam int comm_id){
-
-        if (bindingResult.hasErrors()){
-            return "redirect:/list?error=1";
-        }
-
-        return "redirect:/list";
-    }
 
     @GetMapping("/getMonths")
     @ResponseBody
     public List<String> getMonthsForEditSelfRate(@AuthenticationPrincipal AuthUser authUser){
-        List<String> list = system5Repository.findAllByUserId(authUser.getUser().getUserId()).stream()
+        User user = authUser.getUser();
+        log.info(user.getName() + " enter into controller /getMonths");
+
+        return system5Repository.findAllByUserId(authUser.getUser().getUserId()).stream()
                 .filter(system5 -> system5.getRated() == 0)
                 .map(System5::getMonth)
                 .collect(Collectors.toList());
-        return list;
     }
 }

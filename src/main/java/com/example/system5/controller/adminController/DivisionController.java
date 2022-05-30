@@ -4,6 +4,7 @@ import com.example.system5.dto.UserDto;
 import com.example.system5.model.Division;
 import com.example.system5.repository.DivisionRepository;
 import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +14,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class DivisionController {
     private final DivisionRepository divisionRepository;
-
 
     public DivisionController(DivisionRepository divisionRepository) {
         this.divisionRepository = divisionRepository;

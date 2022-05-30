@@ -3,6 +3,7 @@ package com.example.system5.controller.adminController;
 import com.example.system5.model.Position;
 import com.example.system5.repository.DivisionRepository;
 import com.example.system5.repository.PositionRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class PositionController {
     private final DivisionRepository divisionRepository;
     private final PositionRepository positionRepository;

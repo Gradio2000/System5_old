@@ -5,6 +5,7 @@ import com.example.system5.model.Role;
 import com.example.system5.model.User;
 import com.example.system5.repository.PositionRepository;
 import com.example.system5.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin/user")
+@Slf4j
 public class UserAdminController {
     UserRepository userRepository;
     PositionRepository positionRepository;

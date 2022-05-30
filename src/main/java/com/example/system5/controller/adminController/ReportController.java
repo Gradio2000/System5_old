@@ -5,6 +5,7 @@ import com.example.system5.model.Month;
 import com.example.system5.model.System5;
 import com.example.system5.repository.System5Repository;
 import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class ReportController {
     System5Repository system5Repository;
 

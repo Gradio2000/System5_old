@@ -7,6 +7,7 @@ import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
 import com.example.system5.validation.FormFinishRegValidator;
 import com.example.system5.validation.MyFormValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +30,7 @@ import java.util.Set;
 
 
 @Controller
+@Slf4j
 public class RegistrationController {
 
     private final UserRepository userRepository;

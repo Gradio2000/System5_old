@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Component
 public class TotalMark5 {
     @Id
-    private int system5IdTotalMark;
+    private Integer system5IdTotalMark;
 
     @Column(name = "total_mark")
     private String totalMark;
