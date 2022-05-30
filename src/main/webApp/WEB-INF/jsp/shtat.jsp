@@ -77,7 +77,7 @@
 <form id="changePosition" name=changePosition" method="post" action="/admin/position/change"></form>
 <form id="addPosition" name="addPosition" method="post" ></form>
 
-    <div style="position: absolute; margin-top: 40px">
+    <div style="position: absolute; margin-top: 100px">
         <button type="button" class="btn" onclick="document.location='/list'">На главную</button>
     </div>
 </div>
