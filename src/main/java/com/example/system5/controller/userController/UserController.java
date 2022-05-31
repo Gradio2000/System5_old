@@ -6,14 +6,19 @@ import com.example.system5.model.Position;
 import com.example.system5.model.User;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
+import com.example.system5.validation.ChangePasswordFormValidator;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -21,10 +26,18 @@ public class UserController {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ChangePasswordFormValidator changePasswordFormValidator;
 
-    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder,
+                          ChangePasswordFormValidator changePasswordFormValidator) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.changePasswordFormValidator = changePasswordFormValidator;
+    }
+
+    @InitBinder("changePasswordForm")
+    public void initBinderFormFinishReg(WebDataBinder binder){
+        binder.addValidators(changePasswordFormValidator);
     }
 
     @GetMapping(value = "/my_employers")
@@ -60,11 +73,19 @@ public class UserController {
     @GetMapping("/changePassword")
     public String changePassword(@AuthenticationPrincipal AuthUser authUser, Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("changePasswordForm", new ChangePasswordForm());
         return "changePassword";
     }
 
     @PostMapping("changePassword")
-    public String changePasswordForm(@ModelAttribute ChangePasswordForm changePasswordForm, @AuthenticationPrincipal AuthUser authUser){
+    public String changePasswordForm(@ModelAttribute @Valid ChangePasswordForm changePasswordForm,
+                                     BindingResult bindingResult,
+                                     @AuthenticationPrincipal AuthUser authUser){
+
+        if (bindingResult.hasErrors()){
+            return "changePassword";
+        }
+
         User userForEdit = userRepository.getUserByUserId(authUser.getUser().getUserId());
         String password = passwordEncoder.encode(changePasswordForm.getPassword());
         userForEdit.setPassword(password);

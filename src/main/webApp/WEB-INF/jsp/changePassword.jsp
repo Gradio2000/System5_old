@@ -25,11 +25,13 @@
 <body>
 <div class="main">
     <div class="my-box">
-        <form:form action="changePassword" method="post">
-        <h5 style="width: 300px">Новый пароль</h5>
-        <input type="password" name="password">
-        <h5 style="width: 300px">Подтвердите пароль</h5>
-        <input type="password" name="confirmPassword">
+        <form:form action="changePassword" method="post" modelAttribute="changePasswordForm">
+            <h5 style="width: 300px">Новый пароль</h5>
+            <form:input path="password" type="password" title="password" placeholder="новый пароль" class="field password"/>
+            <form:errors path="password" cssClass="errorMsg"/>
+            <h5 style="width: 300px">Подтвердите пароль</h5>
+            <form:input path="confirmPassword" type="password" title="password" placeholder="подтвердите пароль" class="field confpass"/>
+            <form:errors path="confirmPassword" cssClass="errorMsg"/>
 
         <div>
             <button type="submit" class="btn" hidden="hidden">Сохранить</button>
