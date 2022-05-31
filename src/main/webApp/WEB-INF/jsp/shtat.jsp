@@ -471,13 +471,6 @@
                     table.setAttribute("last_Clicked_Row", row.sectionRowIndex);
                 }
             }
-
-            // if (table_Id === "color_table"){
-            //     getPositions();
-            // }
-            // else if (table_Id === "color_table1"){
-            //     selectPosition();
-            // }
         };
     }
 

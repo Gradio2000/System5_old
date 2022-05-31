@@ -3,7 +3,7 @@
   <div class="header">
     <a class="logo">ЛенИнформ</a>
     <div class="header-right">
-      <a>${user.name}</a>
+      <a href="/getUser">${user.name}</a>
     </div>
   </div>
 </header>

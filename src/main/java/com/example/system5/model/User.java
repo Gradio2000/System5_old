@@ -22,7 +22,7 @@ public class User{
     @Id
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private Integer userId;
 
     @Column(name = "name")
     @Size(max = 128, message = "size is too much")
@@ -58,6 +58,12 @@ public class User{
     }
 
     public User(String login, String password) {
+        this.login = login;
+        this.password = password;
+    }
+
+    public User(String name, String login, String password) {
+        this.name = name;
         this.login = login;
         this.password = password;
     }
