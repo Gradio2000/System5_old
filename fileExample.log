@@ -141,3 +141,27 @@
 2022-05-31 21:09:25.702  INFO 4313 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
 2022-05-31 21:09:30.499  INFO 4313 --- [http-nio-8080-exec-9] c.e.s.controller.System5Controller       : Петрова А.А.sssss enter into controller /list
 2022-05-31 21:09:37.766  INFO 4313 --- [http-nio-8080-exec-5] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:47:04.366  INFO 4814 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4814 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-05-31 21:47:04.371 DEBUG 4814 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-05-31 21:47:04.372  INFO 4814 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-05-31 21:47:09.205  INFO 4814 --- [main] com.example.system5.System5Application   : Started System5Application in 5.657 seconds (JVM running for 7.073)
+2022-05-31 21:47:19.732  INFO 4814 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:47:43.463  INFO 4814 --- [http-nio-8080-exec-1] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:47:52.448  INFO 4814 --- [http-nio-8080-exec-8] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:48:01.052  INFO 4814 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:48:07.311  INFO 4814 --- [http-nio-8080-exec-9] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:49:08.916  INFO 4814 --- [http-nio-8080-exec-7] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:50:31.991  INFO 4854 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4854 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-05-31 21:50:31.996 DEBUG 4854 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-05-31 21:50:31.998  INFO 4854 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-05-31 21:50:37.488  INFO 4854 --- [main] com.example.system5.System5Application   : Started System5Application in 6.556 seconds (JVM running for 8.628)
+2022-05-31 21:50:42.480  INFO 4854 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:50:54.227  INFO 4854 --- [http-nio-8080-exec-10] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:57:27.055  INFO 4928 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4928 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-05-31 21:57:27.060 DEBUG 4928 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-05-31 21:57:27.061  INFO 4928 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-05-31 21:57:32.521  INFO 4928 --- [main] com.example.system5.System5Application   : Started System5Application in 6.064 seconds (JVM running for 7.302)
+2022-05-31 21:58:05.480  INFO 4928 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:58:10.906  INFO 4928 --- [http-nio-8080-exec-1] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:58:21.039  INFO 4928 --- [http-nio-8080-exec-8] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
+2022-05-31 21:58:30.446  INFO 4928 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : Петрова А.А. enter into controller /list
