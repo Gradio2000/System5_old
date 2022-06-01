@@ -1,0 +1,9 @@
+2022-06-01 20:25:44.471  INFO 13092 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 13092 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-01 20:25:44.481 DEBUG 13092 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-01 20:25:44.485  INFO 13092 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-01 20:25:49.040  INFO 13092 --- [main] com.example.system5.System5Application   : Started System5Application in 5.458 seconds (JVM running for 6.743)
+2022-06-01 20:26:24.547  INFO 13120 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 13120 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-01 20:26:24.550 DEBUG 13120 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-01 20:26:24.551  INFO 13120 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-01 20:26:29.082  INFO 13120 --- [main] com.example.system5.System5Application   : Started System5Application in 5.202 seconds (JVM running for 6.275)
+2022-06-01 20:26:37.717  INFO 13120 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : Иванов С.С. enter into controller /list

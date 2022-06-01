@@ -1,4 +1,6 @@
 HELP.md
+.log
+.gitignore
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
@@ -32,4 +34,3 @@ build/
 ### VS Code ###
 .vscode/
 
-fileExample.log
