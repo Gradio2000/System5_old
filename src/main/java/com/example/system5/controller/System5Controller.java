@@ -121,7 +121,7 @@ public class System5Controller {
 
         GetTotalMarkService.toUpperCase(system5);
 
-        System5 systemForUpdate = system5Repository.findByMonth(system5.getMonth());
+        System5 systemForUpdate = system5Repository.findByMonthAndUserId(system5.getMonth(), user.getUserId());
         if (systemForUpdate != null){
             saveOrUpdateSystem5Service.updateSystem5(systemForUpdate, system5);
         }

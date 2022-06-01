@@ -12,5 +12,5 @@ public interface System5Repository extends JpaRepository<System5, Integer> {
     List<System5> findAllByUserId(Integer user_id);
     List<System5> findByUserIdOrderBySystem5Id(int id);
     List<System5> findAllByMonth(String month);
-    System5 findByMonth(String month);
+    System5 findByMonthAndUserId(String month, Integer id);
 }
