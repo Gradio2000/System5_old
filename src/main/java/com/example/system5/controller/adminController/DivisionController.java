@@ -43,8 +43,17 @@ public class DivisionController {
 
     @GetMapping(value = "/division/{id}")
     public String deleteDivision(@PathVariable int id){
-        divisionRepository.deleteById(id);
-        return "redirect:/admin/shtat";
+
+
+        Division division = divisionRepository.findById(id).orElse(null);
+        assert division != null;
+        if (division.getPositions().size() > 0){
+            return "redirect:/admin/shtat?errorDivisionDelete=true";
+        }
+        else {
+            divisionRepository.deleteById(id);
+            return "redirect:/admin/shtat";
+        }
     }
 
     @PostMapping("/division/change")
@@ -58,5 +67,16 @@ public class DivisionController {
         division.setDivision(divisionName);
         divisionRepository.save(division);
         return "redirect:/admin/shtat";
+    }
+
+    @GetMapping("/get_division/{id}")
+    @ResponseBody
+    public String getDivisionByID(@PathVariable Integer id){
+       Division division = divisionRepository.findById(id).orElse(null);
+        assert division != null;
+        if (division.getPositions().size() > 0){
+           return "Сначала удалите все должности подразделения";
+       }
+        else return "Успех";
     }
 }

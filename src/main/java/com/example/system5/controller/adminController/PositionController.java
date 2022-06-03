@@ -59,8 +59,15 @@ public class PositionController {
 
     @GetMapping(value = "/position/delete/{id}")
     public String deletePosition(@PathVariable int id){
-        positionRepository.deleteById(id);
-        return "redirect:/admin/shtat";
+        Position position = positionRepository.findById(id).orElse(null);
+        assert position != null;
+        if (position.getUser() != null){
+            return "redirect:/admin/shtat?errorDeletePosition=true";
+        }
+        else {
+            positionRepository.deleteById(id);
+            return "redirect:/admin/shtat";
+        }
     }
 
     @PostMapping("/position/change")

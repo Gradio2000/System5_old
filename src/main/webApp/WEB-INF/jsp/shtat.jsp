@@ -36,11 +36,15 @@
                 </td>
             </tr
         </c:forEach>
+<div>
+    <a style="color: crimson; font: bold italic 110% serif">
+        <c:if test="${param.get('errordivision') == true}">Введите название структурного подразделения!</c:if>
+        <c:if test="${param.get('errorposition') == true}">Введите название должности!</c:if>
+        <c:if test="${param.get('errorDivisionDelete') == true}">Сначала удалите все должности!</c:if>
+        <c:if test="${param.get('errorDeletePosition') == true}">Сначала увольте работника!</c:if>
+    </a>
+</div>
 
-        <label style="color: crimson; font: bold italic 110% serif">
-            <c:if test="${param.get('errordivision') == true}">Введите название структурного подразделения!</c:if>
-            <c:if test="${param.get('errorposition') == true}">Введите название должности!</c:if>
-        </label>
         </tbody>
     </table>
 
@@ -113,6 +117,8 @@
         }).then(function(data) {
             if (data.myer === true){
                 insertButton(id);
+                $('#mybtnDel').show();
+                $('#mybtnCh').show();
             } else {
                 const data1 = data._embedded.positions;
                 let userName;
@@ -221,7 +227,6 @@
     }
 
     function insertDeleteAndChangeButton(id){
-        console.log(id);
         let userNameInTheTable = document
             .getElementById("color_table1")
             .getElementsByClassName("clicked_Row")

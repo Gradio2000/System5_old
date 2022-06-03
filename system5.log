@@ -1,9 +1,204 @@
-2022-06-01 20:25:44.471  INFO 13092 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 13092 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
-2022-06-01 20:25:44.481 DEBUG 13092 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
-2022-06-01 20:25:44.485  INFO 13092 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
-2022-06-01 20:25:49.040  INFO 13092 --- [main] com.example.system5.System5Application   : Started System5Application in 5.458 seconds (JVM running for 6.743)
-2022-06-01 20:26:24.547  INFO 13120 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 13120 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
-2022-06-01 20:26:24.550 DEBUG 13120 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
-2022-06-01 20:26:24.551  INFO 13120 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
-2022-06-01 20:26:29.082  INFO 13120 --- [main] com.example.system5.System5Application   : Started System5Application in 5.202 seconds (JVM running for 6.275)
-2022-06-01 20:26:37.717  INFO 13120 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : Иванов С.С. enter into controller /list
+2022-06-03 16:40:08.146  INFO 16769 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 16769 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 16:40:08.227 DEBUG 16769 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 16:40:08.228  INFO 16769 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 16:40:17.209  INFO 16769 --- [main] com.example.system5.System5Application   : Started System5Application in 10.244 seconds (JVM running for 15.152)
+2022-06-03 16:43:46.756  INFO 16769 --- [http-nio-8080-exec-8] c.e.s.controller.System5Controller       : Тестировщик В.Г. enter into controller /list
+2022-06-03 16:44:00.175  INFO 16769 --- [http-nio-8080-exec-1] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 17:05:01.006  INFO 17052 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17052 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 17:05:01.012 DEBUG 17052 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 17:05:01.014  INFO 17052 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 17:05:09.339  INFO 17052 --- [main] com.example.system5.System5Application   : Started System5Application in 9.842 seconds (JVM running for 11.805)
+2022-06-03 17:06:24.345  INFO 17052 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 17:34:34.993  WARN 17052 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m59s815ms).
+2022-06-03 17:38:31.309  INFO 17182 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17182 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 17:38:31.314 DEBUG 17182 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 17:38:31.315  INFO 17182 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 17:38:37.457  INFO 17182 --- [main] com.example.system5.System5Application   : Started System5Application in 7.681 seconds (JVM running for 9.718)
+2022-06-03 17:38:56.563  INFO 17182 --- [http-nio-8080-exec-6] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 17:40:50.905  INFO 17225 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17225 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 17:40:50.919 DEBUG 17225 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 17:40:50.921  INFO 17225 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 17:40:56.418  INFO 17225 --- [main] com.example.system5.System5Application   : Started System5Application in 6.896 seconds (JVM running for 8.778)
+2022-06-03 17:41:02.222  INFO 17225 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 17:41:55.712  INFO 17266 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17266 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 17:41:55.716 DEBUG 17266 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 17:41:55.717  INFO 17266 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 17:42:01.544  INFO 17266 --- [main] com.example.system5.System5Application   : Started System5Application in 7.298 seconds (JVM running for 9.374)
+2022-06-03 17:42:12.247  INFO 17266 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 17:42:51.026  INFO 17292 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17292 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 17:42:51.037 DEBUG 17292 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 17:42:51.039  INFO 17292 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 17:42:57.092  INFO 17292 --- [main] com.example.system5.System5Application   : Started System5Application in 6.937 seconds (JVM running for 9.278)
+2022-06-03 17:43:03.579  INFO 17292 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 17:45:12.672  INFO 17328 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17328 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 17:45:12.680 DEBUG 17328 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 17:45:12.681  INFO 17328 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 17:45:15.946  INFO 17330 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17330 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 17:45:15.949 DEBUG 17330 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 17:45:15.951  INFO 17330 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 17:45:24.078  INFO 17330 --- [main] com.example.system5.System5Application   : Started System5Application in 9.498 seconds (JVM running for 12.133)
+2022-06-03 17:45:24.921  WARN 17328 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-06-03 17:45:24.990 ERROR 17328 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-06-03 17:45:28.065  WARN 17330 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [137] milliseconds.
+2022-06-03 17:45:33.132  INFO 17330 --- [http-nio-8080-exec-3] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 17:57:16.901  WARN 17330 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m27s351ms).
+2022-06-03 17:58:13.024  INFO 17424 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17424 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 17:58:13.028 DEBUG 17424 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 17:58:13.029  INFO 17424 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 17:58:18.169  INFO 17424 --- [main] com.example.system5.System5Application   : Started System5Application in 6.741 seconds (JVM running for 8.217)
+2022-06-03 17:58:26.021  INFO 17424 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:02:03.315  INFO 17490 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17490 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:02:03.322 DEBUG 17490 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:02:03.323  INFO 17490 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:02:08.911  INFO 17490 --- [main] com.example.system5.System5Application   : Started System5Application in 7.142 seconds (JVM running for 8.656)
+2022-06-03 18:02:16.478  INFO 17490 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:04:23.002  INFO 17539 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17539 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:04:23.008 DEBUG 17539 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:04:23.010  INFO 17539 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:04:28.342  INFO 17539 --- [main] com.example.system5.System5Application   : Started System5Application in 6.785 seconds (JVM running for 8.934)
+2022-06-03 18:04:37.431  INFO 17539 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:05:19.335  INFO 17564 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17564 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:05:19.341 DEBUG 17564 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:05:19.342  INFO 17564 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:05:26.572  INFO 17564 --- [main] com.example.system5.System5Application   : Started System5Application in 8.975 seconds (JVM running for 10.89)
+2022-06-03 18:05:48.669  INFO 17564 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:07:00.542  INFO 17596 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17596 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:07:00.550 DEBUG 17596 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:07:00.554  INFO 17596 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:07:06.284  INFO 17596 --- [main] com.example.system5.System5Application   : Started System5Application in 7.465 seconds (JVM running for 10.111)
+2022-06-03 18:07:11.643  INFO 17596 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:07:53.921  INFO 17631 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17631 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:07:53.925 DEBUG 17631 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:07:53.927  INFO 17631 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:07:59.506  INFO 17631 --- [main] com.example.system5.System5Application   : Started System5Application in 6.963 seconds (JVM running for 9.329)
+2022-06-03 18:08:04.368  INFO 17631 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:15:18.472  INFO 17717 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17717 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:15:18.478 DEBUG 17717 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:15:18.480  INFO 17717 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:15:24.588  INFO 17717 --- [main] com.example.system5.System5Application   : Started System5Application in 7.383 seconds (JVM running for 9.376)
+2022-06-03 18:15:30.357  INFO 17717 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:16:19.938  INFO 17749 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17749 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:16:19.945 DEBUG 17749 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:16:19.947  INFO 17749 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:16:25.579  INFO 17749 --- [main] com.example.system5.System5Application   : Started System5Application in 6.62 seconds (JVM running for 8.281)
+2022-06-03 18:16:43.068  INFO 17749 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:17:20.584  INFO 17775 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17775 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:17:20.589 DEBUG 17775 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:17:20.590  INFO 17775 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:17:25.947  INFO 17775 --- [main] com.example.system5.System5Application   : Started System5Application in 6.337 seconds (JVM running for 7.82)
+2022-06-03 18:17:36.156  INFO 17775 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:20:27.648  INFO 17865 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17865 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:20:27.653 DEBUG 17865 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:20:27.654  INFO 17865 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:20:33.234  INFO 17865 --- [main] com.example.system5.System5Application   : Started System5Application in 6.511 seconds (JVM running for 7.967)
+2022-06-03 18:21:06.230  INFO 17887 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17887 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:21:06.243 DEBUG 17887 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:21:06.245  INFO 17887 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:21:12.810  INFO 17887 --- [main] com.example.system5.System5Application   : Started System5Application in 7.513 seconds (JVM running for 9.669)
+2022-06-03 18:21:45.267  INFO 17906 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17906 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:21:45.283 DEBUG 17906 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:21:45.285  INFO 17906 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:21:51.063  INFO 17906 --- [main] com.example.system5.System5Application   : Started System5Application in 6.735 seconds (JVM running for 8.333)
+2022-06-03 18:22:15.791  INFO 17906 --- [http-nio-8080-exec-6] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:25:23.097  INFO 17952 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 17952 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:25:23.101 DEBUG 17952 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:25:23.103  INFO 17952 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:25:28.617  INFO 17952 --- [main] com.example.system5.System5Application   : Started System5Application in 6.543 seconds (JVM running for 8.117)
+2022-06-03 18:25:34.699  INFO 17952 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:34:40.852  INFO 18064 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18064 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:34:40.868 DEBUG 18064 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:34:40.871  INFO 18064 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:34:46.996  INFO 18064 --- [main] com.example.system5.System5Application   : Started System5Application in 7.129 seconds (JVM running for 8.626)
+2022-06-03 18:34:53.852  INFO 18064 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:36:21.323  INFO 18096 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18096 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:36:21.328 DEBUG 18096 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:36:21.330  INFO 18096 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:36:26.595  INFO 18096 --- [main] com.example.system5.System5Application   : Started System5Application in 6.658 seconds (JVM running for 9.633)
+2022-06-03 18:36:33.939  INFO 18096 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:39:26.609  INFO 18148 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18148 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:39:26.614 DEBUG 18148 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:39:26.615  INFO 18148 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:39:31.679  INFO 18148 --- [main] com.example.system5.System5Application   : Started System5Application in 5.95 seconds (JVM running for 7.842)
+2022-06-03 18:39:38.425  INFO 18148 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:41:30.521  INFO 18182 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18182 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:41:30.532 DEBUG 18182 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:41:30.535  INFO 18182 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:41:35.782  INFO 18182 --- [main] com.example.system5.System5Application   : Started System5Application in 6.158 seconds (JVM running for 7.971)
+2022-06-03 18:41:46.546  INFO 18196 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18196 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:41:46.551 DEBUG 18196 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:41:46.553  INFO 18196 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:41:56.103  INFO 18196 --- [main] com.example.system5.System5Application   : Started System5Application in 11.188 seconds (JVM running for 14.512)
+2022-06-03 18:42:02.314  INFO 18196 --- [http-nio-8080-exec-3] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:48:10.788  INFO 18286 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18286 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:48:10.795 DEBUG 18286 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:48:10.799  INFO 18286 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:48:18.578  INFO 18286 --- [main] com.example.system5.System5Application   : Started System5Application in 9.016 seconds (JVM running for 10.828)
+2022-06-03 18:48:52.479  INFO 18307 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18307 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:48:52.489 DEBUG 18307 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:48:52.491  INFO 18307 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:48:57.411  INFO 18307 --- [main] com.example.system5.System5Application   : Started System5Application in 6.099 seconds (JVM running for 9.198)
+2022-06-03 18:49:19.288  INFO 18307 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 18:50:26.970  INFO 18346 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18346 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:50:26.976 DEBUG 18346 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:50:26.978  INFO 18346 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:50:31.676  WARN 18346 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-06-03 18:50:31.717 ERROR 18346 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-06-03 18:51:02.437  INFO 18367 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18367 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:51:02.445 DEBUG 18367 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:51:02.446  INFO 18367 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:51:07.647  WARN 18367 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-06-03 18:51:07.700 ERROR 18367 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-06-03 18:51:35.586  INFO 18385 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18385 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:51:35.588 DEBUG 18385 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:51:35.590  INFO 18385 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:51:39.991  INFO 18385 --- [main] com.example.system5.System5Application   : Started System5Application in 4.924 seconds (JVM running for 5.972)
+2022-06-03 18:52:13.078  INFO 18428 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18428 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 18:52:13.082 DEBUG 18428 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 18:52:13.085  INFO 18428 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 18:52:20.239  INFO 18428 --- [main] com.example.system5.System5Application   : Started System5Application in 8.383 seconds (JVM running for 10.281)
+2022-06-03 18:52:29.058  INFO 18428 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list
+2022-06-03 19:07:52.337  WARN 18428 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m5s648ms).
+2022-06-03 19:19:59.478  INFO 18681 --- [main] com.example.system5.System5Application   : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18681 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-06-03 19:19:59.487 DEBUG 18681 --- [main] com.example.system5.System5Application   : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-06-03 19:19:59.489  INFO 18681 --- [main] com.example.system5.System5Application   : No active profile set, falling back to 1 default profile: "default"
+2022-06-03 19:20:04.992  INFO 18681 --- [main] com.example.system5.System5Application   : Started System5Application in 6.463 seconds (JVM running for 7.711)
+2022-06-03 19:20:10.430  INFO 18681 --- [http-nio-8080-exec-4] c.e.s.controller.System5Controller       : admin enter into controller /list

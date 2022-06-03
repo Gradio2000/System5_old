@@ -56,7 +56,8 @@ public class UserAdminController {
     @ResponseBody
     public Map<String, String> setAdminRole(@RequestParam Integer id){
         Map<String, String> result = new HashMap<>();
-        Position position = positionRepository.getByPosition_id(id);
+        Position position = positionRepository.findById(id).orElse(null);
+        assert position != null;
         User user = position.user;
         Set<Role> roleSet = user.getRoles();
         if (roleSet.contains(Role.ADMIN)){
