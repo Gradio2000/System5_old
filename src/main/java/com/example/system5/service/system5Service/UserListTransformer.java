@@ -14,6 +14,11 @@ import java.util.stream.Collectors;
 
 @Service
 public class UserListTransformer {
+    private final GetTotalMarkService getTotalMarkService;
+
+    public UserListTransformer(GetTotalMarkService getTotalMarkService) {
+        this.getTotalMarkService = getTotalMarkService;
+    }
 
     public boolean get(String newMonth){
         return Arrays.stream(Month.values())
@@ -50,7 +55,10 @@ public class UserListTransformer {
                         break;
                 }
             }
-            userDtoListMap.put(userDto, strings);
+            String[] newStrings = new String[7];
+            System.arraycopy(strings, 0, newStrings, 0, strings.length);
+            newStrings[6] = getTotalMarkService.getTotalHalfYearProcess(strings);
+            userDtoListMap.put(userDto, newStrings);
         }
         return userDtoListMap;
     }

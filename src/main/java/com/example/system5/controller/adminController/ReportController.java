@@ -78,6 +78,8 @@ public class ReportController {
 
         Map<UserDto, String[]> userDtoMap = userListTransformer.getUserDtoListMap(userList);
         model.addAttribute("modelMap", userDtoMap);
+
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         return "halfReport";
     }
 }
