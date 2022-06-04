@@ -43,7 +43,7 @@ public class UserController {
     @GetMapping(value = "/my_employers")
     public String getEmployersList(@AuthenticationPrincipal AuthUser authUser, Model model){
         User user = authUser.getUser();
-        List<Position> positionList = null;
+        List<Position> positionList;
         try {
             positionList = user.getPosition().getEmployersList();
         } catch (Exception e) {

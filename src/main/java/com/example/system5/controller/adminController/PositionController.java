@@ -1,7 +1,6 @@
 package com.example.system5.controller.adminController;
 
 import com.example.system5.model.Position;
-import com.example.system5.repository.DivisionRepository;
 import com.example.system5.repository.PositionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.hateoas.CollectionModel;
@@ -17,11 +16,9 @@ import java.util.Map;
 @RequestMapping("/admin")
 @Slf4j
 public class PositionController {
-    private final DivisionRepository divisionRepository;
     private final PositionRepository positionRepository;
 
-    public PositionController(DivisionRepository divisionRepository, PositionRepository positionRepository) {
-        this.divisionRepository = divisionRepository;
+    public PositionController(PositionRepository positionRepository) {
         this.positionRepository = positionRepository;
     }
 

@@ -6,6 +6,7 @@
     <a href="/my_employers">Оценка работников</a>
     <a href="/admin/shtat">Штатное расписание</a>
     <a href="/admin/prepareReport">Отчет за месяц</a>
+    <a href="/admin/prepareHalfYearReport">Отчет за полугодие</a>
     <a href="/logout">Выйти</a>
 </div>
 

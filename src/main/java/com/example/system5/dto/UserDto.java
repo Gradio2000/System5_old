@@ -1,5 +1,6 @@
 package com.example.system5.dto;
 
+import com.example.system5.model.Position;
 import com.example.system5.model.Role;
 import com.example.system5.model.User;
 import lombok.Data;
@@ -14,14 +15,16 @@ public class UserDto implements Serializable {
     private final String name;
     private  Set<Role> roles;
     private String login;
+    private Position position;
 
-    public UserDto(String name, Set<Role> roles, String login) {
+    public UserDto(String name, Set<Role> roles, String login, Position position) {
         this.name = name;
         this.roles = roles;
         this.login = login;
+        this.position = position;
     }
 
     public static UserDto getInstance(User user){
-        return new UserDto(user.getName(), user.getRoles(), user.getLogin());
+        return new UserDto(user.getName(), user.getRoles(), user.getLogin(), user.getPosition());
     }
 }
