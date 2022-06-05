@@ -104,10 +104,15 @@ public class GetTotalMarkService {
         }
 
         float avr = 0;
+        int count = 0;
         for (int m : massInt){
             avr += m;
+            if (m != 0){
+                count++;
+            }
         }
-        avr = Math.round(avr / massInt.length);
+
+        avr = Math.round(avr / count);
 
         String result = null;
         switch ((int) avr){
