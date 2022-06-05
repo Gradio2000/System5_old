@@ -92,4 +92,18 @@ public class ReportController {
         model.addAttribute("half", half);
         return "reportHalfYear";
     }
+
+    @GetMapping("/prepareYearReport")
+    public String prepareYearReport(@AuthenticationPrincipal AuthUser authUser,
+                                    Model model){
+        List<User> userList = userRepository.findAll().stream()
+                .filter(user -> user.getSystem5List().size() != 0)
+                .collect(Collectors.toList());
+
+        Map<UserDto, String[]> userDtoMap = new HashMap<>();
+        userDtoMap = userListTransformer.getUserDtoListMapForYear(userList);
+        model.addAttribute("modelMap", userDtoMap);
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        return "reportYear";
+    }
 }

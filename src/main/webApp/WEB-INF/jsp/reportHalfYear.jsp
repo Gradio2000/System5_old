@@ -61,6 +61,22 @@
             </tbody>
         </table>
     </div>
+    <div>
+        <button type="button" class="btn" onclick="document.location='/admin/prepareHalfYearReport'">Назад</button>
+        <input type="button" onclick="printDiv('printableArea')" value="Печать" class="btn"/>
+    </div>
 </div>
 </body>
 </html>
+<script>
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>

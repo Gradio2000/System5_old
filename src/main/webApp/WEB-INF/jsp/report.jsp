@@ -21,41 +21,41 @@
 
     <div class="main" >
         <div id="printableArea" style="text-align: center">
-        <p>Форма оценки работников полевого учреждения Банка России № 42667 за ${month}</p>
+            <p>Форма оценки работников полевого учреждения Банка России № 42667 за ${month}</p>
             <div>
-            <table class="table">
-        <tbody>
-        <tr>
-            <th rowspan="2">ФИО</th>
-            <th rowspan="2">Должность</th>
-            <th colspan="5">Оценки по критериям</th>
-            <th rowspan="2">Итоговая оценка</th>
-        </tr>
-        <tr>
-            <th>Личная результативность</th>
-            <th>Инициативность</th>
-            <th>Совершенствование профессиональных знаний</th>
-            <th>Клиенто ориентированность</th>
-            <th>Работа в команде</th>
-        </tr>
-        <c:forEach var="system5" items="${system5List}">
-            <tr>
-                <td>${system5.user.name}</td>
-                <td>${system5.user.position.position}</td>
-                <td>${system5.system5empl.resempl1}</td>
-                <td>${system5.system5empl.resempl2}</td>
-                <td>${system5.system5empl.resempl3}</td>
-                <td>${system5.system5empl.resempl4}</td>
-                <td>${system5.system5empl.resempl5}</td>
-                <td>${system5.totalMark5.totalMarkEmpl}</td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-            <br/>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th rowspan="2">ФИО</th>
+                            <th rowspan="2">Должность</th>
+                            <th colspan="5">Оценки по критериям</th>
+                            <th rowspan="2">Итоговая оценка</th>
+                        </tr>
+                        <tr>
+                            <th>Личная результативность</th>
+                            <th>Инициативность</th>
+                            <th>Совершенствование профессиональных знаний</th>
+                            <th>Клиенто ориентированность</th>
+                            <th>Работа в команде</th>
+                        </tr>
+                        <c:forEach var="system5" items="${system5List}">
+                            <tr>
+                                <td>${system5.user.name}</td>
+                                <td>${system5.user.position.position}</td>
+                                <td>${system5.system5empl.resempl1}</td>
+                                <td>${system5.system5empl.resempl2}</td>
+                                <td>${system5.system5empl.resempl3}</td>
+                                <td>${system5.system5empl.resempl4}</td>
+                                <td>${system5.system5empl.resempl5}</td>
+                                <td>${system5.totalMark5.totalMarkEmpl}</td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                <br/>
             </div>
         </div>
-            <div>
+        <div>
             <button type="button" class="btn" onclick="document.location='/admin/prepareReport'">Назад</button>
             <input type="button" onclick="printDiv('printableArea')" value="Печать" class="btn"/>
         </div>

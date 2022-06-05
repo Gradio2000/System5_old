@@ -7,6 +7,7 @@
     <a href="/admin/shtat">Штатное расписание</a>
     <a href="/admin/prepareReport">Отчет за месяц</a>
     <a href="/admin/prepareHalfYearReport">Отчет за полугодие</a>
+    <a href="/admin/prepareYearReport">Отчет за год</a>
     <a href="/logout">Выйти</a>
 </div>
 
