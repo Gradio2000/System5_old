@@ -71,15 +71,25 @@ public class ReportController {
                 .filter(user -> user.getSystem5List().size() != 0)
                 .collect(Collectors.toList());
 
-        for (User user : userList) {
-            List<System5> system5List = user.getSystem5List();
-            system5List.removeIf(system5 -> !userListTransformer.get(system5.getMonth()));
+        Map<UserDto, String[]> userDtoMap = new HashMap<>();
+        if(half == 1) {
+            for (User user : userList) {
+                List<System5> system5List = user.getSystem5List();
+                system5List.removeIf(system5 -> !userListTransformer.getFirstHalf(system5.getMonth()));
+            }
+             userDtoMap = userListTransformer.getUserDtoListMapForFirstHalf(userList);
+        }
+        else if (half == 2){
+            for (User user : userList) {
+                List<System5> system5List = user.getSystem5List();
+                system5List.removeIf(system5 -> !userListTransformer.getSecondHalf(system5.getMonth()));
+            }
+            userDtoMap = userListTransformer.getUserDtoListMapForSecondHalf(userList);
         }
 
-        Map<UserDto, String[]> userDtoMap = userListTransformer.getUserDtoListMap(userList);
         model.addAttribute("modelMap", userDtoMap);
-
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        return "halfReport";
+        model.addAttribute("half", half);
+        return "reportHalfYear";
     }
 }

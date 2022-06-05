@@ -25,18 +25,28 @@
 <body>
 <div class="main">
     <div id="printableArea" style="text-align: center">
-        <p>Оценка работников полевого учреждения Банка России № 42667 за полугодие</p>
+        <p>Оценка работников полевого учреждения Банка России № 42667 за ${half} полугодие</p>
         <table class="table">
             <tbody>
                 <tr>
                     <th>Работник</th>
                     <th>Должность</th>
-                    <th>ЯНВАРЬ</th>
-                    <th>ФЕВРАЛЬ</th>
-                    <th>МАРТ</th>
-                    <th>АПРЕЛЬ</th>
-                    <th>МАЙ</th>
-                    <th>ИЮНЬ</th>
+                    <c:if test="${half == 1}">
+                        <th>ЯНВАРЬ</th>
+                        <th>ФЕВРАЛЬ</th>
+                        <th>МАРТ</th>
+                        <th>АПРЕЛЬ</th>
+                        <th>МАЙ</th>
+                        <th>ИЮНЬ</th>
+                    </c:if>
+                    <c:if test="${half == 2}">
+                        <th>ИЮЛЬ</th>
+                        <th>АВГУСТ</th>
+                        <th>СЕНТЯБРЬ</th>
+                        <th>ОКТЯБРЬ</th>
+                        <th>НОЯБРЬ</th>
+                        <th>ДЕКАБРЬ</th>
+                    </c:if>
                     <th>ИТОГО</th>
                 </tr>
                 <c:forEach var="userDtoList" items="${modelMap}" varStatus="count">
