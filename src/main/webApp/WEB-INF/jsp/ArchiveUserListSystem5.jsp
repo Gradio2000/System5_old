@@ -78,7 +78,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h3 class="modal-title">Самооценка</h3>
+                        <h3 class="modal-title">Изменение самооценки</h3>
                         <a href="#close" title="Close" class="close">×</a>
                     </div>
                     <div class="modal-body my-modal">
@@ -102,67 +102,32 @@
         </div>
 
 
-    <%--    модальное окно для оценки работника--%>
-    <c:if test="${employer == true}">
-        <div id="openModal" class="modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h3 class="modal-title">Оценка</h3>
-                        <a href="#close" title="Close" class="close">×</a>
-                    </div>
-                    <div class="modal-body my-modal">
-                        <form:form method="post" action="/addsempl" modelAttribute="system5empl">
-                            <form:input path="user_id" type="hidden" value="${userId}"/>
-                            <label>Выберите месяц</label>
-                            <br/>
-                            <form:select cssClass="select-css" path="system5Id">
-                                <c:forEach items="${months}" var="month">
-                                    <form:option value="${month.key}">${month.value}</form:option>
-                                </c:forEach>
-                            </form:select>
-                            <br/>
-                            <form:input path="resempl1" placeholder="Личная результативность"/>
-                            <form:input path="resempl2" placeholder="Инициативность"/>
-                            <form:input path="resempl3" placeholder="Совершенствование профессиональных знаний"/>
-                            <form:input path="resempl4" placeholder="Клиентоориентированность"/>
-                            <form:input path="resempl5" placeholder="Работа в команде"/>
-                            <br/>
-                            <button type="submit" class="btn">Отправить</button>
-                        </form:form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </c:if>
 
-    <%--    модальное окно для изменения самооценки--%>
+    <%--    модальное окно для изменения оценки--%>
     <div id="openModalEdit" class="modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h3 class="modal-title">Изменение самооценки</h3>
+                    <h3 class="modal-title">Изменение оценки</h3>
                     <a href="#close" title="Close" class="close">×</a>
                 </div>
                 <div class="modal-body my-modal">
-                    <form:form method="post" action="/adds" modelAttribute="system5">
+                    <form:form method="post" action="/admin/editSystem5EmplFromAdminModule" modelAttribute="system5empl">
+                        <form:input path="user_id" type="hidden" value="${userId}"/>
                         <label>Выберите месяц</label>
-                        <form:select id="selectMonthForEdit" cssClass="select-css" path="month"/>
-                        <form:input path="res1" placeholder="Личная результативность"/>
-                        <form:errors path="res1" cssClass="errorMsg"/>
-                        <form:input path="res2" placeholder="Инициативность"/>
-                        <form:input path="res3" placeholder="Совершенствование профессиональных знаний"/>
-                        <form:input path="res4" placeholder="Клиентоориентированность"/>
-                        <form:input path="res5" placeholder="Работа в команде"/>
-                        <br/>
-                        <br/>
-                        <label>Выберите руководителя, которому отправите самооценку</label>
-                        <select class="select-css" name="comm_id">
-                            <c:forEach items="${userList}" var="user">
-                                <option value="${user.position.position_id}">${user.name}</option>
+
+                        <form:select cssClass="select-css" path="system5Id">
+                            <c:forEach items="${monthListForEditSystem5Empl}" var="month">
+                                <form:option value="${month.key}">${month.value}</form:option>
                             </c:forEach>
-                        </select>
+                        </form:select>
                         <br/>
+
+                        <form:input path="resempl1" placeholder="Личная результативность"/>
+                        <form:input path="resempl2" placeholder="Инициативность"/>
+                        <form:input path="resempl3" placeholder="Совершенствование профессиональных знаний"/>
+                        <form:input path="resempl4" placeholder="Клиентоориентированность"/>
+                        <form:input path="resempl5" placeholder="Работа в команде"/>
                         <button type="submit" class="btn">Отправить</button>
                     </form:form>
                 </div>
@@ -172,7 +137,7 @@
 
     <!-- openModal - id модального окна (элемента div) -->
     <button type="button" class="btn" onclick=document.location='#openModal'>Добавить/изменить самооценку</button>
-    <button type="button" class="btn" onclick="document.location='#openModal'">Добавить/изменить оценку</button>
+    <button type="button" class="btn" onclick="document.location='#openModalEdit'">Добавить/изменить оценку</button>
     <button type="button" class="btn" onclick="document.location='/admin/archive'">Назад</button>
     <br/>
 
