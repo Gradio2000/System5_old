@@ -41,24 +41,25 @@ public class UserListTransformer {
             String[] strings = {"", "", "", "", "", ""};
             List<System5> system5List = user.getSystem5List();
             for (System5 system5 : system5List) {
+                String totalMarkEmpl = system5.getTotalMark5().getTotalMarkEmpl() != null ? system5.getTotalMark5().getTotalMarkEmpl() : "";
                 switch (system5.getMonth()) {
                     case ("ЯНВАРЬ"):
-                        strings[0] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[0] = totalMarkEmpl;
                         break;
                     case ("ФЕВРАЛЬ"):
-                        strings[1] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[1] = totalMarkEmpl;
                         break;
                     case ("МАРТ"):
-                        strings[2] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[2] = totalMarkEmpl;
                         break;
                     case ("АПРЕЛЬ"):
-                        strings[3] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[3] = totalMarkEmpl;
                         break;
                     case ("МАЙ"):
-                        strings[4] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[4] = totalMarkEmpl;
                         break;
                     case ("ИЮНЬ"):
-                        strings[5] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[5] = totalMarkEmpl;
                         break;
                 }
             }
@@ -77,24 +78,25 @@ public class UserListTransformer {
             String[] strings = {"", "", "", "", "", ""};
             List<System5> system5List = user.getSystem5List();
             for (System5 system5 : system5List) {
+                String totalMarkEmpl = system5.getTotalMark5().getTotalMarkEmpl() != null ? system5.getTotalMark5().getTotalMarkEmpl() : "";
                 switch (system5.getMonth()) {
                     case ("ИЮЛЬ"):
-                        strings[0] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[0] = totalMarkEmpl;
                         break;
                     case ("АВГУСТ"):
-                        strings[1] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[1] = totalMarkEmpl;
                         break;
                     case ("СЕНТЯБРЬ"):
-                        strings[2] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[2] = totalMarkEmpl;
                         break;
                     case ("ОКТЯБРЬ"):
-                        strings[3] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[3] = totalMarkEmpl;
                         break;
                     case ("НОЯБРЬ"):
-                        strings[4] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[4] = totalMarkEmpl;
                         break;
                     case ("ДЕКАБРЬ"):
-                        strings[5] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[5] = totalMarkEmpl;
                         break;
                 }
             }
@@ -116,42 +118,43 @@ public class UserListTransformer {
             }
             List<System5> system5List = user.getSystem5List();
             for (System5 system5 : system5List) {
+                String totalMarkEmpl = system5.getTotalMark5().getTotalMarkEmpl() != null ? system5.getTotalMark5().getTotalMarkEmpl() : "";
                 switch (system5.getMonth()) {
                     case ("ЯНВАРЬ"):
-                        strings[0] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[0] = totalMarkEmpl;
                         break;
                     case ("ФЕВРАЛЬ"):
-                        strings[1] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[1] = totalMarkEmpl;
                         break;
                     case ("МАРТ"):
-                        strings[2] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[2] = totalMarkEmpl;
                         break;
                     case ("АПРЕЛЬ"):
-                        strings[3] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[3] = totalMarkEmpl;
                         break;
                     case ("МАЙ"):
-                        strings[4] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[4] = totalMarkEmpl;
                         break;
                     case ("ИЮНЬ"):
-                        strings[5] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[5] = totalMarkEmpl;
                         break;
                     case ("ИЮЛЬ"):
-                        strings[6] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[6] = totalMarkEmpl;
                         break;
                     case ("АВГУСТ"):
-                        strings[7] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[7] = totalMarkEmpl;
                         break;
                     case ("СЕНТЯБРЬ"):
-                        strings[8] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[8] = totalMarkEmpl;
                         break;
                     case ("ОКТЯБРЬ"):
-                        strings[9] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[9] = totalMarkEmpl;
                         break;
                     case ("НОЯБРЬ"):
-                        strings[10] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[10] = totalMarkEmpl;
                         break;
                     case ("ДЕКАБРЬ"):
-                        strings[11] = system5.getTotalMark5().getTotalMarkEmpl();
+                        strings[11] = totalMarkEmpl;
                         break;
                 }
             }

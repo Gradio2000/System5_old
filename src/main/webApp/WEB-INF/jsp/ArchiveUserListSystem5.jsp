@@ -73,7 +73,7 @@
     </table>
 
     <%--    модальное окно для самооценки--%>
-    <c:if test="${employer == false}">
+
         <div id="openModal" class="modal">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -82,8 +82,9 @@
                         <a href="#close" title="Close" class="close">×</a>
                     </div>
                     <div class="modal-body my-modal">
-                        <form:form method="post" action="/adds" modelAttribute="system5">
+                        <form:form method="post" action="/admin/addFromAdminModule" modelAttribute="system5">
                             <label>Выберите месяц</label>
+                            <form:input path="userId" value="${userId}" type="hidden"/>
                             <form:select cssClass="select-css" path="month" items="${monthList}"/>
                             <form:input path="res1" placeholder="Личная результативность"/>
                             <form:errors path="res1" cssClass="errorMsg"/>
@@ -93,20 +94,13 @@
                             <form:input path="res5" placeholder="Работа в команде"/>
                             <br/>
                             <br/>
-                            <label>Выберите руководителя, которому отправите самооценку</label>
-                            <select class="select-css" name="comm_id">
-                                <c:forEach items="${userList}" var="user">
-                                    <option value="${user.position.position_id}">${user.name}</option>
-                                </c:forEach>
-                            </select>
-                            <br/>
                             <button type="submit" class="btn">Отправить</button>
                         </form:form>
                     </div>
                 </div>
             </div>
         </div>
-    </c:if>
+
 
     <%--    модальное окно для оценки работника--%>
     <c:if test="${employer == true}">
@@ -176,19 +170,12 @@
         </div>
     </div>
 
-
-
     <!-- openModal - id модального окна (элемента div) -->
-    <c:if test="${employer == false}">
-        <button type="button" class="btn" onclick="document.location='#openModal'">Добавить самооценку</button>
-    </c:if>
-    <c:if test="${employer == true}">
-        <c:if test="${months.size() != 0}">
-            <button type="button" class="btn" onclick="document.location='#openModal'">Добавить оценку</button>
-        </c:if>
-        <button type="button" class="btn" onclick="document.location='/my_employers'">Назад</button>
-        <br/>
-    </c:if>
+    <button type="button" class="btn" onclick=document.location='#openModal'>Добавить/изменить самооценку</button>
+    <button type="button" class="btn" onclick="document.location='#openModal'">Добавить/изменить оценку</button>
+    <button type="button" class="btn" onclick="document.location='/admin/archive'">Назад</button>
+    <br/>
+
 
     <%--    кнопка изменить--%>
     <c:if test="${employer == false}">
@@ -219,8 +206,8 @@
 </body>
 </html>
 
-
 <script>
+
 
     function editSelfRated(){
         $.ajax({
@@ -242,7 +229,4 @@
         document.location='#openModalEdit';
     }
 
-    function createItems(data){
-
-    }
 </script>

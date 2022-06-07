@@ -25,7 +25,7 @@
 <body>
 <div class="main">
     <c:forEach var="user" items="${userList}">
-        <li><a href="/admin/${user.userId}">${user.position.position} ${user.name}</a></li>
+        <li><a href="/admin/getUserSystem5Archive/${user.userId}">${user.position.position} ${user.name}</a></li>
     </c:forEach>
 </div>
 </body>
