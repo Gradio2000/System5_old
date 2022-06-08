@@ -63,4 +63,24 @@ public class System5 extends RepresentationModel<System5> {
     @PrimaryKeyJoinColumn
     @JsonManagedReference
     private TotalMark5 totalMark5;
+
+    public void setRes1(String res1) {
+        this.res1 = res1.toUpperCase();
+    }
+
+    public void setRes2(String res2) {
+        this.res2 = res2.toUpperCase();
+    }
+
+    public void setRes3(String res3) {
+        this.res3 = res3.toUpperCase();
+    }
+
+    public void setRes4(String res4) {
+        this.res4 = res4.toUpperCase();
+    }
+
+    public void setRes5(String res5) {
+        this.res5 = res5.toUpperCase();
+    }
 }

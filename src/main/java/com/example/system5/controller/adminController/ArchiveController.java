@@ -79,7 +79,7 @@ public class ArchiveController {
             return "redirect:/admin/getUserSystem5Archive/" + system5.getUserId() + "?error=1";
         }
 
-        GetTotalMarkService.toUpperCase(system5);
+//        GetTotalMarkService.toUpperCase(system5);
 
         System5 systemForUpdate = system5Repository.findByMonthAndUserId(system5.getMonth(), system5.getUserId());
         if (systemForUpdate != null){
@@ -101,7 +101,7 @@ public class ArchiveController {
             return "redirect:/admin/getUserSystem5Archive/" + system5empl.getUser_id() + "?error=1";
         }
 
-        GetTotalMarkService.toUpperCaseSystem5Empl(system5empl);
+//        GetTotalMarkService.toUpperCaseSystem5Empl(system5empl);
 
         System5 system5 = system5Repository.findById(system5empl.getSystem5Id()).orElse(null);
         assert system5 != null;

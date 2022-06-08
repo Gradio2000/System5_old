@@ -190,23 +190,4 @@ public class GetTotalMarkService {
         }
         return result;
     }
-
-
-
-    public static void toUpperCase(System5 system5){
-        system5.setRes1(system5.getRes1().toUpperCase());
-        system5.setRes2(system5.getRes2().toUpperCase());
-        system5.setRes3(system5.getRes3().toUpperCase());
-        system5.setRes4(system5.getRes4().toUpperCase());
-        system5.setRes5(system5.getRes5().toUpperCase());
-    }
-
-    public static void toUpperCaseSystem5Empl(System5empl system5empl){
-        system5empl.setResempl1(system5empl.getResempl1().toUpperCase());
-        system5empl.setResempl2(system5empl.getResempl2().toUpperCase());
-        system5empl.setResempl3(system5empl.getResempl3().toUpperCase());
-        system5empl.setResempl4(system5empl.getResempl4().toUpperCase());
-        system5empl.setResempl5(system5empl.getResempl5().toUpperCase());
-    }
-
 }

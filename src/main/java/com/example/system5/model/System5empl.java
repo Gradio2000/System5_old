@@ -45,4 +45,24 @@ public class System5empl {
     @MapsId
     private System5 system5;
 
+
+    public void setResempl1(String resempl1) {
+        this.resempl1 = resempl1.toUpperCase();
+    }
+
+    public void setResempl2(String resempl2) {
+        this.resempl2 = resempl2.toUpperCase();
+    }
+
+    public void setResempl3(String resempl3) {
+        this.resempl3 = resempl3.toUpperCase();
+    }
+
+    public void setResempl4(String resempl4) {
+        this.resempl4 = resempl4.toUpperCase();
+    }
+
+    public void setResempl5(String resempl5) {
+        this.resempl5 = resempl5.toUpperCase();
+    }
 }

@@ -116,7 +116,7 @@ public class System5Controller {
             return "redirect:/list?error=1";
         }
 
-        GetTotalMarkService.toUpperCase(system5);
+//        GetTotalMarkService.toUpperCase(system5);
 
         System5 systemForUpdate = system5Repository.findByMonthAndUserId(system5.getMonth(), user.getUserId());
         if (systemForUpdate != null){
