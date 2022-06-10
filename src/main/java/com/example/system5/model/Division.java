@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "divisions")
+@Table(name = "sys_divisions")
 @Getter
 @Setter
 public class Division {

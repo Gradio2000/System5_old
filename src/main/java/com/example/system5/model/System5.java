@@ -11,7 +11,7 @@ import javax.validation.constraints.Pattern;
 
 
 @Entity
-@Table(name = "system5")
+@Table(name = "sys_system5")
 @Getter
 @Setter
 public class System5 extends RepresentationModel<System5> {

@@ -75,7 +75,8 @@ public class UserListTransformer {
         Map<UserDto, String[]> userDtoListMap = new HashMap<>();
         for (User user : userList) {
             UserDto userDto = UserDto.getInstance(user);
-            String[] strings = {"", "", "", "", "", ""};
+            String[] strings = new String[6];
+            Arrays.fill(strings, "");
             List<System5> system5List = user.getSystem5List();
             for (System5 system5 : system5List) {
                 String totalMarkEmpl = system5.getTotalMark5().getTotalMarkEmpl() != null ? system5.getTotalMark5().getTotalMarkEmpl() : "";
@@ -113,9 +114,7 @@ public class UserListTransformer {
         for (User user : userList) {
             UserDto userDto = UserDto.getInstance(user);
             String[] strings = new String[12];
-            for (int i = 0; i < strings.length; i++) {
-                strings[i] = "";
-            }
+            Arrays.fill(strings, "");
             List<System5> system5List = user.getSystem5List();
             for (System5 system5 : system5List) {
                 String totalMarkEmpl = system5.getTotalMark5().getTotalMarkEmpl() != null ? system5.getTotalMark5().getTotalMarkEmpl() : "";

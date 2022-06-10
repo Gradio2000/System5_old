@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "total_mark5")
+@Table(name = "sys_total_mark5")
 @Getter
 @Setter
 @Component

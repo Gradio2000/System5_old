@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "positions")
+@Table(name = "sys_positions")
 @Getter
 @Setter
 public class Position {
@@ -24,14 +24,14 @@ public class Position {
     private int divisionId;
 
     @OneToOne
-    @JoinTable(name = "position_user",
+    @JoinTable(name = "sys_position_user",
             joinColumns = @JoinColumn(name = "position_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     @JsonManagedReference
     public User user;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "commander_employee",
+    @JoinTable(name = "sys_commander_employee",
             joinColumns =
                     { @JoinColumn(name = "commander_position_id")},
         inverseJoinColumns =

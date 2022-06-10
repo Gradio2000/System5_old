@@ -8,6 +8,7 @@ import com.example.system5.repository.UserRepository;
 import com.example.system5.service.commanderEmployeeService.SaveOrUpdateCommEmplService;
 import com.example.system5.service.system5Service.GetTotalMarkService;
 import com.example.system5.service.system5Service.SaveOrUpdateSystem5Service;
+import com.example.system5.service.system5Service.SortService;
 import com.example.system5.util.AuthUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -30,14 +31,19 @@ public class System5Controller {
     private final GetTotalMarkService getTotalMarkService;
     private final SaveOrUpdateSystem5Service saveOrUpdateSystem5Service;
     private final SaveOrUpdateCommEmplService saveOrUpdateCommEmplService;
+    private final SortService sortService;
 
 
-    public System5Controller(System5Repository system5Repository, UserRepository userRepository, GetTotalMarkService getTotalMarkService, SaveOrUpdateSystem5Service saveOrUpdateSystem5Service, SaveOrUpdateCommEmplService saveOrUpdateCommEmplService) {
+    public System5Controller(System5Repository system5Repository, UserRepository userRepository,
+                             GetTotalMarkService getTotalMarkService,
+                             SaveOrUpdateSystem5Service saveOrUpdateSystem5Service,
+                             SaveOrUpdateCommEmplService saveOrUpdateCommEmplService, SortService sortService) {
         this.system5Repository = system5Repository;
         this.userRepository = userRepository;
         this.getTotalMarkService = getTotalMarkService;
         this.saveOrUpdateSystem5Service = saveOrUpdateSystem5Service;
         this.saveOrUpdateCommEmplService = saveOrUpdateCommEmplService;
+        this.sortService = sortService;
     }
 
     @GetMapping(value = "/list")
@@ -46,7 +52,7 @@ public class System5Controller {
         log.info(user.getName() + " enter into controller /list");
 
         List<System5> system5List = system5Repository.findAllByUserId(user.getUserId());
-        model.addAttribute(system5List);
+        model.addAttribute("system5List", sortService.sortSystem5(system5List));
 
         List<Month> monthList = Arrays.stream(Month.values()).collect(Collectors.toList());
         for(System5 system5 : system5List){
@@ -94,11 +100,13 @@ public class System5Controller {
         }
 
         boolean employer = true;
-        model.addAttribute(system5List);
+
+        model.addAttribute("system5List", sortService.sortSystem5(system5List));
         model.addAttribute("employer", employer);
         model.addAttribute("months", monthMap);
         model.addAttribute("userId", id);
         model.addAttribute("user", UserDto.getInstance(user));
+
         return "lists";
     }
 
@@ -115,8 +123,6 @@ public class System5Controller {
         if (bindingResult.hasErrors()){
             return "redirect:/list?error=1";
         }
-
-//        GetTotalMarkService.toUpperCase(system5);
 
         System5 systemForUpdate = system5Repository.findByMonthAndUserId(system5.getMonth(), user.getUserId());
         if (systemForUpdate != null){

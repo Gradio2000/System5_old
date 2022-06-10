@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "sys_users")
 @Getter
 @Setter
 public class User{
@@ -36,14 +36,14 @@ public class User{
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
+    @CollectionTable(name = "sys_user_role", joinColumns = @JoinColumn(name = "user_id"),
             uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"}, name = "user_roles_unique")})
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     @OneToOne
-    @JoinTable(name = "position_user",
+    @JoinTable(name = "sys_position_user",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "position_id"))
     @JsonBackReference

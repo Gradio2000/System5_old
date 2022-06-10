@@ -7,7 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "system5empl")
+@Table(name = "sys_system5empl")
 @Getter
 @Setter
 public class System5empl {

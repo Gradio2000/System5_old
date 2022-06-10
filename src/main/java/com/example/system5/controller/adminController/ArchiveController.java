@@ -6,6 +6,7 @@ import com.example.system5.repository.System5Repository;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.service.system5Service.GetTotalMarkService;
 import com.example.system5.service.system5Service.SaveOrUpdateSystem5Service;
+import com.example.system5.service.system5Service.SortService;
 import com.example.system5.util.AuthUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -24,13 +25,16 @@ public class ArchiveController {
     private final System5Repository system5Repository;
     private final SaveOrUpdateSystem5Service saveOrUpdateSystem5Service;
     private final GetTotalMarkService getTotalMarkService;
+    private final SortService sortService;
 
     public ArchiveController(UserRepository userRepository, System5Repository system5Repository,
-                             SaveOrUpdateSystem5Service saveOrUpdateSystem5Service, GetTotalMarkService getTotalMarkService) {
+                             SaveOrUpdateSystem5Service saveOrUpdateSystem5Service,
+                             GetTotalMarkService getTotalMarkService, SortService sortService) {
         this.userRepository = userRepository;
         this.system5Repository = system5Repository;
         this.saveOrUpdateSystem5Service = saveOrUpdateSystem5Service;
         this.getTotalMarkService = getTotalMarkService;
+        this.sortService = sortService;
     }
 
     @GetMapping("/archive")
@@ -57,7 +61,7 @@ public class ArchiveController {
 
         assert user != null;
         List<System5> system5List = system5Repository.findAllByUserId(user.getUserId());
-        model.addAttribute("system5List", system5List);
+        model.addAttribute("system5List", sortService.sortSystem5(system5List));
 
 
         Map<Integer, Month> monthListFromSystem5List = new HashMap();
