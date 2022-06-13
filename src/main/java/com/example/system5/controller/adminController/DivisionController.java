@@ -27,7 +27,7 @@ public class DivisionController {
         List<Division> divisions = divisionRepository.findAll();
         model.addAttribute(divisions);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        return "/shtat";
+        return "sys5pages/shtat";
     }
 
     @PostMapping(value = "/division")

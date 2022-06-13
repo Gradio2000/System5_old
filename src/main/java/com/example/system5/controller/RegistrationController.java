@@ -62,7 +62,7 @@ public class RegistrationController {
     @GetMapping("/registration")
     public ModelAndView registration(){
         MyForm myForm = new MyForm();
-        return new ModelAndView("registration", "myForm", myForm);
+        return new ModelAndView("sys5pages/registration", "myForm", myForm);
     }
 
     @PostMapping("/adduser")
@@ -70,7 +70,7 @@ public class RegistrationController {
                           Model model, HttpServletRequest request) {
 
         if (bindingResult.hasErrors()){
-            return "registration";
+            return "sys5pages/registration";
         }
 
         String login = myForm.getLogin();
@@ -96,7 +96,7 @@ public class RegistrationController {
 
         FormFinishReg formFinishReg = new FormFinishReg();
         model.addAttribute(formFinishReg);
-        return "registrationnext";
+        return "sys5pages/registrationnext";
     }
 
     @PostMapping("/finishreg")
@@ -108,7 +108,7 @@ public class RegistrationController {
         if (bindingResult.hasErrors()){
             List<Position> positionList = positionRepository.findAll();
             model.addAttribute(positionList);
-            return "registrationnext";
+            return "sys5pages/registrationnext";
         }
 
         User user = authUser.getUser();

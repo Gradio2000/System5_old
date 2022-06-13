@@ -1,22 +1,22 @@
 drop sequence if exists hibernate_sequence;
 create sequence hibernate_sequence;
 
-DROP TABLE IF EXISTS position_user cascade;
-create table position_user
+DROP TABLE IF EXISTS sys_position_user cascade;
+create table sys_position_user
 (
     position_id integer,
     user_id     integer
 );
 
-DROP TABLE IF EXISTS commander_employee cascade;
-create table commander_employee
+DROP TABLE IF EXISTS sys_commander_employee cascade;
+create table sys_commander_employee
 (
     commander_position_id integer,
     position_id           integer
 );
 
-DROP TABLE IF EXISTS system5empl cascade;
-create table system5empl
+DROP TABLE IF EXISTS sys_system5empl cascade;
+create table sys_system5empl
 (
     resempl1   char,
     resempl2   char,
@@ -28,11 +28,11 @@ create table system5empl
 );
 
 create unique index system5empl_system5_id_uindex
-    on system5empl (system5_id);
+    on sys_system5empl (system5_id);
 
 
-DROP TABLE IF EXISTS users cascade;
-create table users
+DROP TABLE IF EXISTS sys_users cascade;
+create table sys_users
 (
     user_id  serial
         constraint users_pk
@@ -42,30 +42,30 @@ create table users
     password varchar(256)
 );
 
-insert into users (login, name, password) VALUES ('admin', 'admin', '$2a$12$qgc7fFMjfc0or5TdiP.HnegCL0f77FyQ2z3ohZ6.YEkjvmCze/T1a');
+insert into sys_users (login, name, password) VALUES ('admin', 'admin', '$2a$12$qgc7fFMjfc0or5TdiP.HnegCL0f77FyQ2z3ohZ6.YEkjvmCze/T1a');
 
 create unique index users_user_id_uindex
-    on users (user_id);
+    on sys_users (user_id);
 
 create index idx_user_name
-    on users (name);
+    on sys_users (name);
 
 
-DROP TABLE IF EXISTS user_role cascade;
-create table user_role
+DROP TABLE IF EXISTS sys_user_role cascade;
+create table sys_user_role
 (
     user_id integer not null
         constraint fk
-            references users
+            references sys_users
             on update cascade on delete cascade,
     role    varchar(255),
     constraint user_roles_unique
         unique (user_id, role)
 );
-insert into user_role (user_id, role) VALUES (1, 'ADMIN');
+insert into sys_user_role (user_id, role) VALUES (1, 'ADMIN');
 
-DROP TABLE IF EXISTS divisions cascade;
-create table divisions
+DROP TABLE IF EXISTS sys_divisions cascade;
+create table sys_divisions
 (
     division_id           serial
         constraint divisions_pkey
@@ -74,8 +74,8 @@ create table divisions
     commander_position_id integer
 );
 
-DROP TABLE IF EXISTS positions cascade;
-create table positions
+DROP TABLE IF EXISTS sys_positions cascade;
+create table sys_positions
 (
     position_id serial
         constraint positions_pkey
@@ -85,11 +85,11 @@ create table positions
 );
 
 create unique index positions_position_id_uindex
-    on positions (position_id);
+    on sys_positions (position_id);
 
 
-DROP TABLE IF EXISTS total_mark5 cascade;
-create table total_mark5
+DROP TABLE IF EXISTS sys_total_mark5 cascade;
+create table sys_total_mark5
 (
     system5_id_total_mark integer not null,
     total_mark            char,
@@ -97,13 +97,13 @@ create table total_mark5
 );
 
 
-DROP TABLE IF EXISTS system5 cascade;
-create table system5
+DROP TABLE IF EXISTS sys_system5 cascade;
+create table sys_system5
 (
     system5_id serial,
     user_id    integer           not null
         constraint system5_users_user_id_fk
-            references users
+            references sys_users
             on update cascade on delete set null,
     month      varchar           not null,
     res1       char              not null,
@@ -115,5 +115,5 @@ create table system5
 );
 
 create unique index system5_system5_id_uindex
-    on system5 (system5_id);
+    on sys_system5 (system5_id);
 

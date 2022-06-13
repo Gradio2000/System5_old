@@ -18,8 +18,8 @@
     <title>Отчет</title>
 </head>
 <body>
-<jsp:include page="../includes/header.jsp"/>
-<jsp:include page="../includes/menu.jsp"/>
+<jsp:include page="../../includes/header.jsp"/>
+<jsp:include page="../../includes/menu.jsp"/>
 <div class="main">
     <form id="monsel" method="get" action="/admin/report">
         <select name="month" class="select-css" style="width: max-content;">
@@ -33,5 +33,5 @@
 </body>
 </html>
 <style>
-    <%@include file="../includes/myStyle.css"%>
+    <%@include file="../../includes/myStyle.css"%>
 </style>

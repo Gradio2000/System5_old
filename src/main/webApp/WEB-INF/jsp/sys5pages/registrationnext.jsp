@@ -34,6 +34,6 @@
     </div>
 </body>
 <style>
-    <%@include file="../includes/myStyle.css"%>
+    <%@include file="../../includes/myStyle.css"%>
 </style>
 </html>

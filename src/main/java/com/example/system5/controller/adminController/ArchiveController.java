@@ -42,7 +42,7 @@ public class ArchiveController {
                                    Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("userList", userRepository.findAll());
-        return "employersListForGetArchive";
+        return "sys5pages/employersListForGetArchive";
     }
 
     @GetMapping("/getUserSystem5Archive/{id}")
@@ -72,7 +72,7 @@ public class ArchiveController {
 
 
         model.addAttribute("userId", id);
-        return "ArchiveUserListSystem5";
+        return "sys5pages/ArchiveUserListSystem5";
     }
 
     @PostMapping("/addFromAdminModule")

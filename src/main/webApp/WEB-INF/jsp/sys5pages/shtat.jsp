@@ -12,7 +12,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"       prefix="x"   %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"  %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
-<script type="text/javascript" src="../../js/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="../../../js/jquery-3.6.0.js"></script>
 
 
 <html>
@@ -21,8 +21,8 @@
     <title>Штат</title>
 </head>
 <body>
-<jsp:include page="../includes/header.jsp"/>
-<jsp:include page="../includes/menu.jsp"/>
+<jsp:include page="../../includes/header.jsp"/>
+<jsp:include page="../../includes/menu.jsp"/>
 <div class="main">
     <table  id="color_table">
         <tbody>
@@ -482,7 +482,7 @@
 
 </script>
 <style>
-    <%@include file="../includes/myStyle.css"%>
+    <%@include file="../../includes/myStyle.css"%>
     .hover_Row { background-color: #e0dfdf; }
     .clicked_Row { background-color: #b1b0b0; }
 </style>

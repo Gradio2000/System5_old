@@ -12,14 +12,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/xml"       prefix="x"   %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"  %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
-<script type="text/javascript" src="../../js/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="../../../js/jquery-3.6.0.js"></script>
 <html>
 <style>
-    <%@include file="../includes/myStyle.css"%>
+    <%@include file="../../includes/myStyle.css"%>
 </style>
 <head>
-    <jsp:include page="../includes/header.jsp"/>
-    <jsp:include page="../includes/menu.jsp"/>
+    <jsp:include page="../../includes/header.jsp"/>
+    <jsp:include page="../../includes/menu.jsp"/>
     <title>Редактировать</title>
 </head>
 <body>

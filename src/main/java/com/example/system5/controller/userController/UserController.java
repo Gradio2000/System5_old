@@ -47,17 +47,17 @@ public class UserController {
         try {
             positionList = user.getPosition().getEmployersList();
         } catch (Exception e) {
-            return "employers";
+            return "sys5pages/employers";
         }
         model.addAttribute("positionList", positionList);
         model.addAttribute("user", UserDto.getInstance(user));
-        return "employers";
+        return "sys5pages/employers";
     }
 
     @GetMapping("/getUser")
     public String getUser(@AuthenticationPrincipal AuthUser authUser, Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        return "/userEdit";
+        return "sys5pages/userEdit";
     }
 
     @PostMapping("/editUser")
@@ -74,7 +74,7 @@ public class UserController {
     public String changePassword(@AuthenticationPrincipal AuthUser authUser, Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("changePasswordForm", new ChangePasswordForm());
-        return "changePassword";
+        return "sys5pages/changePassword";
     }
 
     @PostMapping("changePassword")
@@ -83,7 +83,7 @@ public class UserController {
                                      @AuthenticationPrincipal AuthUser authUser){
 
         if (bindingResult.hasErrors()){
-            return "changePassword";
+            return "sys5pages/changePassword";
         }
 
         User userForEdit = userRepository.getUserByUserId(authUser.getUser().getUserId());

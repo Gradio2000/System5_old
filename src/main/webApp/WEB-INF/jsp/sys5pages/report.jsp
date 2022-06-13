@@ -16,8 +16,8 @@
     <title>Отчет</title>
 </head>
 <body>
-<jsp:include page="../includes/header.jsp"/>
-<jsp:include page="../includes/menu.jsp"/>
+<jsp:include page="../../includes/header.jsp"/>
+<jsp:include page="../../includes/menu.jsp"/>
 
     <div class="main" >
         <div id="printableArea" style="text-align: center">
@@ -64,7 +64,7 @@
 </body>
 </html>
 <style>
-    <%@include file="../includes/myStyle.css"%>
+    <%@include file="../../includes/myStyle.css"%>
 </style>
 <script>
     function printDiv(divName) {

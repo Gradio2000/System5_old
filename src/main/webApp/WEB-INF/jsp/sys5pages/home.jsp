@@ -7,14 +7,14 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<script type="text/javascript" src="../../js/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="../../../js/jquery-3.6.0.js"></script>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<jsp:include page="../includes/header.jsp"/>
-<jsp:include page="../includes/menu.jsp"/>
+<jsp:include page="../../includes/header.jsp"/>
+<jsp:include page="../../includes/menu.jsp"/>
 <div class="main">
     <form id="monsel" method="get" action="/admin/report"></form>
 </div>
@@ -23,7 +23,7 @@
 </html>
 
 <style>
-    <%@include file="../includes/myStyle.css"%>
+    <%@include file="../../includes/myStyle.css"%>
 </style>
 
 <script>

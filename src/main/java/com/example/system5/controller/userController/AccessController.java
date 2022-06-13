@@ -15,6 +15,6 @@ public class AccessController {
                                Model model){
         UserDto userDto = UserDto.getInstance(authUser.getUser());
         model.addAttribute("user", userDto);
-        return "accessDenied";
+        return "sys5pages/accessDenied";
     }
 }

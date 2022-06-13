@@ -41,13 +41,13 @@ public class ReportController {
                 .collect(Collectors.toList());
         model.addAttribute("months", months);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        return "prepareReport";
+        return "sys5pages/prepareReport";
     }
 
     @GetMapping("/prepareHalfYearReport")
     public String prepareHalfYearReport(@AuthenticationPrincipal AuthUser authUser, Model model) {
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        return "prepareHalfYearReport";
+        return "sys5pages/prepareHalfYearReport";
     }
 
     @GetMapping("/report")
@@ -59,7 +59,7 @@ public class ReportController {
         model.addAttribute(system5List);
         model.addAttribute("month", month);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        return "report";
+        return "sys5pages/report";
     }
 
     @GetMapping("/halfYearReport")
@@ -90,7 +90,7 @@ public class ReportController {
         model.addAttribute("modelMap", userDtoMap);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("half", half);
-        return "reportHalfYear";
+        return "sys5pages/reportHalfYear";
     }
 
     @GetMapping("/prepareYearReport")
@@ -104,6 +104,6 @@ public class ReportController {
         userDtoMap = userListTransformer.getUserDtoListMapForYear(userList);
         model.addAttribute("modelMap", userDtoMap);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        return "reportYear";
+        return "sys5pages/reportYear";
     }
 }

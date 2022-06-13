@@ -87,7 +87,7 @@ public class System5Controller {
 
         model.addAttribute("user", UserDto.getInstance(user));
 
-        return "lists";
+        return "sys5pages/lists";
     }
 
     @GetMapping("/list/{id}")
@@ -103,7 +103,7 @@ public class System5Controller {
 
         List<System5> system5List = system5Repository.findByUserIdOrderBySystem5Id(id);
 
-        Map<Integer, Month> monthMap = new HashMap();
+        Map<Integer, Month> monthMap = new HashMap<>();
         for (System5 system51 : system5List){
             if (system51.getRated() == 0){
                 monthMap.put(system51.getSystem5Id(), Month.valueOf(system51.getMonth()));
@@ -118,7 +118,7 @@ public class System5Controller {
         model.addAttribute("userId", id);
         model.addAttribute("user", UserDto.getInstance(user));
 
-        return "lists";
+        return "sys5pages/lists";
     }
 
 
