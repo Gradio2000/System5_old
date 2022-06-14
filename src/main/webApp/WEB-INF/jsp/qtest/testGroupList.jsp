@@ -33,10 +33,10 @@
             <c:forEach var="groupTest" items="${groupTests}">
                 <tr>
                     <td style="width: 10%;">
-                        <input form="del" value="${groupTest.grouptest_id}" type="checkbox" name="check"/>
+                        <input form="del" value="${groupTest.grouptestId}" type="checkbox" name="check"/>
                     </td>
                     <td class="tblsht">
-                        <a id=${groupTest.grouptest_id}>${groupTest.name}</a>
+                        <a href="/tests/list/${groupTest.grouptestId}">${groupTest.name}</a>
                     </td>
                 </tr
             </c:forEach>
@@ -55,7 +55,6 @@
         </form>
 
         <form id="del" action="/testGroup/delete" method="post"></form>
-
 
         <button form="add" name="addDiv" id="mybtn" type="submit" class="btn">Добавить</button>
         <button form="del" name="delete" type="submit" class="btncancel">Удалить</button>

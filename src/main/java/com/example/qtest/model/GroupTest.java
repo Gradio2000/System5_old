@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
 @Table(name = "q_group_test")
@@ -14,9 +15,13 @@ public class GroupTest {
     @Id
     @Column(name = "grouptest_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer grouptest_id;
+    private Integer grouptestId;
 
     @Column(name = "name")
     @NotBlank
     private String name;
+
+    @OneToMany(targetEntity = Test.class, cascade = CascadeType.ALL,
+    fetch = FetchType.EAGER, mappedBy = "groupId")
+    private List<Test> tests;
 }
