@@ -10,5 +10,4 @@ import java.util.List;
 public interface DivisionRepository extends JpaRepository<Division, Integer> {
     @Override
     List<Division> findAll();
-
 }
