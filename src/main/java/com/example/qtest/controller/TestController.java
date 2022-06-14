@@ -6,10 +6,9 @@ import com.example.system5.util.AuthUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -24,9 +23,30 @@ public class TestController {
 
     @GetMapping("/list/{id}")
     public String getAllTest(@PathVariable Integer id, @AuthenticationPrincipal AuthUser authUser, Model model){
-        model.addAttribute("model", authUser.getUser());
+        model.addAttribute("user", authUser.getUser());
         List<Test> testList = testReposytory.findAllByGroupId(id);
         model.addAttribute("testList", testList);
+        model.addAttribute("groupTestId", id);
         return "qtest/testlist";
+    }
+
+    @PostMapping("/add")
+    public String addGroupTest(@ModelAttribute Test test){
+        if (test.getTestName().isEmpty()){
+            return "redirect:/tests/list/" + test.getGroupId() + "?error=200";
+        }
+        testReposytory.save(test);
+        return "redirect:/tests/list/" + test.getGroupId();
+    }
+
+    @PostMapping("/delete")
+    public String deleteGroupTest(@RequestParam (required = false) Integer[] check,
+                                  @RequestParam Integer testGroupId){
+        try {
+            testReposytory.deleteAllById(Arrays.asList(check));
+        } catch (NullPointerException e) {
+            return "redirect:/tests/list/" + testGroupId + "?error=100";
+        }
+        return "redirect:/tests/list/" + testGroupId;
     }
 }

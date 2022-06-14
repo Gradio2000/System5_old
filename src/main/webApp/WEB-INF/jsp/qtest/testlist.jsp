@@ -26,9 +26,41 @@
 </head>
 <body>
 <div class="main">
-    <c:forEach var="test" items="${testList}">
-        <a>${test.testName}</a>
-    </c:forEach>
+    <table id="color_table" style="width: 100%; table-layout: auto" >
+        <tbody>
+            <tr>
+                <th colspan="2" class="tblsht">Список тестов</th>
+            </tr>
+            <c:forEach var="test" items="${testList}">
+                <tr>
+                    <td style="width: 10%;">
+                        <input form="del" value="${test.testId}" type="checkbox" name="check"/>
+                    </td>
+                    <td class="tblsht">
+                        <a href="/tests/test/${test.testId}">${test.testName}</a>
+                    </td>
+                </tr
+            </c:forEach>
+            <div>
+                <a style="color: crimson; font: bold italic 110% serif">
+                    <c:if test="${param.get('error') == 100}">Не выбран тест!</c:if>
+                    <c:if test="${param.get('error') == 200}">Введите название теста!</c:if>
+                </a>
+            </div>
+        </tbody>
+    </table>
+
+    <form id="add" action="/tests/add" method="post">
+        <input name="groupId" type="hidden" value="${groupTestId}"/>
+        <input name="testName" class="myinput" type="text" placeholder="Введите название теста"/>
+    </form>
+
+    <form id="del" action="/tests/delete" method="post">
+        <input type="hidden" name="testGroupId" value="${groupTestId}">
+    </form>
+
+    <button form="add" name="addDiv" id="mybtn" type="submit" class="btn">Добавить</button>
+    <button form="del" name="delete" type="submit" class="btncancel">Удалить</button>
 </div>
 </body>
 </html>
