@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "q_tests")
@@ -14,19 +15,34 @@ public class Test {
     @Column(name = "test_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer testId;
-    @Column
+
+    @Column(name = "test_name")
     private String testName;
+
     @Column
     private Double criteria;
+
     @Column
     private Double time;
-    @Column
-    private Integer ques_amount;
+
+    @Column(name = "ques_amount")
+    private Integer quesAmount;
+
     @Column
     private boolean deleted;
-    @Column
-    private boolean ques_mix;
 
-    @Column(name = "group_id")
-    private Integer groupId;
+    @Column(name = "ques_mix")
+    private boolean quesMix;
+
+//    @Column(name = "group_id")
+//    private Integer groupId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "group_id")
+    private GroupTest groupTest;
+
+    @OneToMany(targetEntity = Question.class, cascade = CascadeType.ALL,
+    fetch = FetchType.EAGER, mappedBy = "test")
+    private List<Question> questions;
+
 }

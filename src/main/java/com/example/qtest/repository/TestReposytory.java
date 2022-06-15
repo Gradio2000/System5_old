@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TestReposytory extends JpaRepository<Test, Integer> {
-    List<Test> findAllByGroupId(Integer groupId);
+//    List<Test> findAllByGroupId(Integer groupId);
+    List<Test> findAllByGroupTestGrouptestId(Integer id);
 }

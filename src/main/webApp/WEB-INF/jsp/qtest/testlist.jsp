@@ -37,7 +37,7 @@
                         <input form="del" value="${test.testId}" type="checkbox" name="check"/>
                     </td>
                     <td class="tblsht">
-                        <a href="/tests/test/${test.testId}">${test.testName}</a>
+                        <a href="/tests/${test.testId}/questions">${test.testName}</a>
                     </td>
                 </tr
             </c:forEach>

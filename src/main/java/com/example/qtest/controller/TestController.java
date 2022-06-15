@@ -24,7 +24,7 @@ public class TestController {
     @GetMapping("/list/{id}")
     public String getAllTest(@PathVariable Integer id, @AuthenticationPrincipal AuthUser authUser, Model model){
         model.addAttribute("user", authUser.getUser());
-        List<Test> testList = testReposytory.findAllByGroupId(id);
+        List<Test> testList = testReposytory.findAllByGroupTestGrouptestId(id);
         model.addAttribute("testList", testList);
         model.addAttribute("groupTestId", id);
         return "qtest/testlist";
@@ -33,10 +33,10 @@ public class TestController {
     @PostMapping("/add")
     public String addGroupTest(@ModelAttribute Test test){
         if (test.getTestName().isEmpty()){
-            return "redirect:/tests/list/" + test.getGroupId() + "?error=200";
+            return "redirect:/tests/list/" + test.getGroupTest().getGrouptestId() + "?error=200";
         }
         testReposytory.save(test);
-        return "redirect:/tests/list/" + test.getGroupId();
+        return "redirect:/tests/list/" + test.getGroupTest().getGrouptestId();
     }
 
     @PostMapping("/delete")
