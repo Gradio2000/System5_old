@@ -34,9 +34,6 @@ public class Test {
     @Column(name = "ques_mix")
     private boolean quesMix;
 
-//    @Column(name = "group_id")
-//    private Integer groupId;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "group_id")
     private GroupTest groupTest;

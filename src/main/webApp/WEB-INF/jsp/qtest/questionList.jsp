@@ -22,13 +22,19 @@
     <jsp:include page="../../includes/header.jsp"/>
     <jsp:include page="../../includes/menu.jsp"/>
 
-    <title>Срисок вопросов</title>
+    <title>Список вопросов</title>
 </head>
 <body>
 <div class="main">
     <ol>
         <c:forEach var="question" items="${questionList}">
-            <li>${question.questionName}</li>
+            <li>${question.questionName}
+                <ul>
+                    <c:forEach var="answer" items="${question.answers}">
+                        <li>${answer.answerName}</li>
+                    </c:forEach>
+                </ul>
+            </li>
         </c:forEach>
     </ol>
 </div>
