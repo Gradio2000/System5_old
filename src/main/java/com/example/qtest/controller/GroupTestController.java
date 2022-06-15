@@ -1,7 +1,9 @@
 package com.example.qtest.controller;
 
+import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.model.GroupTest;
 import com.example.qtest.repository.GroupTestRepository;
+import com.example.qtest.service.DtoUtils;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -10,22 +12,29 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/testGroup")
 public class GroupTestController {
 
     private final GroupTestRepository groupTestRepository;
+    private final DtoUtils dtoUtils;
 
-    public GroupTestController(GroupTestRepository groupTestRepository) {
+    public GroupTestController(GroupTestRepository groupTestRepository, DtoUtils dtoUtils) {
         this.groupTestRepository = groupTestRepository;
+        this.dtoUtils = dtoUtils;
     }
 
     @GetMapping("/list")
     public String testGroupList(@AuthenticationPrincipal AuthUser authUser,
                                 Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        model.addAttribute("groupTests", groupTestRepository.findAll());
+        List<GroupTestDto> groupTests = groupTestRepository.findAll().stream()
+                .map(dtoUtils::convertToGroupTestDto)
+                .collect(Collectors.toList());
+        model.addAttribute("groupTests", groupTests);
         return "qtest/testGroupList";
     }
 

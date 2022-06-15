@@ -29,7 +29,7 @@
     <table id="color_table" style="width: 100%; table-layout: auto" >
         <tbody>
             <tr>
-                <th colspan="2" class="tblsht">Список тестов</th>
+                <th colspan="2" class="tblsht">Список тестов: ${groupTestName}</th>
             </tr>
             <c:forEach var="test" items="${testList}">
                 <tr>

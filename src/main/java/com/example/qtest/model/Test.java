@@ -34,12 +34,15 @@ public class Test {
     @Column(name = "ques_mix")
     private boolean quesMix;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "group_id")
-    private GroupTest groupTest;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "group_id")
+//    private GroupTest groupTest;
+
+    @Column(name = "group_id")
+    private Integer groupId;
 
     @OneToMany(targetEntity = Question.class, cascade = CascadeType.ALL,
-    fetch = FetchType.EAGER, mappedBy = "test")
+    fetch = FetchType.EAGER, mappedBy = "testId")
     private List<Question> questions;
 
 }
