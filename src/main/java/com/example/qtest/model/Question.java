@@ -19,10 +19,6 @@ public class Question {
     @Column(name = "question_name", nullable = false)
     private String questionName;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "test_id")
-//    private Test test;
-
     @Column(name = "test_id")
     private Integer testId;
 

@@ -29,15 +29,39 @@
     <table id="color_table" style="width: 100%; table-layout: auto" >
         <tbody>
             <tr>
-                <th colspan="2" class="tblsht">Список тестов: ${groupTestName}</th>
+                <th colspan="7" class="tblsht">Список тестов: ${groupTestName}</th>
             </tr>
-            <c:forEach var="test" items="${testList}">
+            <tr>
+                <th>Удалить</th>
+                <th>Название теста</th>
+                <th>Количество вопросов в тесте</th>
+                <th>Критерий, %</th>
+                <th>Время выполнения, мин.</th>
+                <th>Перемешать вопросы</th>
+                <th>Сохранить изменения</th>
+            </tr>
+            <c:forEach var="test" items="${testList}" varStatus="count">
                 <tr>
                     <td style="width: 10%;">
                         <input form="del" value="${test.testId}" type="checkbox" name="check"/>
                     </td>
                     <td class="tblsht">
                         <a href="/tests/${test.testId}/questions">${test.testName}</a>
+                    </td>
+                    <td>
+                        <input type="text" class="myinput" name="quesAmount" value="${test.quesAmount}" onchange="changeData(${count.count})" style="margin-top: 0; padding: 0">
+                    </td>
+                    <td>
+                        <input type="text" class="myinput" name="criteria" value="${test.criteria}" onchange="changeData(${count.count})" style="margin-top: 0; padding: 0"/>
+                    </td>
+                    <td>
+                        <input type="text" class="myinput" name="time" value="${test.time}" onchange="changeData(${count.count})" style="margin-top: 0; padding: 0"/>
+                    </td>
+                    <td>
+                        <input type="checkbox" value="${test.quesMix}" name="quesMix" onchange="changeData(${count.count})"/>
+                    </td>
+                    <td>
+                        <button id="btnch${count.count}" type="button" class="btnch buttonch" style="margin-top: 0; padding: 0; width: 30px"> V </button>
                     </td>
                 </tr
             </c:forEach>
@@ -63,5 +87,12 @@
     <button form="del" name="delete" type="submit" class="btncancel">Удалить</button>
 </div>
 </body>
+<script>
+    function changeData(count){
+      let el =  document.getElementById('btnch' + count);
+      $(el).show();
+      console.log(el);
+    }
+</script>
 </html>
 
