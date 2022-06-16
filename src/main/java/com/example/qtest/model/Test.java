@@ -29,10 +29,10 @@ public class Test {
     private Integer quesAmount;
 
     @Column
-    private boolean deleted;
+    private Boolean deleted;
 
-    @Column(name = "ques_mix")
-    private boolean quesMix;
+    @Column(name = "ques_mix", columnDefinition = "boolean default false")
+    private Boolean quesMix;
 
     @Column(name = "group_id")
     private Integer groupId;

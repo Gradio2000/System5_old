@@ -11,5 +11,5 @@ public class TestDto implements Serializable {
     private final Double criteria;
     private final Double time;
     private final Integer quesAmount;
-    private final boolean quesMix;
+    private final Boolean quesMix;
 }

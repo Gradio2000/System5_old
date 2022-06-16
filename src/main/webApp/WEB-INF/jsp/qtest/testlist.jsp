@@ -40,30 +40,40 @@
                 <th>Перемешать вопросы</th>
                 <th>Сохранить изменения</th>
             </tr>
-            <c:forEach var="test" items="${testList}" varStatus="count">
-                <tr>
-                    <td style="width: 10%;">
-                        <input form="del" value="${test.testId}" type="checkbox" name="check"/>
-                    </td>
-                    <td class="tblsht">
-                        <a href="/tests/${test.testId}/questions">${test.testName}</a>
-                    </td>
-                    <td>
-                        <input type="text" class="myinput" name="quesAmount" value="${test.quesAmount}" onchange="changeData(${count.count})" style="margin-top: 0; padding: 0">
-                    </td>
-                    <td>
-                        <input type="text" class="myinput" name="criteria" value="${test.criteria}" onchange="changeData(${count.count})" style="margin-top: 0; padding: 0"/>
-                    </td>
-                    <td>
-                        <input type="text" class="myinput" name="time" value="${test.time}" onchange="changeData(${count.count})" style="margin-top: 0; padding: 0"/>
-                    </td>
-                    <td>
-                        <input type="checkbox" value="${test.quesMix}" name="quesMix" onchange="changeData(${count.count})"/>
-                    </td>
-                    <td>
-                        <button id="btnch${count.count}" type="button" class="btnch buttonch" style="margin-top: 0; padding: 0; width: 30px"> V </button>
-                    </td>
-                </tr
+            <c:forEach var="test" items="${testList}">
+                <form id="safetest${test.testId}">
+                    <input type="hidden" name="testId" value="${test.testId}">
+                    <input type="hidden" name="testId" value="${groupTestId}">
+                    <tr>
+                        <td style="width: 10%;">
+                            <input form="del" value="${test.testId}" type="checkbox" name="check"/>
+                        </td>
+                        <td class="tblsht">
+                            <input type="text" class="myinput" name="testName" value="${test.testName}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0">
+                        </td>
+                        <td>
+                            <input type="text" class="myinput" name="quesAmount" value="${test.quesAmount}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0">
+                        </td>
+                        <td>
+                            <input type="text" class="myinput" name="criteria" value="${test.criteria}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0"/>
+                        </td>
+                        <td>
+                            <input type="text" class="myinput" name="time" value="${test.time}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0"/>
+                        </td>
+                        <td>
+                            <c:if test="${test.quesMix == true}">
+                                <input type="checkbox" checked value="${test.quesMix}" name="quesMix" onchange="changeData(${test.testId})"/>
+                            </c:if>
+                            <c:if test="${test.quesMix == false}">
+                                <input type="checkbox" value="${test.quesMix}" name="quesMix" onchange="changeData(${test.testId})"/>
+                            </c:if>
+                        </td>
+                        <td>
+                            <button id="btnch${test.testId}" type="button" class="btnch buttonch" style="margin-top: 0; padding: 0; width: 30px" onclick="saveTest(${test.testId})"> V </button>
+                        </td>
+                    </tr>
+                </form>
+
             </c:forEach>
             <div>
                 <a style="color: crimson; font: bold italic 110% serif">
@@ -88,10 +98,28 @@
 </div>
 </body>
 <script>
-    function changeData(count){
-      let el =  document.getElementById('btnch' + count);
+    function changeData(id){
+      let el =  document.getElementById('btnch' + id);
       $(el).show();
-      console.log(el);
+    }
+
+    function saveTest(id){
+        const msg = document.getElementById("safetest" + id);
+        let d = $(msg).serializeArray();
+        $.ajax({
+            type: 'POST',
+            url: '/tests/change/',
+            data: d,
+            success: function (data) {
+                let el =  document.getElementById('btnch' + id);
+                $(el).hide();
+                console.log(d);
+            },
+            error: function () {
+                alert('Ошибка изменения теста! Обратитесь к администратору!');
+                console.log(d);
+            }
+        });
     }
 </script>
 </html>
