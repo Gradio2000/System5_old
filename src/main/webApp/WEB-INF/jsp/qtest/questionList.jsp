@@ -59,32 +59,14 @@
     <form method="POST" action="/fileUpload" enctype="multipart/form-data">
         <input type="hidden" name="testId" value="${testId}">
         <input name="id" hidden value="${id}"/>
-        File to upload: <input type="file" name="file"><br />
-
-        <input type="submit" value="Upload">
-        Press here to upload the file!
+        <input type="file" name="file"><br />
+        <button class="btn" type="submit" value="Upload">Загрузить</button>
     </form>
 
 </div>
 </body>
 <script>
-    function uploadFile(){
-        const msg = $('#loadFile').serialize();
-        $.ajax({
-            type: 'POST',
-            enctype: 'multipart/form-data',
-            url: '/fileUpload',
-            data: msg,
-            success: function (data) {
-                // запустится при успешном выполнении запроса и в data будет ответ скрипта
-            },
-            error: function () {
-                alert('Ошибка!');
-                console.log(msg);
-            }
-        });
 
-    }
 </script>
 </html>
 

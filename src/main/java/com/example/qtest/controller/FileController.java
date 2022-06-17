@@ -23,8 +23,8 @@ public class FileController {
             fileUploadService.uploadQuestionFromFile(file, testId);
         } catch (IOException e) {
             e.printStackTrace();
-            return "redirect:/tests/" + testId + "/questions";
+            return "redirect:/tests/" + testId + "/questions?error=100";
         }
-        return "redirect:/tests/" + testId + "/questions?error=100";
+        return "redirect:/tests/" + testId + "/questions";
     }
 }
