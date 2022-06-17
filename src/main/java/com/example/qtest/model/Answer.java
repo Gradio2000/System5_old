@@ -22,6 +22,9 @@ public class Answer {
     @JoinColumn(name = "question_id")
     private Question question;
 
+//    @Column(name = "question_id")
+//    private Integer questionId;
+
     @Column(name = "is_right", nullable = false)
     private Boolean isRight = false;
 

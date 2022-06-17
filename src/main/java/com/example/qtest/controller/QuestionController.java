@@ -24,6 +24,7 @@ public class QuestionController {
     public String getQuestionsList(@AuthenticationPrincipal AuthUser authUser,
                                    Model model, @PathVariable Integer id){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("testId", id);
         List<Question> questionList = questionRepository.findAllByTestIdOrderById(id);
         model.addAttribute("questionList", questionList);
         return "/qtest/questionList";

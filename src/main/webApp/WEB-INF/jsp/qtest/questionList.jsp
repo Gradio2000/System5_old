@@ -26,7 +26,7 @@
 </head>
 <body>
 <div class="main">
-    <table id="color_table" style="width: 100%; table-layout: fixed" >
+    <table id="color_table" class="quesTable">
         <tbody>
         <tr>
             <th>Вопрос</th>
@@ -35,10 +35,10 @@
         </tr>
         <c:forEach var="question" items="${questionList}">
             <tr>
-                <td rowspan="${question.answers.size() + 1}">${question.questionName}
+                <td rowspan="${question.answers.size() + 1}" style="text-align: justify">${question.questionName}
                     <c:forEach var="answer" items="${question.answers}">
                             <tr>
-                                <td>${answer.answerName}</td>
+                                <td style="text-align: justify">${answer.answerName}</td>
                                 <c:if test="${answer.isRight}">
                                     <td>Да</td>
                                 </c:if>
@@ -52,7 +52,39 @@
         </c:forEach>
         </tbody>
     </table>
+    <br>
+    <a style="color: crimson; font: bold italic 110% serif">
+        <c:if test="${param.get('error') == 100}">Произошла ошибка при загрузке файла с вопросами. Проверьте его структуру!</c:if>
+    </a>
+    <form method="POST" action="/fileUpload" enctype="multipart/form-data">
+        <input type="hidden" name="testId" value="${testId}">
+        <input name="id" hidden value="${id}"/>
+        File to upload: <input type="file" name="file"><br />
+
+        <input type="submit" value="Upload">
+        Press here to upload the file!
+    </form>
+
 </div>
 </body>
+<script>
+    function uploadFile(){
+        const msg = $('#loadFile').serialize();
+        $.ajax({
+            type: 'POST',
+            enctype: 'multipart/form-data',
+            url: '/fileUpload',
+            data: msg,
+            success: function (data) {
+                // запустится при успешном выполнении запроса и в data будет ответ скрипта
+            },
+            error: function () {
+                alert('Ошибка!');
+                console.log(msg);
+            }
+        });
+
+    }
+</script>
 </html>
 
