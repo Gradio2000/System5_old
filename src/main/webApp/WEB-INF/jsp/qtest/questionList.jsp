@@ -19,12 +19,12 @@
 
 </style>
 <head>
-    <jsp:include page="../../includes/header.jsp"/>
     <jsp:include page="../../includes/menu.jsp"/>
-
+    <jsp:include page="../../includes/header.jsp"/>
     <title>Список вопросов</title>
 </head>
 <body>
+
 <div class="main">
     <table id="color_table" class="quesTable">
         <tbody>

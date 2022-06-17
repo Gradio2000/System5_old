@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<header>
+
   <div class="header">
     <a class="logo">ЛенИнформ</a>
     <div class="header-right">
       <a href="/getUser">${user.name}</a>
     </div>
   </div>
-</header>
+
 <style>
   /* Style the header with a grey background and some padding */
   .header {
@@ -14,6 +14,9 @@
     background-color: #f1f1f1;
     padding: 10px 5px;
     font-style: italic;
+    position: fixed;
+    width: 100%;
+    height: 70px;
   }
 
   /* Style the header links */

@@ -17,12 +17,12 @@
 
 <html>
 <head>
-
+    <jsp:include page="../../includes/header.jsp"/>
+    <jsp:include page="../../includes/menu.jsp"/>
     <title>Штат</title>
 </head>
 <body>
-<jsp:include page="../../includes/header.jsp"/>
-<jsp:include page="../../includes/menu.jsp"/>
+
 <div class="main">
     <table  id="color_table">
         <tbody>
