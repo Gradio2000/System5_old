@@ -29,10 +29,11 @@
     <table id="color_table" style="width: 100%; table-layout: auto" >
         <tbody>
             <tr>
-                <th colspan="7" class="tblsht">Список тестов: ${groupTestName}</th>
+                <th colspan="8" class="tblsht">Список тестов: ${groupTestName}</th>
             </tr>
             <tr>
                 <th>Удалить</th>
+                <th>Посмотреть вопросы</th>
                 <th>Название теста</th>
                 <th>Количество вопросов в тесте</th>
                 <th>Критерий, %</th>
@@ -47,6 +48,9 @@
                     <tr>
                         <td style="width: 10%;">
                             <input form="del" value="${test.testId}" type="checkbox" name="check"/>
+                        </td>
+                        <td style="width: 10%;">
+                            <a href="/tests/${test.testId}/questions">Вопросы теста</a>
                         </td>
                         <td class="tblsht">
                             <input type="text" class="myinput" name="testName" value="${test.testName}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0">

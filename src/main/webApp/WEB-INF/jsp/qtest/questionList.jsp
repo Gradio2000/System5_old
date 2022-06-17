@@ -26,17 +26,32 @@
 </head>
 <body>
 <div class="main">
-    <ol>
+    <table id="color_table" style="width: 100%; table-layout: fixed" >
+        <tbody>
+        <tr>
+            <th>Вопрос</th>
+            <th>Варианты ответов</th>
+            <th>Правильный ответ</th>
+        </tr>
         <c:forEach var="question" items="${questionList}">
-            <li>${question.questionName}
-                <ul>
+            <tr>
+                <td rowspan="${question.answers.size() + 1}">${question.questionName}
                     <c:forEach var="answer" items="${question.answers}">
-                        <li>${answer.answerName}</li>
-                    </c:forEach>
-                </ul>
-            </li>
+                            <tr>
+                                <td>${answer.answerName}</td>
+                                <c:if test="${answer.isRight}">
+                                    <td>Да</td>
+                                </c:if>
+                                <c:if test="${!answer.isRight}">
+                                    <td></td>
+                                </c:if>
+                            </tr>
+                        </c:forEach>
+                </td>
+            </tr>
         </c:forEach>
-    </ol>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

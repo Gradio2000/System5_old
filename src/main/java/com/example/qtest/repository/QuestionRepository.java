@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Integer> {
-    List<Question> findAllByTestId(Integer id);
+    List<Question> findAllByTestIdOrderById(Integer id);
 }
