@@ -39,6 +39,7 @@ public class Test {
 
     @OneToMany(targetEntity = Question.class, cascade = CascadeType.ALL,
     fetch = FetchType.EAGER, mappedBy = "testId")
+    @OrderBy("id")
     private List<Question> questions;
 
 }

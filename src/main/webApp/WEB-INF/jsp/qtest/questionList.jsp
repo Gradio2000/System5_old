@@ -29,16 +29,22 @@
     <table id="color_table" class="quesTable">
         <tbody>
         <tr>
+            <th>№ п/п</th>
             <th>Вопрос</th>
             <th>Варианты ответов</th>
             <th>Правильный ответ</th>
         </tr>
-        <c:forEach var="question" items="${questionList}">
+        <c:forEach var="question" items="${questionList}" varStatus="count">
             <tr>
-                <td rowspan="${question.answers.size() + 1}" style="text-align: justify">${question.questionName}
+            <td rowspan="${question.answers.size() + 1}" style="text-align: justify">${count.count}</td>
+                <td rowspan="${question.answers.size() + 1}">
+                    <textarea style="width: 100%; border: none">${question.questionName}</textarea>
                     <c:forEach var="answer" items="${question.answers}">
                             <tr>
-                                <td style="text-align: justify">${answer.answerName}</td>
+<%--                                <td style="text-align: justify">${answer.answerName}</td>--%>
+                                <td style="width: 40%">
+                                    <textarea style="width: 100%; height: 60px; border: none">${answer.answerName}</textarea>
+                                </td>
                                 <c:if test="${answer.isRight}">
                                     <td>Да</td>
                                 </c:if>
@@ -46,7 +52,7 @@
                                     <td></td>
                                 </c:if>
                             </tr>
-                        </c:forEach>
+                    </c:forEach>
                 </td>
             </tr>
         </c:forEach>

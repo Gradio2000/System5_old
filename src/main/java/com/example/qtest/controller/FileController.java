@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
 @Controller
 public class FileController {
 
@@ -21,7 +19,7 @@ public class FileController {
     public String loadFile(@RequestParam MultipartFile file, @RequestParam Integer testId) {
         try {
             fileUploadService.uploadQuestionFromFile(file, testId);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/tests/" + testId + "/questions?error=100";
         }
