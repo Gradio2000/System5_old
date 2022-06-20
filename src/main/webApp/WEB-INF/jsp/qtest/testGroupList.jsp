@@ -28,17 +28,31 @@
         <table id="color_table" style="width: 100%; table-layout: auto" >
             <tbody>
             <tr>
-                <th colspan="2" class="tblsht">Группы тестов</th>
+                <th colspan="4" class="tblsht">Группы тестов</th>
+            </tr>
+            <tr>
+                <th>Удалить</th>
+                <th>Тесты группы</th>
+                <th>Название группы</th>
+                <th>Сохранить изменения</th>
             </tr>
             <c:forEach var="groupTest" items="${groupTests}">
-                <tr>
-                    <td style="width: 10%;">
-                        <input form="del" value="${groupTest.grouptestId}" type="checkbox" name="check"/>
-                    </td>
-                    <td class="tblsht">
-                        <a href="/tests/list/${groupTest.grouptestId}">${groupTest.name}</a>
-                    </td>
-                </tr
+                <form id="editGroup${groupTest.grouptestId}">
+                    <tr>
+                        <td style="width: 10%;">
+                            <input form="del" value="${groupTest.grouptestId}" type="checkbox" name="check"/>
+                        </td>
+                        <td class="tblsht" style="width: 10%;">
+                            <a href="/tests/list/${groupTest.grouptestId}">Список тестов</a>
+                        </td>
+                        <td>
+                            <input type="text" class="myinput" name="name" value="${groupTest.name}" onchange="changeData(${groupTest.grouptestId})" style="margin-top: 0; padding: 0"/>
+                        </td>
+                        <td>
+                            <button id="btnch${groupTest.grouptestId}" type="button" class="btnch buttonch" style="margin-top: 0; padding: 0; width: 30px" onclick="changeGroupName(${groupTest.grouptestId})"> V </button>
+                        </td>
+                    </tr>
+                </form>
             </c:forEach>
             <div>
                 <a style="color: crimson; font: bold italic 110% serif">
@@ -61,4 +75,30 @@
 
     </div>
 </body>
+<script>
+
+    function changeData(id){
+        let el =  document.getElementById('btnch' + id);
+        $(el).show();
+    }
+
+    function changeGroupName(id){
+        const msg = document.getElementById("editGroup" + id);
+        let d = $(msg).serializeArray();
+        $.ajax({
+            type: 'POST',
+            url: '/testGroup/edit/' + id,
+            data: d,
+            success: function (data) {
+                let el =  document.getElementById('btnch' + id);
+                $(el).hide();
+                console.log(d);
+            },
+            error: function () {
+                alert('Ошибка изменения теста! Обратитесь к администратору!');
+                console.log(d);
+            }
+        });
+    }
+</script>
 </html>

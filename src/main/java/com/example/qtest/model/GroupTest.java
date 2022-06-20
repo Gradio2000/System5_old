@@ -23,5 +23,6 @@ public class GroupTest {
 
     @OneToMany(targetEntity = Test.class, cascade = CascadeType.ALL,
     fetch = FetchType.EAGER, mappedBy = "groupId")
+    @OrderBy("testId")
     private List<Test> tests;
 }

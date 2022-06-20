@@ -6,6 +6,7 @@ import com.example.qtest.repository.GroupTestRepository;
 import com.example.qtest.service.DtoUtils;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,7 @@ public class GroupTestController {
     public String testGroupList(@AuthenticationPrincipal AuthUser authUser,
                                 Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        List<GroupTestDto> groupTests = groupTestRepository.findAll().stream()
+        List<GroupTestDto> groupTests = groupTestRepository.findByOrderByGrouptestId().stream()
                 .map(dtoUtils::convertToGroupTestDto)
                 .collect(Collectors.toList());
         model.addAttribute("groupTests", groupTests);
@@ -55,5 +56,15 @@ public class GroupTestController {
             return "redirect:/testGroup/list?error=100";
         }
         return "redirect:/testGroup/list";
+    }
+
+    @PostMapping("/edit/{id}")
+    @ResponseBody
+    public HttpStatus editGroupTestName(@PathVariable Integer id, GroupTestDto groupTestDto){
+        GroupTest groupTest = groupTestRepository.findById(id).orElse(null);
+        assert groupTest != null;
+        groupTest.setName(groupTestDto.getName());
+        groupTestRepository.save(groupTest);
+        return HttpStatus.OK;
     }
 }
