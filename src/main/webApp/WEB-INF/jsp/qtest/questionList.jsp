@@ -43,15 +43,21 @@
                     </form>
                     <c:forEach var="answer" items="${question.answers}">
                             <tr>
-                                <td style="width: 40%">
-                                    <textarea style="width: 100%; height: 60px; border: none">${answer.answerName}</textarea>
-                                </td>
-                                <c:if test="${answer.isRight}">
-                                    <td>Да</td>
-                                </c:if>
-                                <c:if test="${!answer.isRight}">
-                                    <td></td>
-                                </c:if>
+                                <form id="editAnswer${answer.id}">
+                                    <td style="width: 40%">
+                                        <textarea name="answerName" style="width: 100%; height: 60px; border: none" onchange="editAnswer(${answer.id})">${answer.answerName}</textarea>
+                                    </td>
+                                    <c:if test="${answer.isRight}">
+                                        <td>
+                                            <textarea name="isRight" style="width: 100%; height: 60px; border: none" onchange="editAnswer(${answer.id})">Да</textarea>
+                                        </td>
+                                    </c:if>
+                                    <c:if test="${!answer.isRight}">
+                                        <td>
+                                            <textarea name="isRight" style="width: 100%; height: 60px; border: none" onchange="editAnswer(${answer.id})"></textarea>
+                                        </td>
+                                    </c:if>
+                                </form>
                             </tr>
                     </c:forEach>
                 </td>
@@ -81,11 +87,27 @@
             url: '/questions/edit/' + id,
             data: d,
             success: function (data) {
-                // let el =  document.getElementById('btnch' + id);
-                // $(el).hide();
+
             },
             error: function () {
                 alert('Ошибка изменения вопроса! Обратитесь к администратору!');
+                console.log(d);
+            }
+        });
+    }
+
+    function editAnswer(id){
+        const msg = document.getElementById("editAnswer" + id);
+        let d = $(msg).serializeArray();
+        $.ajax({
+            type: 'POST',
+            url: '/answer/edit/' + id,
+            data: d,
+            success: function (data) {
+
+            },
+            error: function () {
+                alert('Ошибка изменения ответа! Обратитесь к администратору!');
                 console.log(d);
             }
         });
