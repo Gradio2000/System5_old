@@ -1,10 +1,12 @@
 package com.example.qtest.controller;
 
+import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.Test;
 import com.example.qtest.repository.GroupTestRepository;
 import com.example.qtest.repository.TestReposytory;
 import com.example.qtest.service.DtoUtils;
+import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -34,7 +37,7 @@ public class TestController {
     public String getAllTest(@PathVariable Integer id, @AuthenticationPrincipal AuthUser authUser, Model model){
         model.addAttribute("user", authUser.getUser());
         model.addAttribute("groupTestId", id);
-        model.addAttribute("groupTestName", groupTestRepository.findById(id).orElse(null).getName());
+        model.addAttribute("groupTestName", Objects.requireNonNull(groupTestRepository.findById(id).orElse(null)).getName());
         List<TestDto> testDtoList = testReposytory.findAllByGroupIdOrderByTestId(id).stream()
                 .map(dtoUtils :: convertToTestDto)
                 .collect(Collectors.toList());
@@ -79,5 +82,26 @@ public class TestController {
         test.setQuesMix(testDto.getQuesMix() != null);
         testReposytory.save(test);
         return HttpStatus.OK;
+    }
+
+    @GetMapping("listForTesting/{id}")
+    public String listForTesting(@AuthenticationPrincipal AuthUser authUser, Model model, @PathVariable Integer id){
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        List<TestDto> testList = testReposytory.findAllByGroupIdOrderByTestId(id).stream()
+                .map(dtoUtils :: convertToTestDto)
+                .collect(Collectors.toList());
+        model.addAttribute("testList", testList);
+        GroupTestDto groupTest = dtoUtils.convertToGroupTestDto(Objects.requireNonNull(groupTestRepository.findById(id).orElse(null)));
+        model.addAttribute("groupTest", groupTest);
+        return "qtest/allTestsForTesting";
+    }
+
+    @GetMapping("/listForTesting/test/{id}")
+    public String getTestForTesting(@AuthenticationPrincipal AuthUser authUser, Model model,
+                                    @PathVariable Integer id){
+        Test test = testReposytory.findById(id).orElse(null);
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("test", test);
+        return "qtest/startTest";
     }
 }

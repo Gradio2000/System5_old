@@ -9,7 +9,8 @@
     <a href="/admin/prepareHalfYearReport">Отчет за полугодие</a>
     <a href="/admin/prepareYearReport">Отчет за год</a>
     <a href="/admin/archive">Архив</a>
-    <a href="/testGroup/list">Группы тестов</a>
+    <a href="/testGroup/list">Редактирование тестов</a>
+    <a href="/testGroup/listForTesting">Тестирование</a>
     <a href="/logout">Выйти</a>
 </div>
 

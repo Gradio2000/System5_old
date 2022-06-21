@@ -67,4 +67,15 @@ public class GroupTestController {
         groupTestRepository.save(groupTest);
         return HttpStatus.OK;
     }
+
+    @GetMapping("/listForTesting")
+    public String getAllTestsForTesting(@AuthenticationPrincipal AuthUser authUser,
+                                        Model model){
+        List<GroupTestDto> groupTests = groupTestRepository.findByOrderByGrouptestId().stream()
+                .map(dtoUtils::convertToGroupTestDto)
+                .collect(Collectors.toList());
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("groupTests", groupTests);
+        return "qtest/allTestGroupForTesting";
+    }
 }
