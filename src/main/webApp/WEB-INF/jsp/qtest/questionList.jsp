@@ -38,10 +38,11 @@
             <tr>
             <td rowspan="${question.answers.size() + 1}" style="text-align: justify">${count.count}</td>
                 <td rowspan="${question.answers.size() + 1}">
-                    <textarea style="width: 100%; border: none">${question.questionName}</textarea>
+                    <form id="editQues${question.id}">
+                        <textarea name="questionName" style="width: 100%; height: 60px; border: none" onchange="editQues(${question.id})">${question.questionName}</textarea>
+                    </form>
                     <c:forEach var="answer" items="${question.answers}">
                             <tr>
-<%--                                <td style="text-align: justify">${answer.answerName}</td>--%>
                                 <td style="width: 40%">
                                     <textarea style="width: 100%; height: 60px; border: none">${answer.answerName}</textarea>
                                 </td>
@@ -72,7 +73,23 @@
 </div>
 </body>
 <script>
-
+    function editQues(id){
+        const msg = document.getElementById("editQues" + id);
+        let d = $(msg).serializeArray();
+        $.ajax({
+            type: 'POST',
+            url: '/questions/edit/' + id,
+            data: d,
+            success: function (data) {
+                // let el =  document.getElementById('btnch' + id);
+                // $(el).hide();
+            },
+            error: function () {
+                alert('Ошибка изменения вопроса! Обратитесь к администратору!');
+                console.log(d);
+            }
+        });
+    }
 </script>
 </html>
 

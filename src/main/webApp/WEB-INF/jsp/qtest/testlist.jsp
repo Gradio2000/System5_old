@@ -117,7 +117,6 @@
             success: function (data) {
                 let el =  document.getElementById('btnch' + id);
                 $(el).hide();
-                console.log(d);
             },
             error: function () {
                 alert('Ошибка изменения теста! Обратитесь к администратору!');

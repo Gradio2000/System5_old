@@ -4,11 +4,11 @@ import com.example.qtest.model.Question;
 import com.example.qtest.repository.QuestionRepository;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +28,15 @@ public class QuestionController {
         List<Question> questionList = questionRepository.findAllByTestIdOrderById(id);
         model.addAttribute("questionList", questionList);
         return "/qtest/questionList";
+    }
+
+    @PostMapping("//questions/edit/{id}")
+    @ResponseBody
+    public HttpStatus editQuestion(@PathVariable Integer id, @ModelAttribute Question question){
+        Question questionForEdit = questionRepository.findById(id).orElse(null);
+        assert questionForEdit != null;
+        questionForEdit.setQuestionName(question.getQuestionName());
+        questionRepository.save(questionForEdit);
+        return HttpStatus.OK;
     }
 }
