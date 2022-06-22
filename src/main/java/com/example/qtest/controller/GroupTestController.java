@@ -76,6 +76,6 @@ public class GroupTestController {
                 .collect(Collectors.toList());
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("groupTests", groupTests);
-        return "qtest/allTestGroupForTesting";
+        return "qtest/forTesting/allTestGroupForTesting";
     }
 }

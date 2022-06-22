@@ -93,7 +93,7 @@ public class TestController {
         model.addAttribute("testList", testList);
         GroupTestDto groupTest = dtoUtils.convertToGroupTestDto(Objects.requireNonNull(groupTestRepository.findById(id).orElse(null)));
         model.addAttribute("groupTest", groupTest);
-        return "qtest/allTestsForTesting";
+        return "qtest/forTesting/allTestsForTesting";
     }
 
     @GetMapping("/listForTesting/test/{id}")
@@ -102,6 +102,6 @@ public class TestController {
         Test test = testReposytory.findById(id).orElse(null);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("test", test);
-        return "qtest/startTest";
+        return "qtest/forTesting/testForTesting";
     }
 }
