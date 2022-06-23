@@ -43,7 +43,7 @@
             <td class="tblsht">${test.quesAmount}</td>
         </tr>
     </table>
-    <form action="/processing/start" method="get">
+    <form action="/processing/start" method="post">
         <input type="hidden" name="testId" value="${test.testId}">
         <button type="submit" class="btn">Начать</button>
     </form>

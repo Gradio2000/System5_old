@@ -27,7 +27,7 @@ public class QuestionController {
         model.addAttribute("testId", id);
         List<Question> questionList = questionRepository.findAllByTestIdOrderById(id);
         model.addAttribute("questionList", questionList);
-        return "/qtest/questionList";
+        return "qtest/administration/questionList";
     }
 
     @PostMapping("//questions/edit/{id}")

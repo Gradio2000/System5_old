@@ -36,7 +36,7 @@ public class GroupTestController {
                 .map(dtoUtils::convertToGroupTestDto)
                 .collect(Collectors.toList());
         model.addAttribute("groupTests", groupTests);
-        return "qtest/testGroupList";
+        return "qtest/administration/testGroupList";
     }
 
     @PostMapping("/add")

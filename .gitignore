@@ -1,5 +1,6 @@
 HELP.md
 .log
+.gz
 .gitignore
 target/
 !.mvn/wrapper/maven-wrapper.jar

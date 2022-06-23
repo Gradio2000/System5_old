@@ -42,7 +42,7 @@ public class TestController {
                 .map(dtoUtils :: convertToTestDto)
                 .collect(Collectors.toList());
         model.addAttribute("testList", testDtoList);
-        return "qtest/testlist";
+        return "qtest/administration/testlist";
     }
 
     @PostMapping("/add")
