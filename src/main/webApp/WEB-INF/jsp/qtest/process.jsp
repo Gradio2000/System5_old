@@ -26,23 +26,54 @@
 </head>
 <body>
 <div class="main">
-    <table id="color_table" style="width: 100%; table-layout: auto">
-        <c:forEach var="question" items="${test.questions}" varStatus="count">
-            <tr>
-                <th colspan="2" class="tblsht">Вопрос ${count.count} из ${test.questions.size()}</th>
-            </tr>
-            <tr>
-                <td colspan="2" class="tblsht">${question.questionName}</td>
-            </tr>
-            <c:forEach var="answer" items="${question.answers}">
-                <tr>
-                    <td style="width: 10%;"><input type="checkbox"></td>
-                    <td class="tblsht">${answer.answerName}</td>
-                </tr>
-            </c:forEach>
-        </c:forEach>
-    </table>
+    <c:forEach var="question" items="${questionList}" varStatus="count">
+        <div id="wrapper${count.count}" hidden>
+            <form id="form${question.question.id}">
+                <input name="attemptId" type="hidden" value="${question.attemptId}">
+                <input name="questionId" type="hidden" value="${question.question.id}">
+                <table id="color_table" style="width: 100%; table-layout: auto">
+                    <tr>
+                        <th colspan="2" class="tblsht">Вопрос ${count.count} из ${questionList.size()}</th>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="tblsht">${question.question.questionName}</td>
+                    </tr>
+                    <c:forEach var="answer" items="${question.question.answers}">
+                        <tr>
+                            <td style="width: 10%;"><input name="check" type="checkbox" value="${answer.id}"></td>
+                            <td class="tblsht">${answer.answerName}</td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </form>
+            <button class="btn" onclick="saveUserAnswer(${question.question.id})">Ответить</button>
+        </div>
+    </c:forEach>
 </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", ready);
+    function ready() {
+        $('#wrapper1').show();
+    }
+
+    function saveUserAnswer(id){
+        const msg = $('#form' + id).serialize();
+        // console.log(msg);
+        $.ajax({
+            type: 'POST',
+            url: '/processing/saveUserAnswer',
+            data: msg,
+            success: function (data) {
+                // запустится при успешном выполнении запроса и в data будет ответ скрипта
+            },
+            error: function () {
+                alert('Ошибка!');
+                console.log(msg);
+            }
+        });
+
+    }
+</script>
 </html>
 

@@ -25,7 +25,7 @@ public class TestService {
         List<QuestionsForAttempt> questionsForAttemptList = new ArrayList<>();
         List<Question> questions = test.getQuestions();
         questions.forEach(q -> {
-            questionsForAttemptList.add(new QuestionsForAttempt(attemptId, q.getId()));
+            questionsForAttemptList.add(new QuestionsForAttempt(attemptId, q));
         });
         return questionsForAttemptList;
     }

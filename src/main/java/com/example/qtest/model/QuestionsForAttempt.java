@@ -18,15 +18,12 @@ public class QuestionsForAttempt {
     @Column(name = "attempt_id")
     private Integer attemptId;
 
-    @Column(name = "question_id")
-    private Integer questionId;
+    @OneToOne(targetEntity = Question.class)
+    @JoinColumn(name = "question_id", referencedColumnName = "question_id")
+    private Question question;
 
-    public QuestionsForAttempt(Integer attemptId, Integer questionId) {
+    public QuestionsForAttempt(Integer attemptId, Question question) {
         this.attemptId = attemptId;
-        this.questionId = questionId;
-    }
-
-    public QuestionsForAttempt() {
-
+        this.question = question;
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -98,7 +99,8 @@ public class TestController {
 
     @GetMapping("/listForTesting/test/{id}")
     public String getTestForTesting(@AuthenticationPrincipal AuthUser authUser, Model model,
-                                    @PathVariable Integer id){
+                                    @PathVariable Integer id,
+                                    HttpSession session){
         Test test = testReposytory.findById(id).orElse(null);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("test", test);
