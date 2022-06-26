@@ -46,7 +46,7 @@
                     </c:forEach>
                 </table>
             </form>
-            <button class="btn" onclick="saveUserAnswer(${question.question.id})">Ответить</button>
+            <button id="${count.count}" class="btn" onclick="saveUserAnswer(${question.question.id}, this.id)">Ответить</button>
         </div>
     </c:forEach>
 </div>
@@ -54,18 +54,19 @@
 <script>
     document.addEventListener("DOMContentLoaded", ready);
     function ready() {
-        $('#wrapper1').show();
+       $('#wrapper1').show();
     }
 
-    function saveUserAnswer(id){
+    function saveUserAnswer(id, counter){
         const msg = $('#form' + id).serialize();
-        // console.log(msg);
         $.ajax({
             type: 'POST',
             url: '/processing/saveUserAnswer',
             data: msg,
             success: function (data) {
-                // запустится при успешном выполнении запроса и в data будет ответ скрипта
+                $('#wrapper' + counter).hide();
+                let newcount = +(counter) + 1;
+                $('#wrapper'  + newcount).show();
             },
             error: function () {
                 alert('Ошибка!');
