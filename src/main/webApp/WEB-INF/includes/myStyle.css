@@ -138,7 +138,40 @@ body {
 .my-modal input:focus {
     outline: none;
 }
+.minibuttons{
+    margin-top: inherit;
+}
+.minibtn{
+    background: #878686;
+    border: 1px solid #525151;
+    color: white;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    height: 30px;
+}
 
+.right{
+    background: #1fb5bf;
+    border: 1px solid #1ba0a9;
+    color: white;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    height: 30px;
+}
+
+.minibtn .false{
+    background: #dc4242;
+    border: 1px solid #d00909;
+    color: white;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    height: 30px;
+}
+
+.skipped{
+    background: #e8d23f;
+    border: 1px solid #d5c13a;
+    color: white;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    height: 30px;
+}
 
 .btn {
     width: auto;
@@ -188,6 +221,19 @@ body {
     background: #23cad5;
 }
 
+.minibtn:hover {
+    background: #b6b6b6;
+}
+
+.right:hover {
+    background: #23cad5;
+}
+
+.skipped:hover {
+    background: #fce345;
+}
+
+
 .btncancel:hover {
     background: #e79696;
 }
@@ -204,6 +250,21 @@ body {
 .btn:active {
     background: #1fb5bf;
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.minibtn:active {
+    background: #878686;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.right:active {
+    background: #1fb5bf;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.skipped:active {
+    background: #e8d23f;
+    box-shadow: inset 0 1px 1px #d5c13a;
 }
 
 .btncancel:active {

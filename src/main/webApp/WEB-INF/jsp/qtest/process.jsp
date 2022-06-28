@@ -26,6 +26,7 @@
 </head>
 <body>
 <div class="main">
+
     <c:forEach var="question" items="${questionList}" varStatus="count">
         <div id="wrapper${count.count}" hidden>
             <form id="form${question.question.id}">
@@ -47,8 +48,16 @@
                 </table>
             </form>
             <button id="${count.count}" class="btn" onclick="saveUserAnswer(${question.question.id}, this.id, ${questionList.size()})">Ответить</button>
+            <button class="buttonch" onclick="skipAnswer(${count.count}, ${questionList.size()})">Пропустить</button>
         </div>
     </c:forEach>
+
+    <div class="minibuttons">
+        <c:forEach items="${questionList}" varStatus="count">
+            <button id="minibtn${count.count}" class="minibtn"></button>
+        </c:forEach>
+    </div>
+
     <div id="lastpage" style="display: none">
         <p style="font-family: 'Courier New',cursive">Спасибо! Вы завершили тест и можете посмотреть результат!</p>
         <button class="btn" onclick="document.location='/getResultTest/${attemptId}'">Результат</button>
@@ -59,6 +68,18 @@
     document.addEventListener("DOMContentLoaded", ready);
     function ready() {
        $('#wrapper1').show();
+    }
+
+    function skipAnswer(counter, size){
+        if (counter < size) {
+            $('#wrapper' + counter).hide();
+            let newcount = +(counter) + 1;
+            $('#wrapper' + newcount).show();
+            console.log(counter, + " " + size);
+        }
+        let elem = $('#minibtn' + counter);
+        elem.removeClass('minibtn');
+        elem.addClass('skipped');
     }
 
     function saveUserAnswer(id, counter, size){
@@ -72,8 +93,12 @@
                     let newcount = +(counter) + 1;
                     if (counter < size) {
                         $('#wrapper' + newcount).show();
+                        let elem = $('#minibtn' + counter);
+                        elem.removeClass('minibtn');
+                        elem.addClass('right');
                     }
                     else {
+                        $('.minibuttons').hide();
                         $('#lastpage').show();
                     }
                 },
