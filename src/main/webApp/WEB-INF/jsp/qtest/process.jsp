@@ -29,7 +29,7 @@
     <c:forEach var="question" items="${questionList}" varStatus="count">
         <div id="wrapper${count.count}" hidden>
             <form id="form${question.question.id}">
-                <input name="attemptId" type="hidden" value="${question.attemptId}">
+                <input name="attemptId" type="hidden" value="${attemptId}">
                 <input name="questionId" type="hidden" value="${question.question.id}">
                 <table id="color_table" style="width: 100%; table-layout: auto">
                     <tr>
@@ -46,9 +46,13 @@
                     </c:forEach>
                 </table>
             </form>
-            <button id="${count.count}" class="btn" onclick="saveUserAnswer(${question.question.id}, this.id)">Ответить</button>
+            <button id="${count.count}" class="btn" onclick="saveUserAnswer(${question.question.id}, this.id, ${questionList.size()})">Ответить</button>
         </div>
     </c:forEach>
+    <div id="lastpage" style="display: none">
+        <p style="font-family: 'Courier New',cursive">Спасибо! Вы завершили тест и можете посмотреть результат!</p>
+        <button class="btn" onclick="document.location='/getResultTest/${attemptId}'">Результат</button>
+    </div >
 </div>
 </body>
 <script>
@@ -57,23 +61,27 @@
        $('#wrapper1').show();
     }
 
-    function saveUserAnswer(id, counter){
+    function saveUserAnswer(id, counter, size){
         const msg = $('#form' + id).serialize();
-        $.ajax({
-            type: 'POST',
-            url: '/processing/saveUserAnswer',
-            data: msg,
-            success: function (data) {
-                $('#wrapper' + counter).hide();
-                let newcount = +(counter) + 1;
-                $('#wrapper'  + newcount).show();
-            },
-            error: function () {
-                alert('Ошибка!');
-                console.log(msg);
-            }
-        });
-
+            $.ajax({
+                type: 'POST',
+                url: '/processing/saveUserAnswer',
+                data: msg,
+                success: function (data) {
+                    $('#wrapper' + counter).hide();
+                    let newcount = +(counter) + 1;
+                    if (counter < size) {
+                        $('#wrapper' + newcount).show();
+                    }
+                    else {
+                        $('#lastpage').show();
+                    }
+                },
+                error: function () {
+                    alert('Выберите ответ!');
+                    console.log(msg);
+                }
+            });
     }
 </script>
 </html>

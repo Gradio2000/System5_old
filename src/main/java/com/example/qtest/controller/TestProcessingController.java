@@ -62,6 +62,7 @@ public class TestProcessingController {
             List<QuestionsForAttempt> questionsForAttemptList = testService.convertTestForSaveBeforeTesting(test, attempttest.getId());
             questionForAttemptRepository.saveAll(questionsForAttemptList);
 
+            model.addAttribute("attemptId", attempttest.getId());
             model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
             model.addAttribute("testName", test.getTestName());
             model.addAttribute("questionList", questionsForAttemptList);
@@ -74,11 +75,11 @@ public class TestProcessingController {
                                      HttpServletRequest request){
         String[] quesIds = request.getParameterMap().get("check");
         List<ResultTest> resultTestList = new ArrayList<>();
-        for (int i = 0; i < quesIds.length; i++) {
+        for (String quesId : quesIds) {
             ResultTest resulttest = new ResultTest();
             resulttest.setAttemptId(attemptId);
             resulttest.setQuestionId(questionId);
-            resulttest.setAnswerId(Integer.valueOf(quesIds[i]));
+            resulttest.setAnswerId(Integer.valueOf(quesId));
             resultTestList.add(resulttest);
         }
         resultTestReposytory.saveAll(resultTestList);

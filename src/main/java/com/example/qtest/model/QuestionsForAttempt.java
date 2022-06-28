@@ -22,6 +22,9 @@ public class QuestionsForAttempt {
     @JoinColumn(name = "question_id", referencedColumnName = "question_id")
     private Question question;
 
+    public QuestionsForAttempt() {
+    }
+
     public QuestionsForAttempt(Integer attemptId, Question question) {
         this.attemptId = attemptId;
         this.question = question;
