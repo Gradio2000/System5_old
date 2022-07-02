@@ -58,44 +58,68 @@
         </c:forEach>
     </div>
 
-    <div id="lastpage" style="display: none">
-        <p style="font-family: 'Courier New',cursive">Спасибо! Вы завершили тест и можете посмотреть результат!</p>
-        <button class="btn" onclick="document.location='/getResultTest/${attemptId}'">Результат</button>
+    <div id="lastpage">
+        <button class="btn" onclick="finishTest(${attemptId}, ${questionList.size()})">Результат</button>
     </div >
 </div>
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", ready);
     function ready() {
-        let elem = $('#wrapper1')
-        elem.show();
-        elem.addClass("visible");
+        $('#wrapper1')
+            .show()
+            .addClass("visible");
+        $('#minibtn1')
+            .removeClass('minibtn')
+            .addClass('selected');
+    }
+
+    function finishTest(attemptId, size){
+        if ($('.right').length !== size){
+            alert('Ответьте на все вопросы!');
+        }
+        else {
+            document.location='/getResultTest/${attemptId}'
+        }
     }
 
     function stepTo(counter){
-        $('.selected')
-            .removeClass("selected")
-            .addClass("minibtn");
+        let elem = $('.selected');
+        elem.removeClass('selected');
+        if (!elem.hasClass('right')){
+            elem.addClass('minibtn');
+        }
 
-        $('.visible').hide().removeClass('visible');
-        let elem = $('#wrapper' + counter);
-        elem.show();
-        elem.addClass('visible');
+        $('.visible')
+            .hide()
+            .removeClass('visible');
 
-        $('#minibtn' + counter)
-            .removeClass("minibtn")
-            .addClass("selected");
+        $('#wrapper' + counter)
+            .show()
+            .addClass('visible');
+
+        $('#minibtn' + counter).addClass("selected");
     }
 
     function skipAnswer(counter, size){
         if (counter < size) {
-            $('#wrapper' + counter).hide().removeClass('visible');
+            $('#wrapper' + counter)
+                .hide()
+                .removeClass('visible');
+
             let newcount = +(counter) + 1;
-            $('#wrapper' + newcount).show().addClass('visible');
+            $('#wrapper' + newcount)
+                .show()
+                .addClass('visible');
         }
-        let elem = $('#minibtn' + counter);
-        elem.removeClass('minibtn');
-        elem.addClass('skipped');
+
+        $('#minibtn' + counter)
+            .removeClass('minibtn')
+            .removeClass('selected')
+            .addClass('skipped');
+
+        let newcount = +(counter) + 1;
+        $('#minibtn' + newcount).click();
     }
 
     function saveUserAnswer(id, counter, size){
@@ -114,6 +138,7 @@
                     $('#minibtn' + counter)
                         .removeClass('skipped')
                         .removeClass('minibtn')
+                        .removeClass('selected')
                         .addClass('right');
 
                     $('#btn' + counter).remove();
