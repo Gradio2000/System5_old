@@ -54,7 +54,7 @@
 
     <div class="minibuttons">
         <c:forEach items="${questionList}" varStatus="count">
-            <button id="minibtn${count.count}" class="minibtn"></button>
+            <button id="minibtn${count.count}" class="minibtn" onclick="stepTo(${count.count})"></button>
         </c:forEach>
     </div>
 
@@ -67,7 +67,16 @@
 <script>
     document.addEventListener("DOMContentLoaded", ready);
     function ready() {
-       $('#wrapper1').show();
+        let elem = $('#wrapper1')
+        elem.show();
+        elem.addClass(" visible");
+    }
+
+    function stepTo(counter){
+        $('.visible').hide();
+        let elem = $('#wrapper' + counter);
+        elem.show();
+        elem.addClass("  visible");
     }
 
     function skipAnswer(counter, size){

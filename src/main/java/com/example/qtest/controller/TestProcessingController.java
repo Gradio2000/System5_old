@@ -34,6 +34,7 @@ public class TestProcessingController {
     private final QuestionForAttemptRepository questionForAttemptRepository;
     private final ResultTestReposytory resultTestReposytory;
 
+
     public TestProcessingController(AttemptestReporitory attemptestReporitory,
                                     TestReposytory testReposytory, TestService testService,
                                     QuestionForAttemptRepository questionForAttemptRepository,
@@ -73,9 +74,10 @@ public class TestProcessingController {
     @ResponseBody
     public HttpStatus saveUserAnswer(@RequestParam Integer attemptId, @RequestParam Integer questionId,
                                      HttpServletRequest request){
-        String[] quesIds = request.getParameterMap().get("check");
+        String[] answersIds = request.getParameterMap().get("check");
         List<ResultTest> resultTestList = new ArrayList<>();
-        for (String quesId : quesIds) {
+        assert answersIds != null : "saveUserAnswer() Пустой массив ответов на вопрос";
+        for (String quesId : answersIds) {
             ResultTest resulttest = new ResultTest();
             resulttest.setAttemptId(attemptId);
             resulttest.setQuestionId(questionId);
