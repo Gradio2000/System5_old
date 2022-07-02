@@ -28,7 +28,7 @@
 <div class="main">
 
     <c:forEach var="question" items="${questionList}" varStatus="count">
-        <div id="wrapper${count.count}" hidden>
+        <div id="wrapper${count.count}" style="display: none">
             <form id="form${question.question.id}">
                 <input name="attemptId" type="hidden" value="${attemptId}">
                 <input name="questionId" type="hidden" value="${question.question.id}">
@@ -41,14 +41,14 @@
                     </tr>
                     <c:forEach var="answer" items="${question.question.answers}">
                         <tr>
-                            <td style="width: 10%;"><input name="check" type="checkbox" value="${answer.id}"></td>
+                            <td style="width: 10%;"><input name="check" class="check" type="checkbox" value="${answer.id}"></td>
                             <td class="tblsht">${answer.answerName}</td>
                         </tr>
                     </c:forEach>
                 </table>
             </form>
-            <button id="${count.count}" class="btn" onclick="saveUserAnswer(${question.question.id}, this.id, ${questionList.size()})">Ответить</button>
-            <button class="buttonch" onclick="skipAnswer(${count.count}, ${questionList.size()})">Пропустить</button>
+            <button id="btn${count.count}" class="btn" onclick="saveUserAnswer(${question.question.id}, ${count.count}, ${questionList.size()})">Ответить</button>
+            <button id="buttonch${count.count}" class="buttonch" onclick="skipAnswer(${count.count}, ${questionList.size()})">Пропустить</button>
         </div>
     </c:forEach>
 
@@ -69,22 +69,29 @@
     function ready() {
         let elem = $('#wrapper1')
         elem.show();
-        elem.addClass(" visible");
+        elem.addClass("visible");
     }
 
     function stepTo(counter){
-        $('.visible').hide();
+        $('.selected')
+            .removeClass("selected")
+            .addClass("minibtn");
+
+        $('.visible').hide().removeClass('visible');
         let elem = $('#wrapper' + counter);
         elem.show();
-        elem.addClass("  visible");
+        elem.addClass('visible');
+
+        $('#minibtn' + counter)
+            .removeClass("minibtn")
+            .addClass("selected");
     }
 
     function skipAnswer(counter, size){
         if (counter < size) {
-            $('#wrapper' + counter).hide();
+            $('#wrapper' + counter).hide().removeClass('visible');
             let newcount = +(counter) + 1;
-            $('#wrapper' + newcount).show();
-            console.log(counter, + " " + size);
+            $('#wrapper' + newcount).show().addClass('visible');
         }
         let elem = $('#minibtn' + counter);
         elem.removeClass('minibtn');
@@ -98,17 +105,38 @@
                 url: '/processing/saveUserAnswer',
                 data: msg,
                 success: function (data) {
-                    $('#wrapper' + counter).hide();
+                    $('#wrapper' + counter).hide().removeClass('visible');
+
+                    let elem = document.getElementById('wrapper' + counter);
+                    let inputs = elem.getElementsByClassName("check");
+                    for (let i = 0; i < inputs.length; i++) {
+                        inputs[i].setAttribute("disabled", "disabled");
+                    }
+
+                    $('#btn' + counter).remove();
+                    $('#buttonch' + counter).remove();
+
                     let newcount = +(counter) + 1;
                     if (counter < size) {
-                        $('#wrapper' + newcount).show();
+                        $('#wrapper' + newcount).show().addClass('visible');
                         let elem = $('#minibtn' + counter);
                         elem.removeClass('minibtn');
+                        elem.removeClass('skipped');
                         elem.addClass('right');
                     }
                     else {
-                        $('.minibuttons').hide();
-                        $('#lastpage').show();
+                        let elems = $('.skipped');
+                        if (elems.length !== 0){
+                            let elem = $('#minibtn' + counter);
+                            elem.removeClass('minibtn');
+                            elem.removeClass('skipped');
+                            elem.addClass('right');
+                            elems[0].click();
+                        }
+                        else {
+                            $('.minibuttons').hide();
+                            $('#lastpage').show();
+                        }
                     }
                 },
                 error: function () {
