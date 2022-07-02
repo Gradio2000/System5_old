@@ -105,43 +105,25 @@
                 url: '/processing/saveUserAnswer',
                 data: msg,
                 success: function (data) {
-                    $('#wrapper' + counter).hide().removeClass('visible');
-
                     let elem = document.getElementById('wrapper' + counter);
                     let inputs = elem.getElementsByClassName("check");
                     for (let i = 0; i < inputs.length; i++) {
                         inputs[i].setAttribute("disabled", "disabled");
                     }
 
+                    $('#minibtn' + counter)
+                        .removeClass('skipped')
+                        .removeClass('minibtn')
+                        .addClass('right');
+
                     $('#btn' + counter).remove();
                     $('#buttonch' + counter).remove();
 
                     let newcount = +(counter) + 1;
-                    if (counter < size) {
-                        $('#wrapper' + newcount).show().addClass('visible');
-                        let elem = $('#minibtn' + counter);
-                        elem.removeClass('minibtn');
-                        elem.removeClass('skipped');
-                        elem.addClass('right');
-                    }
-                    else {
-                        let elems = $('.skipped');
-                        if (elems.length !== 0){
-                            let elem = $('#minibtn' + counter);
-                            elem.removeClass('minibtn');
-                            elem.removeClass('skipped');
-                            elem.addClass('right');
-                            elems[0].click();
-                        }
-                        else {
-                            $('.minibuttons').hide();
-                            $('#lastpage').show();
-                        }
-                    }
+                    $('#minibtn' + newcount).click();
                 },
                 error: function () {
                     alert('Выберите ответ!');
-                    console.log(msg);
                 }
             });
     }
