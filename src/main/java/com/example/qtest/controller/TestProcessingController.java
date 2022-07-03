@@ -6,8 +6,9 @@ import com.example.qtest.model.ResultTest;
 import com.example.qtest.model.Test;
 import com.example.qtest.repository.AttemptestReporitory;
 import com.example.qtest.repository.QuestionForAttemptRepository;
-import com.example.qtest.repository.ResultTestReposytory;
+import com.example.qtest.repository.ResultTestRepository;
 import com.example.qtest.repository.TestReposytory;
+import com.example.qtest.service.ResultTestService;
 import com.example.qtest.service.TestService;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
@@ -15,10 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.Instant;
@@ -32,18 +30,20 @@ public class TestProcessingController {
     private final TestReposytory testReposytory;
     private final TestService testService;
     private final QuestionForAttemptRepository questionForAttemptRepository;
-    private final ResultTestReposytory resultTestReposytory;
+    private final ResultTestRepository resultTestRepository;
+    private final ResultTestService resultTestService;
 
 
     public TestProcessingController(AttemptestReporitory attemptestReporitory,
                                     TestReposytory testReposytory, TestService testService,
                                     QuestionForAttemptRepository questionForAttemptRepository,
-                                    ResultTestReposytory resultTestReposytory) {
+                                    ResultTestRepository resultTestRepository, ResultTestService resultTestService) {
         this.attemptestReporitory = attemptestReporitory;
         this.testReposytory = testReposytory;
         this.testService = testService;
         this.questionForAttemptRepository = questionForAttemptRepository;
-        this.resultTestReposytory = resultTestReposytory;
+        this.resultTestRepository = resultTestRepository;
+        this.resultTestService = resultTestService;
     }
 
     @PostMapping("/start")
@@ -84,7 +84,12 @@ public class TestProcessingController {
             resulttest.setAnswerId(Integer.valueOf(quesId));
             resultTestList.add(resulttest);
         }
-        resultTestReposytory.saveAll(resultTestList);
+        resultTestRepository.saveAll(resultTestList);
         return HttpStatus.OK;
+    }
+
+    @GetMapping("/finishTest/{attemptId}")
+    public void finishTest(@PathVariable Integer attemptId){
+        resultTestService.mainCheck(attemptId);
     }
 }

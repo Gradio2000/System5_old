@@ -79,7 +79,7 @@
            }
         }
         else {
-            document.location='/finishTest/${attemptId}'
+            document.location='/processing/finishTest/${attemptId}'
         }
     }
 

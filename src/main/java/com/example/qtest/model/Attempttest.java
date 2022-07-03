@@ -38,7 +38,7 @@ public class Attempttest {
     private Double result;
 
     @Column(name = "testresult")
-    private String testresult;
+    private String testResult;
 
 //    @ManyToOne(fetch = FetchType.EAGER, optional = false)
 //    @JoinColumn(name = "test_id", nullable = false)
