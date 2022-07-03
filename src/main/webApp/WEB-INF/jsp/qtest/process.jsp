@@ -26,7 +26,11 @@
 </head>
 <body>
 <div class="main">
-
+    <div class="minibuttons">
+        <c:forEach items="${questionList}" varStatus="count">
+            <button id="minibtn${count.count}" class="minibtn" onclick="stepTo(${count.count})"></button>
+        </c:forEach>
+    </div>
     <c:forEach var="question" items="${questionList}" varStatus="count">
         <div id="wrapper${count.count}" style="display: none">
             <form id="form${question.question.id}">
@@ -52,14 +56,8 @@
         </div>
     </c:forEach>
 
-    <div class="minibuttons">
-        <c:forEach items="${questionList}" varStatus="count">
-            <button id="minibtn${count.count}" class="minibtn" onclick="stepTo(${count.count})"></button>
-        </c:forEach>
-    </div>
-
     <div id="lastpage">
-        <button class="btn" onclick="finishTest(${attemptId}, ${questionList.size()})">Результат</button>
+        <button class="btn" onclick="finishTest(${attemptId}, ${questionList.size()})">Завершить</button>
     </div >
 </div>
 </body>
@@ -76,10 +74,12 @@
 
     function finishTest(attemptId, size){
         if ($('.right').length !== size){
-            alert('Ответьте на все вопросы!');
+           if (confirm('Есть вопросы с неполученными ответами. Завершение выполнения теста отметит их как неправильные. Вы действительно хотите завершить тест?')){
+               document.location='/finishTest/${attemptId}';
+           }
         }
         else {
-            document.location='/getResultTest/${attemptId}'
+            document.location='/finishTest/${attemptId}'
         }
     }
 
