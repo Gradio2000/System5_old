@@ -1,31 +1,98 @@
-create table q_group_test
+create table q_answers
 (
-    grouptest_id integer default nextval('group_test_grouptest_id_seq'::regclass) not null
-        constraint group_test_pkey
+    answer_id   serial
+        constraint q_answers_pk
             primary key,
-    name varchar not null
+    answer_name varchar,
+    is_right    boolean,
+    question_id integer
 );
 
-create unique index "group_test_id_groupTest_uindex"
+create unique index q_answers_answer_id_uindex
+    on q_answers (answer_id);
+
+create table q_attempttests
+(
+    attempt_id           serial
+        constraint q_attempttests_pk
+            primary key,
+    date_time            timestamp,
+    user_id              integer,
+    time_attempt         integer,
+    amount_ques          integer,
+    amount_false_answers integer,
+    amount_true_answers  integer,
+    column_8             integer,
+    result               double precision,
+    testresult           varchar,
+    test_id              integer
+);
+
+create unique index q_attempttests_attempt_id_uindex
+    on q_attempttests (attempt_id);
+
+create table q_group_test
+(
+    grouptest_id serial
+        constraint q_group_test_pk
+            primary key,
+    name         varchar
+);
+
+create unique index q_group_test_grouptest_id_uindex
     on q_group_test (grouptest_id);
+
+create table q_questions
+(
+    question_id   serial
+        constraint q_questions_pk
+            primary key,
+    question_name varchar,
+    test_id       integer
+);
+
+create unique index q_questions_question_id_uindex
+    on q_questions (question_id);
+
+create table q_questions_for_attempt
+(
+    id          serial
+        constraint q_questions_for_attempt_pk
+            primary key,
+    attempt_id  integer,
+    question_id integer
+);
+
+create unique index q_questions_for_attempt_id_uindex
+    on q_questions_for_attempt (id);
+
+create table q_result_test
+(
+    resulttest_id serial
+        constraint q_result_test_pk
+            primary key,
+    attempt_id    integer,
+    question_id   integer,
+    answer_id     integer
+);
+
+create unique index q_result_test_resulttest_id_uindex
+    on q_result_test (resulttest_id);
 
 create table q_tests
 (
-    test_id     integer default nextval('tests_test_id_seq'::regclass) not null
-        constraint tests_pkey
+    test_id     serial
+        constraint q_tests_pk
             primary key,
-    test_name   varchar                                                not null,
-    group_id    integer
-        constraint tests_group_test_id_grouptest_fk
-            references q_group_test
-            on update cascade on delete cascade,
+    test_name   varchar,
     criteria    double precision,
     time        double precision,
     ques_amount integer,
+    ques_mix    boolean,
     deleted     boolean,
-    ques_mix    boolean default true
+    group_id    integer
 );
 
-create unique index tests_test_id_uindex
+create unique index q_tests_test_id_uindex
     on q_tests (test_id);
 
