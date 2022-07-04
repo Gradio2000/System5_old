@@ -58,7 +58,7 @@ public class System5Controller {
             model.addAttribute("formFinishReg", new FormFinishReg());
             request.setAttribute("error", "Не завершена процедура регистрации");
             model.addAttribute("positionList", positionRepository.findAll());
-            return "registrationnext";
+            return "sys5pages/registrationnext";
         }
         log.info(user.getName() + " enter into controller /list");
 
@@ -81,7 +81,7 @@ public class System5Controller {
         model.addAttribute("employer", employer);
 
         List<User> userList = userRepository.findAll().stream()
-                .filter(u -> u.getUserId() != user.getUserId())
+                .filter(u -> !Objects.equals(u.getUserId(), user.getUserId()))
                 .collect(Collectors.toList());
         model.addAttribute(userList);
 

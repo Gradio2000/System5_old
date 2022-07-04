@@ -92,20 +92,19 @@ public class ResultTestService {
 
 
         Attempttest attemptTest = attemptestReporitory.findById(attemptId).orElse(null);
+        assert attemptTest != null;
+
         Test test = testReposytory.findById(attemptTest.getTestId()).orElse(null);
+        assert test != null;
 
         List<ResultTest> resultTestList = getResultTest(attemptId);
         Map<Integer, List<Integer>> mapOfUserAnswers = getMapOfAnswers(resultTestList);
-
-
-        assert test != null;
-        List<Question> questionList = test.getQuestions();
-        falseAnswerSet = getFalseAnswerSet(mapOfUserAnswers, questionList);
-        trueAnswers = questionList.size() - falseAnswerSet.size();
-        result = getResult(trueAnswers, questionList.size());
+        quesList = questionRepository.findQuestionsByAttemptId(attemptId);
+        falseAnswerSet = getFalseAnswerSet(mapOfUserAnswers, quesList);
+        trueAnswers = quesList.size() - falseAnswerSet.size();
+        result = getResult(trueAnswers, quesList.size());
         testResult = getTestResult(result, test.getCriteria()) ? "Тест пройден" : "Тест не пройден";
         listOfUsersAnswers = getListOfUsersAnswers(mapOfUserAnswers);
-        quesList = questionRepository.findQuestionsByAttemptId(attemptId);
 
         //Ок. А теперь кое-что запишем в бд, чтоб админ мог использовать
         attemptTest.setAmountQues(quesList.size());

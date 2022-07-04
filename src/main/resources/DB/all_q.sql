@@ -22,7 +22,6 @@ create table q_attempttests
     amount_ques          integer,
     amount_false_answers integer,
     amount_true_answers  integer,
-    column_8             integer,
     result               double precision,
     testresult           varchar,
     test_id              integer
