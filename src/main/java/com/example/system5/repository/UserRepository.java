@@ -19,29 +19,29 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     boolean existsUserByLogin(String login);
 
     @Query(nativeQuery = true,
-            value = "SELECT EXISTS(SELECT user_id FROM position_user WHERE position_id = :position_id)")
+            value = "SELECT EXISTS(SELECT user_id FROM sys_position_user WHERE position_id = :position_id)")
     boolean existsUserByPosition_id(Integer position_id);
 
 
     @Modifying
     @Transactional
     @Query(nativeQuery = true,
-    value = "delete from position_user where position_id = :id")
+    value = "delete from sys_position_user where position_id = :id")
     void deleteUser(int id);
 
     @Modifying
     @Transactional
     @Query(nativeQuery = true,
-            value = "INSERT INTO commander_employee (commander_position_id, position_id) VALUES (:comm_id, :position_id)")
+            value = "INSERT INTO sys_commander_employee (commander_position_id, position_id) VALUES (:comm_id, :position_id)")
     void commEmpAdd(int comm_id, int position_id);
 
     @Query(nativeQuery = true,
-            value = "SELECT EXISTS(SELECT commander_position_id FROM commander_employee WHERE position_id = :position_id)")
+            value = "SELECT EXISTS(SELECT commander_position_id FROM sys_commander_employee WHERE position_id = :position_id)")
     boolean existsCommanderPosition(Integer position_id);
 
     @Modifying
     @Transactional
     @Query(nativeQuery = true,
-            value = "UPDATE commander_employee SET commander_position_id = :comm_id WHERE position_id = :position_id")
+            value = "UPDATE sys_commander_employee SET commander_position_id = :comm_id WHERE position_id = :position_id")
     void updateCommanderPosition(int comm_id, int position_id);
 }
