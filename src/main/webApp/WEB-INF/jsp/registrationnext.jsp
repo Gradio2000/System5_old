@@ -16,6 +16,7 @@
     <div class="log-form">
         <h2>Регистрация - шаг 2</h2>
         <form:form method="post" action="/finishreg" modelAttribute="formFinishReg">
+            <a class="errorMsg">${error}</a>
             <form:input type="text" title="name" placeholder="Фамилия И.О." path="name" class="field name"/>
             <form:errors path="name" cssClass="errorMsg" />
             <br/>

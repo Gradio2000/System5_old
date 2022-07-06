@@ -9,7 +9,6 @@ import com.example.system5.validation.FormFinishRegValidator;
 import com.example.system5.validation.MyFormValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -123,9 +122,6 @@ public class RegistrationController {
 
     @GetMapping("/cancel")
     public String cancelReg(){
-        AuthUser authUser = (AuthUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        User user = authUser.getUser();
-        userRepository.delete(user);
         return "redirect:/logout";
     }
 

@@ -3,6 +3,7 @@ package com.example.system5.controller;
 
 import com.example.system5.dto.UserDto;
 import com.example.system5.model.*;
+import com.example.system5.repository.PositionRepository;
 import com.example.system5.repository.System5Repository;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.service.commanderEmployeeService.SaveOrUpdateCommEmplService;
@@ -17,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -32,23 +34,32 @@ public class System5Controller {
     private final SaveOrUpdateSystem5Service saveOrUpdateSystem5Service;
     private final SaveOrUpdateCommEmplService saveOrUpdateCommEmplService;
     private final SortService sortService;
+    private final PositionRepository positionRepository;
 
 
     public System5Controller(System5Repository system5Repository, UserRepository userRepository,
                              GetTotalMarkService getTotalMarkService,
                              SaveOrUpdateSystem5Service saveOrUpdateSystem5Service,
-                             SaveOrUpdateCommEmplService saveOrUpdateCommEmplService, SortService sortService) {
+                             SaveOrUpdateCommEmplService saveOrUpdateCommEmplService, SortService sortService,
+                             PositionRepository positionRepository) {
         this.system5Repository = system5Repository;
         this.userRepository = userRepository;
         this.getTotalMarkService = getTotalMarkService;
         this.saveOrUpdateSystem5Service = saveOrUpdateSystem5Service;
         this.saveOrUpdateCommEmplService = saveOrUpdateCommEmplService;
         this.sortService = sortService;
+        this.positionRepository = positionRepository;
     }
 
     @GetMapping(value = "/list")
-    public String getAll(@AuthenticationPrincipal AuthUser authUser, Model model){
+    public String getAll(@AuthenticationPrincipal AuthUser authUser, Model model, HttpServletRequest request){
         User user = authUser.getUser();
+        if (user.getName() == null){
+            model.addAttribute("formFinishReg", new FormFinishReg());
+            request.setAttribute("error", "Не завершена процедура регистрации");
+            model.addAttribute("positionList", positionRepository.findAll());
+            return "registrationnext";
+        }
         log.info(user.getName() + " enter into controller /list");
 
         List<System5> system5List = system5Repository.findAllByUserId(user.getUserId());
