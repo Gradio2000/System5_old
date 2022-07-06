@@ -254,6 +254,23 @@ body {
     padding: 0;
     float: right;
 }
+
+.rememberPas {
+    color: #33d3de;
+    line-height: 0.5em;
+    position: relative;
+    top: 2.5em;
+    text-decoration: none;
+    font-size: 0.75em;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+.rememberPas:hover{
+    color: #1ba0a9;
+}
+
 .log-form .forgot:hover {
     color: #1ba0a9;
 }

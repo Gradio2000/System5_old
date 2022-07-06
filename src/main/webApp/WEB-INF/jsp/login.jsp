@@ -23,10 +23,17 @@
         <input type="password" title="Пароль" placeholder="пароль" name="password" />
         <button type="submit" class="btn">Войти</button>
         <a class="forgot" href="/registration">Регистрация</a>
+        <br/>
+        <a class="rememberPas" onclick="rememberPassword()">Вспомнить пароль</a>
     </form>
 </div>
 </body>
 <style>
     <%@include file="../includes/myStyle.css"%>
 </style>
+<script>
+    function rememberPassword(){
+        alert("Функция восстановления пароля не реализована. Обратитесь к администратору!");
+    }
+</script>
 </html>
