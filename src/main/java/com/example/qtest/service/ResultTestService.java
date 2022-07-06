@@ -113,17 +113,6 @@ public class ResultTestService {
         attemptTest.setResult(result);
         attemptTest.setTestResult(testResult);
         attemptestReporitory.save(attemptTest);
-
-
-//        } catch (Exception e) {
-//            FileHandler fh = new FileHandler("your_log.txt", false);   // true forces append mode
-//            SimpleFormatter sf = new SimpleFormatter();
-//            fh.setFormatter(sf);
-//            log.addHandler(fh);
-//            log.log(Level.SEVERE, ExceptionUtils.getStackTrace(e));
-//        }
-
-//        return new Statistic(date, test, falseAnswerSet, trueAnswers, testResult, listOfUsersAnswers, result, time, quesList);
     }
 
     public List<ResultTest> getResultTest(Integer attemptId) {

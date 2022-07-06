@@ -19,8 +19,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -51,7 +51,7 @@ public class TestProcessingController {
                                       Model model, @RequestParam Integer testId){
 
             Attempttest attempttest = new Attempttest();
-            attempttest.setDateTime(Instant.now());
+            attempttest.setDateTime(new Date());
             attempttest.setUserId(authUser.getUser().getUserId());
             attempttest.setTestId(testId);
             attemptestReporitory.save(attempttest);
@@ -89,7 +89,8 @@ public class TestProcessingController {
     }
 
     @GetMapping("/finishTest/{attemptId}")
-    public void finishTest(@PathVariable Integer attemptId){
+    public String finishTest(@PathVariable Integer attemptId){
         resultTestService.mainCheck(attemptId);
+        return "redirect:/tests/mytests";
     }
 }

@@ -2,7 +2,9 @@ package com.example.qtest.controller;
 
 import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.dto.TestDto;
+import com.example.qtest.model.Attempttest;
 import com.example.qtest.model.Test;
+import com.example.qtest.repository.AttemptestReporitory;
 import com.example.qtest.repository.GroupTestRepository;
 import com.example.qtest.repository.TestReposytory;
 import com.example.qtest.service.DtoUtils;
@@ -27,11 +29,14 @@ public class TestController {
     private final GroupTestRepository groupTestRepository;
     private final TestReposytory testReposytory;
     private final DtoUtils dtoUtils;
+    private final AttemptestReporitory attemptestReporitory;
 
-    public TestController(GroupTestRepository groupTestRepository, TestReposytory testReposytory, DtoUtils dtoUtils) {
+    public TestController(GroupTestRepository groupTestRepository, TestReposytory testReposytory,
+                          DtoUtils dtoUtils, AttemptestReporitory attemptestReporitory) {
         this.groupTestRepository = groupTestRepository;
         this.testReposytory = testReposytory;
         this.dtoUtils = dtoUtils;
+        this.attemptestReporitory = attemptestReporitory;
     }
 
     @GetMapping("/list/{id}")
@@ -105,5 +110,14 @@ public class TestController {
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("test", test);
         return "qtest/forTesting/testForTesting";
+    }
+
+    @GetMapping("/mytests")
+    public String getUserAttempts(@AuthenticationPrincipal AuthUser authUser, Model model){
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+
+        List<Attempttest> attemptsList = attemptestReporitory.findAllByUserId(authUser.getUser().getUserId());
+        model.addAttribute("attemptsList", attemptsList);
+        return "qtest/myTestsList";
     }
 }

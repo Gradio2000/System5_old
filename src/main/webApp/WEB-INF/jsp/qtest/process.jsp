@@ -75,7 +75,7 @@
     function finishTest(attemptId, size){
         if ($('.right').length !== size){
            if (confirm('Есть вопросы с неполученными ответами. Завершение выполнения теста отметит их как неправильные. Вы действительно хотите завершить тест?')){
-               document.location='/finishTest/${attemptId}';
+               document.location='/processing/finishTest/${attemptId}';
            }
         }
         else {

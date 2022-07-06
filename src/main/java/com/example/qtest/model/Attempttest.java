@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.util.Date;
 
 @Entity
 @Table(name = "q_attempttests")
@@ -17,7 +17,7 @@ public class Attempttest {
     private Integer id;
 
     @Column(name = "date_time", nullable = false)
-    private Instant dateTime;
+    private Date dateTime;
 
     @Column(name = "user_id", nullable = false)
     private Integer userId;
@@ -40,11 +40,10 @@ public class Attempttest {
     @Column(name = "testresult")
     private String testResult;
 
-//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-//    @JoinColumn(name = "test_id", nullable = false)
-//    private Test test;
-
     @Column(name = "test_id")
     private Integer testId;
 
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "test_id", nullable = false, insertable = false, updatable = false)
+    private Test test;
 }
