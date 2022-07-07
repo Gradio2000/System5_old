@@ -19,18 +19,23 @@
 </head>
 <body>
 <div class="main">
+    <div class="pagination">
+        <a onclick="pagin(${attemptsList.previousOrFirstPageable().pageNumber})">«</a>
+        <c:forEach begin="1" end="${attemptsList.totalPages}" varStatus="count">
+            <a id="pag${count.count - 1}" onclick="pagin(${count.count - 1})">${count.count}</a>
+        </c:forEach>
+        <a onclick="pagin(${attemptsList.nextOrLastPageable().pageNumber})">»</a>
+    </div>
     <table id="color_table" style="width: 100%">
         <tbody>
             <tr>
-                <th style="width: 10%">№ п/п</th>
                 <th>Дата и время</th>
                 <th style="width: 40%">Название теста</th>
                 <th>Результат</th>
                 <th>Протокол</th>
             </tr>
-        <c:forEach var="attempt" items="${attemptsList}" varStatus="count">
+        <c:forEach var="attempt" items="${attemptsList.content}">
             <tr>
-                <td>${count.count}</td>
                 <td>
                     <fmt:formatDate value="${attempt.dateTime}" pattern="dd.MM.yyyy  HH:mm"/>
                 </td>
@@ -41,6 +46,21 @@
         </c:forEach>
         </tbody>
     </table>
+
 </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", ready);
+    function ready(){
+        $('#pag${attemptsList.pageable.pageNumber}').addClass("active");
+    }
+
+    function pagin(pageNumber){
+        document.location='/tests/mytests/' + pageNumber;
+    }
+
+    function paginPrevious(){
+
+    }
+</script>
 </html>

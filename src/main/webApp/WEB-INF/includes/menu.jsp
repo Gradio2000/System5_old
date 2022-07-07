@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"      prefix="c"   %>
 <div class="sidenav">
     <a href="/list">Мои оценки</a>
-    <a href="/tests/mytests">Мои тесты</a>
+    <a href="/tests/mytests/0">Мои тесты</a>
     <a href="/my_employers">Оценка работников</a>
     <a href="/admin/shtat">Штатное расписание</a>
     <a href="/admin/prepareReport">Отчет за месяц</a>

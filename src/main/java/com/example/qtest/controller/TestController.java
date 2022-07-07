@@ -10,6 +10,9 @@ import com.example.qtest.repository.TestReposytory;
 import com.example.qtest.service.DtoUtils;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -112,11 +115,13 @@ public class TestController {
         return "qtest/forTesting/testForTesting";
     }
 
-    @GetMapping("/mytests")
-    public String getUserAttempts(@AuthenticationPrincipal AuthUser authUser, Model model){
+    @GetMapping("/mytests/{page}")
+    public String getUserAttempts(@AuthenticationPrincipal AuthUser authUser, Model model,
+                                  @PathVariable Integer page){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
-        List<Attempttest> attemptsList = attemptestReporitory.findAllByUserId(authUser.getUser().getUserId());
+        Pageable pageable = PageRequest.of(page, 10);
+        Page<Attempttest> attemptsList = attemptestReporitory.findAllByUserId(authUser.getUser().getUserId(), pageable);
         model.addAttribute("attemptsList", attemptsList);
         return "qtest/myTestsList";
     }

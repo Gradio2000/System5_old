@@ -393,7 +393,6 @@ table th {
 /* стилизация содержимого страницы */
 body {
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-    font-size: 16px;
     font-weight: 400;
     /*line-height: 1.5;*/
     color: #292b2c;
@@ -659,4 +658,24 @@ body {
     margin: 0;
     margin-left: 8px;
     margin-right: 8px;
+    font-size: small;
 }
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    background-color: #1fb5bf;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
