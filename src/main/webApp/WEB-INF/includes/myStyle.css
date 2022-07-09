@@ -319,7 +319,7 @@ body {
 }
 .log-form .forgot {
     color: #33d3de;
-    line-height: 0.5em;
+    line-height: 2.5em;
     position: relative;
     top: 2.5em;
     text-decoration: none;
@@ -658,11 +658,11 @@ body {
     margin: 0;
     margin-left: 8px;
     margin-right: 8px;
-    font-size: small;
 }
 
 .pagination {
     display: inline-block;
+    font-size: small;
 }
 
 .pagination a {

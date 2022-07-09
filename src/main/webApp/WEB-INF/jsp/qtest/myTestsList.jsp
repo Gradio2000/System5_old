@@ -41,7 +41,7 @@
                 </td>
                 <td>${attempt.test.testName}</td>
                 <td>${attempt.testResult}</td>
-                <td><a>Протокол</a></td>
+                <td><a href="/qtest/report/${attempt.id}">Протокол</a></td>
             </tr>
         </c:forEach>
         </tbody>
@@ -57,10 +57,6 @@
 
     function pagin(pageNumber){
         document.location='/tests/mytests/' + pageNumber;
-    }
-
-    function paginPrevious(){
-
     }
 </script>
 </html>
