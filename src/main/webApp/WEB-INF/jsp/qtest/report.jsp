@@ -19,37 +19,98 @@
 </head>
 <body>
 <div class="main">
-    <table>
-        <tr>
-            <td>Работник</td>
-            <td>${user.name}</td>
-        </tr>
-        <tr>
-            <td>Дата и время</td>
-            <td>${attempt.dateTime}</td>
-        </tr>
-        <tr>
-            <td>Тест</td>
-            <td>${attempt.test.testName}</td>
-        </tr>
-        <tr>
-            <td>Количество заданных вопросов</td>
-            <td>${attempt.amountQues}</td>
-        </tr>
-        <tr>
-            <td>Количество правильных ответов</td>
-            <td>${attempt.amountTrueAnswers}</td>
-        </tr>
-        <tr>
-            <td>Количество неверных ответов</td>
-            <td>${attempt.amountFalseAnswers}</td>
-        </tr>
-        <tr>
-            <td>Затраченное время</td>
-            <td>${attempt.timeAttempt}</td>
-        </tr>
-    </table>
-    <button class="btn" onclick="document.location='/tests/mytests/0'">Назад</button>
+    <div id="printableArea">
+        <table>
+            <tr>
+                <td>Работник</td>
+                <td>${user.name}</td>
+            </tr>
+            <tr>
+                <td>Должность</td>
+                <td>${user.position.position}</td>
+            </tr>
+            <tr>
+                <td>Дата и время</td>
+                <td>
+                    <fmt:formatDate value="${attempt.dateTime}" pattern="dd.MM.yyyy  HH:mm"/>
+                </td>
+            </tr>
+            <tr>
+                <td>Тест</td>
+                <td>${attempt.test.testName}</td>
+            </tr>
+            <tr>
+                <td>Количество заданных вопросов</td>
+                <td>${attempt.amountQues}</td>
+            </tr>
+            <tr>
+                <td>Количество правильных ответов</td>
+                <td>${attempt.amountTrueAnswers}</td>
+            </tr>
+            <tr>
+                <td>Количество неверных ответов</td>
+                <td>${attempt.amountFalseAnswers}</td>
+            </tr>
+            <tr>
+                <td>Критерий прохождения теста</td>
+                <td>${attempt.test.criteria}</td>
+            </tr>
+            <tr>
+                <td>Результат, %</td>
+                <td>${attempt.result} %</td>
+            </tr>
+            <tr>
+                <td>Итого</td>
+                <td>${attempt.testResult}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <th style="width: 5%">№п/п</th>
+                <th>Вопрос</th>
+                <th>Ответы</th>
+                <th style="width: 10%">Правильный ответ</th>
+                <th style="width: 10%">Ответ тестируемого</th>
+            </tr>
+            <c:forEach var="ques" items="${quesList}" varStatus="count">
+                <tr>
+                <td rowspan="${ques.answers.size() + 1}">${count.count}</td>
+                <td rowspan="${ques.answers.size() + 1}" style="text-align: justify">${ques.questionName}</td>
+                <c:forEach var="answer" items="${ques.answers}">
+                    <c:set var="id" value="${answer.id}"/>
+                    <tr>
+                        <td style="text-align: justify">${answer.answerName}</td>
+                        <td>
+                            <c:if test="${answer.isRight}">
+                                V
+                            </c:if>
+                        </td>
+                        <td>
+                            <c:if test="${listOfUsersAnswers.contains(id)}">
+                                V
+                            </c:if>
+                        </td>
+                    </tr>
+                </c:forEach>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+
+    <button class="btn" onclick="history.back()">Назад</button>
+    <input type="button" onclick="printDiv('printableArea')" value="Печать" class="btn"/>
 </div>
 </body>
+<script>
+    function printDiv(divName) {
+        const printContents = document.getElementById(divName).innerHTML;
+        const originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
 </html>

@@ -587,11 +587,12 @@ body {
 }
 
 .sidenav a {
-    padding: 6px 8px 6px 16px;
+    /*padding: 6px 8px 6px 16px;*/
     text-decoration: none;
     /*font-size: 25px;*/
     color: #393939;
     display: block;
+    padding-left: 10px;
 }
 
 .sidenav a:hover {
