@@ -115,12 +115,14 @@ public class TestController {
         return "qtest/forTesting/testForTesting";
     }
 
-    @GetMapping("/mytests/{page}")
+
+    @GetMapping("/mytests")
     public String getUserAttempts(@AuthenticationPrincipal AuthUser authUser, Model model,
-                                  @PathVariable Integer page){
+                                  @RequestParam (defaultValue = "0") Integer page, @RequestParam (defaultValue = "10") Integer size){
+
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
-        Pageable pageable = PageRequest.of(page, 10);
+        Pageable pageable = PageRequest.of(page, size);
         Page<Attempttest> attemptsList = attemptestReporitory.findAllByUserId(authUser.getUser().getUserId(), pageable);
         model.addAttribute("attemptsList", attemptsList);
         return "qtest/myTestsList";

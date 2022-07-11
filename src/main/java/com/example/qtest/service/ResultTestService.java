@@ -63,7 +63,6 @@ public class ResultTestService {
         } else {
             for (Question question : questionList) {
                 falseAnswerSet.add(question.getId());
-                falseAnswerSet.add(question.getId());
             }
         }
 

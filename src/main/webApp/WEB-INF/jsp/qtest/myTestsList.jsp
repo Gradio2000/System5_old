@@ -19,13 +19,26 @@
 </head>
 <body>
 <div class="main">
-    <div class="pagination">
-        <a onclick="pagin(${attemptsList.previousOrFirstPageable().pageNumber})">«</a>
-        <c:forEach begin="1" end="${attemptsList.totalPages}" varStatus="count">
-            <a id="pag${count.count - 1}" onclick="pagin(${count.count - 1})">${count.count}</a>
-        </c:forEach>
-        <a onclick="pagin(${attemptsList.nextOrLastPageable().pageNumber})">»</a>
+    <div style="display: flex; justify-content: space-between">
+        <div class="pagination">
+            <a onclick="pagin(${attemptsList.previousOrFirstPageable().pageNumber}, ${attemptsList.size})">«</a>
+            <c:forEach begin="1" end="${attemptsList.totalPages}" varStatus="count">
+                <a id="pag${count.count - 1}" onclick="pagin(${count.count - 1}, ${attemptsList.size})">${count.count}</a>
+            </c:forEach>
+            <a onclick="pagin(${attemptsList.nextOrLastPageable().pageNumber}, ${attemptsList.size})">»</a>
+        </div>
+        <div style="margin-right: 20px; margin-top: 6px">
+            <label>Показывать по:
+                <select class="chosen-select" onchange="changeSelect(this.value)">
+                    <option data-value="10">10</option>
+                    <option data-value="20">20</option>
+                    <option data-value="100">100</option>
+                    <option data-value="1000">1000</option>
+                </select>
+            </label>
+        </div>
     </div>
+
     <table id="color_table" style="width: 100%">
         <tbody>
             <tr>
@@ -53,10 +66,18 @@
     document.addEventListener("DOMContentLoaded", ready);
     function ready(){
         $('#pag${attemptsList.pageable.pageNumber}').addClass("active");
+        $('.chosen-select')
+            .find(`option[data-value="${attemptsList.size}"]`)
+            .prop('selected', true)
+            .end()
     }
 
-    function pagin(pageNumber){
-        document.location='/tests/mytests/' + pageNumber;
+    function pagin(pageNumber, size){
+        document.location='/tests/mytests?page=' + pageNumber + '&size=' + size;
+    }
+
+    function changeSelect(size){
+        document.location='/tests/mytests?page=0&size=' + size;
     }
 </script>
 </html>

@@ -5,7 +5,7 @@
     <a href="/list">Мои оценки</a>
     <a href="/my_employers">Оценка работников</a>
     <br/>
-    <a href="/tests/mytests/0">Мои тесты</a>
+    <a href="/tests/mytests">Мои тесты</a>
     <a href="/testGroup/listForTesting">Тестирование</a>
     <br/>
     <a href="/admin/prepareReport">Отчет за месяц</a>

@@ -91,6 +91,6 @@ public class TestProcessingController {
     @GetMapping("/finishTest/{attemptId}")
     public String finishTest(@PathVariable Integer attemptId){
         resultTestService.mainCheck(attemptId);
-        return "redirect:/tests/mytests/0";
+        return "redirect:/tests/mytests";
     }
 }
