@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "q_tests")
@@ -40,6 +40,6 @@ public class Test {
     @OneToMany(targetEntity = Question.class, cascade = CascadeType.ALL,
     fetch = FetchType.EAGER, mappedBy = "testId")
     @OrderBy("id")
-    private List<Question> questions;
+    private Set<Question> questions;
 
 }

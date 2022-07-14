@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -23,7 +25,7 @@ public class FileUploadService {
         File newFile = File.createTempFile("temp", null, null);
         file.transferTo(newFile);
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(newFile)));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(newFile.toPath())));
 
         String line;
         Question question;
@@ -74,7 +76,7 @@ public class FileUploadService {
         reader.close();
         Test test = testReposytory.findById(testId).orElse(null);
         assert test != null;
-        test.setQuestions(questionList);
+        test.setQuestions(new HashSet<>(questionList));
         testReposytory.save(test);
     }
 }
