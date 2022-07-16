@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/processing")
@@ -54,18 +56,19 @@ public class TestProcessingController {
             attempttest.setDateTime(new Date());
             attempttest.setUserId(authUser.getUser().getUserId());
             attempttest.setTestId(testId);
+            attempttest.setTestResult("Не завершен");
             attemptestReporitory.save(attempttest);
 
             Test test = testReposytory.findById(testId).orElse(null);
             assert test != null;
             testService.getShuffleTest(test);
 
-            List<QuestionsForAttempt> questionsForAttemptList = testService.convertTestForSaveBeforeTesting(test, attempttest.getId());
+            List<QuestionsForAttempt> questionsForAttemptList =
+                    testService.convertTestForSaveBeforeTesting(test, attempttest.getId());
             questionForAttemptRepository.saveAll(questionsForAttemptList);
 
             model.addAttribute("attemptId", attempttest.getId());
             model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-            model.addAttribute("testName", test.getTestName());
             model.addAttribute("questionList", questionsForAttemptList);
             return "qtest/process";
     }
@@ -92,5 +95,26 @@ public class TestProcessingController {
     public String finishTest(@PathVariable Integer attemptId){
         resultTestService.mainCheck(attemptId);
         return "redirect:/tests/mytests";
+    }
+
+    @GetMapping("/continue/{attemptId}")
+    public String continueTest(@AuthenticationPrincipal AuthUser authUser,
+                               @PathVariable Integer attemptId, Model model){
+
+
+        List<QuestionsForAttempt> questionsForAttemptList = questionForAttemptRepository.findAllByAttemptId(attemptId);
+        Set<Integer> resultTestQuestionsIdsList = resultTestRepository.findAllByAttemptId(attemptId).stream()
+                .map(ResultTest::getQuestionId)
+                .collect(Collectors.toSet());
+        Set<Integer> resultTestAnswerIdsList = resultTestRepository.findAllByAttemptId(attemptId).stream()
+                .map(ResultTest::getAnswerId)
+                .collect(Collectors.toSet());
+
+        model.addAttribute("attemptId", attemptId);
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("questionList", questionsForAttemptList);
+        model.addAttribute("resultTestQuestionsIdsList", resultTestQuestionsIdsList);
+        model.addAttribute("resultTestAnswerIdsList", resultTestAnswerIdsList);
+        return "qtest/process";
     }
 }

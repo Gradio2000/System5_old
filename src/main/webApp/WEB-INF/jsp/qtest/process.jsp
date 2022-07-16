@@ -31,12 +31,36 @@
             <button id="minibtn${count.count}" class="minibtn" onclick="stepTo(${count.count})"></button>
         </c:forEach>
     </div>
+
     <c:forEach var="question" items="${questionList}" varStatus="count">
-        <div id="wrapper${count.count}" style="display: none">
-            <form id="form${question.question.id}">
-                <input name="attemptId" type="hidden" value="${attemptId}">
-                <input name="questionId" type="hidden" value="${question.question.id}">
-                <table id="color_table" style="width: 100%; table-layout: auto">
+        <c:if test="${!resultTestQuestionsIdsList.contains(question.question.id)}">
+            <div id="wrapper${count.count}" style="display: none">
+                <form id="form${question.question.id}">
+                    <input name="attemptId" type="hidden" value="${attemptId}">
+                    <input name="questionId" type="hidden" value="${question.question.id}">
+                    <table id="color_table" style="width: 100%; table-layout: auto">
+                        <tr>
+                            <th colspan="2" class="tblsht">Вопрос ${count.count} из ${questionList.size()}</th>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="tblsht">${question.question.questionName}</td>
+                        </tr>
+                        <c:forEach var="answer" items="${question.question.answers}">
+                            <tr>
+                                <td style="width: 10%;"><input name="check" class="check" type="checkbox" value="${answer.id}"></td>
+                                <td class="tblsht">${answer.answerName}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </form>
+                <button id="btn${count.count}" class="btn" onclick="saveUserAnswer(${question.question.id}, ${count.count}, ${questionList.size()})">Ответить</button>
+                <button id="buttonch${count.count}" class="buttonch" onclick="skipAnswer(${count.count}, ${questionList.size()})">Пропустить</button>
+            </div>
+        </c:if>
+
+        <c:if test="${resultTestQuestionsIdsList.contains(question.question.id)}">
+            <div id="wrapper${count.count}" class="wrapperContainsAnswers" style="display: none">
+                <table style="width: 100%; table-layout: auto">
                     <tr>
                         <th colspan="2" class="tblsht">Вопрос ${count.count} из ${questionList.size()}</th>
                     </tr>
@@ -45,15 +69,19 @@
                     </tr>
                     <c:forEach var="answer" items="${question.question.answers}">
                         <tr>
-                            <td style="width: 10%;"><input name="check" class="check" type="checkbox" value="${answer.id}"></td>
+                            <c:if test="${resultTestAnswerIdsList.contains(answer.id)}">
+                                <td style="width: 10%;"><input name="check" class="check" type="checkbox" checked disabled value="${answer.id}"></td>
+                            </c:if>
+                            <c:if test="${!resultTestAnswerIdsList.contains(answer.id)}">
+                                <td style="width: 10%;"><input name="check" class="check" type="checkbox" disabled value="${answer.id}"></td>
+                            </c:if>
                             <td class="tblsht">${answer.answerName}</td>
                         </tr>
                     </c:forEach>
                 </table>
-            </form>
-            <button id="btn${count.count}" class="btn" onclick="saveUserAnswer(${question.question.id}, ${count.count}, ${questionList.size()})">Ответить</button>
-            <button id="buttonch${count.count}" class="buttonch" onclick="skipAnswer(${count.count}, ${questionList.size()})">Пропустить</button>
-        </div>
+            </div>
+        </c:if>
+
     </c:forEach>
 
     <div id="lastpage">
@@ -70,6 +98,12 @@
         $('#minibtn1')
             .removeClass('minibtn')
             .addClass('selected');
+
+        let wrapperContainsAnswers = document.getElementsByClassName('wrapperContainsAnswers');
+        for (let i = 0; i < wrapperContainsAnswers.length; i++) {
+            let ids = wrapperContainsAnswers[i].getAttribute("id").slice(-1);
+            document.getElementById("minibtn" + ids).setAttribute("class", "right");
+        }
     }
 
     function finishTest(attemptId, size){

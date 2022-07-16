@@ -54,7 +54,12 @@
                 </td>
                 <td>${attempt.test.testName}</td>
                 <td>${attempt.testResult}</td>
-                <td><a href="/qtest/report/${attempt.id}">Протокол</a></td>
+                <c:if test="${attempt.testResult != 'Не завершен'}">
+                    <td><a href="/qtest/report/${attempt.id}">Протокол</a></td>
+                </c:if>
+                <c:if test="${attempt.testResult == 'Не завершен'}">
+                    <td><a href="/processing/continue/${attempt.id}">Продолжить</a></td>
+                </c:if>
             </tr>
         </c:forEach>
         </tbody>
