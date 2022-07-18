@@ -13,6 +13,7 @@ import com.example.system5.util.AuthUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -118,13 +119,22 @@ public class TestController {
 
     @GetMapping("/mytests")
     public String getUserAttempts(@AuthenticationPrincipal AuthUser authUser, Model model,
-                                  @RequestParam (defaultValue = "0") Integer page, @RequestParam (defaultValue = "10") Integer size){
+                                  @RequestParam (defaultValue = "0") Integer page,
+                                  @RequestParam (defaultValue = "10") Integer size,
+                                  @RequestParam (defaultValue = "up") String sort){
 
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
-        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable;
+        if (sort.equals("down")){
+            pageable = PageRequest.of(page, size, Sort.by("dateTime").descending());
+        }
+        else {
+            pageable = PageRequest.of(page, size, Sort.by("dateTime").ascending());
+        }
         Page<Attempttest> attemptsList = attemptestReporitory.findAllByUserId(authUser.getUser().getUserId(), pageable);
         model.addAttribute("attemptsList", attemptsList);
+        model.addAttribute("sort", sort);
         return "qtest/myTestsList";
     }
 }

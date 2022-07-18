@@ -27,6 +27,14 @@
             </c:forEach>
             <a onclick="pagin(${attemptsList.nextOrLastPageable().pageNumber}, ${attemptsList.size})">»</a>
         </div>
+        <div class="sort" style="margin-right: 20px; margin-top: 6px">
+            <label>Сортировать по:
+                <select onchange="changeSort(this.value)">
+                    <option value="up">возрастанию даты</option>
+                    <option value="down">убыванию даты</option>
+                </select>
+            </label>
+        </div>
         <div style="margin-right: 20px; margin-top: 6px">
             <label>Показывать по:
                 <select class="chosen-select" onchange="changeSelect(this.value)">
@@ -75,14 +83,24 @@
             .find(`option[data-value="${attemptsList.size}"]`)
             .prop('selected', true)
             .end()
+
+        $('.sort')
+            .find(`option[value="${sort}"]`)
+            .prop('selected', true)
+            .end()
     }
 
     function pagin(pageNumber, size){
-        document.location='/tests/mytests?page=' + pageNumber + '&size=' + size;
+        document.location='/tests/mytests?page=' + pageNumber + '&size=' + size + '&sort=${sort}';
     }
 
     function changeSelect(size){
         document.location='/tests/mytests?page=0&size=' + size;
+    }
+
+    function changeSort(value){
+        let size = ${attemptsList.size};
+        document.location='/tests/mytests?page=0&size=' + size + '&sort=' + value;
     }
 </script>
 </html>
