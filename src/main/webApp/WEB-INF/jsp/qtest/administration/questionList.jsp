@@ -82,6 +82,7 @@
     function editQues(id){
         const msg = document.getElementById("editQues" + id);
         let d = $(msg).serializeArray();
+        console.log(d);
         $.ajax({
             type: 'POST',
             url: '/questions/edit/' + id,

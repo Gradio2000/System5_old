@@ -1,5 +1,6 @@
 package com.example.qtest.controller;
 
+import com.example.qtest.model.Answer;
 import com.example.qtest.model.Question;
 import com.example.qtest.repository.QuestionRepository;
 import com.example.system5.dto.UserDto;
@@ -30,13 +31,25 @@ public class QuestionController {
         return "qtest/administration/questionList";
     }
 
-    @PostMapping("//questions/edit/{id}")
+    @PostMapping("/questions/edit/{oldQuestionId}")
     @ResponseBody
-    public HttpStatus editQuestion(@PathVariable Integer id, @ModelAttribute Question question){
-        Question questionForEdit = questionRepository.findById(id).orElse(null);
-        assert questionForEdit != null;
-        questionForEdit.setQuestionName(question.getQuestionName());
-        questionRepository.save(questionForEdit);
+    public HttpStatus editQuestion(@PathVariable Integer oldQuestionId, @ModelAttribute Question newQuestion){
+        Question oldQuestion = questionRepository.findById(oldQuestionId).orElse(null);
+        assert oldQuestion != null;
+        oldQuestion.setDeleted(true);
+
+        List<Answer> newAnswerList = oldQuestion.getAnswers();
+        for (Answer answer: newAnswerList){
+            answer.setId(null);
+            answer.setQuestion(newQuestion);
+        }
+        newQuestion.setAnswers(newAnswerList);
+        newQuestion.setTestId(oldQuestion.getTestId());
+        newQuestion.setDeleted(false);
+
+
+        questionRepository.save(newQuestion);
+        questionRepository.save(oldQuestion);
         return HttpStatus.OK;
     }
 }

@@ -22,6 +22,9 @@ public class Question {
     @Column(name = "test_id")
     private Integer testId;
 
+    @Column(name = "deleted")
+    private Boolean deleted;
+
     @OneToMany(targetEntity = Answer.class, cascade = CascadeType.ALL,
     fetch = FetchType.EAGER, mappedBy = "question")
     @OrderBy("id")

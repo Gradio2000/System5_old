@@ -71,6 +71,7 @@ public class FileUploadService {
             answerList.add(answer);
             question.setAnswers(answerList);
             question.setTestId(testId);
+            question.setDeleted(false);
             questionList.add(question);
         }
         reader.close();

@@ -2,6 +2,7 @@ package com.example.qtest.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -40,6 +41,7 @@ public class Test {
     @OneToMany(targetEntity = Question.class, cascade = CascadeType.ALL,
     fetch = FetchType.EAGER, mappedBy = "testId")
     @OrderBy("id")
+    @Where(clause = "deleted = false")
     private Set<Question> questions;
 
 }

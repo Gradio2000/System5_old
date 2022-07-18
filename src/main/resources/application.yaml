@@ -31,7 +31,6 @@ logging:
     root: WARN
     com.example.system5: DEBUG
 
-
     org:
       springframework:
         security=debug:
@@ -39,6 +38,8 @@ logging:
           org:
             hibernate:
               SQL=debug:
+  file:
+    name: system5.log
 
 server.servlet:
   encoding:

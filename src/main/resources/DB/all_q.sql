@@ -47,7 +47,8 @@ create table q_questions
         constraint q_questions_pk
             primary key,
     question_name varchar,
-    test_id       integer
+    test_id       integer,
+    deleted       boolean default false
 );
 
 create unique index q_questions_question_id_uindex
