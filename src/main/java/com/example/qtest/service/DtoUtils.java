@@ -15,6 +15,6 @@ public class DtoUtils {
 
     public TestDto convertToTestDto(Test test){
         return new TestDto(test.getTestId(), test.getTestName(), test.getCriteria(),
-                test.getTime(), test.getQuesAmount(),test.getQuesMix());
+                test.getTime(), test.getQuesAmount(),test.getQuesMix(), test.getDeleted());
     }
 }

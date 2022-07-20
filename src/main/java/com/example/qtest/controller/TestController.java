@@ -21,9 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -72,11 +70,24 @@ public class TestController {
     @PostMapping("/delete")
     public String deleteGroupTest(@RequestParam (required = false) Integer[] check,
                                   @RequestParam Integer testGroupId){
-        try {
-            testReposytory.deleteAllById(Arrays.asList(check));
-        } catch (NullPointerException e) {
+
+        if (check == null){
             return "redirect:/tests/list/" + testGroupId + "?error=100";
         }
+
+        testReposytory.makeTestsDeletedTrue(check);
+
+        Set<Integer> testIdsUsingInAttempts = attemptestReporitory.findAllTestId();
+        Set<Integer> checks = new HashSet<>(Arrays.asList(check));
+        checks.removeIf(testIdsUsingInAttempts::contains);
+        testReposytory.deleteAllById(checks);
+
+        return "redirect:/tests/list/" + testGroupId;
+    }
+
+    @GetMapping("/undelete/{testGroupId}/{testId}")
+    public String undeleteTest(@PathVariable Integer testGroupId, @PathVariable Integer testId){
+        testReposytory.undeleteTest(testId);
         return "redirect:/tests/list/" + testGroupId;
     }
 
@@ -97,7 +108,7 @@ public class TestController {
     @GetMapping("listForTesting/{id}")
     public String listForTesting(@AuthenticationPrincipal AuthUser authUser, Model model, @PathVariable Integer id){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        List<TestDto> testList = testReposytory.findAllByGroupIdOrderByTestId(id).stream()
+        List<TestDto> testList = testReposytory.findAllDeletedTestsByGroupIdOrderByTestId(id).stream()
                 .map(dtoUtils :: convertToTestDto)
                 .collect(Collectors.toList());
         model.addAttribute("testList", testList);

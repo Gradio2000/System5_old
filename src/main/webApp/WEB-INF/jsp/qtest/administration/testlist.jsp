@@ -42,41 +42,62 @@
                 <th>Сохранить изменения</th>
             </tr>
             <c:forEach var="test" items="${testList}">
-                <form id="safetest${test.testId}">
-                    <input type="hidden" name="testId" value="${test.testId}">
-                    <input type="hidden" name="testId" value="${groupTestId}">
+                <c:if test="${test.deleted}">
                     <tr>
                         <td style="width: 10%;">
-                            <input form="del" value="${test.testId}" type="checkbox" name="check"/>
+                            <a href="/tests/undelete/${groupTestId}/${test.testId}">Разархивировать</a>
                         </td>
-                        <td style="width: 10%;">
-                            <a href="/tests/${test.testId}/questions">Вопросы теста</a>
+                        <td style="width: 10%; color: #b1b0b0">
+                            <a>Вопросы теста</a>
                         </td>
                         <td class="tblsht">
-                            <input type="text" class="myinput" name="testName" value="${test.testName}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0">
+                            <a style="color: #b1b0b0">${test.testName}</a>
                         </td>
-                        <td>
-                            <input type="text" class="myinput" name="quesAmount" value="${test.quesAmount}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0">
-                        </td>
-                        <td>
-                            <input type="text" class="myinput" name="criteria" value="${test.criteria}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0"/>
-                        </td>
-                        <td>
-                            <input type="text" class="myinput" name="time" value="${test.time}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0"/>
-                        </td>
-                        <td>
-                            <c:if test="${test.quesMix == true}">
-                                <input type="checkbox" checked value="${test.quesMix}" name="quesMix" onchange="changeData(${test.testId})"/>
-                            </c:if>
-                            <c:if test="${test.quesMix == false}">
-                                <input type="checkbox" value="${test.quesMix}" name="quesMix" onchange="changeData(${test.testId})"/>
-                            </c:if>
-                        </td>
-                        <td>
-                            <button id="btnch${test.testId}" type="button" class="btnch buttonch" style="margin-top: 0; padding: 0; width: 30px" onclick="saveTest(${test.testId})"> V </button>
-                        </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                     </tr>
-                </form>
+                </c:if>
+                <c:if test="${!test.deleted}">
+                    <form id="safetest${test.testId}">
+                        <input type="hidden" name="testId" value="${test.testId}">
+                        <input type="hidden" name="testId" value="${groupTestId}">
+                        <tr>
+                            <td style="width: 10%;">
+                                <input form="del" value="${test.testId}" type="checkbox" name="check"/>
+                            </td>
+                            <td style="width: 10%;">
+                                <a href="/tests/${test.testId}/questions">Вопросы теста</a>
+                            </td>
+                            <td class="tblsht">
+                                <input type="text" class="myinput" name="testName" value="${test.testName}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0">
+                            </td>
+                            <td>
+                                <input type="text" class="myinput" name="quesAmount" value="${test.quesAmount}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0">
+                            </td>
+                            <td>
+                                <input type="text" class="myinput" name="criteria" value="${test.criteria}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0"/>
+                            </td>
+                            <td>
+                                <input type="text" class="myinput" name="time" value="${test.time}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0"/>
+                            </td>
+                            <td>
+                                <c:if test="${test.quesMix == true}">
+                                    <input type="checkbox" checked value="${test.quesMix}" name="quesMix" onchange="changeData(${test.testId})"/>
+                                </c:if>
+                                <c:if test="${test.quesMix == false}">
+                                    <input type="checkbox" value="${test.quesMix}" name="quesMix" onchange="changeData(${test.testId})"/>
+                                </c:if>
+                            </td>
+                            <td>
+                                <button id="btnch${test.testId}" type="button" class="btnch buttonch" style="margin-top: 0; padding: 0; width: 30px" onclick="saveTest(${test.testId})"> V </button>
+                            </td>
+                        </tr>
+                    </form>
+                </c:if>
+                
 
             </c:forEach>
             <div>
@@ -93,7 +114,8 @@
         <input name="testName" class="myinput" type="text" placeholder="Введите название теста"/>
     </form>
 
-    <form id="del" action="/tests/delete" method="post">
+    <form id="del" action="/tests/delete" method="post" onsubmit="alert('Внимание! Тесты, которые не использовались для тестирования ' +
+     'будут удалены. Тесты, которые использовались для тестирования будут заархивированы!')">
         <input type="hidden" name="testGroupId" value="${groupTestId}">
     </form>
 
