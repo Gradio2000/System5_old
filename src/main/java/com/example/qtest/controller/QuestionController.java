@@ -3,6 +3,7 @@ package com.example.qtest.controller;
 import com.example.qtest.model.Answer;
 import com.example.qtest.model.Question;
 import com.example.qtest.repository.QuestionRepository;
+import com.example.qtest.service.QuestionService;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
 import org.springframework.http.HttpStatus;
@@ -16,9 +17,11 @@ import java.util.List;
 @Controller
 public class QuestionController {
     private final QuestionRepository questionRepository;
+    private final QuestionService questionService;
 
-    public QuestionController(QuestionRepository questionRepository) {
+    public QuestionController(QuestionRepository questionRepository, QuestionService questionService) {
         this.questionRepository = questionRepository;
+        this.questionService = questionService;
     }
 
     @GetMapping("/tests/{id}/questions")
@@ -50,6 +53,7 @@ public class QuestionController {
         questionRepository.save(newQuestion);
         questionRepository.save(oldQuestion);
 
+        questionService.deleteUnusageQuestion(oldQuestion);
         return HttpStatus.OK;
     }
 }
