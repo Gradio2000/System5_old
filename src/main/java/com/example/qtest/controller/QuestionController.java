@@ -47,9 +47,9 @@ public class QuestionController {
         newQuestion.setTestId(oldQuestion.getTestId());
         newQuestion.setDeleted(false);
 
-
         questionRepository.save(newQuestion);
         questionRepository.save(oldQuestion);
+
         return HttpStatus.OK;
     }
 }
