@@ -29,6 +29,7 @@
     <table id="color_table" class="quesTable">
         <tbody>
         <tr>
+            <th>Удалить</th>
             <th>№ п/п</th>
             <th>Вопрос</th>
             <th>Варианты ответов</th>
@@ -36,6 +37,9 @@
         </tr>
         <c:forEach var="question" items="${questionList}" varStatus="count">
             <tr>
+            <td rowspan="${question.answers.size() + 1}">
+                <input form="del" value="${question.id}" type="checkbox" name="check"/>
+            </td>
             <td rowspan="${question.answers.size() + 1}" style="text-align: justify">${count.count}</td>
                 <td rowspan="${question.answers.size() + 1}">
                     <form id="editQues${question.id}">
@@ -69,12 +73,18 @@
     <a style="color: crimson; font: bold italic 110% serif">
         <c:if test="${param.get('error') == 100}">Произошла ошибка при загрузке файла с вопросами. Проверьте его структуру!</c:if>
     </a>
-    <form method="POST" action="/fileUpload" enctype="multipart/form-data">
+    <form id="load" method="POST" action="/fileUpload" enctype="multipart/form-data">
         <input type="hidden" name="testId" value="${testId}">
         <input name="id" hidden value="${id}"/>
         <input type="file" name="file"><br />
-        <button class="btn" type="submit" value="Upload">Загрузить</button>
     </form>
+
+    <form id="del" action="/questions/delete" method="post" onsubmit="alert('Внимание! Вы действительно хотите удалить выбранные вопросы?')">
+        <input type="hidden" name="testId" value="${testId}">
+    </form>
+
+    <button form="load" class="btn" type="submit" value="Upload">Загрузить</button>
+    <button form="del" name="delete" type="submit" class="btncancel">Удалить</button>
 
 </div>
 </body>

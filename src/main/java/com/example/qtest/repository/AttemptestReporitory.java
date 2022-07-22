@@ -16,4 +16,5 @@ public interface AttemptestReporitory extends JpaRepository<Attempttest, Integer
 
     @Query(nativeQuery = true, value = "SELECT test_id FROM q_attempttests")
     Set<Integer> findAllTestId();
+
 }

@@ -2,8 +2,10 @@ package com.example.qtest.repository;
 
 import com.example.qtest.model.Question;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
@@ -26,4 +28,15 @@ public interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     @Query(nativeQuery = true, value = "SELECT question_id FROM q_questions_for_attempt")
     Set<Integer> getIds();
+
+    @Query(nativeQuery = true,
+    value = "SELECT * FROM q_questions WHERE question_id IN :check")
+    List<Question> findAllByIds(Integer[] check);
+
+    @Transactional
+    @Modifying
+    @Query(nativeQuery = true,
+    value = "UPDATE q_questions SET deleted = true WHERE question_id IN :ids")
+    void makeQuestionDeletedTrue(Integer[] ids);
+
 }

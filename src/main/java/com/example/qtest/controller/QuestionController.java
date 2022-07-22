@@ -56,4 +56,12 @@ public class QuestionController {
         questionService.deleteUnusageQuestion(oldQuestion);
         return HttpStatus.OK;
     }
+
+    @PostMapping("/questions/delete")
+    public String deleteQuestion(@RequestParam Integer testId,
+                                 @RequestParam Integer[] check){
+       questionRepository.makeQuestionDeletedTrue(check);
+       questionService.deleteUnusageQuestion(check);
+       return "redirect:/tests/" + testId + "/questions";
+    }
 }
