@@ -60,9 +60,9 @@ public class GroupTestController {
         return "redirect:/testGroup/list";
     }
 
-    @PostMapping("/edit/{id}")
+    @PostMapping("/edit")
     @ResponseBody
-    public HttpStatus editGroupTestName(@PathVariable Integer id, GroupTestDto groupTestDto){
+    public HttpStatus editGroupTestName(@RequestParam Integer id, GroupTestDto groupTestDto){
         GroupTest groupTest = groupTestRepository.findById(id).orElse(null);
         assert groupTest != null;
         groupTest.setName(groupTestDto.getName());

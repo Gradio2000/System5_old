@@ -34,9 +34,9 @@ public class QuestionController {
         return "qtest/administration/questionList";
     }
 
-    @PostMapping("/questions/edit/{oldQuestionId}")
+    @PostMapping("/questions/edit")
     @ResponseBody
-    public HttpStatus editQuestion(@PathVariable Integer oldQuestionId, @ModelAttribute Question newQuestion){
+    public HttpStatus editQuestion(@RequestParam Integer oldQuestionId, @ModelAttribute Question newQuestion){
         Question oldQuestion = questionRepository.findById(oldQuestionId).orElse(null);
         assert oldQuestion != null;
         oldQuestion.setDeleted(true);

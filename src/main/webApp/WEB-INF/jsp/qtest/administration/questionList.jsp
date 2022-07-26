@@ -43,12 +43,14 @@
             <td rowspan="${question.answers.size() + 1}" style="text-align: justify">${count.count}</td>
                 <td rowspan="${question.answers.size() + 1}">
                     <form id="editQues${question.id}">
+                        <input type="hidden" name="oldQuestionId" value="${question.id}">
                         <textarea name="questionName" style="width: 100%; height: 60px; border: none" onchange="editQues(${question.id})">${question.questionName}</textarea>
                     </form>
                     <c:forEach var="answer" items="${question.answers}">
                             <tr>
                                 <form id="editAnswer${answer.id}">
                                     <td style="width: 40%">
+                                        <input type="hidden" name="id" value="${answer.id}"/>
                                         <textarea name="answerName" style="width: 100%; height: 60px; border: none" onchange="editAnswer(${answer.id})">${answer.answerName}</textarea>
                                     </td>
                                     <c:if test="${answer.isRight}">
@@ -95,7 +97,7 @@
         console.log(d);
         $.ajax({
             type: 'POST',
-            url: '/questions/edit/' + id,
+            url: '/questions/edit',
             data: d,
             success: function (data) {
 
@@ -112,7 +114,7 @@
         let d = $(msg).serializeArray();
         $.ajax({
             type: 'POST',
-            url: '/answer/edit/' + id,
+            url: '/answer/edit',
             data: d,
             success: function (data) {
 

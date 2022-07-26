@@ -79,8 +79,8 @@ public class AdminTestController {
         return "redirect:/tests/list/" + testGroupId;
     }
 
-    @GetMapping("/undelete/{testGroupId}/{testId}")
-    public String undeleteTest(@PathVariable Integer testGroupId, @PathVariable Integer testId){
+    @PostMapping("/undelete")
+    public String undeleteTest(@RequestParam Integer testGroupId, @RequestParam Integer testId){
         testReposytory.undeleteTest(testId);
         return "redirect:/tests/list/" + testGroupId;
     }

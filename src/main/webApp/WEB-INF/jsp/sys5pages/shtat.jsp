@@ -139,11 +139,11 @@
 
                     let elem4 = document.createElement("td");
                     elem4.setAttribute("class", "tblsht");
-                    elem4.id="forrole";
+                    elem4.id="forrole" + data1[i].position_id;
 
                     let elem5 = document.createElement("td");
                     elem5.setAttribute("class", "tblsht");
-                    elem5.id="forRoleAdminTest";
+                    elem5.id="forRoleAdminTest" + data1[i].position_id;
 
 
                     if  (data1[i].user != null){
@@ -193,7 +193,7 @@
             url: '/admin/user/setrole',
             data: {"id": id},
             success: function (data) {
-                let el = document.getElementById("forrole");
+                let el = document.getElementById("forrole" + id);
                 let elATag = el.getElementsByTagName("a").item(0);
                 if (elATag != null){
                     elATag.remove();
@@ -215,7 +215,7 @@
             url: '/admin/user/setAdminTestRole',
             data: {"id": id},
             success: function (data) {
-                let el = document.getElementById("forRoleAdminTest");
+                let el = document.getElementById("forRoleAdminTest" + id);
                 let elATag = el.getElementsByTagName("a").item(0);
                 if (elATag != null){
                     elATag.remove();
@@ -378,7 +378,6 @@
             url: '/admin/user/get',
             success: function (data) {
                 let users = data._embedded.users
-                console.log(users);
                 for (let i = 0; i < users.length; i++) {
                     let option = document.createElement("option");
                     option.value = users[i].userId;

@@ -45,7 +45,11 @@
                 <c:if test="${test.deleted}">
                     <tr>
                         <td style="width: 10%;">
-                            <a href="/tests/undelete/${groupTestId}/${test.testId}">Разархивировать</a>
+                            <form id="undelForm${test.testId}" action="/tests/undelete" method="post">
+                                <input type="hidden" name="testGroupId" value="${groupTestId}">
+                                <input type="hidden" name="testId" value="${test.testId}">
+                                <a href=# onclick="document.getElementById('undelForm${test.testId}').submit()">Разархивировать</a>
+                            </form>
                         </td>
                         <td style="width: 10%; color: #b1b0b0">
                             <a>Вопросы теста</a>

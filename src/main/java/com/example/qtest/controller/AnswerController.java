@@ -7,7 +7,6 @@ import com.example.qtest.repository.QuestionRepository;
 import com.example.qtest.service.QuestionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,9 +28,9 @@ public class AnswerController {
         this.questionService = questionService;
     }
 
-    @PostMapping("/answer/edit/{id}")
+    @PostMapping("/answer/edit")
     @ResponseBody
-    public HttpStatus editAnswer(@PathVariable Integer id, @RequestParam String answerName,
+    public HttpStatus editAnswer(@RequestParam Integer id, @RequestParam String answerName,
                                  @RequestParam String isRight){
         Answer oldAnswer = answerRepository.findById(id).orElse(null);
         assert oldAnswer != null;

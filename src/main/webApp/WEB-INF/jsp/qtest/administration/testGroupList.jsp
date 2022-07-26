@@ -38,6 +38,7 @@
             </tr>
             <c:forEach var="groupTest" items="${groupTests}">
                 <form id="editGroup${groupTest.grouptestId}">
+                    <input  type="hidden" name="id" value="${groupTest.grouptestId}">
                     <tr>
                         <td style="width: 10%;">
                             <input form="del" value="${groupTest.grouptestId}" type="checkbox" name="check"/>
@@ -76,7 +77,6 @@
     </div>
 </body>
 <script>
-
     function changeData(id){
         let el =  document.getElementById('btnch' + id);
         $(el).show();
@@ -87,12 +87,11 @@
         let d = $(msg).serializeArray();
         $.ajax({
             type: 'POST',
-            url: '/testGroup/edit/' + id,
+            url: '/testGroup/edit',
             data: d,
             success: function (data) {
                 let el =  document.getElementById('btnch' + id);
                 $(el).hide();
-                console.log(d);
             },
             error: function () {
                 alert('Ошибка изменения теста! Обратитесь к администратору!');
