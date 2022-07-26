@@ -60,7 +60,8 @@
         <tr>
             <th class="tblsht">Должности</th>
             <th class="tblsht">Работники</th>
-            <th class="tblsht">Администратор</th>
+            <th class="tblsht">Администратор оценок</th>
+            <th class="tblsht">Администратор тестов</th>
         </tr>
         </tbody>
     </table>
@@ -71,9 +72,6 @@
     </br>
 
     <div id="insdelbtn"></div>
-
-
-
 
     <form id="addDivision" name="addDivision" method="post" action="/admin/division"></form>
     <form id="insertUser" name="insertUser" method="post" action="/admin/user/insert"></form>
@@ -143,6 +141,10 @@
                     elem4.setAttribute("class", "tblsht");
                     elem4.id="forrole";
 
+                    let elem5 = document.createElement("td");
+                    elem5.setAttribute("class", "tblsht");
+                    elem5.id="forRoleAdminTest";
+
 
                     if  (data1[i].user != null){
                         let a = document.createElement("a");
@@ -158,11 +160,21 @@
                         }
                         elcheck.setAttribute("onchange", "showbutrol(" + data1[i].position_id + ")");
                         elem4.append(elcheck);
+
+                        let elcheck2 = document.createElement("input");
+                        elcheck2.type = "checkbox";
+                        elcheck2.name="checkRoleAdminTest";
+                        if (data1[i].user.roles.includes("ADMIN_TEST")){
+                            elcheck2.checked = "checked";
+                        }
+                        elcheck2.setAttribute("onchange", "showbutrol2(" + data1[i].position_id + ")");
+                        elem5.append(elcheck2);
                     }
 
                     elem1.append(elem2);
                     elem1.append(elem3);
                     elem1.append(elem4);
+                    elem1.append(elem5);
                     elem.append(elem1);
 
                 }
@@ -181,18 +193,42 @@
             url: '/admin/user/setrole',
             data: {"id": id},
             success: function (data) {
-                let elll = document.getElementById("forrole");
+                let el = document.getElementById("forrole");
+                let elATag = el.getElementsByTagName("a").item(0);
+                if (elATag != null){
+                    elATag.remove();
+                }
                 let a = document.createElement("a");
                 a.innerText = data.res;
-                elll.append(a);
+                el.append(a);
             },
             error: function () {
                 alert('Ошибка!');
                 console.log(msg);
             }
         });
+    }
 
-
+    function showbutrol2(id){
+        $.ajax({
+            type: 'POST',
+            url: '/admin/user/setAdminTestRole',
+            data: {"id": id},
+            success: function (data) {
+                let el = document.getElementById("forRoleAdminTest");
+                let elATag = el.getElementsByTagName("a").item(0);
+                if (elATag != null){
+                    elATag.remove();
+                }
+                let a = document.createElement("a");
+                a.innerText = data.res;
+                el.append(a);
+            },
+            error: function () {
+                alert('Ошибка!');
+                console.log(msg);
+            }
+        });
     }
 
     function selectPosition(){

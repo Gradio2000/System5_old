@@ -7,6 +7,7 @@ import com.example.qtest.service.DtoUtils;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ public class GroupTestController {
     }
 
     @GetMapping("/list")
+    @PreAuthorize("hasRole('ADMIN_TEST')")
     public String testGroupList(@AuthenticationPrincipal AuthUser authUser,
                                 Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));

@@ -1,40 +1,34 @@
 package com.example.qtest.controller;
 
-import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.dto.TestDto;
-import com.example.qtest.model.Attempttest;
 import com.example.qtest.model.Test;
 import com.example.qtest.repository.AttemptestReporitory;
 import com.example.qtest.repository.GroupTestRepository;
 import com.example.qtest.repository.TestReposytory;
 import com.example.qtest.service.DtoUtils;
-import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/tests")
-public class TestController {
+@PreAuthorize("hasRole('ADMIN_TEST')")
+public class AdminTestController {
 
     private final GroupTestRepository groupTestRepository;
     private final TestReposytory testReposytory;
     private final DtoUtils dtoUtils;
     private final AttemptestReporitory attemptestReporitory;
 
-    public TestController(GroupTestRepository groupTestRepository, TestReposytory testReposytory,
-                          DtoUtils dtoUtils, AttemptestReporitory attemptestReporitory) {
+    public AdminTestController(GroupTestRepository groupTestRepository, TestReposytory testReposytory,
+                               DtoUtils dtoUtils, AttemptestReporitory attemptestReporitory) {
         this.groupTestRepository = groupTestRepository;
         this.testReposytory = testReposytory;
         this.dtoUtils = dtoUtils;
@@ -105,47 +99,5 @@ public class TestController {
         return HttpStatus.OK;
     }
 
-    @GetMapping("listForTesting/{id}")
-    public String listForTesting(@AuthenticationPrincipal AuthUser authUser, Model model, @PathVariable Integer id){
-        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        List<TestDto> testList = testReposytory.findAllDeletedTestsByGroupIdOrderByTestId(id).stream()
-                .map(dtoUtils :: convertToTestDto)
-                .collect(Collectors.toList());
-        model.addAttribute("testList", testList);
-        GroupTestDto groupTest = dtoUtils.convertToGroupTestDto(Objects.requireNonNull(groupTestRepository.findById(id).orElse(null)));
-        model.addAttribute("groupTest", groupTest);
-        return "qtest/forTesting/allTestsForTesting";
-    }
 
-    @GetMapping("/listForTesting/test/{id}")
-    public String getTestForTesting(@AuthenticationPrincipal AuthUser authUser, Model model,
-                                    @PathVariable Integer id,
-                                    HttpSession session){
-        Test test = testReposytory.findById(id).orElse(null);
-        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        model.addAttribute("test", test);
-        return "qtest/forTesting/testForTesting";
-    }
-
-
-    @GetMapping("/mytests")
-    public String getUserAttempts(@AuthenticationPrincipal AuthUser authUser, Model model,
-                                  @RequestParam (defaultValue = "0") Integer page,
-                                  @RequestParam (defaultValue = "10") Integer size,
-                                  @RequestParam (defaultValue = "up") String sort){
-
-        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-
-        Pageable pageable;
-        if (sort.equals("down")){
-            pageable = PageRequest.of(page, size, Sort.by("dateTime").descending());
-        }
-        else {
-            pageable = PageRequest.of(page, size, Sort.by("dateTime").ascending());
-        }
-        Page<Attempttest> attemptsList = attemptestReporitory.findAllByUserId(authUser.getUser().getUserId(), pageable);
-        model.addAttribute("attemptsList", attemptsList);
-        model.addAttribute("sort", sort);
-        return "qtest/myTestsList";
-    }
 }

@@ -61,14 +61,36 @@ public class UserAdminController {
         User user = position.user;
         Set<Role> roleSet = user.getRoles();
         if (roleSet.contains(Role.ADMIN)){
-            roleSet.clear();
-            roleSet.add(Role.USER);
+            roleSet.remove(Role.ADMIN);
             user.setRoles(roleSet);
             userRepository.save(user);
             result.put("res", "not admin");
         }
         else {
             roleSet.add(Role.ADMIN);
+            user.setRoles(roleSet);
+            userRepository.save(user);
+            result.put("res", "admin");
+        }
+        return result;
+    }
+
+    @PostMapping("/setAdminTestRole")
+    @ResponseBody
+    public Map<String, String> setAdminTestRole(@RequestParam Integer id){
+        Map<String, String> result = new HashMap<>();
+        Position position = positionRepository.findById(id).orElse(null);
+        assert position != null;
+        User user = position.user;
+        Set<Role> roleSet = user.getRoles();
+        if (roleSet.contains(Role.ADMIN_TEST)){
+            roleSet.remove(Role.ADMIN_TEST);
+            user.setRoles(roleSet);
+            userRepository.save(user);
+            result.put("res", "not admin");
+        }
+        else {
+            roleSet.add(Role.ADMIN_TEST);
             user.setRoles(roleSet);
             userRepository.save(user);
             result.put("res", "admin");
