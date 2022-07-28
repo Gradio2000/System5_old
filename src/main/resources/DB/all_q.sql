@@ -103,3 +103,25 @@ create table q_tests
 create unique index q_tests_test_id_uindex
     on q_tests (test_id);
 
+create table if not exists q_appoint_tests
+(
+    id_appoint_test serial
+        constraint q_appoint_tests_pk
+            primary key,
+    user_id         integer
+        constraint q_appoint_tests_sys_users_user_id_fk
+            references sys_users,
+    test_id         integer
+        constraint q_appoint_tests_q_tests_test_id_fk
+            references q_tests,
+    finished        boolean
+);
+
+alter table q_appoint_tests
+    owner to admin;
+
+create unique index if not exists q_appoint_tests_id_appoint_test_uindex
+    on q_appoint_tests (id_appoint_test);
+
+
+

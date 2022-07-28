@@ -7,6 +7,7 @@
     <br/>
     <a href="/tests/mytests">Мои тесты</a>
     <a href="/testGroup/listForTesting">Тестирование</a>
+    <a href="/appointTests/getUserAppoint">Назначенные зачёты</a>
     <br/>
     <a href="/admin/prepareReport">Отчет за месяц</a>
     <a href="/admin/prepareHalfYearReport">Отчет за полугодие</a>
