@@ -85,9 +85,15 @@
     </c:forEach>
 
     <div id="lastpage">
-        <button class="btn" onclick="finishTest(${attemptId}, ${questionList.size()})">Завершить</button>
+        <button class="btn" type="submit" form="finishForm">Завершить</button>
     </div >
 </div>
+
+<form id="finishForm" method="post" action="/processing/finishTest" onsubmit="finishTest(${questionList.size()}); return false;">
+    <input type="hidden" name="attemptId" value="${attemptId}"/>
+    <input type="hidden" name="appointTestId" value="${appointTestId}">
+</form>
+
 </body>
 <script>
     document.addEventListener("DOMContentLoaded", ready);
@@ -106,14 +112,14 @@
         }
     }
 
-    function finishTest(attemptId, size){
-        if ($('.right').length !== size){
-           if (confirm('Есть вопросы с неполученными ответами. Завершение выполнения теста отметит их как неправильные. Вы действительно хотите завершить тест?')){
-               document.location='/processing/finishTest/${attemptId}';
-           }
-        }
-        else {
-            document.location='/processing/finishTest/${attemptId}'
+    function finishTest(size, s){
+        if ($('.right').length === size) {
+            s.submit();
+        } else {
+            if (confirm('Есть вопросы с неполученными ответами. Завершение выполнения теста отметит их как неправильные.' +
+            ' Вы действительно хотите завершить тест?')) {
+                s.submit();
+            }
         }
     }
 

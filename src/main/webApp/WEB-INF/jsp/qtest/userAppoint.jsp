@@ -26,29 +26,35 @@
 </head>
 <body>
 <div class="main">
-<c:forEach var="test" items="${testDtoList}">
+    <div>
+        <c:if test="${testDtoMap.size() == 0}">
+            <a style="font-family: 'Arial Unicode MS',cursive; color: #dc4242">Вам не назначены зачёты</a>
+        </c:if>
+    </div>
+<c:forEach var="test" items="${testDtoMap}">
     <div>
         <table id="color_table" style="width: 100%; table-layout: auto">
             <tr>
                 <th class="tblsht">Tест: </th>
-                <td class="tblsht">${test.testName}</td>
+                <td class="tblsht">${test.value.testName}</td>
             <tr>
                 <th class="tblsht">Время теста, мин.</th>
-                <td class="tblsht">${test.time}</td>
+                <td class="tblsht">${test.value.time}</td>
             </tr>
             <tr>
                 <th class="tblsht">Критерий для сдачи, %</th>
-                <td class="tblsht">${test.criteria}</td>
+                <td class="tblsht">${test.value.criteria}</td>
             </tr>
             <tr>
                 <th class="tblsht">Количество вопросов</th>
-                <td class="tblsht">${test.quesAmount}</td>
+                <td class="tblsht">${test.value.quesAmount}</td>
             </tr>
     </table>
     </div>
     <div>
         <form action="/processing/start" method="post">
-            <input type="hidden" name="testId" value="${test.testId}">
+            <input type="hidden" name="testId" value="${test.value.testId}">
+            <input type="hidden" name="appointTestId" value="${test.key}">
             <button type="submit" class="btn">Начать</button>
         </form>
     </div>

@@ -4,10 +4,7 @@ import com.example.qtest.model.Attempttest;
 import com.example.qtest.model.QuestionsForAttempt;
 import com.example.qtest.model.ResultTest;
 import com.example.qtest.model.Test;
-import com.example.qtest.repository.AttemptestReporitory;
-import com.example.qtest.repository.QuestionForAttemptRepository;
-import com.example.qtest.repository.ResultTestRepository;
-import com.example.qtest.repository.TestReposytory;
+import com.example.qtest.repository.*;
 import com.example.qtest.service.ResultTestService;
 import com.example.qtest.service.TestService;
 import com.example.system5.dto.UserDto;
@@ -34,23 +31,25 @@ public class TestProcessingController {
     private final QuestionForAttemptRepository questionForAttemptRepository;
     private final ResultTestRepository resultTestRepository;
     private final ResultTestService resultTestService;
+    private final AppointTestRepository appointTestRepository;
 
-
-    public TestProcessingController(AttemptestReporitory attemptestReporitory,
-                                    TestReposytory testReposytory, TestService testService,
-                                    QuestionForAttemptRepository questionForAttemptRepository,
-                                    ResultTestRepository resultTestRepository, ResultTestService resultTestService) {
+    public TestProcessingController(AttemptestReporitory attemptestReporitory, TestReposytory testReposytory,
+                                    TestService testService, QuestionForAttemptRepository questionForAttemptRepository,
+                                    ResultTestRepository resultTestRepository, ResultTestService resultTestService,
+                                    AppointTestRepository appointTestRepository) {
         this.attemptestReporitory = attemptestReporitory;
         this.testReposytory = testReposytory;
         this.testService = testService;
         this.questionForAttemptRepository = questionForAttemptRepository;
         this.resultTestRepository = resultTestRepository;
         this.resultTestService = resultTestService;
+        this.appointTestRepository = appointTestRepository;
     }
 
     @PostMapping("/start")
     public String startTestProcessing(@AuthenticationPrincipal AuthUser authUser,
-                                      Model model, @RequestParam Integer testId){
+                                      Model model, @RequestParam Integer testId,
+                                      @RequestParam (required = false) Integer appointTestId){
 
             Attempttest attempttest = new Attempttest();
             attempttest.setDateTime(new Date());
@@ -70,6 +69,7 @@ public class TestProcessingController {
             model.addAttribute("attemptId", attempttest.getId());
             model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
             model.addAttribute("questionList", questionsForAttemptList);
+            model.addAttribute("appointTestId", appointTestId);
             return "qtest/process";
     }
 
@@ -91,9 +91,12 @@ public class TestProcessingController {
         return HttpStatus.OK;
     }
 
-    @GetMapping("/finishTest/{attemptId}")
-    public String finishTest(@PathVariable Integer attemptId){
+    @PostMapping("/finishTest")
+    public String finishTest(@RequestParam Integer attemptId, @RequestParam (required = false) Integer appointTestId){
         resultTestService.mainCheck(attemptId);
+        if (appointTestId != null){
+            appointTestRepository.setAppointTrue(appointTestId);
+        }
         return "redirect:/tests/mytests";
     }
 

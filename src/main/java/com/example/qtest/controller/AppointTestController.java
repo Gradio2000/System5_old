@@ -1,6 +1,7 @@
 package com.example.qtest.controller;
 
 import com.example.qtest.dto.TestDto;
+import com.example.qtest.model.AppointTest;
 import com.example.qtest.repository.AppointTestRepository;
 import com.example.qtest.service.DtoUtils;
 import com.example.system5.dto.UserDto;
@@ -11,8 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/appointTests")
@@ -29,10 +31,13 @@ public class AppointTestController {
     public String getUserAppoint(@AuthenticationPrincipal AuthUser authUser, Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
-        List<TestDto> testDtoList = appointTestRepository.findAllByUser(authUser.getUser()).stream()
-                .map(appointTest -> dtoUtils.convertToTestDto(appointTest.getTest()))
-                .collect(Collectors.toList());
-        model.addAttribute("testDtoList", testDtoList);
+        List<AppointTest> appointTestList = appointTestRepository.findAllByUser(authUser.getUser());
+        Map<Integer, TestDto> testDtoMap = new HashMap<>();
+        for (AppointTest appointTest: appointTestList){
+            testDtoMap.put(appointTest.getId(), dtoUtils.convertToTestDto(appointTest.getTest()));
+        }
+
+        model.addAttribute("testDtoMap", testDtoMap);
         return "qtest/userAppoint";
     }
 }
