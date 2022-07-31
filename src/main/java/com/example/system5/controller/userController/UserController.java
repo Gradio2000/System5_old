@@ -62,7 +62,8 @@ public class UserController {
 
     @PostMapping("/editUser")
     public String editUser(@ModelAttribute User user, @AuthenticationPrincipal AuthUser authUser){
-        User userForEdit = userRepository.getUserByUserId(authUser.getUser().getUserId());
+        User userForEdit = userRepository.findById(authUser.getUser().getUserId()).orElse(null);
+        assert userForEdit != null;
         userForEdit.setName(user.getName());
         userForEdit.setLogin(user.getLogin());
         userRepository.save(userForEdit);
@@ -86,8 +87,9 @@ public class UserController {
             return "sys5pages/changePassword";
         }
 
-        User userForEdit = userRepository.getUserByUserId(authUser.getUser().getUserId());
+        User userForEdit = userRepository.findById(authUser.getUser().getUserId()).orElse(null);
         String password = passwordEncoder.encode(changePasswordForm.getPassword());
+        assert userForEdit != null;
         userForEdit.setPassword(password);
         userRepository.save(userForEdit);
         authUser.setUser(userForEdit);

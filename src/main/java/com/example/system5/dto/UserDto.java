@@ -11,13 +11,15 @@ import java.util.Set;
 
 @Data
 public class UserDto implements Serializable {
+    private Integer userId;
     @Size(max = 128, message = "size is too much")
     private final String name;
     private  Set<Role> roles;
     private String login;
     private Position position;
 
-    public UserDto(String name, Set<Role> roles, String login, Position position) {
+    public UserDto(Integer userId, String name, Set<Role> roles, String login, Position position) {
+        this.userId = userId;
         this.name = name;
         this.roles = roles;
         this.login = login;
@@ -25,6 +27,6 @@ public class UserDto implements Serializable {
     }
 
     public static UserDto getInstance(User user){
-        return new UserDto(user.getName(), user.getRoles(), user.getLogin(), user.getPosition());
+        return new UserDto(user.getUserId(), user.getName(), user.getRoles(), user.getLogin(), user.getPosition());
     }
 }

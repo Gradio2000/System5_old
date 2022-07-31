@@ -16,6 +16,7 @@
     <a href="/admin/archive">Архив оценок</a>
     <a href="/admin/shtat">Штатное расписание</a>
     <a href="/testGroup/list">Редактирование тестов</a>
+    <a href="/exam/exam">Назначение зачётов</a>
     <br/>
     <a href="/logout">Выйти</a>
 </div>

@@ -1,11 +1,14 @@
 package com.example.qtest.controller;
 
+import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.Test;
 import com.example.qtest.repository.AttemptestReporitory;
 import com.example.qtest.repository.GroupTestRepository;
 import com.example.qtest.repository.TestReposytory;
 import com.example.qtest.service.DtoUtils;
+import com.example.system5.dto.UserDto;
+import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -26,13 +29,17 @@ public class AdminTestController {
     private final TestReposytory testReposytory;
     private final DtoUtils dtoUtils;
     private final AttemptestReporitory attemptestReporitory;
+    private final UserRepository userRepository;
 
-    public AdminTestController(GroupTestRepository groupTestRepository, TestReposytory testReposytory,
-                               DtoUtils dtoUtils, AttemptestReporitory attemptestReporitory) {
+    public AdminTestController(GroupTestRepository groupTestRepository,
+                               TestReposytory testReposytory, DtoUtils dtoUtils,
+                               AttemptestReporitory attemptestReporitory,
+                               UserRepository userRepository) {
         this.groupTestRepository = groupTestRepository;
         this.testReposytory = testReposytory;
         this.dtoUtils = dtoUtils;
         this.attemptestReporitory = attemptestReporitory;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/list/{id}")
@@ -98,6 +105,5 @@ public class AdminTestController {
         testReposytory.save(test);
         return HttpStatus.OK;
     }
-
 
 }

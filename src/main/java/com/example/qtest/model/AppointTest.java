@@ -29,4 +29,12 @@ public class AppointTest {
     @Column(name = "finished")
     private Boolean finished;
 
+    public AppointTest(User user, Test test, Boolean finished) {
+        this.user = user;
+        this.test = test;
+        this.finished = finished;
+    }
+
+    public AppointTest() {
+    }
 }

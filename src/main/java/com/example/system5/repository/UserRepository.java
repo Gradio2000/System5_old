@@ -14,8 +14,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByLogin(String login);
 
-    User getUserByUserId(int id);
-
     boolean existsUserByLogin(String login);
 
     @Query(nativeQuery = true,

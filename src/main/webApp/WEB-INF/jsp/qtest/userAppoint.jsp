@@ -33,21 +33,21 @@
     </div>
 <c:forEach var="test" items="${testDtoMap}">
     <div>
-        <table id="color_table" style="width: 100%; table-layout: auto">
+        <table style="width: 100%; table-layout: auto">
             <tr>
-                <th class="tblsht">Tест: </th>
-                <td class="tblsht">${test.value.testName}</td>
+                <th style="width: 20%">Tест: </th>
+                <td style="text-align: left">${test.value.testName}</td>
             <tr>
-                <th class="tblsht">Время теста, мин.</th>
-                <td class="tblsht">${test.value.time}</td>
+                <th style="width: 20%">Время теста, мин.</th>
+                <td style="text-align: left">${test.value.time}</td>
             </tr>
             <tr>
-                <th class="tblsht">Критерий для сдачи, %</th>
-                <td class="tblsht">${test.value.criteria}</td>
+                <th style="width: 20%">Критерий для сдачи, %</th>
+                <td style="text-align: left">${test.value.criteria}</td>
             </tr>
             <tr>
-                <th class="tblsht">Количество вопросов</th>
-                <td class="tblsht">${test.value.quesAmount}</td>
+                <th style="width: 20%">Количество вопросов</th>
+                <td style="text-align: left">${test.value.quesAmount}</td>
             </tr>
     </table>
     </div>
@@ -55,7 +55,7 @@
         <form action="/processing/start" method="post">
             <input type="hidden" name="testId" value="${test.value.testId}">
             <input type="hidden" name="appointTestId" value="${test.key}">
-            <button type="submit" class="btn">Начать</button>
+            <button type="submit" class="btn" STYLE="margin-top: 1em">Начать</button>
         </form>
     </div>
 </c:forEach>

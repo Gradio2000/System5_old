@@ -1,8 +1,8 @@
 package com.example.qtest.repository;
 
 import com.example.qtest.model.AppointTest;
+import com.example.qtest.model.Test;
 import com.example.system5.model.User;
-import org.hibernate.annotations.Where;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,4 +20,17 @@ public interface AppointTestRepository extends JpaRepository<AppointTest, Intege
     @Query(nativeQuery = true,
     value = "UPDATE q_appoint_tests SET finished = true WHERE id_appoint_test = :appointTestId")
     void setAppointTrue(Integer appointTestId);
+
+    @Query(nativeQuery = true,
+    value = "SELECT * FROM q_appoint_tests WHERE test_id = :testId AND user_id = :userId")
+    AppointTest getAppointTest(Integer testId, Integer userId);
+
+    boolean existsByUserAndTest(User user, Test test);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true,
+    value = "DELETE FROM q_appoint_tests WHERE user_id = :userId AND test_id = :testId")
+    void deleteByUserAndTest(Integer userId, Integer testId);
+
 }
