@@ -29,10 +29,14 @@ public class AppointTest {
     @Column(name = "finished")
     private Boolean finished;
 
-    public AppointTest(User user, Test test, Boolean finished) {
+    @Column
+    private String base;
+
+    public AppointTest(User user, Test test, Boolean finished, String base) {
         this.user = user;
         this.test = test;
         this.finished = finished;
+        this.base = base;
     }
 
     public AppointTest() {

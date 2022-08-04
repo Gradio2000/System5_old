@@ -70,11 +70,12 @@ public class ExamController {
 
     @PostMapping("/appointExam")
     @ResponseBody
-    public HttpStatus appointExam(@RequestParam Integer testId, @RequestParam Integer userId){
+    public HttpStatus appointExam(@RequestParam Integer testId, @RequestParam Integer userId,
+                                  @RequestParam String base){
         User user = userRepository.findById(userId).orElse(null);
         Test test = testReposytory.findById(testId).orElse(null);
         if (!appointTestRepository.existsByUserAndTest(user, test)){
-            AppointTest appointTest = new AppointTest(user, test, false);
+            AppointTest appointTest = new AppointTest(user, test, false, base);
             appointTestRepository.save(appointTest);
         }
         else {

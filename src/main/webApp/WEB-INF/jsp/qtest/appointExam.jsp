@@ -19,47 +19,97 @@
 </head>
 <body>
 <div class="main">
+
     <form id="selectUser">
-
-            <select class="select-css" id="userIdSelect" name="userId" onchange="getUsersAppoints()"
-                    style="width: max-content;">
-                <option value="" disabled selected>Выберите работника</option>
-                <c:forEach var="user" items="${userDtoList}">
-                    <option value="${user.userId}">${user.name}</option>
-                </c:forEach>
-            </select>
-
+        <select class="select-css" id="userIdSelect" name="userId" onchange="getUsersAppoints()"
+                style="width: max-content;">
+            <option value="" disabled selected>Выберите работника</option>
+            <c:forEach var="user" items="${userDtoList}">
+                <option value="${user.userId}">${user.name}</option>
+            </c:forEach>
+        </select>
     </form>
+
     <table id="color_table" style="width: 100%">
         <tbody>
+        <tr>
+            <th>Название теста</th>
+            <th>Назначить</th>
+        </tr>
+        <c:forEach var="groupTest" items="${groupTestDtoList}">
             <tr>
-                <th>Название теста</th>
-                <th>Назначить</th>
+                <th colspan="2">группа: ${groupTest.name}</th>
             </tr>
-            <c:forEach var="groupTest" items="${groupTestDtoList}">
+            <c:forEach var="test" items="${groupTest.testDtoList}">
                 <tr>
-                    <th colspan="2">группа: ${groupTest.name}</th>
+                    <td>${test.testName}</td>
+                    <td><input type="checkbox" class="appointCheck" id="${test.testId}" disabled
+                               onchange="getModalView(${test.testId})"/></td>
                 </tr>
-                <c:forEach var="test" items="${groupTest.testDtoList}">
-                    <tr>
-                        <td>${test.testName}</td>
-                        <td><input type="checkbox" class="appointCheck" id="${test.testId}" disabled
-                                   onchange="appointExam(${test.testId})"/></td>
-                    </tr>
-                </c:forEach>
             </c:forEach>
+        </c:forEach>
         </tbody>
     </table>
 </div>
+
+
+<div id="openModal" class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Основание</h3>
+                <a href="#close" title="Close" class="close">×</a>
+            </div>
+            <div class="modal-body my-modal">
+                <label>Введите номер и дату распорядительного документа</label>
+                <input form="examAppointForm" type="text" name="base"/>
+                <button form="examAppointForm" type="button" class="btn" onclick="appointExam()">Отправить</button>
+            </div>
+        </div>
+    </div>
+</div>
+<form id="examAppointForm"></form>
 </body>
 </html>
 <script>
-    function appointExam(testId) {
-        let userId = document.getElementById("userIdSelect").value;
+
+    function getModalView(testId){
+        let form =  $('#examAppointForm');
+        $('.inpClass').remove();
+
+        let inptestId = document.createElement("input");
+        inptestId.type = "hidden";
+        inptestId.className = "inpClass";
+        inptestId.form = "examAppointForm";
+        inptestId.name = "testId";
+        inptestId.value = testId;
+        form.append(inptestId);
+
+
+        let inpUserId = document.createElement("input");
+        inpUserId.type = "hidden";
+        inpUserId.className = "inpClass";
+        inpUserId.form = "examAppointForm";
+        inpUserId.name = "userId";
+        inpUserId.value = document.getElementById("userIdSelect").value;
+        form.append(inpUserId);
+
+        let el = document.getElementById(testId);
+        if(el.checked){
+            document.location='#openModal';
+        }
+        else {
+            appointExam();
+        }
+    }
+
+    function appointExam() {
+        document.location='#close';
+        const msg = $('#examAppointForm').serialize();
         $.ajax({
             type: 'POST',
             url: '/exam/appointExam',
-            data: {"testId": testId,  "userId": userId},
+            data: msg,
             success: function (data) {
                 // запустится при успешном выполнении запроса и в data будет ответ скрипта
             },
@@ -67,7 +117,6 @@
                 alert('Ошибка!');
             }
         });
-
     }
 
     function getUsersAppoints(){
@@ -77,7 +126,7 @@
             url: '/exam/getUsersAppoints',
             data: elem,
             success: function (data) {
-               let elem = document.getElementsByClassName("appointCheck");
+                let elem = document.getElementsByClassName("appointCheck");
                 for (let i = 0; i < elem.length; i++) {
                     elem[i].removeAttribute("disabled");
                     elem[i].checked = false;
