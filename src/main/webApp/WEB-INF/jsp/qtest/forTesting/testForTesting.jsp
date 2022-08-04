@@ -28,18 +28,18 @@
 <div class="main">
     <table id="color_table" style="width: 100%; table-layout: auto">
         <tr>
-            <th class="tblsht">Tест: </th>
+            <th style="width: 20%" class="tblsht">Tест: </th>
             <td class="tblsht">${test.testName}</td>
         <tr>
-            <th class="tblsht">Время теста, мин.</th>
+            <th style="width: 20%" class="tblsht">Время теста, мин.</th>
             <td class="tblsht">${test.time}</td>
         </tr>
         <tr>
-            <th class="tblsht">Критерий для сдачи, %</th>
+            <th style="width: 20%" class="tblsht">Критерий для сдачи, %</th>
             <td class="tblsht">${test.criteria}</td>
         </tr>
         <tr>
-            <th class="tblsht">Количество вопросов</th>
+            <th style="width: 20%" class="tblsht">Количество вопросов</th>
             <td class="tblsht">${test.quesAmount}</td>
         </tr>
     </table>

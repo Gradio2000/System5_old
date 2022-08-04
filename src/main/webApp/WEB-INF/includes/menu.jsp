@@ -9,15 +9,26 @@
     <a href="/testGroup/listForTesting">Тестирование</a>
     <a href="/appointTests/getUserAppoint">Назначенные зачёты</a>
     <br/>
-    <a href="/admin/prepareReport">Отчет за месяц</a>
-    <a href="/admin/prepareHalfYearReport">Отчет за полугодие</a>
-    <a href="/admin/prepareYearReport">Отчет за год</a>
-    <br/>
-    <a href="/admin/archive">Архив оценок</a>
-    <a href="/admin/shtat">Штатное расписание</a>
+
+    <c:forEach var="role" items="${user.roles}">
+        <c:if test="${role == 'ADMIN'}">
+            <a href="/admin/prepareReport">Отчет за месяц</a>
+            <a href="/admin/prepareHalfYearReport">Отчет за полугодие</a>
+            <a href="/admin/prepareYearReport">Отчет за год</a>
+            <br/>
+            <a href="/admin/archive">Архив оценок</a>
+            <a href="/admin/shtat">Штатное расписание</a>
+            <br/>
+        </c:if>
+    </c:forEach>
+
+<c:forEach var="role" items="${user.roles}">
+    <c:if test="${role == 'ADMIN_TEST'}">
     <a href="/testGroup/list">Редактирование тестов</a>
     <a href="/exam/exam">Назначение зачётов</a>
     <br/>
+    </c:if>
+</c:forEach>
     <a href="/logout">Выйти</a>
 </div>
 
