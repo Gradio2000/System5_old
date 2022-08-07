@@ -3,7 +3,6 @@ package com.example.qtest.model;
 import com.example.system5.model.User;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -11,7 +10,7 @@ import javax.persistence.*;
 @Table(name = "q_appoint_tests")
 @Getter
 @Setter
-@Where(clause = "finished = false")
+//@Where(clause = "finished = false")
 public class AppointTest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +30,10 @@ public class AppointTest {
 
     @Column
     private String base;
+
+    @OneToOne
+    @JoinColumn(name = "attempt_test_id", referencedColumnName = "attempt_id")
+    private Attempttest attempttest;
 
     public AppointTest(User user, Test test, Boolean finished, String base) {
         this.user = user;

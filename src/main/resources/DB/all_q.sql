@@ -32,6 +32,7 @@ create table q_attempttests
 create unique index q_attempttests_attempt_id_uindex
     on q_attempttests (attempt_id);
 
+
 drop table if exists q_group_test;
 create table q_group_test
 (
@@ -85,7 +86,7 @@ create table q_result_test
 create unique index q_result_test_resulttest_id_uindex
     on q_result_test (resulttest_id);
 
-drop table if exists q_tests;
+drop table if exists q_tests cascade ;
 create table q_tests
 (
     test_id     serial
@@ -103,6 +104,8 @@ create table q_tests
 create unique index q_tests_test_id_uindex
     on q_tests (test_id);
 
+drop table if exists q_appoint_tests;
+
 create table q_appoint_tests
 (
     id_appoint_test serial
@@ -115,7 +118,8 @@ create table q_appoint_tests
         constraint q_appoint_tests_q_tests_test_id_fk
             references q_tests,
     finished        boolean,
-    base            varchar
+    base            varchar,
+    attempt_test_id int
 );
 
 alter table q_appoint_tests

@@ -26,6 +26,7 @@
     <c:if test="${role == 'ADMIN_TEST'}">
     <a href="/testGroup/list">Редактирование тестов</a>
     <a href="/exam/exam">Назначение зачётов</a>
+    <a href="/exam/journal">Журнал зачётов</a>
     <br/>
     </c:if>
 </c:forEach>

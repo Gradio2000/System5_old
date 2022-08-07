@@ -1,9 +1,6 @@
 package com.example.qtest.controller;
 
-import com.example.qtest.model.Attempttest;
-import com.example.qtest.model.QuestionsForAttempt;
-import com.example.qtest.model.ResultTest;
-import com.example.qtest.model.Test;
+import com.example.qtest.model.*;
 import com.example.qtest.repository.*;
 import com.example.qtest.service.ResultTestService;
 import com.example.qtest.service.TestService;
@@ -57,6 +54,13 @@ public class TestProcessingController {
             attempttest.setTestId(testId);
             attempttest.setTestResult("Не завершен");
             attemptestReporitory.save(attempttest);
+
+            if (appointTestId != null){
+                AppointTest appointTest = appointTestRepository.findById(appointTestId).orElse(null);
+                assert appointTest != null;
+                appointTest.setAttempttest(attempttest);
+                appointTestRepository.save(appointTest);
+            }
 
             Test test = testReposytory.findById(testId).orElse(null);
             assert test != null;

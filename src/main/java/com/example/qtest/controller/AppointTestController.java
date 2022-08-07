@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/appointTests")
@@ -31,7 +32,9 @@ public class AppointTestController {
     public String getUserAppoint(@AuthenticationPrincipal AuthUser authUser, Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
-        List<AppointTest> appointTestList = appointTestRepository.findAllByUser(authUser.getUser());
+        List<AppointTest> appointTestList = appointTestRepository.findAllByUser(authUser.getUser()).stream()
+                .filter(appointTest -> !appointTest.getFinished())
+                .collect(Collectors.toList());
         Map<Integer, TestDto> testDtoMap = new HashMap<>();
         for (AppointTest appointTest: appointTestList){
             testDtoMap.put(appointTest.getId(), dtoUtils.convertToTestDto(appointTest.getTest()));

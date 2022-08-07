@@ -1,5 +1,6 @@
 package com.example.qtest.controller;
 
+import com.example.qtest.dto.AppointTestDto;
 import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.model.AppointTest;
 import com.example.qtest.model.Test;
@@ -82,5 +83,19 @@ public class ExamController {
             appointTestRepository.deleteByUserAndTest(userId, testId);
         }
         return HttpStatus.OK;
+    }
+
+    @GetMapping ("/journal")
+    public String getJournal(@AuthenticationPrincipal AuthUser authUser, Model model){
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        List<AppointTest> appointTestList = appointTestRepository.findAll().stream()
+                .filter(AppointTest::getFinished)
+                .collect(Collectors.toList());
+
+        List<AppointTestDto> appointTestDtoList = dtoUtils.convertToAppointTestDtoList(appointTestList);
+
+
+        model.addAttribute("appointTestDtoList", appointTestDtoList);
+        return "qtest/journal";
     }
 }
