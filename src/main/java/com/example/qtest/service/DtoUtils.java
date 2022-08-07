@@ -24,7 +24,9 @@ public class DtoUtils {
 
     public GroupTestDto convertToGroupTestDtoWithTestName(GroupTest groupTest){
         return new GroupTestDto(groupTest.getGrouptestId(), groupTest.getName(),
-                groupTest.getTests().stream().map(this::convertToTestDto).collect(Collectors.toList()));
+                groupTest.getTests().stream()
+                        .map(TestDto::getInstance)
+                        .collect(Collectors.toList()));
     }
 
     public TestDto convertToTestDto(Test test){

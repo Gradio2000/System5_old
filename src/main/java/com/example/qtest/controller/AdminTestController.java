@@ -1,13 +1,11 @@
 package com.example.qtest.controller;
 
-import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.Test;
 import com.example.qtest.repository.AttemptestReporitory;
 import com.example.qtest.repository.GroupTestRepository;
 import com.example.qtest.repository.TestReposytory;
 import com.example.qtest.service.DtoUtils;
-import com.example.system5.dto.UserDto;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
 import org.springframework.http.HttpStatus;
@@ -48,7 +46,7 @@ public class AdminTestController {
         model.addAttribute("groupTestId", id);
         model.addAttribute("groupTestName", Objects.requireNonNull(groupTestRepository.findById(id).orElse(null)).getName());
         List<TestDto> testDtoList = testReposytory.findAllByGroupIdOrderByTestId(id).stream()
-                .map(dtoUtils :: convertToTestDto)
+                .map(TestDto::getInstance)
                 .collect(Collectors.toList());
         model.addAttribute("testList", testDtoList);
         return "qtest/administration/testlist";

@@ -65,6 +65,7 @@ public class ExamController {
         return appointTestRepository
                 .findAllByUser(userRepository.findById(userId).orElse(null))
                 .stream()
+                .filter(appointTest -> !appointTest.getFinished())
                 .map(appointTest -> appointTest.getTest().getTestId())
                 .collect(Collectors.toList());
     }
@@ -75,8 +76,9 @@ public class ExamController {
                                   @RequestParam String base){
         User user = userRepository.findById(userId).orElse(null);
         Test test = testReposytory.findById(testId).orElse(null);
-        if (!appointTestRepository.existsByUserAndTest(user, test)){
-            AppointTest appointTest = new AppointTest(user, test, false, base);
+        AppointTest appointTest = appointTestRepository.findByUserAndTestAndFinished(user, test, false);
+        if (appointTest == null){
+            appointTest = new AppointTest(user, test, false, base);
             appointTestRepository.save(appointTest);
         }
         else {

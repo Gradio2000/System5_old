@@ -37,7 +37,7 @@ public class AppointTestController {
                 .collect(Collectors.toList());
         Map<Integer, TestDto> testDtoMap = new HashMap<>();
         for (AppointTest appointTest: appointTestList){
-            testDtoMap.put(appointTest.getId(), dtoUtils.convertToTestDto(appointTest.getTest()));
+            testDtoMap.put(appointTest.getId(), TestDto.getInstance(appointTest.getTest()));
         }
 
         model.addAttribute("testDtoMap", testDtoMap);

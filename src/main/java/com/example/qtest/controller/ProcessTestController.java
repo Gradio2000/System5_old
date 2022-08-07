@@ -49,7 +49,7 @@ public class ProcessTestController {
     public String listForTesting(@AuthenticationPrincipal AuthUser authUser, Model model, @PathVariable Integer id){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         List<TestDto> testList = testReposytory.findAllDeletedTestsByGroupIdOrderByTestId(id).stream()
-                .map(dtoUtils :: convertToTestDto)
+                .map(TestDto::getInstance)
                 .collect(Collectors.toList());
         model.addAttribute("testList", testList);
         GroupTestDto groupTest = dtoUtils.convertToGroupTestDto(Objects.requireNonNull(groupTestRepository.findById(id).orElse(null)));

@@ -25,7 +25,7 @@ public interface AppointTestRepository extends JpaRepository<AppointTest, Intege
     value = "SELECT * FROM q_appoint_tests WHERE test_id = :testId AND user_id = :userId")
     AppointTest getAppointTest(Integer testId, Integer userId);
 
-    boolean existsByUserAndTest(User user, Test test);
+    AppointTest findByUserAndTestAndFinished(User user, Test test, Boolean finished);
 
     @Modifying
     @Transactional
