@@ -26,6 +26,7 @@
 </head>
 <body>
 <div class="main">
+    <div id="printableArea">
     <table id="color_table" style="width: 100%">
         <tbody>
             <tr>
@@ -35,9 +36,38 @@
                 <th>Сумма набранных баллов</th>
                 <th>Оценка комиссии</th>
             </tr>
+        <c:forEach var="appointTestDto" items="${appointTestDtoList}">
+            <tr>
+                <td>${appointTestDto.base}</td>
+                <td>
+                    <fmt:formatDate value="${appointTestDto.attempttestDto.dateTime}" pattern="dd.MM.yyyy"/>
+                    тестирование
+                </td>
+                <td>${appointTestDto.userDto.name} ${appointTestDto.userDto.position.position}</td>
+                <td>${appointTestDto.attempttestDto.amountTrueAnswers} из ${appointTestDto.attempttestDto.amountQues}</td>
+                <td>${appointTestDto.attempttestDto.testResult}</td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
+    </div>
+    <div>
+        <input type="button" onclick="printDiv('printableArea')" value="Печать" class="btn"/>
+    </div>
 </div>
+
 </body>
 </html>
+<script>
+    function printDiv(divName) {
+        const printContents = document.getElementById(divName).innerHTML;
+        const originalContents = document.body.innerHTML;
+
+        document.body.innerHTML = printContents;
+
+        window.print();
+
+        document.body.innerHTML = originalContents;
+    }
+</script>
 

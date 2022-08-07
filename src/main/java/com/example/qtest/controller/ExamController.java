@@ -95,8 +95,6 @@ public class ExamController {
                 .collect(Collectors.toList());
 
         List<AppointTestDto> appointTestDtoList = dtoUtils.convertToAppointTestDtoList(appointTestList);
-
-
         model.addAttribute("appointTestDtoList", appointTestDtoList);
         return "qtest/journal";
     }

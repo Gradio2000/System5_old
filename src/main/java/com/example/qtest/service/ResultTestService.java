@@ -13,14 +13,13 @@ public class ResultTestService {
 
     private final AttemptestReporitory attemptestReporitory;
     private final ResultTestRepository resultTestRepository;
-    private final QuestionForAttemptRepository questionForAttemptRepository;
     private final TestReposytory testReposytory;
     private final QuestionRepository questionRepository;
 
-    public ResultTestService(AttemptestReporitory attemptestReporitory, ResultTestRepository resultTestRepository, QuestionForAttemptRepository questionForAttemptRepository, TestReposytory testReposytory, QuestionRepository questionRepository) {
+    public ResultTestService(AttemptestReporitory attemptestReporitory, ResultTestRepository resultTestRepository,
+                             TestReposytory testReposytory, QuestionRepository questionRepository) {
         this.attemptestReporitory = attemptestReporitory;
         this.resultTestRepository = resultTestRepository;
-        this.questionForAttemptRepository = questionForAttemptRepository;
         this.testReposytory = testReposytory;
         this.questionRepository = questionRepository;
     }
@@ -102,7 +101,7 @@ public class ResultTestService {
         falseAnswerSet = getFalseAnswerSet(mapOfUserAnswers, quesList);
         trueAnswers = quesList.size() - falseAnswerSet.size();
         result = getResult(trueAnswers, quesList.size());
-        testResult = getTestResult(result, test.getCriteria()) ? "Тест пройден" : "Тест не пройден";
+        testResult = getTestResult(result, test.getCriteria()) ? "Удовлетворительно" : "Неудовлетворительно";
         listOfUsersAnswers = getListOfUsersAnswers(mapOfUserAnswers);
 
         //Ок. А теперь кое-что запишем в бд, чтоб админ мог использовать
