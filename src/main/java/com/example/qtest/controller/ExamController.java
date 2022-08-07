@@ -73,12 +73,12 @@ public class ExamController {
     @PostMapping("/appointExam")
     @ResponseBody
     public HttpStatus appointExam(@RequestParam Integer testId, @RequestParam Integer userId,
-                                  @RequestParam String base){
+                                  @RequestParam (required = false) String base, @RequestParam (required = false) Boolean eko){
         User user = userRepository.findById(userId).orElse(null);
         Test test = testReposytory.findById(testId).orElse(null);
         AppointTest appointTest = appointTestRepository.findByUserAndTestAndFinished(user, test, false);
         if (appointTest == null){
-            appointTest = new AppointTest(user, test, false, base);
+            appointTest = new AppointTest(user, test, false, base, eko);
             appointTestRepository.save(appointTest);
         }
         else {
@@ -90,12 +90,11 @@ public class ExamController {
     @GetMapping ("/journal")
     public String getJournal(@AuthenticationPrincipal AuthUser authUser, Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        List<AppointTest> appointTestList = appointTestRepository.findAll().stream()
-                .filter(AppointTest::getFinished)
-                .collect(Collectors.toList());
+
+        List<AppointTest> appointTestList = appointTestRepository.findAllByFinishedAndEko(true, true);
 
         List<AppointTestDto> appointTestDtoList = dtoUtils.convertToAppointTestDtoList(appointTestList);
         model.addAttribute("appointTestDtoList", appointTestDtoList);
-        return "qtest/journal";
+        return "qtest/journalEko";
     }
 }

@@ -119,7 +119,8 @@ create table q_appoint_tests
             references q_tests,
     finished        boolean,
     base            varchar,
-    attempt_test_id int
+    attempt_test_id int,
+    eko boolean
 );
 
 alter table q_appoint_tests

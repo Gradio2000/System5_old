@@ -63,7 +63,13 @@
             <div class="modal-body my-modal">
                 <label>Введите номер и дату распорядительного документа</label>
                 <input form="examAppointForm" type="text" name="base"/>
-                <button form="examAppointForm" type="button" class="btn" onclick="appointExam()">Отправить</button>
+            </div>
+            <div>
+                <input form="examAppointForm" type="checkbox" name="eko" style="margin-left: 10px"/>
+                <a> проверка знания порядка ведения ЭКО</a>
+            </div>
+            <div>
+                <button form="examAppointForm" type="button" class="btn" onclick="appointExam()" style="margin: 10px">Отправить</button>
             </div>
         </div>
     </div>

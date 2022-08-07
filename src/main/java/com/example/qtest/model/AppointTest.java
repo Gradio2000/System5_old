@@ -31,15 +31,19 @@ public class AppointTest {
     @Column
     private String base;
 
+    @Column
+    private Boolean eko;
+
     @OneToOne
     @JoinColumn(name = "attempt_test_id", referencedColumnName = "attempt_id")
     private Attempttest attempttest;
 
-    public AppointTest(User user, Test test, Boolean finished, String base) {
+    public AppointTest(User user, Test test, Boolean finished, String base, Boolean eko) {
         this.user = user;
         this.test = test;
         this.finished = finished;
         this.base = base;
+        this.eko = eko;
     }
 
     public AppointTest() {

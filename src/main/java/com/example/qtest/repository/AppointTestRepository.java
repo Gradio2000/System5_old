@@ -30,7 +30,8 @@ public interface AppointTestRepository extends JpaRepository<AppointTest, Intege
     @Modifying
     @Transactional
     @Query(nativeQuery = true,
-    value = "DELETE FROM q_appoint_tests WHERE user_id = :userId AND test_id = :testId")
+    value = "DELETE FROM q_appoint_tests WHERE user_id = :userId AND test_id = :testId AND finished = false")
     void deleteByUserAndTest(Integer userId, Integer testId);
 
+    List<AppointTest> findAllByFinishedAndEko(Boolean finished, Boolean eko);
 }
