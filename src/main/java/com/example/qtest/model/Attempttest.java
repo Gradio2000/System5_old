@@ -1,5 +1,6 @@
 package com.example.qtest.model;
 
+import com.example.system5.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,8 +20,9 @@ public class Attempttest {
     @Column(name = "date_time", nullable = false)
     private Date dateTime;
 
-    @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "time_attempt")
     private Integer timeAttempt;

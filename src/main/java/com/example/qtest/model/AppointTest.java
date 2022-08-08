@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Table(name = "q_appoint_tests")
 @Getter
 @Setter
-//@Where(clause = "finished = false")
 public class AppointTest {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

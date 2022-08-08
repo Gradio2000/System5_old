@@ -83,7 +83,7 @@ public class ProcessTestController {
         else {
             pageable = PageRequest.of(page, size, Sort.by("dateTime").ascending());
         }
-        Page<Attempttest> attemptsList = attemptestReporitory.findAllByUserId(authUser.getUser().getUserId(), pageable);
+        Page<Attempttest> attemptsList = attemptestReporitory.findAllByUser(authUser.getUser(), pageable);
         model.addAttribute("attemptsList", attemptsList);
         model.addAttribute("sort", sort);
         return "qtest/myTestsList";

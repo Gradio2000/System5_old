@@ -50,7 +50,7 @@ public class TestProcessingController {
 
             Attempttest attempttest = new Attempttest();
             attempttest.setDateTime(new Date());
-            attempttest.setUserId(authUser.getUser().getUserId());
+            attempttest.setUser(authUser.getUser());
             attempttest.setTestId(testId);
             attempttest.setTestResult("Не завершен");
             attemptestReporitory.save(attempttest);
