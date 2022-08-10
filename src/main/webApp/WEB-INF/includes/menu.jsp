@@ -27,7 +27,7 @@
     <a href="/testGroup/list">Редактирование тестов</a>
     <a href="/exam/exam">Назначение зачётов</a>
     <a href="/exam/journal">Журнал зачётов (ЭКР)</a>
-    <a href="/exam/journalBase">Общий журнал</a>
+    <a href="/exam/journalBase">Журнал зачетов (общий)</a>
     <br/>
     </c:if>
 </c:forEach>
