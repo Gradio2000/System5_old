@@ -130,5 +130,17 @@ alter table q_appoint_tests
 create unique index if not exists q_appoint_tests_id_appoint_test_uindex
     on q_appoint_tests (id_appoint_test);
 
+create table false_users_answers
+(
+    id          serial
+        constraint false_users_answers_pk
+            primary key,
+    question_id integer,
+    attempt_id  integer
+);
+
+create unique index false_users_answers_id_uindex
+    on false_users_answers (id);
+
 
 

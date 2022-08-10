@@ -15,13 +15,18 @@ public class ResultTestService {
     private final ResultTestRepository resultTestRepository;
     private final TestReposytory testReposytory;
     private final QuestionRepository questionRepository;
+    private final FalseUsersAnswerRepository falseUsersAnswerRepository;
 
-    public ResultTestService(AttemptestReporitory attemptestReporitory, ResultTestRepository resultTestRepository,
-                             TestReposytory testReposytory, QuestionRepository questionRepository) {
+    public ResultTestService(AttemptestReporitory attemptestReporitory,
+                             ResultTestRepository resultTestRepository,
+                             TestReposytory testReposytory,
+                             QuestionRepository questionRepository,
+                             FalseUsersAnswerRepository falseUsersAnswerRepository) {
         this.attemptestReporitory = attemptestReporitory;
         this.resultTestRepository = resultTestRepository;
         this.testReposytory = testReposytory;
         this.questionRepository = questionRepository;
+        this.falseUsersAnswerRepository = falseUsersAnswerRepository;
     }
 
     public Map<Integer, List<Integer>> getMapOfAnswers(List<ResultTest> resultTestList) {
@@ -79,30 +84,16 @@ public class ResultTestService {
     //основной метод проверки ответов пользователя и вывода результата теста после его прохождения
     public void mainCheck(Integer attemptId) {
 
-        String date = null;
-        Set<Integer> falseAnswerSet;
-        int trueAnswers;
-        double result;
-        String testResult;
-        List<Integer> listOfUsersAnswers = null;
-        String time = null;
-        List<Question> quesList;
-
+        List<ResultTest> resultTestList = getResultTest(attemptId);
+        Map<Integer, List<Integer>> mapOfUserAnswers = getMapOfAnswers(resultTestList);
+        List<Question> quesList = questionRepository.findQuestionsByAttemptId(attemptId);
+        Set<Integer> falseAnswerSet = getFalseAnswerSet(mapOfUserAnswers, quesList);
+        int trueAnswers = quesList.size() - falseAnswerSet.size();
+        double result = getResult(trueAnswers, quesList.size());
 
         Attempttest attemptTest = attemptestReporitory.findById(attemptId).orElse(null);
         assert attemptTest != null;
-
-        Test test = testReposytory.findById(attemptTest.getTestId()).orElse(null);
-        assert test != null;
-
-        List<ResultTest> resultTestList = getResultTest(attemptId);
-        Map<Integer, List<Integer>> mapOfUserAnswers = getMapOfAnswers(resultTestList);
-        quesList = questionRepository.findQuestionsByAttemptId(attemptId);
-        falseAnswerSet = getFalseAnswerSet(mapOfUserAnswers, quesList);
-        trueAnswers = quesList.size() - falseAnswerSet.size();
-        result = getResult(trueAnswers, quesList.size());
-        testResult = getTestResult(result, test.getCriteria()) ? "Удовлетворительно" : "Неудовлетворительно";
-        listOfUsersAnswers = getListOfUsersAnswers(mapOfUserAnswers);
+        String testResult = getTestResult(result, attemptTest.getTest().getCriteria()) ? "Удовлетворительно" : "Неудовлетворительно";
 
         //Ок. А теперь кое-что запишем в бд, чтоб админ мог использовать
         attemptTest.setAmountQues(quesList.size());
@@ -111,6 +102,19 @@ public class ResultTestService {
         attemptTest.setResult(result);
         attemptTest.setTestResult(testResult);
         attemptestReporitory.save(attemptTest);
+
+        saveUserFalseAnswerToDB(attemptId, falseAnswerSet);
+    }
+
+    private void saveUserFalseAnswerToDB(Integer attemptId, Set<Integer> falseAnswerSet) {
+        List<FalseUsersAnswer> falseUsersAnswerList = new ArrayList<>();
+        for (Integer id : falseAnswerSet){
+            FalseUsersAnswer falseUsersAnswer = new FalseUsersAnswer();
+            falseUsersAnswer.setAttemptId(attemptId);
+            falseUsersAnswer.setQuestionId(id);
+            falseUsersAnswerList.add(falseUsersAnswer);
+        }
+        falseUsersAnswerRepository.saveAll(falseUsersAnswerList);
     }
 
     public List<ResultTest> getResultTest(Integer attemptId) {

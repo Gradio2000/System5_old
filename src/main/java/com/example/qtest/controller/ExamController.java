@@ -121,7 +121,6 @@ public class ExamController {
             pageable = PageRequest.of(page, size, Sort.by("attempttest.dateTime").ascending());
         }
 
-//        Page<Attempttest> attemptsList = attemptestReporitory.findAll(pageable);
         Page<AppointTest> attemptsList = appointTestRepository.findAll(pageable);
         model.addAttribute("attemptsList", attemptsList);
         model.addAttribute("sort", sort);
