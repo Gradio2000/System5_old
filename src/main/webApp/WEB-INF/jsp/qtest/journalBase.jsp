@@ -59,15 +59,15 @@
         <c:forEach var="attempt" items="${attemptsList.content}">
             <tr>
                 <td>
-                    <fmt:formatDate value="${attempt.dateTime}" pattern="dd.MM.yyyy  HH:mm"/>
+                    <fmt:formatDate value="${attempt.attempttest.dateTime}" pattern="dd.MM.yyyy  HH:mm"/>
                 </td>
-                <td>${attempt.user.name} ${attempt.user.position.position}</td>
-                <td>${attempt.test.testName}</td>
-                <td>${attempt.testResult}</td>
-                <c:if test="${attempt.testResult != 'Не завершен'}">
-                    <td><a href="/qtest/report/${attempt.id}">Протокол</a></td>
+                <td>${attempt.user.name} ${attempt.attempttest.user.position.position}</td>
+                <td>${attempt.attempttest.test.testName}</td>
+                <td>${attempt.attempttest.testResult}</td>
+                <c:if test="${attempt.attempttest.testResult != 'Не завершен'}">
+                    <td><a href="/qtest/report/${attempt.attempttest.id}">Протокол</a></td>
                 </c:if>
-                <c:if test="${attempt.testResult == 'Не завершен'}">
+                <c:if test="${attempt.attempttest.testResult == 'Не завершен'}">
                     <td></td>
                 </c:if>
             </tr>

@@ -3,7 +3,6 @@ package com.example.qtest.controller;
 import com.example.qtest.dto.AppointTestDto;
 import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.model.AppointTest;
-import com.example.qtest.model.Attempttest;
 import com.example.qtest.model.Test;
 import com.example.qtest.repository.AppointTestRepository;
 import com.example.qtest.repository.AttemptestReporitory;
@@ -38,6 +37,7 @@ public class ExamController {
     private final DtoUtils dtoUtils;
     private final TestReposytory testReposytory;
     private final AttemptestReporitory attemptestReporitory;
+
 
     public ExamController(AppointTestRepository appointTestRepository, UserRepository userRepository,
                           GroupTestRepository groupTestRepository, DtoUtils dtoUtils,
@@ -115,13 +115,14 @@ public class ExamController {
 
         Pageable pageable;
         if (sort.equals("down")){
-            pageable = PageRequest.of(page, size, Sort.by("dateTime").descending());
+            pageable = PageRequest.of(page, size, Sort.by("attempttest.dateTime").descending());
         }
         else {
-            pageable = PageRequest.of(page, size, Sort.by("dateTime").ascending());
+            pageable = PageRequest.of(page, size, Sort.by("attempttest.dateTime").ascending());
         }
 
-        Page<Attempttest> attemptsList = attemptestReporitory.findAll(pageable);
+//        Page<Attempttest> attemptsList = attemptestReporitory.findAll(pageable);
+        Page<AppointTest> attemptsList = appointTestRepository.findAll(pageable);
         model.addAttribute("attemptsList", attemptsList);
         model.addAttribute("sort", sort);
         return "qtest/journalBase";

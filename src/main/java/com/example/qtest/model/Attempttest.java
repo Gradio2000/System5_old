@@ -48,4 +48,5 @@ public class Attempttest {
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "test_id", nullable = false, insertable = false, updatable = false)
     private Test test;
+
 }

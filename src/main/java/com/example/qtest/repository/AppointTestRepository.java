@@ -21,10 +21,6 @@ public interface AppointTestRepository extends JpaRepository<AppointTest, Intege
     value = "UPDATE q_appoint_tests SET finished = true WHERE id_appoint_test = :appointTestId")
     void setAppointTrue(Integer appointTestId);
 
-    @Query(nativeQuery = true,
-    value = "SELECT * FROM q_appoint_tests WHERE test_id = :testId AND user_id = :userId")
-    AppointTest getAppointTest(Integer testId, Integer userId);
-
     AppointTest findByUserAndTestAndFinished(User user, Test test, Boolean finished);
 
     @Modifying

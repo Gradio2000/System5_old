@@ -26,7 +26,8 @@ create table q_attempttests
     amount_true_answers  integer,
     result               double precision,
     testresult           varchar,
-    test_id              integer
+    test_id              integer,
+    appoint_test_id      integer
 );
 
 create unique index q_attempttests_attempt_id_uindex
