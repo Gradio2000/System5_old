@@ -85,11 +85,17 @@
                                 V
                             </c:if>
                         </td>
-                        <td>
-                            <c:if test="${listOfUsersAnswers.contains(id)}">
-                                V
+                        <c:if test="${listOfUsersAnswers.contains(id)}">
+                            <c:if test="${falseUserAnswers.contains(ques.id)}">
+                                <td style="background: #e79696">V</td>
                             </c:if>
-                        </td>
+                            <c:if test="${!falseUserAnswers.contains(ques.id)}">
+                                <td style="background: lightgreen">V</td>
+                            </c:if>
+                        </c:if>
+                        <c:if test="${!listOfUsersAnswers.contains(id)}">
+                            <td></td>
+                        </c:if>
                     </tr>
                 </c:forEach>
                 </tr>

@@ -115,9 +115,7 @@ public class ReportController {
                 .filter(user -> user.getSystem5List().size() != 0)
                 .collect(Collectors.toList());
 
-        Map<UserDto, String[]> userDtoMap = new HashMap<>();
-        userDtoMap = userListTransformer.getUserDtoListMapForYear(userList);
-        model.addAttribute("modelMap", userDtoMap);
+        model.addAttribute("modelMap", userListTransformer.getUserDtoListMapForYear(userList));
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         return "sys5pages/reportYear";
     }

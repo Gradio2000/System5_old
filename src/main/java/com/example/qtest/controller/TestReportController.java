@@ -1,8 +1,10 @@
 package com.example.qtest.controller;
 
+import com.example.qtest.model.FalseUsersAnswer;
 import com.example.qtest.model.Question;
 import com.example.qtest.model.ResultTest;
 import com.example.qtest.repository.AttemptestReporitory;
+import com.example.qtest.repository.FalseUsersAnswerRepository;
 import com.example.qtest.repository.QuestionRepository;
 import com.example.qtest.repository.ResultTestRepository;
 import com.example.qtest.service.ResultTestService;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("qtest/report")
@@ -26,12 +29,16 @@ public class TestReportController {
     private final ResultTestRepository resultTestRepository;
     private final ResultTestService resultTestService;
     private final QuestionRepository questionRepository;
+    private final FalseUsersAnswerRepository falseUsersAnswerRepository;
 
-    public TestReportController(AttemptestReporitory attemptestReporitory, ResultTestRepository resultTestRepository, ResultTestService resultTestService, QuestionRepository questionRepository) {
+    public TestReportController(AttemptestReporitory attemptestReporitory, ResultTestRepository resultTestRepository, ResultTestService resultTestService,
+                                QuestionRepository questionRepository,
+                                FalseUsersAnswerRepository falseUsersAnswerRepository) {
         this.attemptestReporitory = attemptestReporitory;
         this.resultTestRepository = resultTestRepository;
         this.resultTestService = resultTestService;
         this.questionRepository = questionRepository;
+        this.falseUsersAnswerRepository = falseUsersAnswerRepository;
     }
 
     @GetMapping("/{attemptId}")
@@ -48,7 +55,10 @@ public class TestReportController {
         List<Integer> listOfUsersAnswers = resultTestService.getListOfUsersAnswers(mapOfUserAnswers);
         List<Question> quesList = questionRepository.findQuestionsByAttemptId(attemptId);
 
-
+        List<Integer> falseUserAnswers = falseUsersAnswerRepository.findAllByAttemptId(attemptId).stream()
+                .map(FalseUsersAnswer::getQuestionId)
+                .collect(Collectors.toList());
+        model.addAttribute("falseUserAnswers", falseUserAnswers);
         model.addAttribute("quesList", quesList);
         model.addAttribute("listOfUsersAnswers", listOfUsersAnswers);
         return "qtest/report";
