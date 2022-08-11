@@ -13,18 +13,15 @@ public class ResultTestService {
 
     private final AttemptestReporitory attemptestReporitory;
     private final ResultTestRepository resultTestRepository;
-    private final TestReposytory testReposytory;
     private final QuestionRepository questionRepository;
     private final FalseUsersAnswerRepository falseUsersAnswerRepository;
 
     public ResultTestService(AttemptestReporitory attemptestReporitory,
                              ResultTestRepository resultTestRepository,
-                             TestReposytory testReposytory,
                              QuestionRepository questionRepository,
                              FalseUsersAnswerRepository falseUsersAnswerRepository) {
         this.attemptestReporitory = attemptestReporitory;
         this.resultTestRepository = resultTestRepository;
-        this.testReposytory = testReposytory;
         this.questionRepository = questionRepository;
         this.falseUsersAnswerRepository = falseUsersAnswerRepository;
     }
