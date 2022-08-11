@@ -36,6 +36,9 @@ public class ReportController {
 
     @GetMapping("/prepareReport")
     public String getMonths(@AuthenticationPrincipal AuthUser authUser, Model model) {
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         List<String> months = Arrays.stream(Month.values())
                 .map(Enum::name)
                 .collect(Collectors.toList());
@@ -46,6 +49,9 @@ public class ReportController {
 
     @GetMapping("/prepareHalfYearReport")
     public String prepareHalfYearReport(@AuthenticationPrincipal AuthUser authUser, Model model) {
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         return "sys5pages/prepareHalfYearReport";
     }
@@ -54,6 +60,9 @@ public class ReportController {
     public String getMonthReport(@AuthenticationPrincipal AuthUser authUser,
                                  @RequestParam String month,
                                  Model model) {
+
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         List<System5> system5List = system5Repository.findAllByMonth(month);
         model.addAttribute(system5List);
@@ -66,6 +75,9 @@ public class ReportController {
     public String getHalfYearReport(@AuthenticationPrincipal AuthUser authUser,
                                     @RequestParam Integer half,
                                     Model model) {
+
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         List<User> userList = userRepository.findAll().stream()
                 .filter(user -> user.getSystem5List().size() != 0)
@@ -96,6 +108,9 @@ public class ReportController {
     @GetMapping("/prepareYearReport")
     public String prepareYearReport(@AuthenticationPrincipal AuthUser authUser,
                                     Model model){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         List<User> userList = userRepository.findAll().stream()
                 .filter(user -> user.getSystem5List().size() != 0)
                 .collect(Collectors.toList());

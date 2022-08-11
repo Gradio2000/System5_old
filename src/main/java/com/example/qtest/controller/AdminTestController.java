@@ -5,9 +5,8 @@ import com.example.qtest.model.Test;
 import com.example.qtest.repository.AttemptestReporitory;
 import com.example.qtest.repository.GroupTestRepository;
 import com.example.qtest.repository.TestReposytory;
-import com.example.qtest.service.DtoUtils;
-import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -21,27 +20,27 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/tests")
 @PreAuthorize("hasRole('ADMIN_TEST')")
+@Slf4j
 public class AdminTestController {
 
     private final GroupTestRepository groupTestRepository;
     private final TestReposytory testReposytory;
-    private final DtoUtils dtoUtils;
     private final AttemptestReporitory attemptestReporitory;
-    private final UserRepository userRepository;
+    
 
     public AdminTestController(GroupTestRepository groupTestRepository,
-                               TestReposytory testReposytory, DtoUtils dtoUtils,
-                               AttemptestReporitory attemptestReporitory,
-                               UserRepository userRepository) {
+                               TestReposytory testReposytory,
+                               AttemptestReporitory attemptestReporitory) {
         this.groupTestRepository = groupTestRepository;
         this.testReposytory = testReposytory;
-        this.dtoUtils = dtoUtils;
         this.attemptestReporitory = attemptestReporitory;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/list/{id}")
     public String getAllTest(@PathVariable Integer id, @AuthenticationPrincipal AuthUser authUser, Model model){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         model.addAttribute("user", authUser.getUser());
         model.addAttribute("groupTestId", id);
         model.addAttribute("groupTestName", Objects.requireNonNull(groupTestRepository.findById(id).orElse(null)).getName());
@@ -53,7 +52,11 @@ public class AdminTestController {
     }
 
     @PostMapping("/add")
-    public String addGroupTest(@ModelAttribute Test test){
+    public String addGroupTest(@ModelAttribute Test test, @AuthenticationPrincipal AuthUser authUser){
+
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         if (test.getTestName().isEmpty()){
             return "redirect:/tests/list/" + test.getGroupId() + "?error=200";
         }
@@ -68,7 +71,10 @@ public class AdminTestController {
 
     @PostMapping("/delete")
     public String deleteGroupTest(@RequestParam (required = false) Integer[] check,
-                                  @RequestParam Integer testGroupId){
+                                  @RequestParam Integer testGroupId, @AuthenticationPrincipal AuthUser authUser){
+
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         if (check == null){
             return "redirect:/tests/list/" + testGroupId + "?error=100";
@@ -85,14 +91,21 @@ public class AdminTestController {
     }
 
     @PostMapping("/undelete")
-    public String undeleteTest(@RequestParam Integer testGroupId, @RequestParam Integer testId){
+    public String undeleteTest(@RequestParam Integer testGroupId, @RequestParam Integer testId,
+                               @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         testReposytory.undeleteTest(testId);
         return "redirect:/tests/list/" + testGroupId;
     }
 
     @PostMapping("/change/")
     @ResponseBody
-    public HttpStatus changeTest(@ModelAttribute TestDto testDto){
+    public HttpStatus changeTest(@ModelAttribute TestDto testDto, @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         Test test = testReposytory.findById(testDto.getTestId()).orElse(null);
         assert test != null;
         test.setTestName(testDto.getTestName());

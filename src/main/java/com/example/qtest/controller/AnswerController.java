@@ -5,7 +5,10 @@ import com.example.qtest.model.Question;
 import com.example.qtest.repository.AnswerRepository;
 import com.example.qtest.repository.QuestionRepository;
 import com.example.qtest.service.QuestionService;
+import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Controller
+@Slf4j
 public class AnswerController {
     private final AnswerRepository answerRepository;
     private final QuestionRepository questionRepository;
@@ -31,7 +35,10 @@ public class AnswerController {
     @PostMapping("/answer/edit")
     @ResponseBody
     public HttpStatus editAnswer(@RequestParam Integer id, @RequestParam String answerName,
-                                 @RequestParam String isRight){
+                                 @RequestParam String isRight, @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         Answer oldAnswer = answerRepository.findById(id).orElse(null);
         assert oldAnswer != null;
         Question oldQuestion = oldAnswer.getQuestion();

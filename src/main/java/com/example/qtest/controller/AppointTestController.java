@@ -6,6 +6,7 @@ import com.example.qtest.repository.AppointTestRepository;
 import com.example.qtest.service.DtoUtils;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/appointTests")
+@Slf4j
 public class AppointTestController {
     private final AppointTestRepository appointTestRepository;
     private final DtoUtils dtoUtils;
@@ -30,6 +32,9 @@ public class AppointTestController {
 
     @GetMapping("/getUserAppoint")
     public String getUserAppoint(@AuthenticationPrincipal AuthUser authUser, Model model){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
         List<AppointTest> appointTestList = appointTestRepository.findAllByUser(authUser.getUser()).stream()

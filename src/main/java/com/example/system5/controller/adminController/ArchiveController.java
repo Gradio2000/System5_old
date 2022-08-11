@@ -8,6 +8,7 @@ import com.example.system5.service.system5Service.GetTotalMarkService;
 import com.example.system5.service.system5Service.SaveOrUpdateSystem5Service;
 import com.example.system5.service.system5Service.SortService;
 import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
+@Slf4j
 public class ArchiveController {
     private final UserRepository userRepository;
     private final System5Repository system5Repository;
@@ -40,6 +42,9 @@ public class ArchiveController {
     @GetMapping("/archive")
     public String getEmployersList(@AuthenticationPrincipal AuthUser authUser,
                                    Model model){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("userList", userRepository.findAll());
         return "sys5pages/employersListForGetArchive";
@@ -51,6 +56,9 @@ public class ArchiveController {
                                      BindingResult bindingResult,
                                      @ModelAttribute @Valid System5empl system5empl,
                                      BindingResult bindingResult1){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         User user = userRepository.findById(id).orElse(null);
 
@@ -77,13 +85,14 @@ public class ArchiveController {
 
     @PostMapping("/addFromAdminModule")
     public String addMarkFromAdminModule(@ModelAttribute @Valid System5 system5,
-                                         BindingResult bindingResult){
+                                         BindingResult bindingResult, @AuthenticationPrincipal AuthUser authUser){
+
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         if (bindingResult.hasErrors()){
             return "redirect:/admin/getUserSystem5Archive/" + system5.getUserId() + "?error=1";
         }
-
-//        GetTotalMarkService.toUpperCase(system5);
 
         System5 systemForUpdate = system5Repository.findByMonthAndUserId(system5.getMonth(), system5.getUserId());
         if (systemForUpdate != null){
@@ -100,12 +109,14 @@ public class ArchiveController {
 
     @PostMapping("/editSystem5EmplFromAdminModule")
     public String editSystem5EmplFromAdminModule(@ModelAttribute @Valid System5empl system5empl,
-                                                 BindingResult bindingResult){
+                                                 BindingResult bindingResult,
+                                                 @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         if (bindingResult.hasErrors()){
             return "redirect:/admin/getUserSystem5Archive/" + system5empl.getUser_id() + "?error=1";
         }
-
-//        GetTotalMarkService.toUpperCaseSystem5Empl(system5empl);
 
         System5 system5 = system5Repository.findById(system5empl.getSystem5Id()).orElse(null);
         assert system5 != null;

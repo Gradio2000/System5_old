@@ -6,6 +6,7 @@ import com.example.qtest.service.ResultTestService;
 import com.example.qtest.service.TestService;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/processing")
+@Slf4j
 public class TestProcessingController {
     private final AttemptestReporitory attemptestReporitory;
     private final TestReposytory testReposytory;
@@ -47,6 +49,9 @@ public class TestProcessingController {
     public String startTestProcessing(@AuthenticationPrincipal AuthUser authUser,
                                       Model model, @RequestParam Integer testId,
                                       @RequestParam (required = false) Integer appointTestId){
+
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
             Attempttest attempttest = new Attempttest();
             attempttest.setDateTime(new Date());
@@ -80,7 +85,10 @@ public class TestProcessingController {
     @PostMapping("/saveUserAnswer")
     @ResponseBody
     public HttpStatus saveUserAnswer(@RequestParam Integer attemptId, @RequestParam Integer questionId,
-                                     HttpServletRequest request){
+                                     HttpServletRequest request, @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         String[] answersIds = request.getParameterMap().get("check");
         List<ResultTest> resultTestList = new ArrayList<>();
         assert answersIds != null : "saveUserAnswer() Пустой массив ответов на вопрос";
@@ -96,7 +104,12 @@ public class TestProcessingController {
     }
 
     @PostMapping("/finishTest")
-    public String finishTest(@RequestParam Integer attemptId, @RequestParam (required = false) Integer appointTestId){
+    public String finishTest(@RequestParam Integer attemptId,
+                             @RequestParam (required = false) Integer appointTestId,
+                             @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         resultTestService.mainCheck(attemptId);
         if (appointTestId != null){
             appointTestRepository.setAppointTrue(appointTestId);
@@ -108,6 +121,8 @@ public class TestProcessingController {
     public String continueTest(@AuthenticationPrincipal AuthUser authUser,
                                @PathVariable Integer attemptId, Model model){
 
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         List<QuestionsForAttempt> questionsForAttemptList = questionForAttemptRepository.findAllByAttemptId(attemptId);
         Set<Integer> resultTestQuestionsIdsList = resultTestRepository.findAllByAttemptId(attemptId).stream()

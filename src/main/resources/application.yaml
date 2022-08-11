@@ -29,7 +29,7 @@ spring:
 logging:
   level:
     root: WARN
-    com.example.system5: DEBUG
+    com.example: DEBUG
 
     org:
       springframework:

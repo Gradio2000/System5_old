@@ -105,6 +105,9 @@ public class RegistrationController {
                                      BindingResult bindingResult,
                                      Model model){
 
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         if (bindingResult.hasErrors()){
             List<Position> positionList = positionRepository.findAll();
             model.addAttribute(positionList);

@@ -24,6 +24,9 @@ public class DivisionController {
 
     @GetMapping("/shtat")
     public String getStat(@AuthenticationPrincipal AuthUser authUser, Model model){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         List<Division> divisions = divisionRepository.findAll();
         model.addAttribute(divisions);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
@@ -31,7 +34,10 @@ public class DivisionController {
     }
 
     @PostMapping(value = "/division")
-    public String addDivision(@RequestParam String division){
+    public String addDivision(@RequestParam String division, @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         if (division.isEmpty()){
             return "redirect:/admin/shtat?errordivision=true";
         }
@@ -42,8 +48,10 @@ public class DivisionController {
     }
 
     @GetMapping(value = "/division/{id}")
-    public String deleteDivision(@PathVariable int id){
+    public String deleteDivision(@PathVariable int id, @AuthenticationPrincipal AuthUser authUser){
 
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         Division division = divisionRepository.findById(id).orElse(null);
         assert division != null;
@@ -58,7 +66,10 @@ public class DivisionController {
 
     @PostMapping("/division/change")
     public String chanheDivision(@RequestParam String divisionName,
-                                 @RequestParam int id){
+                                 @RequestParam int id, @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         Division division = divisionRepository.findById(id).orElse(null);
         if (divisionName.isEmpty()){
             return "redirect:/admin/shtat?errorDivisionChange=true";
@@ -71,8 +82,11 @@ public class DivisionController {
 
     @GetMapping("/get_division/{id}")
     @ResponseBody
-    public String getDivisionByID(@PathVariable Integer id){
-       Division division = divisionRepository.findById(id).orElse(null);
+    public String getDivisionByID(@PathVariable Integer id, @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
+        Division division = divisionRepository.findById(id).orElse(null);
         assert division != null;
         if (division.getPositions().size() > 0){
            return "Сначала удалите все должности подразделения";

@@ -10,6 +10,7 @@ import com.example.qtest.repository.TestReposytory;
 import com.example.qtest.service.DtoUtils;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,13 +23,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/tests")
+@Slf4j
 public class ProcessTestController {
 
     private final GroupTestRepository groupTestRepository;
@@ -47,6 +48,9 @@ public class ProcessTestController {
 
     @GetMapping("listForTesting/{id}")
     public String listForTesting(@AuthenticationPrincipal AuthUser authUser, Model model, @PathVariable Integer id){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         List<TestDto> testList = testReposytory.findAllDeletedTestsByGroupIdOrderByTestId(id).stream()
                 .map(TestDto::getInstance)
@@ -59,8 +63,9 @@ public class ProcessTestController {
 
     @GetMapping("/listForTesting/test/{id}")
     public String getTestForTesting(@AuthenticationPrincipal AuthUser authUser, Model model,
-                                    @PathVariable Integer id,
-                                    HttpSession session){
+                                    @PathVariable Integer id){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
         Test test = testReposytory.findById(id).orElse(null);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("test", test);
@@ -73,6 +78,9 @@ public class ProcessTestController {
                                   @RequestParam(defaultValue = "0") Integer page,
                                   @RequestParam (defaultValue = "10") Integer size,
                                   @RequestParam (defaultValue = "up") String sort){
+
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 

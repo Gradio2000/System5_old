@@ -5,7 +5,6 @@ import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.model.AppointTest;
 import com.example.qtest.model.Test;
 import com.example.qtest.repository.AppointTestRepository;
-import com.example.qtest.repository.AttemptestReporitory;
 import com.example.qtest.repository.GroupTestRepository;
 import com.example.qtest.repository.TestReposytory;
 import com.example.qtest.service.DtoUtils;
@@ -13,6 +12,7 @@ import com.example.system5.dto.UserDto;
 import com.example.system5.model.User;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,29 +30,32 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/exam")
 @PreAuthorize("hasRole('ADMIN_TEST')")
+@Slf4j
 public class ExamController {
     private final AppointTestRepository appointTestRepository;
     private final UserRepository userRepository;
     private final GroupTestRepository groupTestRepository;
     private final DtoUtils dtoUtils;
     private final TestReposytory testReposytory;
-    private final AttemptestReporitory attemptestReporitory;
+
 
 
     public ExamController(AppointTestRepository appointTestRepository, UserRepository userRepository,
                           GroupTestRepository groupTestRepository, DtoUtils dtoUtils,
-                          TestReposytory testReposytory, AttemptestReporitory attemptestReporitory) {
+                          TestReposytory testReposytory) {
         this.appointTestRepository = appointTestRepository;
         this.userRepository = userRepository;
         this.groupTestRepository = groupTestRepository;
         this.dtoUtils = dtoUtils;
         this.testReposytory = testReposytory;
-        this.attemptestReporitory = attemptestReporitory;
     }
 
     @GetMapping("/exam")
     public String appointExam(@AuthenticationPrincipal AuthUser authUser,
                               Model model){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
         List<GroupTestDto> groupTestDtoList = groupTestRepository.findAll().stream()
@@ -69,7 +72,9 @@ public class ExamController {
 
     @GetMapping("/getUsersAppoints")
     @ResponseBody
-    public List<Integer> getUsersAppoints(@RequestParam Integer userId){
+    public List<Integer> getUsersAppoints(@RequestParam Integer userId, @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
         return appointTestRepository
                 .findAllByUser(userRepository.findById(userId).orElse(null))
                 .stream()
@@ -81,7 +86,10 @@ public class ExamController {
     @PostMapping("/appointExam")
     @ResponseBody
     public HttpStatus appointExam(@RequestParam Integer testId, @RequestParam Integer userId,
-                                  @RequestParam (required = false) String base, @RequestParam (required = false) Boolean eko){
+                                  @RequestParam (required = false) String base, @RequestParam (required = false) Boolean eko,
+                                  @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
         User user = userRepository.findById(userId).orElse(null);
         Test test = testReposytory.findById(testId).orElse(null);
         AppointTest appointTest = appointTestRepository.findByUserAndTestAndFinished(user, test, false);
@@ -97,6 +105,8 @@ public class ExamController {
 
     @GetMapping ("/journal")
     public String getJournal(@AuthenticationPrincipal AuthUser authUser, Model model){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
         List<AppointTest> appointTestList = appointTestRepository.findAllByFinishedAndEko(true, true);
@@ -111,6 +121,8 @@ public class ExamController {
                                  @RequestParam(defaultValue = "0") Integer page,
                                  @RequestParam (defaultValue = "10") Integer size,
                                  @RequestParam (defaultValue = "up") String sort){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
         Pageable pageable;

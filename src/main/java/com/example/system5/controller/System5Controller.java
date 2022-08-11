@@ -53,16 +53,17 @@ public class System5Controller {
 
     @GetMapping(value = "/list")
     public String getAll(@AuthenticationPrincipal AuthUser authUser, Model model, HttpServletRequest request){
-        User user = authUser.getUser();
-        if (user.getName() == null){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
+        if (authUser.getUser().getName() == null){
             model.addAttribute("formFinishReg", new FormFinishReg());
             request.setAttribute("error", "Не завершена процедура регистрации");
             model.addAttribute("positionList", positionRepository.findAll());
             return "sys5pages/registrationnext";
         }
-        log.info(user.getName() + " enter into controller /list");
 
-        List<System5> system5List = system5Repository.findAllByUserId(user.getUserId());
+        List<System5> system5List = system5Repository.findAllByUserId(authUser.getUser().getUserId());
         model.addAttribute("system5List", sortService.sortSystem5(system5List));
 
         List<Month> monthList = Arrays.stream(Month.values()).collect(Collectors.toList());
@@ -81,11 +82,11 @@ public class System5Controller {
         model.addAttribute("employer", employer);
 
         List<User> userList = userRepository.findAll().stream()
-                .filter(u -> !Objects.equals(u.getUserId(), user.getUserId()))
+                .filter(u -> !Objects.equals(u.getUserId(), authUser.getUser().getUserId()))
                 .collect(Collectors.toList());
         model.addAttribute(userList);
 
-        model.addAttribute("user", UserDto.getInstance(user));
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
         return "sys5pages/lists";
     }
@@ -128,23 +129,23 @@ public class System5Controller {
                       BindingResult bindingResult,
                       @RequestParam int comm_id){
 
-        User user = authUser.getUser();
-        log.info(user.getName() + " enter into controller /adds");
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         if (bindingResult.hasErrors()){
             return "redirect:/list?error=1";
         }
 
-        System5 systemForUpdate = system5Repository.findByMonthAndUserId(system5.getMonth(), user.getUserId());
+        System5 systemForUpdate = system5Repository.findByMonthAndUserId(system5.getMonth(), authUser.getUser().getUserId());
         if (systemForUpdate != null){
             saveOrUpdateSystem5Service.updateSystem5(systemForUpdate, system5);
         }
         else {
-            system5.setUserId(user.getUserId());
+            system5.setUserId(authUser.getUser().getUserId());
             saveOrUpdateSystem5Service.saveSystem5(system5);
         }
 
-        saveOrUpdateCommEmplService.saveOrUpdateCommEmpl(comm_id, user);
+        saveOrUpdateCommEmplService.saveOrUpdateCommEmpl(comm_id, authUser.getUser());
         return "redirect:/list";
     }
 
@@ -153,9 +154,8 @@ public class System5Controller {
     public String addempl(@AuthenticationPrincipal AuthUser authUser,
                           @ModelAttribute @Valid System5empl system5empl,
                           BindingResult bindingResult){
-
-        User user = authUser.getUser();
-        log.info(user.getName() + " enter into controller /addsempl");
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         int userId= system5empl.getUser_id();
         if (bindingResult.hasErrors()){
@@ -188,8 +188,8 @@ public class System5Controller {
     @GetMapping("/getMonths")
     @ResponseBody
     public List<String> getMonthsForEditSelfRate(@AuthenticationPrincipal AuthUser authUser){
-        User user = authUser.getUser();
-        log.info(user.getName() + " enter into controller /getMonths");
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         return system5Repository.findAllByUserId(authUser.getUser().getUserId()).stream()
                 .filter(system5 -> system5.getRated() == 0)
