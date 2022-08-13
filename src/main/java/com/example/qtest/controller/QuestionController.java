@@ -1,6 +1,5 @@
 package com.example.qtest.controller;
 
-import com.example.qtest.model.Answer;
 import com.example.qtest.model.Question;
 import com.example.qtest.repository.QuestionRepository;
 import com.example.qtest.service.QuestionService;
@@ -46,23 +45,7 @@ public class QuestionController {
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
-        Question oldQuestion = questionRepository.findById(oldQuestionId).orElse(null);
-        assert oldQuestion != null;
-        oldQuestion.setDeleted(true);
-
-        List<Answer> newAnswerList = oldQuestion.getAnswers();
-        for (Answer answer: newAnswerList){
-            answer.setId(null);
-            answer.setQuestion(newQuestion);
-        }
-        newQuestion.setAnswers(newAnswerList);
-        newQuestion.setTestId(oldQuestion.getTestId());
-        newQuestion.setDeleted(false);
-
-        questionRepository.save(newQuestion);
-        questionRepository.save(oldQuestion);
-
-        questionService.deleteUnusageQuestion(oldQuestion);
+        questionService.editQuestion(oldQuestionId, newQuestion);
         return HttpStatus.OK;
     }
 

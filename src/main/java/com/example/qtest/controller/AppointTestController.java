@@ -3,7 +3,6 @@ package com.example.qtest.controller;
 import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.AppointTest;
 import com.example.qtest.repository.AppointTestRepository;
-import com.example.qtest.service.DtoUtils;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
 import lombok.extern.slf4j.Slf4j;
@@ -23,11 +22,10 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AppointTestController {
     private final AppointTestRepository appointTestRepository;
-    private final DtoUtils dtoUtils;
 
-    public AppointTestController(AppointTestRepository appointTestRepository, DtoUtils dtoUtils) {
+
+    public AppointTestController(AppointTestRepository appointTestRepository) {
         this.appointTestRepository = appointTestRepository;
-        this.dtoUtils = dtoUtils;
     }
 
     @GetMapping("/getUserAppoint")

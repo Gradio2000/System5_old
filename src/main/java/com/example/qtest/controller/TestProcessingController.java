@@ -3,6 +3,7 @@ package com.example.qtest.controller;
 import com.example.qtest.model.*;
 import com.example.qtest.repository.*;
 import com.example.qtest.service.ResultTestService;
+import com.example.qtest.service.TestProcessingService;
 import com.example.qtest.service.TestService;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
@@ -14,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -31,11 +31,12 @@ public class TestProcessingController {
     private final ResultTestRepository resultTestRepository;
     private final ResultTestService resultTestService;
     private final AppointTestRepository appointTestRepository;
+    private final TestProcessingService testProcessingService;
 
     public TestProcessingController(AttemptestReporitory attemptestReporitory, TestReposytory testReposytory,
                                     TestService testService, QuestionForAttemptRepository questionForAttemptRepository,
                                     ResultTestRepository resultTestRepository, ResultTestService resultTestService,
-                                    AppointTestRepository appointTestRepository) {
+                                    AppointTestRepository appointTestRepository, TestProcessingService testProcessingService) {
         this.attemptestReporitory = attemptestReporitory;
         this.testReposytory = testReposytory;
         this.testService = testService;
@@ -43,6 +44,7 @@ public class TestProcessingController {
         this.resultTestRepository = resultTestRepository;
         this.resultTestService = resultTestService;
         this.appointTestRepository = appointTestRepository;
+        this.testProcessingService = testProcessingService;
     }
 
     @PostMapping("/start")
@@ -90,16 +92,7 @@ public class TestProcessingController {
                 authUser.getUser().getName());
 
         String[] answersIds = request.getParameterMap().get("check");
-        List<ResultTest> resultTestList = new ArrayList<>();
-        assert answersIds != null : "saveUserAnswer() Пустой массив ответов на вопрос";
-        for (String quesId : answersIds) {
-            ResultTest resulttest = new ResultTest();
-            resulttest.setAttemptId(attemptId);
-            resulttest.setQuestionId(questionId);
-            resulttest.setAnswerId(Integer.valueOf(quesId));
-            resultTestList.add(resulttest);
-        }
-        resultTestRepository.saveAll(resultTestList);
+        testProcessingService.saveUserAnswer(attemptId, questionId, answersIds);
         return HttpStatus.OK;
     }
 

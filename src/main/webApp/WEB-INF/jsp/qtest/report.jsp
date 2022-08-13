@@ -74,7 +74,13 @@
             </tr>
             <c:forEach var="ques" items="${quesList}" varStatus="count">
                 <tr>
-                <td rowspan="${ques.answers.size() + 1}">${count.count}</td>
+                <c:if test="${falseUserAnswers.contains(ques.id)}">
+                    <td style="background: #e79696" rowspan="${ques.answers.size() + 1}">${count.count}</td>
+                </c:if>
+                <c:if test="${!falseUserAnswers.contains(ques.id)}">
+                    <td style="background: lightgreen" rowspan="${ques.answers.size() + 1}">${count.count}</td>
+                </c:if>
+
                 <td rowspan="${ques.answers.size() + 1}" style="text-align: justify">${ques.questionName}</td>
                 <c:forEach var="answer" items="${ques.answers}">
                     <c:set var="id" value="${answer.id}"/>
@@ -86,12 +92,7 @@
                             </c:if>
                         </td>
                         <c:if test="${listOfUsersAnswers.contains(id)}">
-                            <c:if test="${falseUserAnswers.contains(ques.id)}">
-                                <td style="background: #e79696">V</td>
-                            </c:if>
-                            <c:if test="${!falseUserAnswers.contains(ques.id)}">
-                                <td style="background: lightgreen">V</td>
-                            </c:if>
+                            <td>V</td>
                         </c:if>
                         <c:if test="${!listOfUsersAnswers.contains(id)}">
                             <td></td>

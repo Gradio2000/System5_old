@@ -19,7 +19,7 @@ public class JspViewResolverConfig {
         viewResolver.setContentType("text/html");
 
         // Make sure > Thymeleaf order & FreeMarker order.
-        viewResolver.setOrder(1000);
+        viewResolver.setOrder(0);
 
         return viewResolver;
     }

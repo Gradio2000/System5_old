@@ -197,4 +197,9 @@ public class System5Controller {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/primefaces")
+    public String getPrimefaces(){
+        return "/primefaces.xhtml";
+    }
+
 }

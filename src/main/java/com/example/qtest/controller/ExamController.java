@@ -107,10 +107,9 @@ public class ExamController {
     public String getJournal(@AuthenticationPrincipal AuthUser authUser, Model model){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
+
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-
         List<AppointTest> appointTestList = appointTestRepository.findAllByFinishedAndEko(true, true);
-
         List<AppointTestDto> appointTestDtoList = dtoUtils.convertToAppointTestDtoList(appointTestList);
         model.addAttribute("appointTestDtoList", appointTestDtoList);
         return "qtest/journalEko";

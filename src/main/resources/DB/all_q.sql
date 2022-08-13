@@ -130,7 +130,7 @@ alter table q_appoint_tests
 create unique index if not exists q_appoint_tests_id_appoint_test_uindex
     on q_appoint_tests (id_appoint_test);
 
-create table false_users_answers
+create table q_false_users_answers
 (
     id          serial
         constraint false_users_answers_pk
@@ -140,7 +140,7 @@ create table false_users_answers
 );
 
 create unique index false_users_answers_id_uindex
-    on false_users_answers (id);
+    on q_false_users_answers (id);
 
 
 

@@ -6,7 +6,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "false_users_answers")
+@Table(name = "q_false_users_answers")
 @Getter
 @Setter
 public class FalseUsersAnswer {
