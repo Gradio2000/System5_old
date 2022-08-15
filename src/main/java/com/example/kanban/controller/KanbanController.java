@@ -4,6 +4,7 @@ import com.example.kanban.model.Kanban;
 import com.example.kanban.repository.KanbanRepository;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +23,8 @@ public class KanbanController {
     @GetMapping("kanban")
     public String getAllKanban(@AuthenticationPrincipal AuthUser authUser, Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        List<Kanban> kanbanList = kanbanRepository.findAll();
+        List<Kanban> kanbanList = kanbanRepository.findAll(Sort.by("id"));
         model.addAttribute("kanbanList", kanbanList);
-        return "kanban/kanban";
+        return "kanban/kanban2";
     }
 }
