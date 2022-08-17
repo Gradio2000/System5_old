@@ -31,7 +31,7 @@
     <br/>
     </c:if>
 </c:forEach>
-    <a href="/kanban">Канбан</a>
+    <a href="/kanban/kanban">Канбан</a>
     <br/>
     <a href="/logout">Выйти</a>
 </div>
