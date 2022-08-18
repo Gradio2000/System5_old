@@ -5,14 +5,12 @@ import com.example.system5.model.Role;
 import com.example.system5.model.User;
 import lombok.Data;
 
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Set;
 
 @Data
 public class UserDto implements Serializable {
     private Integer userId;
-    @Size(max = 128, message = "size is too much")
     private final String name;
     private  Set<Role> roles;
     private String login;

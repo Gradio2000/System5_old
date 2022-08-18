@@ -1,5 +1,6 @@
 package com.example.kanban.controller;
 
+import com.example.kanban.dto.KanbanDto;
 import com.example.kanban.model.Kanban;
 import com.example.kanban.repository.KanbanRepository;
 import com.example.system5.dto.UserDto;
@@ -12,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/kanban")
@@ -26,7 +28,9 @@ public class KanbanController {
     public String getAllKanban(@AuthenticationPrincipal AuthUser authUser,
                                Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        List<Kanban> kanbanList = kanbanRepository.findAll(Sort.by("id"));
+        List<KanbanDto> kanbanList = kanbanRepository.findAll(Sort.by("id")).stream()
+                .map(KanbanDto::getInstance)
+                .collect(Collectors.toList());
         model.addAttribute("kanbanList", kanbanList);
         model.addAttribute("kanban", new Kanban());
         return "kanban/kanban";
