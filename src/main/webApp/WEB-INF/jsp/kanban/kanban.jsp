@@ -29,6 +29,7 @@
             <c:forEach items="${kanbanList}" var="kanbanDto">
                 <c:if test="${kanbanDto.started == true}">
                     <div id="${kanbanDto.id}" class="list-group-item started span-shadow" draggable="true">
+                        <div class="closex"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
                         <div style="margin-top: 5px"><a style="font-size:10px;">Автор: ${kanbanDto.userDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
@@ -41,6 +42,7 @@
             <c:forEach items="${kanbanList}" var="kanbanDto">
                 <c:if test="${kanbanDto.continues == true}">
                     <div id="${kanbanDto.id}" class="list-group-item continues span-shadow-yellow" draggable="true">
+                        <div class="closex"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
                         <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
@@ -53,6 +55,7 @@
             <c:forEach items="${kanbanList}" var="kanbanDto">
                 <c:if test="${kanbanDto.finished == true}">
                     <div id="${kanbanDto.id}" class="list-group-item finished span-shadow-green" draggable="true">
+                        <div class="closex"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
                         <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
@@ -144,6 +147,19 @@
 <style>
     <%@include file="../../includes/myStyle.css"%>
 
+    .closex{
+        position: absolute;
+        z-index: 2;
+        right: 10px;
+        top: 1px;
+        opacity: 0;
+        color: #8f8f8f;
+    }
+
+    .closex:hover{
+        cursor: pointer;
+        color: black;
+    }
 
     input[type=text], select, textarea {
         width: 100%;
@@ -217,11 +233,17 @@
     font-size: 22px;
   }
   .list-group-item {
+      z-index: 1;
+      position: relative;
     background: #fff;
     margin: 5px;
     padding: 10px;
     border-radius: 5px;
     cursor: move;
+  }
+
+  .list-group-item:hover .closex{
+      opacity: 1;
   }
 
   .started{
