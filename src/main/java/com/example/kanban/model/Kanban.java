@@ -1,5 +1,6 @@
 package com.example.kanban.model;
 
+import com.example.system5.model.User;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,5 +27,12 @@ public class Kanban {
 
     @Column(name = "finished")
     private Boolean finished;
+
+    @Column(name = "describe")
+    private String describe;
+
+    @OneToOne()
+    @JoinColumn(name = "author_user_id", referencedColumnName = "user_id")
+    private User user;
 
 }

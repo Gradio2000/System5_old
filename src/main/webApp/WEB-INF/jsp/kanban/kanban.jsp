@@ -48,6 +48,26 @@
                 </c:if>
             </c:forEach>
         </div>
+        <div style="width: 40%">
+            <button class="collapsible">Новая задача</button>
+            <div class="content">
+                <div class="container-form">
+                    <form:form action="/kanban/addNewCanban" method="post" modelAttribute="kanban" >
+                        <label for="kanbanName">Название</label>
+                        <input type="text" id="kanbanName" name="kanbanName" placeholder="Что делаем..">
+                        <label for="describe">Описание</label>
+                        <textarea id="describe" name="describe" placeholder="Напишите, что ожидаете.." style="height:200px"></textarea>
+                        <input type="hidden" name="started" value="true"/>
+                        <input type="hidden" name="continues" value="false"/>
+                        <input type="hidden" name="finished" value="false"/>
+                        <input type="hidden" name="user"/>
+
+                        <button class="btn" type="submit">Сохранить</button>
+                    </form:form>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 </body>
@@ -87,10 +107,56 @@
             }
         });
       });
+
+
+      var coll = document.getElementsByClassName("collapsible");
+      var i;
+
+      for (i = 0; i < coll.length; i++) {
+          coll[i].addEventListener("click", function() {
+              this.classList.toggle("active");
+              var content = this.nextElementSibling;
+              if (content.style.maxHeight){
+                  content.style.maxHeight = null;
+              } else {
+                  content.style.maxHeight = content.scrollHeight + "px";
+              }
+          });
+      }
 </script>
 <style>
     <%@include file="../../includes/myStyle.css"%>
 
+
+    input[type=text], select, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        resize: vertical;
+    }
+
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+        background-color: #45a049;
+    }
+
+    .container-form {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
 
 
     .span-shadow {
@@ -116,15 +182,16 @@
     }
 
     .container {
-    font-family: "Trebuchet MS", sans-serif;
-    display: flex;
-    gap: 30px;
+        font-family: "Trebuchet MS", sans-serif;
+        display: flex;
+        gap: 10px;
+        padding: 5px;
   }
   .column {
     flex-basis: 20%;
-    background: #ddd;
+    background: #f1f1f1;
     min-height: 90vh;
-    padding: 5px;
+    /*padding: 5px;*/
     border-radius: 10px;
   }
   .column h1 {
@@ -133,7 +200,7 @@
   }
   .list-group-item {
     background: #fff;
-    margin: 20px;
+    margin: 5px;
     padding: 20px;
     border-radius: 5px;
     cursor: move;
@@ -148,5 +215,43 @@
   .finished{
       background: #76ff80;
   }
+
+
+    .collapsible {
+        background-color: #939393;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+
+    .active, .collapsible:hover {
+        background-color: #737373;
+    }
+
+    .collapsible:after {
+        content: '\002B';
+        color: white;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .active:after {
+        content: "\2212";
+    }
+
+    .content {
+        padding: 0 18px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        background-color: #f1f1f1;
+    }
 </style>
 </html>

@@ -45,7 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                     .loginPage("/login").permitAll()
                     .loginProcessingUrl("/perform_login")
-                    .defaultSuccessUrl("/list", true)
+                    .defaultSuccessUrl("/kanban/kanban", true)
                     .failureUrl("/login?error=true")
                     .usernameParameter("login")
                     .passwordParameter("password")

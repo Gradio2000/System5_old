@@ -23,10 +23,12 @@ public class KanbanController {
     }
 
     @GetMapping("/kanban")
-    public String getAllKanban(@AuthenticationPrincipal AuthUser authUser, Model model){
+    public String getAllKanban(@AuthenticationPrincipal AuthUser authUser,
+                               Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         List<Kanban> kanbanList = kanbanRepository.findAll(Sort.by("id"));
         model.addAttribute("kanbanList", kanbanList);
+        model.addAttribute("kanban", new Kanban());
         return "kanban/kanban";
     }
 
@@ -56,5 +58,13 @@ public class KanbanController {
                 break;
         }
         return HttpStatus.OK;
+    }
+
+    @PostMapping("/addNewCanban")
+    public String addNewCanban(@ModelAttribute Kanban kanban,
+                               @AuthenticationPrincipal AuthUser authUser){
+        kanban.setUser(authUser.getUser());
+        kanbanRepository.save(kanban);
+        return "redirect:kanban";
     }
 }
