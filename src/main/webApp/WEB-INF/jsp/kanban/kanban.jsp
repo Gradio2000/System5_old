@@ -29,7 +29,7 @@
             <c:forEach items="${kanbanList}" var="kanbanDto">
                 <c:if test="${kanbanDto.started == true}">
                     <div id="${kanbanDto.id}" class="list-group-item started span-shadow" draggable="true">
-                        <div class="closex"><a>x</a></div>
+                        <div class="closex" onclick="deleteKanban(${kanbanDto.id})"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
                         <div style="margin-top: 5px"><a style="font-size:10px;">Автор: ${kanbanDto.userDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
@@ -42,7 +42,7 @@
             <c:forEach items="${kanbanList}" var="kanbanDto">
                 <c:if test="${kanbanDto.continues == true}">
                     <div id="${kanbanDto.id}" class="list-group-item continues span-shadow-yellow" draggable="true">
-                        <div class="closex"><a>x</a></div>
+                        <div class="closex" onclick="deleteKanban(${kanbanDto.id})"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
                         <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
@@ -55,7 +55,7 @@
             <c:forEach items="${kanbanList}" var="kanbanDto">
                 <c:if test="${kanbanDto.finished == true}">
                     <div id="${kanbanDto.id}" class="list-group-item finished span-shadow-green" draggable="true">
-                        <div class="closex"><a>x</a></div>
+                        <div class="closex" onclick="deleteKanban(${kanbanDto.id})"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
                         <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
@@ -73,9 +73,7 @@
                         <label for="describe">Описание</label>
                         <textarea id="describe" name="describe" placeholder="Напишите, что ожидаете.." style="height:200px"></textarea>
                         <label for="taskEndDate">Желаемая дата завершения</label>
-                        <input type="date" id="taskEndDate" name="date"
-                               value=""
-                               min="2022-01-01" max="2022-12-31">
+                        <input type="date" id="taskEndDate" name="date">
 
                         <input type="hidden" name="started" value="true"/>
                         <input type="hidden" name="continues" value="false"/>
@@ -140,6 +138,23 @@
                   content.style.maxHeight = null;
               } else {
                   content.style.maxHeight = content.scrollHeight + "px";
+              }
+          });
+      }
+
+      function deleteKanban(id){
+          let el = document.getElementById(id);
+          el.setAttribute("hidden", true);
+          $.ajax({
+              type: 'POST',
+              url: '/kanban/delete',
+              data: { kanbanId: id },
+              success: function (data) {
+                  // запустится при успешном выполнении запроса и в data будет ответ скрипта
+              },
+              error: function () {
+                  el.removeAttribute("hidden");
+                  alert('Ошибка удаления задачи!');
               }
           });
       }

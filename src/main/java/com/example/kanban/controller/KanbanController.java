@@ -76,4 +76,11 @@ public class KanbanController {
         kanbanRepository.save(kanban);
         return "redirect:kanban";
     }
+
+    @PostMapping("/delete")
+    @ResponseBody
+    public HttpStatus deleteKanban(@RequestParam Integer kanbanId){
+        kanbanRepository.deleteById(kanbanId);
+        return HttpStatus.OK;
+    }
 }
