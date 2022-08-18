@@ -26,25 +26,37 @@
     <div class="container">
         <div id="col1" class="column">
             <h1>Надо сделать</h1>
-            <c:forEach items="${kanbanList}" var="kanban">
-                <c:if test="${kanban.started == true}">
-                    <div id="${kanban.id}" class="list-group-item started span-shadow" draggable="true">${kanban.kanbanName}</div>
+            <c:forEach items="${kanbanList}" var="kanbanDto">
+                <c:if test="${kanbanDto.started == true}">
+                    <div id="${kanbanDto.id}" class="list-group-item started span-shadow" draggable="true">
+                        <div><a>${kanbanDto.kanbanName}</a></div>
+                        <div style="margin-top: 5px"><a style="font-size:10px;">Автор: ${kanbanDto.userDto.name}</a></div>
+                        <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
+                    </div>
                 </c:if>
             </c:forEach>
         </div>
         <div id="col2" class="column">
             <h1>Уже делаем</h1>
-            <c:forEach items="${kanbanList}" var="kanban">
-                <c:if test="${kanban.continues == true}">
-                    <div id="${kanban.id}" class="list-group-item continues span-shadow-yellow" draggable="true">${kanban.kanbanName}</div>
+            <c:forEach items="${kanbanList}" var="kanbanDto">
+                <c:if test="${kanbanDto.continues == true}">
+                    <div id="${kanbanDto.id}" class="list-group-item continues span-shadow-yellow" draggable="true">
+                        <div><a>${kanbanDto.kanbanName}</a></div>
+                        <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDto.name}</a></div>
+                        <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
+                    </div>
                 </c:if>
             </c:forEach>
         </div>
         <div id="col3" class="column">
             <h1>Мы сделали</h1>
-            <c:forEach items="${kanbanList}" var="kanban">
-                <c:if test="${kanban.finished == true}">
-                    <div id="${kanban.id}" class="list-group-item finished span-shadow-green" draggable="true">${kanban.kanbanName}</div>
+            <c:forEach items="${kanbanList}" var="kanbanDto">
+                <c:if test="${kanbanDto.finished == true}">
+                    <div id="${kanbanDto.id}" class="list-group-item finished span-shadow-green" draggable="true">
+                        <div><a>${kanbanDto.kanbanName}</a></div>
+                        <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDto.name}</a></div>
+                        <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
+                    </div>
                 </c:if>
             </c:forEach>
         </div>
@@ -52,11 +64,16 @@
             <button class="collapsible">Новая задача</button>
             <div class="content">
                 <div class="container-form">
-                    <form:form action="/kanban/addNewCanban" method="post" modelAttribute="kanban" >
+                    <form:form action="/kanban/addNewKanban" method="post" modelAttribute="kanban" >
                         <label for="kanbanName">Название</label>
                         <input type="text" id="kanbanName" name="kanbanName" placeholder="Что делаем..">
                         <label for="describe">Описание</label>
                         <textarea id="describe" name="describe" placeholder="Напишите, что ожидаете.." style="height:200px"></textarea>
+                        <label for="taskEndDate">Желаемая дата завершения</label>
+                        <input type="date" id="taskEndDate" name="date"
+                               value=""
+                               min="2022-01-01" max="2022-12-31">
+
                         <input type="hidden" name="started" value="true"/>
                         <input type="hidden" name="continues" value="false"/>
                         <input type="hidden" name="finished" value="false"/>
@@ -183,6 +200,7 @@
 
     .container {
         font-family: "Trebuchet MS", sans-serif;
+        font-size: medium;
         display: flex;
         gap: 10px;
         padding: 5px;
@@ -201,7 +219,7 @@
   .list-group-item {
     background: #fff;
     margin: 5px;
-    padding: 20px;
+    padding: 10px;
     border-radius: 5px;
     cursor: move;
   }

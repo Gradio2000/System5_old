@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,10 +66,13 @@ public class KanbanController {
         return HttpStatus.OK;
     }
 
-    @PostMapping("/addNewCanban")
+    @PostMapping("/addNewKanban")
     public String addNewCanban(@ModelAttribute Kanban kanban,
-                               @AuthenticationPrincipal AuthUser authUser){
+                               @AuthenticationPrincipal AuthUser authUser,
+                               @RequestParam String date){
         kanban.setUser(authUser.getUser());
+        Date date1 = java.sql.Date.valueOf(LocalDate.parse(date));
+        kanban.setTaskEndDate(date1);
         kanbanRepository.save(kanban);
         return "redirect:kanban";
     }

@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "kan_kanban")
@@ -34,5 +35,8 @@ public class Kanban {
     @OneToOne()
     @JoinColumn(name = "author_user_id", referencedColumnName = "user_id")
     private User user;
+
+    @Column(name = "taskenddate")
+    private Date taskEndDate;
 
 }

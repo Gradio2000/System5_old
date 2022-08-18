@@ -5,6 +5,7 @@ import com.example.system5.dto.UserDto;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 @Data
 public class KanbanDto implements Serializable {
@@ -15,9 +16,11 @@ public class KanbanDto implements Serializable {
     private Boolean finished;
     private String describe;
     private UserDto userDto;
+    private Date taskEndDate;
 
     public KanbanDto(Integer id, String kanbanName, Boolean started,
-                     Boolean continues, Boolean finished, String describe, UserDto userDto) {
+                     Boolean continues, Boolean finished,
+                     String describe, UserDto userDto, Date taskEndDate) {
         this.id = id;
         this.kanbanName = kanbanName;
         this.started = started;
@@ -25,6 +28,7 @@ public class KanbanDto implements Serializable {
         this.finished = finished;
         this.describe = describe;
         this.userDto = userDto;
+        this.taskEndDate = taskEndDate;
     }
 
     public KanbanDto() {
@@ -33,6 +37,6 @@ public class KanbanDto implements Serializable {
     public static KanbanDto getInstance(Kanban kanban){
         return new KanbanDto(kanban.getId(), kanban.getKanbanName(), kanban.getStarted(),
                 kanban.getContinues(), kanban.getFinished(), kanban.getDescribe(),
-                UserDto.getInstance(kanban.getUser()));
+                UserDto.getInstance(kanban.getUser()), kanban.getTaskEndDate());
     }
 }
