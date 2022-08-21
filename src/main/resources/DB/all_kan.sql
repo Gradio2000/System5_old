@@ -10,7 +10,8 @@ create table kan_kanban
     continues      boolean,
     finished       boolean,
     describe       varchar,
-    author_user_id integer
+    author_user_id integer,
+    taskenddate     date
 );
 
 

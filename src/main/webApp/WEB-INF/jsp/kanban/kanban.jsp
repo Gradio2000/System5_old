@@ -67,20 +67,20 @@
             <button class="collapsible">Новая задача</button>
             <div class="content">
                 <div class="container-form">
-                    <form:form action="/kanban/addNewKanban" method="post" modelAttribute="kanban" >
+                    <form:form id="newCanbanForm" action="/kanban/addNewKanban" method="post" modelAttribute="kanban" >
                         <label for="kanbanName">Название</label>
                         <input type="text" id="kanbanName" name="kanbanName" placeholder="Что делаем..">
                         <label for="describe">Описание</label>
                         <textarea id="describe" name="describe" placeholder="Напишите, что ожидаете.." style="height:200px"></textarea>
                         <label for="taskEndDate">Желаемая дата завершения</label>
-                        <input type="date" id="taskEndDate" name="date">
+                        <input type="date" id="taskEndDate" name="date"/>
 
                         <input type="hidden" name="started" value="true"/>
                         <input type="hidden" name="continues" value="false"/>
                         <input type="hidden" name="finished" value="false"/>
                         <input type="hidden" name="user"/>
 
-                        <button class="btn" type="submit">Сохранить</button>
+                        <button class="btn" type="button" onclick="submitForm()">Сохранить</button>
                     </form:form>
                 </div>
             </div>
@@ -157,6 +157,16 @@
                   alert('Ошибка удаления задачи!');
               }
           });
+      }
+
+      function submitForm(){
+          let date = document.getElementById("taskEndDate").value;
+          console.log(date);
+          if (date === ""){
+              alert("Заполните плановую дату задачи!");
+              return;
+          }
+          $('#newCanbanForm').submit();
       }
 </script>
 <style>
