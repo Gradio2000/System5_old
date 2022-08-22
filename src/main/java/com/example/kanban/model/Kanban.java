@@ -3,10 +3,12 @@ package com.example.kanban.model;
 import com.example.system5.model.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "kan_kanban")
@@ -40,10 +42,11 @@ public class Kanban {
     @Column(name = "taskenddate")
     private Date taskEndDate;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "kan_kanban_users",
             joinColumns = {@JoinColumn(name = "kanban_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
-    private Set<User> userSet;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<User> userList;
 
 }

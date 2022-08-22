@@ -7,12 +7,12 @@ import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.AppointTest;
 import com.example.qtest.model.GroupTest;
 import com.example.system5.dto.UserDto;
+import com.example.system5.dto.UserDtoNameOnly;
 import com.example.system5.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -45,9 +45,9 @@ public class DtoUtils {
         return appointTestDtoList;
     }
 
-    public static Set<UserDto> convertToUserDtoSet(Set<User> userSet){
-        return userSet.stream()
-                .map(UserDto::getInstance)
-                .collect(Collectors.toSet());
+    public static List<UserDtoNameOnly> convertToUserDtoNameOnlyList(List<User> userList){
+        return userList.stream()
+                .map(UserDtoNameOnly::getInstance)
+                .collect(Collectors.toList());
     }
 }

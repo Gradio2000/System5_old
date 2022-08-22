@@ -184,11 +184,11 @@
                         <div style="margin-top: 5px"><a style="font-size:10px;">Автор: ${kanbanDto.userDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
                         <div>
-                            <c:if test="${kanbanDto.userDtoSet.size() > 1}">
-                                <a style="font-size:10px">отв.: ${kanbanDto.userDtoSet.iterator().next().getName()} и др.</a>
+                            <c:if test="${kanbanDto.userDtoNameOnlyList.size() > 1}">
+                                <a style="font-size:10px">отв.: ${kanbanDto.userDtoNameOnlyList.get(0).name} и др.</a>
                             </c:if>
-                            <c:if test="${kanbanDto.userDtoSet.size() == 1}">
-                                <a style="font-size:10px">отв.: ${kanbanDto.userDtoSet.iterator().next().getName()}</a>
+                            <c:if test="${kanbanDto.userDtoNameOnlyList.size() == 1}">
+                                <a style="font-size:10px">отв.: ${kanbanDto.userDtoNameOnlyList.get(0).name}</a>
                             </c:if>
                         </div>
                     </div>
@@ -204,11 +204,11 @@
                         <div><a>${kanbanDto.kanbanName}</a></div>
                         <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
-                        <c:if test="${kanbanDto.userDtoSet.size() > 1}">
-                            <a style="font-size:10px">отв.: ${kanbanDto.userDtoSet.iterator().next().getName()} и др.</a>
+                        <c:if test="${kanbanDto.userDtoNameOnlyList.size() > 1}">
+                            <a style="font-size:10px">отв.: ${kanbanDto.userDtoNameOnlyList.get(0).name} и др.</a>
                         </c:if>
-                        <c:if test="${kanbanDto.userDtoSet.size() == 1}">
-                            <a style="font-size:10px">отв.: ${kanbanDto.userDtoSet.iterator().next().getName()}</a>
+                        <c:if test="${kanbanDto.userDtoNameOnlyList.size() == 1}">
+                            <a style="font-size:10px">отв.: ${kanbanDto.userDtoNameOnlyList.get(0).name}</a>
                         </c:if>
                     </div>
                 </c:if>
@@ -223,11 +223,11 @@
                         <div><a>${kanbanDto.kanbanName}</a></div>
                         <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
-                        <c:if test="${kanbanDto.userDtoSet.size() > 1}">
-                            <a style="font-size:10px">отв.: ${kanbanDto.userDtoSet.iterator().next().getName()} и др.</a>
+                        <c:if test="${kanbanDto.userDtoNameOnlyList.size() > 1}">
+                            <a style="font-size:10px">отв.: ${kanbanDto.userDtoNameOnlyList.get(0).name} и др.</a>
                         </c:if>
-                        <c:if test="${kanbanDto.userDtoSet.size() == 1}">
-                            <a style="font-size:10px">отв.: ${kanbanDto.userDtoSet.iterator().next().getName()}</a>
+                        <c:if test="${kanbanDto.userDtoNameOnlyList.size() == 1}">
+                            <a style="font-size:10px">отв.: ${kanbanDto.userDtoNameOnlyList.get(0).name}</a>
                         </c:if>
                     </div>
                 </c:if>
