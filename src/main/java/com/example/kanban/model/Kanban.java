@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "kan_kanban")
@@ -38,5 +39,11 @@ public class Kanban {
 
     @Column(name = "taskenddate")
     private Date taskEndDate;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "kan_kanban_users",
+            joinColumns = {@JoinColumn(name = "kanban_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")})
+    private Set<User> userSet;
 
 }

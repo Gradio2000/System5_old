@@ -5,14 +5,14 @@ import com.example.qtest.dto.AttempttestDto;
 import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.AppointTest;
-import com.example.qtest.model.Attempttest;
 import com.example.qtest.model.GroupTest;
-import com.example.qtest.model.Test;
 import com.example.system5.dto.UserDto;
+import com.example.system5.model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,17 +29,6 @@ public class DtoUtils {
                         .collect(Collectors.toList()));
     }
 
-    public TestDto convertToTestDto(Test test){
-        return new TestDto(test.getTestId(), test.getTestName(), test.getCriteria(),
-                test.getTime(), test.getQuesAmount(),test.getQuesMix(), test.getDeleted());
-    }
-
-    public List<AttempttestDto> convertToAttempttestDtoList(List<Attempttest> attempttestList){
-        return attempttestList.stream()
-                .map(AttempttestDto::getInstance)
-                .collect(Collectors.toList());
-    }
-
     public List<AppointTestDto> convertToAppointTestDtoList(List<AppointTest> appointTestList){
         List<AppointTestDto> appointTestDtoList = new ArrayList<>();
         for (AppointTest appointTest: appointTestList){
@@ -54,5 +43,11 @@ public class DtoUtils {
             appointTestDtoList.add(appointTestDto);
         }
         return appointTestDtoList;
+    }
+
+    public static Set<UserDto> convertToUserDtoSet(Set<User> userSet){
+        return userSet.stream()
+                .map(UserDto::getInstance)
+                .collect(Collectors.toSet());
     }
 }
