@@ -181,7 +181,7 @@
                     <div id="${kanbanDto.id}" class="list-group-item started span-shadow" draggable="true">
                         <div class="closex" onclick="deleteKanban(${kanbanDto.id})"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
-                        <div style="margin-top: 5px"><a style="font-size:10px;">Автор: ${kanbanDto.userDto.name}</a></div>
+                        <div style="margin-top: 5px"><a style="font-size:10px;">Автор: ${kanbanDto.userDtoNameOnlyWithPositionDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
                         <div>
                             <c:if test="${kanbanDto.userDtoNameOnlyList.size() > 1}">
@@ -202,7 +202,7 @@
                     <div id="${kanbanDto.id}" class="list-group-item continues span-shadow-yellow" draggable="true">
                         <div class="closex" onclick="deleteKanban(${kanbanDto.id})"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
-                        <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDto.name}</a></div>
+                        <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDtoNameOnlyWithPositionDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
                         <c:if test="${kanbanDto.userDtoNameOnlyList.size() > 1}">
                             <a style="font-size:10px">отв.: ${kanbanDto.userDtoNameOnlyList.get(0).name} и др.</a>
@@ -221,7 +221,7 @@
                     <div id="${kanbanDto.id}" class="list-group-item finished span-shadow-green" draggable="true">
                         <div class="closex" onclick="deleteKanban(${kanbanDto.id})"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
-                        <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDto.name}</a></div>
+                        <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDtoNameOnlyWithPositionDto.name}</a></div>
                         <div><a style="font-size:10px">срок: <fmt:formatDate value="${kanbanDto.taskEndDate}" pattern="dd.MM.yyyy"/></a></div>
                         <c:if test="${kanbanDto.userDtoNameOnlyList.size() > 1}">
                             <a style="font-size:10px">отв.: ${kanbanDto.userDtoNameOnlyList.get(0).name} и др.</a>

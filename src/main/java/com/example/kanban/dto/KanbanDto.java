@@ -2,8 +2,8 @@ package com.example.kanban.dto;
 
 import com.example.kanban.model.Kanban;
 import com.example.qtest.service.DtoUtils;
-import com.example.system5.dto.UserDto;
 import com.example.system5.dto.UserDtoNameOnly;
+import com.example.system5.dto.UserDtoNameOnlyWithPositionDto;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,21 +18,21 @@ public class KanbanDto implements Serializable {
     private Boolean continues;
     private Boolean finished;
     private String describe;
-    private UserDto userDto;
+    private UserDtoNameOnlyWithPositionDto userDtoNameOnlyWithPositionDto;
     private Date taskEndDate;
     private List<UserDtoNameOnly> userDtoNameOnlyList;
 
     public KanbanDto(Integer id, String kanbanName, Boolean started,
                      Boolean continues, Boolean finished,
-                     String describe, UserDto userDto, Date taskEndDate,
-                     List<UserDtoNameOnly> userDtoNameOnlyList) {
+                     String describe, UserDtoNameOnlyWithPositionDto userDtoNameOnlyWithPositionDto,
+                     Date taskEndDate, List<UserDtoNameOnly> userDtoNameOnlyList) {
         this.id = id;
         this.kanbanName = kanbanName;
         this.started = started;
         this.continues = continues;
         this.finished = finished;
         this.describe = describe;
-        this.userDto = userDto;
+        this.userDtoNameOnlyWithPositionDto = userDtoNameOnlyWithPositionDto;
         this.taskEndDate = taskEndDate;
         this.userDtoNameOnlyList = userDtoNameOnlyList;
     }
@@ -43,7 +43,7 @@ public class KanbanDto implements Serializable {
     public static KanbanDto getInstance(Kanban kanban){
         return new KanbanDto(kanban.getId(), kanban.getKanbanName(), kanban.getStarted(),
                 kanban.getContinues(), kanban.getFinished(), kanban.getDescribe(),
-                UserDto.getInstance(kanban.getUser()), kanban.getTaskEndDate(),
+                UserDtoNameOnlyWithPositionDto.getInstance(kanban.getUser()), kanban.getTaskEndDate(),
                 DtoUtils.convertToUserDtoNameOnlyList(kanban.getUserList()));
     }
 }

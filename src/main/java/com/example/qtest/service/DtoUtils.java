@@ -6,8 +6,10 @@ import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.AppointTest;
 import com.example.qtest.model.GroupTest;
+import com.example.system5.dto.PositionDtoNameOnly;
 import com.example.system5.dto.UserDto;
 import com.example.system5.dto.UserDtoNameOnly;
+import com.example.system5.model.Position;
 import com.example.system5.model.User;
 import org.springframework.stereotype.Service;
 
@@ -48,6 +50,12 @@ public class DtoUtils {
     public static List<UserDtoNameOnly> convertToUserDtoNameOnlyList(List<User> userList){
         return userList.stream()
                 .map(UserDtoNameOnly::getInstance)
+                .collect(Collectors.toList());
+    }
+
+    public static List<PositionDtoNameOnly> convertToPositionDtoNameOnly(List<Position> positionList){
+        return positionList.stream()
+                .map(PositionDtoNameOnly::getInstance)
                 .collect(Collectors.toList());
     }
 }
