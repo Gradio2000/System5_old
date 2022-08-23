@@ -196,10 +196,4 @@ public class System5Controller {
                 .map(System5::getMonth)
                 .collect(Collectors.toList());
     }
-
-    @GetMapping("/primefaces")
-    public String getPrimefaces(){
-        return "/primefaces.xhtml";
-    }
-
 }

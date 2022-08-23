@@ -502,6 +502,29 @@ body {
     cursor: pointer;
     opacity: .75;
 }
+
+.edit {
+    float: right;
+    font-family: sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    text-decoration: none;
+    margin: 2px;
+    padding: 2px;
+}
+/* свойства для кнопки "edit" при нахождении её в фокусе или наведении */
+.edit:focus, .edit:hover {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: .75;
+}
+
+
 /* свойства для блока, содержащего основное содержимое окна */
 .modal-body {
     position: relative;
@@ -535,6 +558,41 @@ body {
     border-bottom: 1px solid #eaeaea;
     padding: 0.5em 0 1.25em;
     color: #757575;
+}
+
+.myinput-forKanban {
+    height: auto;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #eaeaea;
+    color: #606060;
+    margin-top: 0;
+}
+
+.mytextarea-forKanban {
+    height: 70px;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #eaeaea;
+    color: #494949;
+    resize: vertical;
+}
+
+.mylabel-forkanban{
+    color: #999;
+    font: 12px/1.5'Helvetica Neue','Helvetica',Arial,sans-serif;
+    margin-top: 10px;
+    display: block;
+}
+
+.membersBlock{
+    margin-left: 0; /* Отступ слева в браузере IE и Opera */
+    padding-left: 0; /* Отступ слева в браузере Firefox, Safari, Chrome */
+}
+
+.member{
+    list-style-type: none;
+    color: #494949;
 }
 
 .select-css {

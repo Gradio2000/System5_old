@@ -33,16 +33,16 @@
         color: black;
     }
 
-    input[type=text], select, textarea {
-        width: 100%;
-        padding: 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        margin-top: 6px;
-        margin-bottom: 16px;
-        resize: vertical;
-    }
+    /*input[type=text], select, textarea {*/
+    /*    width: 100%;*/
+    /*    padding: 12px;*/
+    /*    border: 1px solid #ccc;*/
+    /*    border-radius: 4px;*/
+    /*    box-sizing: border-box;*/
+    /*    margin-top: 6px;*/
+    /*    margin-bottom: 16px;*/
+    /*    resize: vertical;*/
+    /*}*/
 
     input[type=submit] {
         background-color: #4CAF50;
@@ -178,7 +178,7 @@
             <h1>Надо сделать</h1>
             <c:forEach items="${kanbanList}" var="kanbanDto">
                 <c:if test="${kanbanDto.started == true}">
-                    <div id="${kanbanDto.id}" class="list-group-item started span-shadow" draggable="true">
+                    <div id="${kanbanDto.id}" class="list-group-item started span-shadow" draggable="true" onclick="openModal(this.id)">
                         <div class="closex" onclick="deleteKanban(${kanbanDto.id})"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
                         <div style="margin-top: 5px"><a style="font-size:10px;">Автор: ${kanbanDto.userDtoNameOnlyWithPositionDto.name}</a></div>
@@ -238,12 +238,14 @@
             <div class="content">
                 <div class="container-form">
                     <form:form id="newCanbanForm" action="/kanban/addNewKanban" method="post" modelAttribute="kanban" >
-                        <label for="kanbanName">Название</label>
-                        <input type="text" id="kanbanName" name="kanbanName" placeholder="Что делаем..">
-                        <label for="describe">Описание</label>
-                        <textarea id="describe" name="describe" placeholder="Напишите, что ожидаете.." style="height:200px"></textarea>
-                        <label for="taskEndDate">Желаемая дата завершения</label>
-                        <input type="date" id="taskEndDate" name="date"/>
+                        <label class="mylabel-forkanban" for="kanbanName">Название</label>
+                        <input class="myinput-forKanban" type="text" id="kanbanName" name="kanbanName" placeholder="Что делаем..">
+
+                        <label class="mylabel-forkanban" for="describe">Описание</label>
+                        <textarea class="mytextarea-forKanban" id="describe" name="describe" placeholder="Напишите, что ожидаете.."></textarea>
+
+                        <label class="mylabel-forkanban" for="taskEndDate">Желаемая дата завершения</label>
+                        <input class="myinput-forKanban" type="date" id="taskEndDate" name="date"/>
 
                         <input type="hidden" name="started" value="true"/>
                         <input type="hidden" name="continues" value="false"/>
@@ -255,8 +257,34 @@
                 </div>
             </div>
         </div>
-
     </div>
+
+    <div id="openModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="editKanban">
+                    <input id="kanbanId" type="hidden" name="kanbanId">
+                    <div class="modal-header" id="modal-header">
+                        <a title="Edit" class="edit" onclick="editKanbanName()">...</a>
+                        <a title="Close" class="close" onclick="closeModal()">×</a>
+                    </div>
+                    <div class="modal-body my-modal">
+                        <label id="taskAuthor" class="mylabel-forkanban" style="margin: 0">Автор: </label>
+                        <label id="labelDescribe" class="mylabel-forkanban">Описание</label>
+                        <label id="labelEndDate" class="mylabel-forkanban">Плановая дата выполнения</label>
+                        <label id="labelMembers" class="mylabel-forkanban">Участники:
+                            <ul id="membersBlock" class="membersBlock"></ul>
+                        </label>
+                        <select name="memberSelect" id="memberSelect" onchange="editMembers()">
+                            <option value="" disabled selected>Добавить</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <form id="kanbanForm"></form>
 </div>
 </body>
 
@@ -295,7 +323,6 @@
             }
         });
       });
-
 
       var coll = document.getElementsByClassName("collapsible");
       var i;
@@ -337,6 +364,183 @@
               return;
           }
           $('#newCanbanForm').submit();
+      }
+
+      function openModal(id){
+          $.ajax({
+              type: 'GET',
+              url: '/kanban/getKanban',
+              data: {kanId: id},
+              success: function (data) {
+                  // запустится при успешном выполнении запроса и в data будет ответ скрипта
+                  clearModal();
+                  document.getElementById("kanbanId").value = data.id;
+
+                  // <input type="text" class="modal-title myinput-forKanban" id="modal-title" name="kanbanName" disabled="" onchange="changeTitle(this.value)">
+                  let title = document.createElement("input");
+                  title.type = "text"
+                  title.className = "modal-title myinput-forKanban";
+                  title.id = "modal-title";
+                  title.name = "kanbanName";
+                  title.disabled = "disabled";
+                  title.value = data.kanbanName;
+                  title.form = "editKanban";
+                  title.setAttribute("onchange", "changeTitle(this.value)");
+                  document.getElementById("modal-header").prepend(title);
+
+                  // <a>Иванов С.Н.</a>
+                  let author = document.createElement("a");
+                  author.textContent = data.userDtoNameOnlyWithPositionDto.name;
+                  document.getElementById("taskAuthor").append(author);
+
+                  // <textarea name="describe" id="describe" class="mytextarea-forKanban" onchange="changeDescribe(this.value)"></textarea>
+                  let describe = document.createElement("textarea");
+                  describe.form = "kanbanForm";
+                  describe.name = "describe";
+                  describe.id = "describe";
+                  describe.innerText = data.describe;
+                  describe.className = "mytextarea-forKanban";
+                  describe.setAttribute("onchange", "changeDescribe(this.value)");
+                  document.getElementById("labelDescribe").append(describe);
+
+                  // <input class="myinput-forKanban" id="endDate" name="endDate" type="date" onchange="editDate(this.value)" style="margin-top: 2px; width: 160px;">
+                  let endDate = document.createElement("input");
+                  endDate.className = "myinput-forKanban";
+                  endDate.id = "endDate";
+                  endDate.name = "endDate";
+                  endDate.type = "date";
+                  endDate.form = "kanbanForm";
+                  if (data.taskEndDate != null){
+                      let newDate = new Date(data.taskEndDate);
+                      newDate.setDate(newDate.getDate() + 1);
+                      endDate.valueAsDate = newDate;
+                  }
+                  endDate.style = "margin-top: 2px; width: 160px";
+                  endDate.setAttribute("onchange", "editDate(this.value)");
+                  document.getElementById("labelEndDate").append(endDate);
+
+                  // <ul id="membersBlock" class="membersBlock"><li class="member">Петрова И.Н.</li></ul>
+                  let membersBlock = document.getElementById("membersBlock");
+                  for (let i = 0; i < data.userDtoNameOnlyList.length; i++){
+                      let member = document.createElement("li");
+                      member.innerText = data.userDtoNameOnlyList[i].name;
+                      member.className = "member";
+                      membersBlock.append(member);
+                  }
+                  document.getElementById("labelMembers").append(membersBlock);
+
+                  // <select name="memberSelect" id="memberSelect">
+                  let memberSelect = document.getElementById("memberSelect");
+                  $.ajax({
+                      type: 'GET',
+                      url: '/kanban/getUserDtoList',
+                      data: {kanId: id},
+                      success: function (data) {
+                          for (let i = 0; i < data.length; i++) {
+                              let opt = document.createElement("option");
+                              opt.value = data[i].userId;
+                              opt.innerText = data[i].name;
+                              memberSelect.append(opt);
+                          }
+                      },
+                      error: function () {
+                          alert('Ошибка получения списка пользователей! \n' +
+                                'function openModal(id) \n' +
+                                'url: /kanban/getUserDtoList');
+                      }
+                  });
+              },
+              error: function () {
+                  alert('Ошибка получения данных с сервера! \n function openModal(id)');
+              }
+          });
+
+          document.location='#openModal'
+      }
+
+      function clearModal(){
+          let el = document.getElementById("modal-title");
+          if (el != null){
+              el.remove();
+          }
+
+          let describe = document.getElementById("describe");
+          if (describe != null){
+              describe.remove();
+          }
+      }
+
+      function closeModal(){
+          document.location = '#close';
+          location.reload();
+      }
+
+      function editKanbanName(){
+          let el = document.getElementById("modal-title");
+          el.removeAttribute("disabled");
+          el.focus();
+          el.setSelectionRange(el.value.length,el.value.length);
+      }
+
+      function changeTitle(name){
+          const msg = $('#editKanban').serialize();
+          $.ajax({
+              type: 'POST',
+              url: '/kanban/editName',
+              data: msg,
+              success: function (data) {
+              },
+              error: function () {
+                  alert('Ошибка отправки данных на сервер! \n function changeTitle(name)');
+              }
+          });
+      }
+
+      function changeDescribe(describe){
+          const msg = $('#editKanban').serialize();
+          $.ajax({
+              type: 'POST',
+              url: '/kanban/editDescribe',
+              data: msg,
+              success: function (data) {
+              },
+              error: function () {
+                  alert('Ошибка отправки данных на сервер! \n function changeDescribe(describe)');
+              }
+          });
+      }
+
+      function editDate(date){
+          const msg = $('#editKanban').serialize();
+          $.ajax({
+              type: 'POST',
+              url: '/kanban/editDate',
+              data: msg,
+              success: function (data) {
+              },
+              error: function () {
+                  alert('Ошибка отправки данных на сервер! \n function editDate(date)');
+              }
+          });
+      }
+
+      function editMembers(){
+          const msg = $('#editKanban').serialize();
+          $.ajax({
+              type: 'POST',
+              url: '/kanban/editMembers',
+              data: msg,
+              success: function (data){
+                  let member = document.createElement("li");
+                  member.innerText = data.name;
+                  member.className = "member";
+                  document.getElementById("membersBlock").append(member);
+              },
+              error: function(){
+                  alert('Ошибка отправки данных на сервер! \n function editMembers()')
+              }
+          });
+
       }
 </script>
 
