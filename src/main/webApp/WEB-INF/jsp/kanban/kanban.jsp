@@ -165,6 +165,23 @@
         transition: max-height 0.2s ease-out;
         background-color: #f1f1f1;
     }
+
+    .contain {
+        display: flex;
+    }
+
+    .member {
+        margin-left: 5px;
+    }
+
+    .del{
+        color: white;
+    }
+
+    .contain:hover .del{
+        color: black;
+        cursor: pointer;
+    }
 </style>
 <head>
     <jsp:include page="../../includes/header.jsp"/>
@@ -422,10 +439,21 @@
                   // <ul id="membersBlock" class="membersBlock"><li class="member">Петрова И.Н.</li></ul>
                   let membersBlock = document.getElementById("membersBlock");
                   for (let i = 0; i < data.userDtoNameOnlyList.length; i++){
-                      let member = document.createElement("li");
-                      member.innerText = data.userDtoNameOnlyList[i].name;
-                      member.className = "member";
-                      membersBlock.append(member);
+                      let contain = document.createElement("div");
+                      contain.className = "contain";
+                            let member = document.createElement("li");
+                            member.innerText = data.userDtoNameOnlyList[i].name;
+                            member.className = "member";
+
+                            let del = document.createElement("a");
+                            del.className = "del";
+                            del.innerText = "X";
+
+                      contain.append(del);
+                      contain.append(member);
+
+
+                      membersBlock.append(contain);
                   }
                   document.getElementById("labelMembers").append(membersBlock);
 
@@ -531,10 +559,35 @@
               url: '/kanban/editMembers',
               data: msg,
               success: function (data){
+
+                  let contain = document.createElement("div");
+                  contain.className = "contain";
+
+                  let del = document.createElement("a");
+                  del.innerText = "X";
+                  del.className = "del";
+
                   let member = document.createElement("li");
                   member.innerText = data.name;
                   member.className = "member";
-                  document.getElementById("membersBlock").append(member);
+
+                  contain.append(del);
+                  contain.append(member);
+
+                  let membersBlock = document.getElementById("membersBlock");
+                  membersBlock.append(contain);
+
+                  //remove element from select list
+                  let memberSelect = document.getElementById("memberSelect");
+                  for (let i = 0; i < memberSelect.length; i++){
+                      if (memberSelect.options[i].innerText === data.name){
+                          memberSelect.options[i].remove();
+                      }
+                      if (memberSelect.options[i].innerText === 'Добавить'){
+                          memberSelect.options[i].selected = true;
+                      }
+                  }
+
               },
               error: function(){
                   alert('Ошибка отправки данных на сервер! \n function editMembers()')
