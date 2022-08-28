@@ -565,8 +565,9 @@ body {
     width: 100%;
     border: none;
     border-bottom: 1px solid #eaeaea;
-    color: #606060;
+    color: #494949;
     margin-top: 0;
+    font-family: inherit;
 }
 
 .mytextarea-forKanban {
@@ -576,6 +577,7 @@ body {
     border-bottom: 1px solid #eaeaea;
     color: #494949;
     resize: vertical;
+    font-family: inherit;
 }
 
 .mylabel-forkanban{

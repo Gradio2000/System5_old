@@ -157,4 +157,18 @@ public class KanbanController {
         assert user != null;
         return UserDtoNameOnly.getInstance(user);
     }
+
+    @PostMapping("/delMember")
+    @ResponseBody
+    public UserDtoNameOnly delMember(@RequestParam Integer userId, @RequestParam Integer kanId){
+        Kanban kanban = kanbanRepository.findById(kanId).orElse(null);
+        assert kanban != null;
+        List<User> userList = kanban.getUserList();
+        userList.removeIf(user -> Objects.equals(user.getUserId(), userId));
+        kanban.setUserList(userList);
+        kanbanRepository.save(kanban);
+        User user = userRepository.findById(userId).orElse(null);
+        assert user != null;
+        return UserDtoNameOnly.getInstance(user);
+    }
 }

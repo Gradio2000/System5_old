@@ -35,14 +35,14 @@ public class Kanban {
     @Column(name = "describe")
     private String describe;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "author_user_id", referencedColumnName = "user_id")
     private User user;
 
     @Column(name = "taskenddate")
     private Date taskEndDate;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinTable(name = "kan_kanban_users",
             joinColumns = {@JoinColumn(name = "kanban_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})

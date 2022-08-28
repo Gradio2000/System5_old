@@ -171,7 +171,7 @@
     }
 
     .member {
-        margin-left: 5px;
+        margin-left: 10px;
         color: #494949;
     }
 
@@ -222,7 +222,7 @@
             <h1>Уже делаем</h1>
             <c:forEach items="${kanbanList}" var="kanbanDto">
                 <c:if test="${kanbanDto.continues == true}">
-                    <div id="${kanbanDto.id}" class="list-group-item continues span-shadow-yellow" draggable="true">
+                    <div id="${kanbanDto.id}" class="list-group-item continues span-shadow-yellow" draggable="true" onclick="openModal(this.id)">
                         <div class="closex" onclick="deleteKanban(${kanbanDto.id})"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
                         <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDtoNameOnlyWithPositionDto.name}</a></div>
@@ -241,7 +241,7 @@
             <h1>Мы сделали</h1>
             <c:forEach items="${kanbanList}" var="kanbanDto">
                 <c:if test="${kanbanDto.finished == true}">
-                    <div id="${kanbanDto.id}" class="list-group-item finished span-shadow-green" draggable="true">
+                    <div id="${kanbanDto.id}" class="list-group-item finished span-shadow-green" draggable="true" onclick="openModal(this.id)">
                         <div class="closex" onclick="deleteKanban(${kanbanDto.id})"><a>x</a></div>
                         <div><a>${kanbanDto.kanbanName}</a></div>
                         <div style="margin-top: 5px"><a style="font-size:10px">Автор: ${kanbanDto.userDtoNameOnlyWithPositionDto.name}</a></div>
@@ -363,6 +363,7 @@
       }
 
       function deleteKanban(id){
+          event.stopPropagation();
           let el = document.getElementById(id);
           el.setAttribute("hidden", true);
           $.ajax({
@@ -439,7 +440,7 @@
                       newDate.setDate(newDate.getDate() + 1);
                       endDate.valueAsDate = newDate;
                   }
-                  endDate.style = "margin-top: 2px; width: 160px";
+                  endDate.style = "margin-top: 2px; width: 160px; color: #494949";
                   endDate.setAttribute("onchange", "editDate(this.value)");
                   document.getElementById("labelEndDate").append(endDate);
 
@@ -457,7 +458,7 @@
                             del.className = "del";
                             del.innerText = "X";
                             del.id = data.userDtoNameOnlyList[i].userId;
-                            del.setAttribute("onclick", "delMember(this.id)");
+                            del.setAttribute("onclick", "delMember(this.id, " + data.id + ")");
 
 
                       contain.append(del);
@@ -579,7 +580,8 @@
                   del.innerText = "X";
                   del.className = "del";
                   del.id = data.userId;
-                  del.setAttribute("onclick", "delMember(this.id)");
+                  let kanId = document.getElementById("kanbanId").value;
+                  del.setAttribute("onclick", "delMember(this.id, " + kanId + ")");
 
                   let member = document.createElement("li");
                   member.innerText = data.name;
@@ -610,8 +612,23 @@
 
       }
 
-      function delMember(id){
-          $('#cont'+id).hide();
+      function delMember(id, kanId){
+          $('#cont'+id).remove();
+
+          $.ajax({
+              type: 'POST',
+              url: '/kanban/delMember',
+              data: {"userId": id, "kanId": kanId},
+              success: function (userDto){
+                  let opt = document.createElement("option");
+                  opt.value = userDto.userId;
+                  opt.innerText = userDto.name;
+                  document.getElementById("memberSelect").append(opt);
+              },
+              error: function (){
+                  alert('Ошибка отправки данных на сервер! \n function delMember(id)')
+              }
+          });
       }
 </script>
 
