@@ -172,15 +172,21 @@
 
     .member {
         margin-left: 5px;
+        color: #494949;
     }
 
     .del{
         color: white;
+        font-weight: 500;
     }
 
     .contain:hover .del{
         color: black;
         cursor: pointer;
+    }
+
+    .contain:hover .member{
+        font-weight: 500;
     }
 </style>
 <head>
@@ -389,6 +395,7 @@
               url: '/kanban/getKanban',
               data: {kanId: id},
               success: function (data) {
+                  console.log(data);
                   // запустится при успешном выполнении запроса и в data будет ответ скрипта
                   clearModal();
                   document.getElementById("kanbanId").value = data.id;
@@ -441,6 +448,7 @@
                   for (let i = 0; i < data.userDtoNameOnlyList.length; i++){
                       let contain = document.createElement("div");
                       contain.className = "contain";
+                      contain.id = "cont" + data.userDtoNameOnlyList[i].userId;
                             let member = document.createElement("li");
                             member.innerText = data.userDtoNameOnlyList[i].name;
                             member.className = "member";
@@ -448,6 +456,9 @@
                             let del = document.createElement("a");
                             del.className = "del";
                             del.innerText = "X";
+                            del.id = data.userDtoNameOnlyList[i].userId;
+                            del.setAttribute("onclick", "delMember(this.id)");
+
 
                       contain.append(del);
                       contain.append(member);
@@ -559,13 +570,16 @@
               url: '/kanban/editMembers',
               data: msg,
               success: function (data){
-
+                  console.log(data);
                   let contain = document.createElement("div");
                   contain.className = "contain";
+                  contain.id = "cont" + data.userId;
 
                   let del = document.createElement("a");
                   del.innerText = "X";
                   del.className = "del";
+                  del.id = data.userId;
+                  del.setAttribute("onclick", "delMember(this.id)");
 
                   let member = document.createElement("li");
                   member.innerText = data.name;
@@ -594,6 +608,10 @@
               }
           });
 
+      }
+
+      function delMember(id){
+          $('#cont'+id).hide();
       }
 </script>
 
