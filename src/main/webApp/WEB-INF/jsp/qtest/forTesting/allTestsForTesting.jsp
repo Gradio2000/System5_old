@@ -14,6 +14,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"  %>
 <script type="text/javascript" src="../../../../js/jquery-3.6.0.js"></script>
 <html>
+
 <style>
   <%@include file="../../../includes/myStyle.css"%>
 
@@ -29,15 +30,49 @@
   <table id="color_table" style="width: 100%; table-layout: auto">
     <tr>
       <th class="tblsht">Tесты группы: ${groupTest.name}</th>
+      <th>Выбрать одиночный тест</th>
+      <th>Собрать сводный тест</th>
     </tr>
-    <c:forEach var="test" items="${testList}">
-      <tr>
-        <td class="tblsht">
-          <a href="test/${test.testId}">${test.testName}</a>
-        </td>
-      </tr>
-    </c:forEach>
+    <form id="searchTest" method="POST" action="test">
+      <c:forEach var="test" items="${testList}">
+        <tr>
+          <td class="tblsht">
+            <a>${test.testName}</a>
+          </td>
+          <td>
+            <input type="radio" class="radioTest" value="${test.testId}" name="id"/>
+          </td>
+          <td>
+            <input type="checkbox" class="chektest"/>
+          </td>
+        </tr>
+      </c:forEach>
+    </form>
   </table>
+  <button form="searchTest" class="btn" type="submit">ОК</button>
 </div>
 </body>
+<script>
+  const elems = document.body.querySelectorAll('.chektest');
+
+  for (let x = 0; x < elems.length; x++) {
+    elems[x].addEventListener("click", listener)
+  }
+
+  function listener(){
+    const element = document.getElementsByClassName("radioTest");
+    for (let x = 0; x < elems.length; x++) {
+      if (elems[x].checked){
+        for (let i = 0; i < element.length; i++) {
+          element[i].disabled = true;
+        }
+        return;
+      }
+    }
+    for (let i = 0; i < element.length; i++) {
+      element[i].disabled = false;
+    }
+  }
+
+</script>
 </html>
