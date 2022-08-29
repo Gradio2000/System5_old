@@ -60,7 +60,8 @@ public class ProcessTestController {
 
     @PostMapping("/listForTesting/test")
     public String getTestForTesting(@AuthenticationPrincipal AuthUser authUser, Model model,
-                                    @RequestParam Integer id){
+                                    @RequestParam (required = false) Integer id,
+                                    @RequestParam (required = false) Integer[] testIds){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
         Test test = testReposytory.findById(id).orElse(null);

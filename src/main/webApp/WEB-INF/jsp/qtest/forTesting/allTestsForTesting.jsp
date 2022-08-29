@@ -43,7 +43,7 @@
             <input type="radio" class="radioTest" value="${test.testId}" name="id"/>
           </td>
           <td>
-            <input type="checkbox" class="chektest"/>
+            <input type="checkbox" class="chektest" name="testIds" value="${test.testId}"/>
           </td>
         </tr>
       </c:forEach>
