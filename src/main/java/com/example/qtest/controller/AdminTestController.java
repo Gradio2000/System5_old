@@ -60,9 +60,7 @@ public class AdminTestController {
         if (test.getTestName().isEmpty()){
             return "redirect:/tests/list/" + test.getGroupId() + "?error=200";
         }
-        test.setQuesMix(true);
-        test.setQuesAmount(0);
-        test.setTime(0.0);
+
         test.setCriteria(0.0);
         test.setDeleted(false);
         testReposytory.save(test);
@@ -110,9 +108,6 @@ public class AdminTestController {
         assert test != null;
         test.setTestName(testDto.getTestName());
         test.setCriteria(testDto.getCriteria());
-        test.setTime(testDto.getTime());
-        test.setQuesAmount(testDto.getQuesAmount());
-        test.setQuesMix(testDto.getQuesMix() != null);
         testReposytory.save(test);
         return HttpStatus.OK;
     }

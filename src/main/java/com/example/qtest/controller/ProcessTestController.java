@@ -64,8 +64,15 @@ public class ProcessTestController {
                                     @RequestParam (required = false) Integer[] testIds){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
-        Test test = testReposytory.findById(id).orElse(null);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+
+        if (testIds != null){
+            List<TestDto> testDtoList = DtoUtils.convertToListDto(testReposytory.findByAllByIds(testIds));
+            model.addAttribute("testDtoList", testDtoList);
+            return "qtest/forTesting/prepareConsolidTest";
+
+        }
+        Test test = testReposytory.findById(id).orElse(null);
         model.addAttribute("test", test);
         return "qtest/forTesting/testForTesting";
     }

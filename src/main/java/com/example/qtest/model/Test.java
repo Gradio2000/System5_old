@@ -23,17 +23,17 @@ public class Test {
     @Column
     private Double criteria;
 
-    @Column
-    private Double time;
+//    @Column
+//    private Double time;
 
-    @Column(name = "ques_amount")
-    private Integer quesAmount;
+//    @Column(name = "ques_amount")
+//    private Integer quesAmount;
 
     @Column
     private Boolean deleted;
 
-    @Column(name = "ques_mix", columnDefinition = "boolean default false")
-    private Boolean quesMix;
+//    @Column(name = "ques_mix", columnDefinition = "boolean default false")
+//    private Boolean quesMix;
 
     @Column(name = "group_id")
     private Integer groupId;

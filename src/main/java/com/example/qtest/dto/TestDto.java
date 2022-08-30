@@ -10,25 +10,20 @@ public class TestDto implements Serializable {
     private  Integer testId;
     private  String testName;
     private  Double criteria;
-    private  Double time;
-    private  Integer quesAmount;
-    private  Boolean quesMix;
     private  Boolean deleted;
+    private  Integer quesAmount;
 
 
-    public TestDto(Integer testId, String testName, Double criteria, Double time,
-                   Integer quesAmount, Boolean quesMix, Boolean deleted) {
+    public TestDto(Integer testId, String testName, Double criteria, Boolean deleted, Integer quesAmount) {
         this.testId = testId;
         this.testName = testName;
         this.criteria = criteria;
-        this.time = time;
-        this.quesAmount = quesAmount;
-        this.quesMix = quesMix;
         this.deleted = deleted;
+        this.quesAmount = quesAmount;
     }
 
     public static TestDto getInstance(Test test){
         return new TestDto(test.getTestId(), test.getTestName(), test.getCriteria(),
-                test.getTime(), test.getQuesAmount(),test.getQuesMix(), test.getDeleted());
+                test.getDeleted(), test.getQuestions().size());
     }
 }

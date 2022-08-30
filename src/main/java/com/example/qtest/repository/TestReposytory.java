@@ -28,4 +28,8 @@ public interface TestReposytory extends JpaRepository<Test, Integer> {
     @Query(nativeQuery = true,
     value = "UPDATE q_tests SET deleted = false WHERE test_id = :testId")
     void undeleteTest(Integer testId);
+
+    @Query(nativeQuery = true,
+    value = "SELECT * FROM q_tests WHERE test_id IN :testIds")
+    List<Test> findByAllByIds(Integer[] testIds);
 }

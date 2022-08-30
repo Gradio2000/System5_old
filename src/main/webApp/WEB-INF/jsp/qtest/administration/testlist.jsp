@@ -29,7 +29,7 @@
     <table id="color_table" style="width: 100%; table-layout: auto" >
         <tbody>
             <tr>
-                <th colspan="8" class="tblsht">Список тестов: ${groupTestName}</th>
+                <th colspan="5" class="tblsht">Список тестов: ${groupTestName}</th>
             </tr>
             <tr>
                 <th>Удалить</th>
@@ -37,9 +37,6 @@
                 <th>Название теста</th>
                 <th>Количество вопросов в тесте</th>
                 <th>Критерий, %</th>
-                <th>Время выполнения, мин.</th>
-                <th>Перемешать вопросы</th>
-                <th>Сохранить изменения</th>
             </tr>
             <c:forEach var="test" items="${testList}">
                 <c:if test="${test.deleted}">
@@ -59,9 +56,6 @@
                         </td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
                     </tr>
                 </c:if>
                 <c:if test="${!test.deleted}">
@@ -76,28 +70,15 @@
                                 <a href="/tests/${test.testId}/questions">Вопросы теста</a>
                             </td>
                             <td class="tblsht">
-                                <input type="text" class="myinput" name="testName" value="${test.testName}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0">
+                                <input type="text" class="myinput" name="testName" value="${test.testName}" onchange="saveTest(${test.testId})" style="margin-top: 0; padding: 0">
                             </td>
                             <td>
-                                <input type="text" class="myinput" name="quesAmount" value="${test.quesAmount}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0">
+                                <a>${test.quesAmount}</a>
                             </td>
                             <td>
-                                <input type="text" class="myinput" name="criteria" value="${test.criteria}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0"/>
+                                <input type="text" class="myinput" name="criteria" value="${test.criteria}" onchange="saveTest(${test.testId})" style="margin-top: 0; padding: 0"/>
                             </td>
-                            <td>
-                                <input type="text" class="myinput" name="time" value="${test.time}" onchange="changeData(${test.testId})" style="margin-top: 0; padding: 0"/>
-                            </td>
-                            <td>
-                                <c:if test="${test.quesMix == true}">
-                                    <input type="checkbox" checked value="${test.quesMix}" name="quesMix" onchange="changeData(${test.testId})"/>
-                                </c:if>
-                                <c:if test="${test.quesMix == false}">
-                                    <input type="checkbox" value="${test.quesMix}" name="quesMix" onchange="changeData(${test.testId})"/>
-                                </c:if>
-                            </td>
-                            <td>
-                                <button id="btnch${test.testId}" type="button" class="btnch buttonch" style="margin-top: 0; padding: 0; width: 30px" onclick="saveTest(${test.testId})"> V </button>
-                            </td>
+
                         </tr>
                     </form>
                 </c:if>

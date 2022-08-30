@@ -6,6 +6,7 @@ import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.AppointTest;
 import com.example.qtest.model.GroupTest;
+import com.example.qtest.model.Test;
 import com.example.system5.dto.PositionDtoNameOnly;
 import com.example.system5.dto.UserDto;
 import com.example.system5.dto.UserDtoNameOnly;
@@ -56,6 +57,12 @@ public class DtoUtils {
     public static List<PositionDtoNameOnly> convertToPositionDtoNameOnly(List<Position> positionList){
         return positionList.stream()
                 .map(PositionDtoNameOnly::getInstance)
+                .collect(Collectors.toList());
+    }
+
+    public static List<TestDto> convertToListDto(List<Test> testList){
+        return testList.stream()
+                .map(TestDto::getInstance)
                 .collect(Collectors.toList());
     }
 }
