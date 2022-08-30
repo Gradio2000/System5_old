@@ -45,7 +45,7 @@
           <td>
             <input id="ques${test.testId}" type="text"
                    class="myinput" style="margin-top: 0; padding: 0" value="${test.quesAmount}"
-                   name="quesAmount" disabled onchange="listener()"/>
+                   name="quesAmount" disabled onchange="check(${test.quesAmount}, this.value, this.id)"/>
           </td>
         </tr>
       </c:forEach>
@@ -80,6 +80,15 @@
       }
     }
     document.getElementById("totalQuesAmount").innerText = total;
+  }
+
+  function check(quesAmont, value, id){
+    if (value > quesAmont){
+      alert("Превышено допустимое значение количества вопросов для теста: " + quesAmont);
+      document.getElementById(id).value = quesAmont;
+      return;
+    }
+    listener();
   }
 
 </script>
