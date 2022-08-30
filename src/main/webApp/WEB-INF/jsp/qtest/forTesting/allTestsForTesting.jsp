@@ -29,25 +29,32 @@
 <div class="main">
   <table id="color_table" style="width: 100%; table-layout: auto">
     <tr>
+      <th>Выбрать тест</th>
       <th class="tblsht">Tесты группы: ${groupTest.name}</th>
-      <th>Выбрать одиночный тест</th>
-      <th>Собрать сводный тест</th>
+      <th>Задать количество вопросов</th>
     </tr>
     <form id="searchTest" method="POST" action="test">
       <c:forEach var="test" items="${testList}">
         <tr>
+          <td style="width: 10%;">
+            <input type="checkbox" class="chektest" name="testIds" value="${test.testId}"/>
+          </td>
           <td class="tblsht">
             <a>${test.testName}</a>
           </td>
           <td>
-            <input type="radio" class="radioTest" value="${test.testId}" name="id"/>
-          </td>
-          <td>
-            <input type="checkbox" class="chektest" name="testIds" value="${test.testId}"/>
+            <input id="ques${test.testId}" type="text"
+                   class="myinput" style="margin-top: 0; padding: 0" value="${test.quesAmount}"
+                   name="quesAmount" disabled onchange="listener()"/>
           </td>
         </tr>
       </c:forEach>
     </form>
+    <tr>
+      <td colspan="3" style="text-align: left">
+        <a>Выбрано <span id="totalQuesAmount">0</span> вопросов</a>
+      </td>
+    </tr>
   </table>
   <button form="searchTest" class="btn" type="submit">ОК</button>
 </div>
@@ -60,18 +67,19 @@
   }
 
   function listener(){
-    const element = document.getElementsByClassName("radioTest");
-    for (let x = 0; x < elems.length; x++) {
-      if (elems[x].checked){
-        for (let i = 0; i < element.length; i++) {
-          element[i].disabled = true;
-        }
-        return;
+    let total = 0;
+    for (let i = 0; i < elems.length; i++) {
+      let elem = document.getElementById("ques" + elems[i].value);
+      if (elems[i].checked){
+        elem.disabled = false;
+        let quesAmount = Number(elem.value);
+        total = total + quesAmount;
+      }
+      else{
+        elem.disabled = true;
       }
     }
-    for (let i = 0; i < element.length; i++) {
-      element[i].disabled = false;
-    }
+    document.getElementById("totalQuesAmount").innerText = total;
   }
 
 </script>
