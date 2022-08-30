@@ -3,7 +3,6 @@ package com.example.qtest.controller;
 import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.Attempttest;
-import com.example.qtest.model.Test;
 import com.example.qtest.repository.AttemptestReporitory;
 import com.example.qtest.repository.GroupTestRepository;
 import com.example.qtest.repository.TestReposytory;
@@ -60,21 +59,24 @@ public class ProcessTestController {
 
     @PostMapping("/listForTesting/test")
     public String getTestForTesting(@AuthenticationPrincipal AuthUser authUser, Model model,
-                                    @RequestParam (required = false) Integer id,
-                                    @RequestParam (required = false) Integer[] testIds){
+                                    @RequestParam (required = false) Integer[] testIds,
+                                    @RequestParam Integer quesAmount){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
-        if (testIds != null){
+        if (testIds.length > 1){
             List<TestDto> testDtoList = DtoUtils.convertToListDto(testReposytory.findByAllByIds(testIds));
             model.addAttribute("testDtoList", testDtoList);
             return "qtest/forTesting/prepareConsolidTest";
 
         }
-        Test test = testReposytory.findById(id).orElse(null);
-        model.addAttribute("test", test);
-        return "qtest/forTesting/testForTesting";
+        else {
+            TestDto testDto = TestDto.getInstance(Objects.requireNonNull(testReposytory.findById(testIds[0]).orElse(null)));
+            model.addAttribute("testDto", testDto);
+            model.addAttribute("quesAmount", quesAmount);
+            return "qtest/forTesting/testForTesting";
+        }
     }
 
 

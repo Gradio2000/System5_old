@@ -50,7 +50,8 @@ public class TestProcessingController {
     @PostMapping("/start")
     public String startTestProcessing(@AuthenticationPrincipal AuthUser authUser,
                                       Model model, @RequestParam Integer testId,
-                                      @RequestParam (required = false) Integer appointTestId){
+                                      @RequestParam (required = false) Integer appointTestId,
+                                      @RequestParam Integer quesAmount){
 
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
@@ -71,7 +72,7 @@ public class TestProcessingController {
 
             Test test = testReposytory.findById(testId).orElse(null);
             assert test != null;
-            testService.getShuffleTest(test);
+            testService.getShuffleTest(test, quesAmount);
 
             List<QuestionsForAttempt> questionsForAttemptList =
                     testService.convertTestForSaveBeforeTesting(test, attempttest.getId());

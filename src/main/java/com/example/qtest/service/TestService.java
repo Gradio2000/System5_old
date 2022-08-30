@@ -9,13 +9,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class TestService {
 
-    public void getShuffleTest(Test test) {
+    public void getShuffleTest(Test test, Integer quesAmount) {
         List<Question> questionList = new ArrayList<>(test.getQuestions());
         Collections.shuffle(questionList);
+        test.setQuestions(questionList.stream()
+                .limit(quesAmount)
+                .collect(Collectors.toSet()));
     }
 
     public List<QuestionsForAttempt> convertTestForSaveBeforeTesting(Test test, Integer attemptId){

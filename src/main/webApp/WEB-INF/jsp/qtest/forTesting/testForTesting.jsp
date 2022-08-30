@@ -29,22 +29,19 @@
     <table id="color_table" style="width: 100%; table-layout: auto">
         <tr>
             <th style="width: 20%" class="tblsht">Tест: </th>
-            <td class="tblsht">${test.testName}</td>
-        <tr>
-            <th style="width: 20%" class="tblsht">Время теста, мин.</th>
-            <td class="tblsht">${test.time}</td>
-        </tr>
+            <td class="tblsht">${testDto.testName}</td>
         <tr>
             <th style="width: 20%" class="tblsht">Критерий для сдачи, %</th>
-            <td class="tblsht">${test.criteria}</td>
+            <td class="tblsht">${testDto.criteria}</td>
         </tr>
         <tr>
             <th style="width: 20%" class="tblsht">Количество вопросов</th>
-            <td class="tblsht">${test.quesAmount}</td>
+            <td class="tblsht">${quesAmount}</td>
         </tr>
     </table>
     <form action="/processing/start" method="post">
-        <input type="hidden" name="testId" value="${test.testId}">
+        <input type="hidden" name="quesAmount" value="${quesAmount}">
+        <input type="hidden" name="testId" value="${testDto.testId}">
         <button type="submit" class="btn">Начать</button>
     </form>
 
