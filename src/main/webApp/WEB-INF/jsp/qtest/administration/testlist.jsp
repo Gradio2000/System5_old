@@ -29,14 +29,13 @@
     <table id="color_table" style="width: 100%; table-layout: auto" >
         <tbody>
             <tr>
-                <th colspan="5" class="tblsht">Список тестов: ${groupTestName}</th>
+                <th colspan="4" class="tblsht">Список тестов: ${groupTestName}</th>
             </tr>
             <tr>
                 <th>Удалить</th>
                 <th>Посмотреть вопросы</th>
                 <th>Название теста</th>
                 <th>Количество вопросов в тесте</th>
-                <th>Критерий, %</th>
             </tr>
             <c:forEach var="test" items="${testList}">
                 <c:if test="${test.deleted}">
@@ -75,10 +74,6 @@
                             <td>
                                 <a>${test.quesAmount}</a>
                             </td>
-                            <td>
-                                <input type="text" class="myinput" name="criteria" value="${test.criteria}" onchange="saveTest(${test.testId})" style="margin-top: 0; padding: 0"/>
-                            </td>
-
                         </tr>
                     </form>
                 </c:if>

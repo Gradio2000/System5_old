@@ -57,9 +57,12 @@
     </tr>
     <tr>
       <td colspan="3" style="text-align: left">
-        <label>Установите критерий в процентах
-          <input form="searchTest" type="text" class="myinput" name="criteria" style="margin-top: 0; padding: 0; width: auto"/>
-        </label>
+        <input form="searchTest" type="text" class="myinput" name="criteria" style="margin-top: 0; padding: 0" placeholder="Установите критерий в процентах"/>
+      </td>
+    </tr>
+    <tr id="testNameTr" style="display: none">
+      <td colspan="3" style="text-align: left">
+        <textarea form="searchTest" class="myinput" name="testName" style="margin-top: 0; padding: 0; font-family: inherit" placeholder="Введите название сводного теста"></textarea>
       </td>
     </tr>
   </table>
@@ -75,9 +78,11 @@
 
   function listener(){
     let total = 0;
+    let count = 0;
     for (let i = 0; i < elems.length; i++) {
       let elem = document.getElementById("ques" + elems[i].value);
       if (elems[i].checked){
+        count++;
         elem.disabled = false;
         let quesAmount = Number(elem.value);
         total = total + quesAmount;
@@ -85,6 +90,12 @@
       else{
         elem.disabled = true;
       }
+    }
+    if(count > 1){
+      $('#testNameTr').show();
+    }
+    else {
+      $('#testNameTr').hide();
     }
     document.getElementById("totalQuesAmount").innerText = total;
   }
