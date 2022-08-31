@@ -42,7 +42,7 @@
           <td class="tblsht">
             <a>${test.testName}</a>
           </td>
-          <td>
+          <td style="width: 20%;">
             <input id="ques${test.testId}" type="text"
                    class="myinput" style="margin-top: 0; padding: 0" value="${test.quesAmount}"
                    name="quesAmount" disabled onchange="check(${test.quesAmount}, this.value, this.id)"/>
@@ -53,6 +53,13 @@
     <tr>
       <td colspan="3" style="text-align: left">
         <a>Выбрано <span id="totalQuesAmount">0</span> вопросов</a>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3" style="text-align: left">
+        <label>Установите критерий в процентах
+          <input form="searchTest" type="text" class="myinput" name="criteria" style="margin-top: 0; padding: 0; width: auto"/>
+        </label>
       </td>
     </tr>
   </table>

@@ -130,6 +130,7 @@ alter table q_appoint_tests
 create unique index if not exists q_appoint_tests_id_appoint_test_uindex
     on q_appoint_tests (id_appoint_test);
 
+drop table if exists q_false_users_answers;
 create table q_false_users_answers
 (
     id          serial

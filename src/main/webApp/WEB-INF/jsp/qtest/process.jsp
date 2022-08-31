@@ -92,6 +92,7 @@
 <form id="finishForm" method="post" action="/processing/finishTest" onsubmit="finishTest(${questionList.size()}); return false;">
     <input type="hidden" name="attemptId" value="${attemptId}"/>
     <input type="hidden" name="appointTestId" value="${appointTestId}">
+    <input type="hidden" name="criteria" value="${criteria}">
 </form>
 
 </body>

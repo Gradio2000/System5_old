@@ -61,7 +61,7 @@ public class AdminTestController {
             return "redirect:/tests/list/" + test.getGroupId() + "?error=200";
         }
 
-        test.setCriteria(0.0);
+//        test.setCriteria(0.0);
         test.setDeleted(false);
         testReposytory.save(test);
         return "redirect:/tests/list/" + test.getGroupId();
@@ -107,7 +107,7 @@ public class AdminTestController {
         Test test = testReposytory.findById(testDto.getTestId()).orElse(null);
         assert test != null;
         test.setTestName(testDto.getTestName());
-        test.setCriteria(testDto.getCriteria());
+//        test.setCriteria(testDto.getCriteria());
         testReposytory.save(test);
         return HttpStatus.OK;
     }

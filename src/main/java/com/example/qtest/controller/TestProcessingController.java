@@ -51,7 +51,7 @@ public class TestProcessingController {
     public String startTestProcessing(@AuthenticationPrincipal AuthUser authUser,
                                       Model model, @RequestParam Integer testId,
                                       @RequestParam (required = false) Integer appointTestId,
-                                      @RequestParam Integer quesAmount){
+                                      @RequestParam Integer quesAmount, @RequestParam Integer criteria){
 
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
@@ -60,6 +60,7 @@ public class TestProcessingController {
             attempttest.setDateTime(new Date());
             attempttest.setUser(authUser.getUser());
             attempttest.setTestId(testId);
+            attempttest.setCriteria(criteria);
             attempttest.setTestResult("Не завершен");
             attemptestReporitory.save(attempttest);
 
@@ -82,6 +83,7 @@ public class TestProcessingController {
             model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
             model.addAttribute("questionList", questionsForAttemptList);
             model.addAttribute("appointTestId", appointTestId);
+            model.addAttribute("criteria", criteria);
             return "qtest/process";
     }
 
@@ -100,11 +102,12 @@ public class TestProcessingController {
     @PostMapping("/finishTest")
     public String finishTest(@RequestParam Integer attemptId,
                              @RequestParam (required = false) Integer appointTestId,
-                             @AuthenticationPrincipal AuthUser authUser){
+                             @AuthenticationPrincipal AuthUser authUser,
+                             @RequestParam Integer criteria){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
-        resultTestService.mainCheck(attemptId);
+        resultTestService.mainCheck(attemptId, criteria);
         if (appointTestId != null){
             appointTestRepository.setAppointTrue(appointTestId);
         }

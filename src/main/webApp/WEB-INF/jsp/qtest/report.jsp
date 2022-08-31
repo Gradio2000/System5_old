@@ -53,7 +53,7 @@
             </tr>
             <tr>
                 <td>Критерий прохождения теста</td>
-                <td>${attempt.test.criteria}</td>
+                <td>${attempt.criteria}</td>
             </tr>
             <tr>
                 <td>Результат, %</td>

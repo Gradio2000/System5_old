@@ -60,7 +60,7 @@ public class ProcessTestController {
     @PostMapping("/listForTesting/test")
     public String getTestForTesting(@AuthenticationPrincipal AuthUser authUser, Model model,
                                     @RequestParam (required = false) Integer[] testIds,
-                                    @RequestParam Integer quesAmount){
+                                    @RequestParam Integer quesAmount, @RequestParam Integer criteria){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
@@ -75,6 +75,7 @@ public class ProcessTestController {
             TestDto testDto = TestDto.getInstance(Objects.requireNonNull(testReposytory.findById(testIds[0]).orElse(null)));
             model.addAttribute("testDto", testDto);
             model.addAttribute("quesAmount", quesAmount);
+            model.addAttribute("criteria", criteria);
             return "qtest/forTesting/testForTesting";
         }
     }

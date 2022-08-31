@@ -14,6 +14,7 @@ create table kan_kanban
     taskenddate     date
 );
 
+drop table if exists kan_kanban_users;
 create table kan_kanban_users
 (
     id        serial

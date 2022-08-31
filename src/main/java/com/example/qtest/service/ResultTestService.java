@@ -1,7 +1,10 @@
 package com.example.qtest.service;
 
 import com.example.qtest.model.*;
-import com.example.qtest.repository.*;
+import com.example.qtest.repository.AttemptestReporitory;
+import com.example.qtest.repository.FalseUsersAnswerRepository;
+import com.example.qtest.repository.QuestionRepository;
+import com.example.qtest.repository.ResultTestRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -79,7 +82,7 @@ public class ResultTestService {
     }
 
     //основной метод проверки ответов пользователя и вывода результата теста после его прохождения
-    public void mainCheck(Integer attemptId) {
+    public void mainCheck(Integer attemptId, Integer criteria) {
 
         List<ResultTest> resultTestList = getResultTest(attemptId);
         Map<Integer, List<Integer>> mapOfUserAnswers = getMapOfAnswers(resultTestList);
@@ -90,7 +93,7 @@ public class ResultTestService {
 
         Attempttest attemptTest = attemptestReporitory.findById(attemptId).orElse(null);
         assert attemptTest != null;
-        String testResult = getTestResult(result, attemptTest.getTest().getCriteria()) ? "Удовлетворительно" : "Неудовлетворительно";
+        String testResult = getTestResult(result, criteria) ? "Удовлетворительно" : "Неудовлетворительно";
 
         //Ок. А теперь кое-что запишем в бд, чтоб админ мог использовать
         attemptTest.setAmountQues(quesList.size());
@@ -124,7 +127,7 @@ public class ResultTestService {
         return bigDecimal2.compareTo(BigDecimal.ZERO) == 0 ? 0 : bigDecimal1.divide(bigDecimal2, 2, RoundingMode.DOWN).multiply(new BigDecimal("100")).doubleValue();
     }
 
-    private boolean getTestResult(Double result, Double criteria) {
+    private boolean getTestResult(Double result, Integer criteria) {
         return result >= criteria;
     }
 

@@ -45,6 +45,9 @@ public class Attempttest {
     @Column(name = "test_id")
     private Integer testId;
 
+    @Column(name = "criteria")
+    private Integer criteria;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "test_id", nullable = false, insertable = false, updatable = false)
     private Test test;

@@ -32,7 +32,7 @@
             <td class="tblsht">${testDto.testName}</td>
         <tr>
             <th style="width: 20%" class="tblsht">Критерий для сдачи, %</th>
-            <td class="tblsht">${testDto.criteria}</td>
+            <td class="tblsht">${criteria}</td>
         </tr>
         <tr>
             <th style="width: 20%" class="tblsht">Количество вопросов</th>
@@ -40,6 +40,7 @@
         </tr>
     </table>
     <form action="/processing/start" method="post">
+        <input type="hidden" name="criteria" value="${criteria}">
         <input type="hidden" name="quesAmount" value="${quesAmount}">
         <input type="hidden" name="testId" value="${testDto.testId}">
         <button type="submit" class="btn">Начать</button>
