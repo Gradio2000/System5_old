@@ -48,10 +48,14 @@ public class TestProcessingController {
     }
 
     @PostMapping("/start")
-    public String startTestProcessing(@AuthenticationPrincipal AuthUser authUser,
-                                      Model model, @RequestParam Integer testId,
+    public String startTestProcessing(@AuthenticationPrincipal AuthUser authUser, Model model,
+                                      @RequestParam (required = false) Integer testId,
                                       @RequestParam (required = false) Integer appointTestId,
-                                      @RequestParam Integer quesAmount, @RequestParam Integer criteria){
+                                      @RequestParam Integer quesAmount,
+                                      @RequestParam Integer criteria,
+                                      @RequestParam (required = false) List<String> testIds,
+                                      @RequestParam Boolean consolidTest,
+                                      @RequestParam (required = false) String testName){
 
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
@@ -59,10 +63,27 @@ public class TestProcessingController {
             Attempttest attempttest = new Attempttest();
             attempttest.setDateTime(new Date());
             attempttest.setUser(authUser.getUser());
-            attempttest.setTestId(testId);
             attempttest.setCriteria(criteria);
             attempttest.setTestResult("Не завершен");
-            attemptestReporitory.save(attempttest);
+
+            if (consolidTest){
+                attempttest.setConsolidTestName(testName);
+            }
+            else {
+                attempttest.setTestId(testId);
+                Test test = testReposytory.findById(testId).orElse(null);
+                assert test != null;
+                testService.getShuffleTest(test, quesAmount);
+
+                attemptestReporitory.save(attempttest);
+
+                List<QuestionsForAttempt> questionsForAttemptList =
+                        testService.convertTestForSaveBeforeTesting(test, attempttest.getId());
+                questionForAttemptRepository.saveAll(questionsForAttemptList);
+                model.addAttribute("questionList", questionsForAttemptList);
+            }
+
+
 
             if (appointTestId != null){
                 AppointTest appointTest = appointTestRepository.findById(appointTestId).orElse(null);
@@ -71,20 +92,12 @@ public class TestProcessingController {
                 appointTestRepository.save(appointTest);
             }
 
-            Test test = testReposytory.findById(testId).orElse(null);
-            assert test != null;
-            testService.getShuffleTest(test, quesAmount);
 
-            List<QuestionsForAttempt> questionsForAttemptList =
-                    testService.convertTestForSaveBeforeTesting(test, attempttest.getId());
-            questionForAttemptRepository.saveAll(questionsForAttemptList);
-
-            model.addAttribute("attemptId", attempttest.getId());
-            model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-            model.addAttribute("questionList", questionsForAttemptList);
-            model.addAttribute("appointTestId", appointTestId);
-            model.addAttribute("criteria", criteria);
-            return "qtest/process";
+        model.addAttribute("attemptId", attempttest.getId());
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("appointTestId", appointTestId);
+        model.addAttribute("criteria", criteria);
+        return "qtest/process";
     }
 
     @PostMapping("/saveUserAnswer")

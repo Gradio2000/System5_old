@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -60,24 +61,27 @@ public class ProcessTestController {
     @PostMapping("/listForTesting/test")
     public String getTestForTesting(@AuthenticationPrincipal AuthUser authUser, Model model,
                                     @RequestParam (required = false) Integer[] testIds,
-                                    @RequestParam Integer quesAmount, @RequestParam Integer criteria){
+                                    @RequestParam Integer quesAmount, @RequestParam Integer criteria,
+                                    @RequestParam (required = false) String testName){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
         if (testIds.length > 1){
-            List<TestDto> testDtoList = DtoUtils.convertToListDto(testReposytory.findByAllByIds(testIds));
-            model.addAttribute("testDtoList", testDtoList);
-            return "qtest/forTesting/prepareConsolidTest";
-
+            model.addAttribute("testIds", Arrays.stream(testIds).collect(Collectors.toList()));
+            model.addAttribute("consolidTest", true);
+            model.addAttribute("testName", testName);
         }
         else {
             TestDto testDto = TestDto.getInstance(Objects.requireNonNull(testReposytory.findById(testIds[0]).orElse(null)));
             model.addAttribute("testDto", testDto);
-            model.addAttribute("quesAmount", quesAmount);
-            model.addAttribute("criteria", criteria);
-            return "qtest/forTesting/testForTesting";
+            model.addAttribute("consolidTest", false);
         }
+
+        model.addAttribute("quesAmount", quesAmount);
+        model.addAttribute("criteria", criteria);
+
+        return "qtest/forTesting/testForTesting";
     }
 
 

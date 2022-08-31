@@ -48,6 +48,9 @@ public class Attempttest {
     @Column(name = "criteria")
     private Integer criteria;
 
+    @Column(name = "consolid_test_name")
+    private String consolidTestName;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "test_id", nullable = false, insertable = false, updatable = false)
     private Test test;

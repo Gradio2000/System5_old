@@ -29,7 +29,13 @@
     <table id="color_table" style="width: 100%; table-layout: auto">
         <tr>
             <th style="width: 20%" class="tblsht">Tест: </th>
-            <td class="tblsht">${testDto.testName}</td>
+            <c:if test="${consolidTest == true}">
+                <td class="tblsht">${testName}</td>
+            </c:if>
+            <c:if test="${consolidTest == false}">
+                <td class="tblsht">${testDto.testName}</td>
+            </c:if>
+
         <tr>
             <th style="width: 20%" class="tblsht">Критерий для сдачи, %</th>
             <td class="tblsht">${criteria}</td>
@@ -43,6 +49,11 @@
         <input type="hidden" name="criteria" value="${criteria}">
         <input type="hidden" name="quesAmount" value="${quesAmount}">
         <input type="hidden" name="testId" value="${testDto.testId}">
+        <input type="hidden" name="consolidTest" value="${consolidTest}">
+        <input type="hidden" name="testName" value="${testName}">
+        <c:forEach var="testId" items="${testIds}">
+            <input type="hidden" name="testIds" value="${testId}">
+        </c:forEach>
         <button type="submit" class="btn">Начать</button>
     </form>
 
