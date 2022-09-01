@@ -18,4 +18,8 @@ public interface AttemptestReporitory extends JpaRepository<Attempttest, Integer
     @Query(nativeQuery = true, value = "SELECT test_id FROM q_attempttests")
     Set<Integer> findAllTestId();
 
+    @Query(nativeQuery = true, value = "SELECT attempt_id, criteria, consolid_test FROM q_attempttests WHERE test_id = :id")
+    Attempttest getAttempttestById(Integer id);
+
+
 }

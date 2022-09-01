@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,7 +54,7 @@ public class TestProcessingController {
                                       @RequestParam (required = false) Integer appointTestId,
                                       @RequestParam Integer quesAmount,
                                       @RequestParam Integer criteria,
-                                      @RequestParam (required = false) List<String> testIds,
+                                      @RequestParam (required = false) List<Integer> testIds,
                                       @RequestParam Boolean consolidTest,
                                       @RequestParam (required = false) String testName){
 
@@ -66,25 +67,31 @@ public class TestProcessingController {
             attempttest.setCriteria(criteria);
             attempttest.setTestResult("Не завершен");
 
+            Set<Question> questionSet = new HashSet<>();
+
             if (consolidTest){
+                attempttest.setConsolidTest(true);
                 attempttest.setConsolidTestName(testName);
+                //todo
+                List<Test> testList = testReposytory.findByAllByIds(testIds);
+                for (Test test: testList){
+                    questionSet.addAll(test.getQuestions());
+                }
+                questionSet = testService.getShuffleTest(questionSet, quesAmount);
             }
             else {
-                attempttest.setTestId(testId);
                 Test test = testReposytory.findById(testId).orElse(null);
                 assert test != null;
-                testService.getShuffleTest(test, quesAmount);
-
-                attemptestReporitory.save(attempttest);
-
-                List<QuestionsForAttempt> questionsForAttemptList =
-                        testService.convertTestForSaveBeforeTesting(test, attempttest.getId());
-                questionForAttemptRepository.saveAll(questionsForAttemptList);
-                model.addAttribute("questionList", questionsForAttemptList);
+                questionSet  = testService.getShuffleTest(test.getQuestions(), quesAmount);
             }
 
+            attemptestReporitory.save(attempttest);
 
+            List<QuestionsForAttempt> questionsForAttemptList =
+                    testService.convertTestForSaveBeforeTesting(questionSet, attempttest.getId());
+            questionForAttemptRepository.saveAll(questionsForAttemptList);
 
+            //блок для зачета
             if (appointTestId != null){
                 AppointTest appointTest = appointTestRepository.findById(appointTestId).orElse(null);
                 assert appointTest != null;
@@ -92,7 +99,7 @@ public class TestProcessingController {
                 appointTestRepository.save(appointTest);
             }
 
-
+        model.addAttribute("questionList", questionsForAttemptList);
         model.addAttribute("attemptId", attempttest.getId());
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("appointTestId", appointTestId);

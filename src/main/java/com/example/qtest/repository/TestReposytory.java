@@ -31,5 +31,5 @@ public interface TestReposytory extends JpaRepository<Test, Integer> {
 
     @Query(nativeQuery = true,
     value = "SELECT * FROM q_tests WHERE test_id IN :testIds")
-    List<Test> findByAllByIds(Integer[] testIds);
+    List<Test> findByAllByIds(List<Integer> testIds);
 }
