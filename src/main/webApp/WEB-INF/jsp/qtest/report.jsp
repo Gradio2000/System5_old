@@ -37,7 +37,7 @@
             </tr>
             <tr>
                 <td>Тест</td>
-                <td>${attempt.test.testName}</td>
+                <td>${attempt.testName}</td>
             </tr>
             <tr>
                 <td>Количество заданных вопросов</td>

@@ -91,7 +91,7 @@ public class ResultTestService {
         int trueAnswers = quesList.size() - falseAnswerSet.size();
         double result = getResult(trueAnswers, quesList.size());
 
-        Attempttest attemptTest = attemptestReporitory.getAttempttestById(attemptId);
+        Attempttest attemptTest = attemptestReporitory.findById(attemptId).orElse(null);
         assert attemptTest != null;
         String testResult = getTestResult(result, criteria) ? "Удовлетворительно" : "Неудовлетворительно";
 

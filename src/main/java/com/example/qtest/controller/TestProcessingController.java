@@ -71,8 +71,7 @@ public class TestProcessingController {
 
             if (consolidTest){
                 attempttest.setConsolidTest(true);
-                attempttest.setConsolidTestName(testName);
-                //todo
+                attempttest.setTestName(testName);
                 List<Test> testList = testReposytory.findByAllByIds(testIds);
                 for (Test test: testList){
                     questionSet.addAll(test.getQuestions());
@@ -80,8 +79,10 @@ public class TestProcessingController {
                 questionSet = testService.getShuffleTest(questionSet, quesAmount);
             }
             else {
+                attempttest.setConsolidTest(false);
                 Test test = testReposytory.findById(testId).orElse(null);
                 assert test != null;
+                attempttest.setTestName(test.getTestName());
                 questionSet  = testService.getShuffleTest(test.getQuestions(), quesAmount);
             }
 

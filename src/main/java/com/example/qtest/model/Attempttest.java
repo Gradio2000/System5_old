@@ -24,9 +24,6 @@ public class Attempttest {
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
     private User user;
 
-//    @Column(name = "time_attempt")
-//    private Integer timeAttempt;
-
     @Column(name = "amount_ques")
     private Integer amountQues;
 
@@ -42,20 +39,13 @@ public class Attempttest {
     @Column(name = "testresult")
     private String testResult;
 
-//    @Column(name = "test_id")
-//    private Integer testId;
-
     @Column(name = "criteria")
     private Integer criteria;
 
-    @Column(name = "consolid_test_name")
-    private String consolidTestName;
+    @Column(name = "test_name")
+    private String testName;
 
     @Column(name = "consolid_test")
     private Boolean consolidTest;
-
-//    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-//    @JoinColumn(name = "test_id", nullable = false, insertable = false, updatable = false)
-//    private Test test;
 
 }

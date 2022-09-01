@@ -60,7 +60,7 @@
                 <td>
                     <fmt:formatDate value="${attempt.dateTime}" pattern="dd.MM.yyyy  HH:mm"/>
                 </td>
-                <td>${attempt.test.testName}</td>
+                <td>${attempt.testName}</td>
                 <td>${attempt.testResult}</td>
                 <c:if test="${attempt.testResult != 'Не завершен'}">
                     <td><a href="/qtest/report/${attempt.id}">Протокол</a></td>
