@@ -17,9 +17,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -58,31 +60,31 @@ public class ProcessTestController {
         return "qtest/forTesting/allTestsForTesting";
     }
 
-    @PostMapping("/listForTesting/test")
-    public String getTestForTesting(@AuthenticationPrincipal AuthUser authUser, Model model,
-                                    @RequestParam (required = false) Integer[] testIds,
-                                    @RequestParam Integer quesAmount, @RequestParam Integer criteria,
-                                    @RequestParam (required = false) String testName){
-        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
-                authUser.getUser().getName());
-        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-
-        if (testIds.length > 1){
-            model.addAttribute("testIds", Arrays.stream(testIds).collect(Collectors.toList()));
-            model.addAttribute("consolidTest", true);
-            model.addAttribute("testName", testName);
-        }
-        else {
-            TestDto testDto = TestDto.getInstance(Objects.requireNonNull(testReposytory.findById(testIds[0]).orElse(null)));
-            model.addAttribute("testDto", testDto);
-            model.addAttribute("consolidTest", false);
-        }
-
-        model.addAttribute("quesAmount", quesAmount);
-        model.addAttribute("criteria", criteria);
-
-        return "qtest/forTesting/testForTesting";
-    }
+//    @PostMapping("/listForTesting/test")
+//    public String getTestForTesting(@AuthenticationPrincipal AuthUser authUser, Model model,
+//                                    @RequestParam (required = false) Integer[] testIds,
+//                                    @RequestParam Integer quesAmount, @RequestParam Integer criteria,
+//                                    @RequestParam (required = false) String testName){
+//        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+//                authUser.getUser().getName());
+//        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+//
+//        if (testIds.length > 1){
+//            model.addAttribute("testIds", Arrays.stream(testIds).collect(Collectors.toList()));
+//            model.addAttribute("consolidTest", true);
+//            model.addAttribute("testName", testName);
+//        }
+//        else {
+//            TestDto testDto = TestDto.getInstance(Objects.requireNonNull(testReposytory.findById(testIds[0]).orElse(null)));
+//            model.addAttribute("testDto", testDto);
+//            model.addAttribute("consolidTest", false);
+//        }
+//
+//        model.addAttribute("quesAmount", quesAmount);
+//        model.addAttribute("criteria", criteria);
+//
+//        return "qtest/forTesting/testForTesting";
+//    }
 
 
     @GetMapping("/mytests")

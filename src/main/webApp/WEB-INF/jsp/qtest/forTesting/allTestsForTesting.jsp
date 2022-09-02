@@ -33,7 +33,7 @@
       <th class="tblsht">Tесты группы: ${groupTest.name}</th>
       <th>Задать количество вопросов</th>
     </tr>
-    <form id="searchTest" method="POST" action="test">
+    <form id="searchTest" method="POST" action="/processing/start">
       <c:forEach var="test" items="${testList}">
         <tr>
           <td style="width: 10%;">
@@ -45,7 +45,7 @@
           <td style="width: 20%;">
             <input id="ques${test.testId}" type="text"
                    class="myinput" style="margin-top: 0; padding: 0" value="${test.quesAmount}"
-                   name="quesAmount" disabled onchange="check(${test.quesAmount}, this.value, this.id)"/>
+                   name="quesAmounts" disabled onchange="check(${test.quesAmount}, this.value, this.id)"/>
           </td>
         </tr>
       </c:forEach>

@@ -15,10 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -50,16 +47,21 @@ public class TestProcessingController {
 
     @PostMapping("/start")
     public String startTestProcessing(@AuthenticationPrincipal AuthUser authUser, Model model,
-                                      @RequestParam (required = false) Integer testId,
+                                      @RequestParam Integer[] testIds,
+                                      @RequestParam Integer[] quesAmounts,
                                       @RequestParam (required = false) Integer appointTestId,
-                                      @RequestParam Integer quesAmount,
                                       @RequestParam Integer criteria,
-                                      @RequestParam (required = false) List<Integer> testIds,
-                                      @RequestParam Boolean consolidTest,
                                       @RequestParam (required = false) String testName){
 
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
+
+        Map<Integer, Integer> idsQuesAmountMap = new HashMap<>();
+        int sumQuesAmount = 0;
+        for (int i = 0; i < testIds.length; i++) {
+            idsQuesAmountMap.put(testIds[i], quesAmounts[i]);
+            sumQuesAmount =+ quesAmounts[i];
+        }
 
             Attempttest attempttest = new Attempttest();
             attempttest.setDateTime(new Date());
@@ -67,29 +69,33 @@ public class TestProcessingController {
             attempttest.setCriteria(criteria);
             attempttest.setTestResult("Не завершен");
 
-            Set<Question> questionSet = new HashSet<>();
+            Set<Question> allQuestionsForTesting = new HashSet<>();
 
-            if (consolidTest){
+            if (idsQuesAmountMap.size() > 1){
                 attempttest.setConsolidTest(true);
                 attempttest.setTestName(testName);
-                List<Test> testList = testReposytory.findByAllByIds(testIds);
+                List<Test> testList = testReposytory.findByAllByIds(Arrays.asList(testIds));
                 for (Test test: testList){
-                    questionSet.addAll(test.getQuestions());
+                    int quesAmount = idsQuesAmountMap.get(test.getTestId());
+                    Set<Question> questionSet = new HashSet<>(test.getQuestions());
+                    questionSet = testService.getShuffleTest(questionSet, quesAmount);
+                    allQuestionsForTesting.addAll(questionSet);
                 }
-                questionSet = testService.getShuffleTest(questionSet, quesAmount);
+                allQuestionsForTesting = testService.getShuffleTest(allQuestionsForTesting, allQuestionsForTesting.size());
             }
             else {
                 attempttest.setConsolidTest(false);
-                Test test = testReposytory.findById(testId).orElse(null);
+                Test test = testReposytory.findById(testIds[0]).orElse(null);
                 assert test != null;
                 attempttest.setTestName(test.getTestName());
-                questionSet  = testService.getShuffleTest(test.getQuestions(), quesAmount);
+                allQuestionsForTesting  = testService.getShuffleTest(test.getQuestions(), quesAmounts[0]);
             }
 
             attemptestReporitory.save(attempttest);
 
             List<QuestionsForAttempt> questionsForAttemptList =
-                    testService.convertTestForSaveBeforeTesting(questionSet, attempttest.getId());
+                    testService.convertTestForSaveBeforeTesting(allQuestionsForTesting, attempttest.getId());
+
             questionForAttemptRepository.saveAll(questionsForAttemptList);
 
             //блок для зачета
