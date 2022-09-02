@@ -57,7 +57,7 @@
     </tr>
     <tr>
       <td colspan="3" style="text-align: left">
-        <input form="searchTest" type="text" class="myinput" name="criteria" style="margin-top: 0; padding: 0" placeholder="Установите критерий в процентах"/>
+        <input form="searchTest" type="number" class="myinput" name="criteria" style="margin-top: 0; padding: 0" placeholder="Установите критерий в процентах"/>
       </td>
     </tr>
     <tr id="testNameTr" style="display: none">
@@ -66,7 +66,7 @@
       </td>
     </tr>
   </table>
-  <button form="searchTest" class="btn" type="submit">ОК</button>
+  <button form="searchTest" class="btn" type="submit">Начать тест</button>
 </div>
 </body>
 <script>

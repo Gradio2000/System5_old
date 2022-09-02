@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ResultTestRepository extends JpaRepository<ResultTest, Integer> {
-    List<ResultTest> findAllByAttemptId(Integer attemptId);
+    List<ResultTest> findAllByAttemptIdOrderById(Integer attemptId);
 }

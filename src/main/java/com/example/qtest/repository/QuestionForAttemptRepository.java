@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface QuestionForAttemptRepository extends JpaRepository<QuestionsForAttempt, Integer> {
-    List<QuestionsForAttempt> findAllByAttemptId(Integer attemptId);
+    List<QuestionsForAttempt> findAllByAttemptIdOrderById(Integer attemptId);
 }

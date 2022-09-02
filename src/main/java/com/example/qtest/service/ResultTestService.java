@@ -118,7 +118,7 @@ public class ResultTestService {
     }
 
     public List<ResultTest> getResultTest(Integer attemptId) {
-        return resultTestRepository.findAllByAttemptId(attemptId);
+        return resultTestRepository.findAllByAttemptIdOrderById(attemptId);
     }
 
     public Double getResult(int trueCountAnswers, int totalCountAnswers) {

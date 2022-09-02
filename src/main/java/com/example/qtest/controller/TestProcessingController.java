@@ -148,19 +148,22 @@ public class TestProcessingController {
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
-        List<QuestionsForAttempt> questionsForAttemptList = questionForAttemptRepository.findAllByAttemptId(attemptId);
-        Set<Integer> resultTestQuestionsIdsList = resultTestRepository.findAllByAttemptId(attemptId).stream()
+        List<QuestionsForAttempt> questionsForAttemptList = questionForAttemptRepository.findAllByAttemptIdOrderById(attemptId);
+        Set<Integer> resultTestQuestionsIdsList = resultTestRepository.findAllByAttemptIdOrderById(attemptId).stream()
                 .map(ResultTest::getQuestionId)
                 .collect(Collectors.toSet());
-        Set<Integer> resultTestAnswerIdsList = resultTestRepository.findAllByAttemptId(attemptId).stream()
+        Set<Integer> resultTestAnswerIdsList = resultTestRepository.findAllByAttemptIdOrderById(attemptId).stream()
                 .map(ResultTest::getAnswerId)
                 .collect(Collectors.toSet());
+
+        int criteria = attemptestReporitory.findById(attemptId).orElse(null).getCriteria();
 
         model.addAttribute("attemptId", attemptId);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("questionList", questionsForAttemptList);
         model.addAttribute("resultTestQuestionsIdsList", resultTestQuestionsIdsList);
         model.addAttribute("resultTestAnswerIdsList", resultTestAnswerIdsList);
+        model.addAttribute("criteria", criteria);
         return "qtest/process";
     }
 }

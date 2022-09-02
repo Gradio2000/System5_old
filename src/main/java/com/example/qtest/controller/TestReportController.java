@@ -50,7 +50,7 @@ public class TestReportController {
         model.addAttribute("user", authUser.getUser());
         model.addAttribute("attempt", attemptestReporitory.findById(attemptId).orElse(null));
 
-        List<ResultTest> resultTestList = resultTestRepository.findAllByAttemptId(attemptId);
+        List<ResultTest> resultTestList = resultTestRepository.findAllByAttemptIdOrderById(attemptId);
         Map<Integer, List<Integer>> mapOfUserAnswers = resultTestService.getMapOfAnswers(resultTestList);
         List<Integer> listOfUsersAnswers = resultTestService.getListOfUsersAnswers(mapOfUserAnswers);
         List<Question> quesList = questionRepository.findQuestionsByAttemptId(attemptId);
