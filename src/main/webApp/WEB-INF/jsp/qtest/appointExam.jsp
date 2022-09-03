@@ -37,23 +37,26 @@
             <th style="width: 10%">Назначить</th>
             <th style="width: 10%">Количество вопросов</th>
         </tr>
-        <c:forEach var="groupTest" items="${groupTestDtoList}">
-            <tr>
-                <th colspan="3" style="text-align: left">группа: ${groupTest.name}</th>
-            </tr>
-            <c:forEach var="test" items="${groupTest.testDtoList}">
+        <form id="examAppointForm">
+            <c:forEach var="groupTest" items="${groupTestDtoList}">
                 <tr>
-                    <td style="text-align: left">${test.testName}</td>
-                    <td><input type="checkbox" class="appointCheck" id="${test.testId}"
-                               value="${test.quesAmount}" disabled onchange="selectTest(${test.testId})"/>
-                    </td>
-                    <td><input type="number" id="checkQuesAmount${test.testId}" class="myinput" value="${test.quesAmount}"
-                               onchange="check(${test.quesAmount}, this.value, ${test.testId})"
-                               style="padding: 0; margin: 0" disabled/>
-                    </td>
+                    <th colspan="3" style="text-align: left">группа: ${groupTest.name}</th>
                 </tr>
+                    <c:forEach var="test" items="${groupTest.testDtoList}">
+                        <tr>
+                            <td style="text-align: left">${test.testName}</td>
+                            <td><input type="checkbox" class="appointCheck" id="${test.testId}"
+                                       name="testIds"
+                                       value="${test.testId}" disabled onchange="selectTest(${test.testId})"/>
+                            </td>
+                            <td><input type="number" id="checkQuesAmount${test.testId}" class="myinput" value="${test.quesAmount}"
+                                       name="quesAmounts"
+                                       onchange="check(${test.quesAmount}, this.value, ${test.testId})" style="padding: 0; margin: 0" disabled/>
+                            </td>
+                        </tr>
+                    </c:forEach>
             </c:forEach>
-        </c:forEach>
+        </form>
         </tbody>
     </table>
     <div id="totQuesAm" class="hidEl" style="margin: 10px; font-size: small; font-weight: bold; font-style: italic; display: none">
@@ -61,18 +64,18 @@
     </div>
     <div id="testNameTr"  style="margin: 10px; margin-top: 30px; font-size: small; display: none">
         <label>Введите наименование сводного теста</label>
-        <input class="myinput" form="examAppointForm" type="text" name="base" style="height: 0; margin-top: 0"/>
+        <input class="myinput" form="examAppointForm" type="text" name="consolidTestName" style="height: 0; margin-top: 0"/>
     </div>
     <div id="baseDoc" class="hidEl" style="margin: 10px; font-size: small; display: none">
         <label>Введите номер и дату распорядительного документа</label>
-        <input class="myinput" form="examAppointForm" type="text" name="base" style="height: 0; margin-top: 0"/>
+        <input class="myinput" form="examAppointForm" type="text" name="baseDocName" style="height: 0; margin-top: 0"/>
     </div>
     <div id="eko" class="hidEl" style="font-size: small; display: none">
         <input form="examAppointForm" type="checkbox" name="eko" style="margin-left: 10px"/>
         <a> проверка знания порядка ведения ЭКО</a>
     </div>
     <div style="margin: 10px">
-        <button class="btn">Назначить</button>
+        <button class="btn" onclick="appointExam()">Назначить</button>
     </div>
     <div id="divTable" style="margin-top: 20px; display: none">
         <table id="color_table2" style="width: 100%">
@@ -85,7 +88,6 @@
     </div>
 </div>
 
-<form id="examAppointForm"></form>
 
 </body>
 </html>
@@ -141,13 +143,13 @@
         let form =  $('#examAppointForm');
         $('.inpClass').remove();
 
-        let inptestId = document.createElement("input");
-        inptestId.type = "hidden";
-        inptestId.className = "inpClass";
-        inptestId.form = "examAppointForm";
-        inptestId.name = "testId";
-        inptestId.value = testId;
-        form.append(inptestId);
+        // let inptestId = document.createElement("input");
+        // inptestId.type = "hidden";
+        // inptestId.className = "inpClass";
+        // inptestId.form = "examAppointForm";
+        // inptestId.name = "testId";
+        // inptestId.value = testId;
+        // form.append(inptestId);
 
 
         let inpUserId = document.createElement("input");
@@ -162,12 +164,14 @@
 
     function appointExam() {
         const msg = $('#examAppointForm').serialize();
+        usId = msg.userId;
+        console.log(msg);
         $.ajax({
             type: 'POST',
             url: '/exam/appointExam',
             data: msg,
             success: function (data) {
-                // запустится при успешном выполнении запроса и в data будет ответ скрипта
+                getUsersAppoints(usId);
             },
             error: function () {
                 alert('Ошибка!');
@@ -182,6 +186,13 @@
             url: '/exam/getUsersAppoints',
             data: elem,
             success: function (data) {
+
+                let elem = document.getElementsByClassName("appointCheck");
+                for (let i = 0; i < elem.length; i++) {
+                    elem[i].removeAttribute("disabled");
+                    elem[i].checked = false;
+                }
+
                 let divTable = $('#divTable');
                 divTable.hide();
                 $('.trTable').remove();
@@ -220,10 +231,10 @@
         });
     }
 
-    function deleteAppoint(userId, testId){
+    function deleteAppoint(testId, userId){
         $.ajax({
            type: 'POST',
-           data: {userId: userId, testId: testId},
+           data: {testId: testId, userId: userId},
            url: '/exam/deleteAppoint',
            success: function (data){
                getUsersAppoints(userId);

@@ -89,20 +89,23 @@ public class ExamController {
 
     @PostMapping("/appointExam")
     @ResponseBody
-    public HttpStatus appointExam(@RequestParam Integer testId, @RequestParam Integer userId,
-                                  @RequestParam (required = false) String base, @RequestParam (required = false) Boolean eko,
+    public HttpStatus appointExam(@RequestParam Integer[] testIds,
+                                  @RequestParam Integer[] quesAmounts,
+                                  @RequestParam Integer userId,
+                                  @RequestParam (required = false) String baseDocName,
+                                  @RequestParam (required = false) String consolidTestName,
+                                  @RequestParam (required = false) Boolean eko,
                                   @AuthenticationPrincipal AuthUser authUser){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
         User user = userRepository.findById(userId).orElse(null);
-        Test test = testReposytory.findById(testId).orElse(null);
-        AppointTest appointTest = appointTestRepository.findByUserAndTestAndFinished(user, test, false);
-        if (appointTest == null){
-            appointTest = new AppointTest(user, test, false, base, eko);
+        if (testIds.length == 1){
+            Test test = testReposytory.findById(testIds[0]).orElse(null);
+            AppointTest appointTest = new AppointTest(user, test, false, baseDocName, eko);
             appointTestRepository.save(appointTest);
         }
-        else {
-            appointTestRepository.deleteByUserAndTest(userId, testId);
+        else if (testIds.length > 1){
+
         }
         return HttpStatus.OK;
     }
