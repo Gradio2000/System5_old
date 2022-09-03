@@ -21,7 +21,7 @@
 <div class="main">
     <div style="margin-top: 90px">
         <form id="selectUser">
-            <select class="select-css" id="userIdSelect" name="userId" onchange="getUsersAppoints()"
+            <select class="select-css" id="userIdSelect" name="userId" onchange="getUsersAppoints(this.value)"
                     style="width: max-content;">
                 <option value="" disabled selected>Выберите работника</option>
                 <c:forEach var="user" items="${userDtoList}">
@@ -106,7 +106,6 @@
         printTotalAmount();
     }
 
-
     function printTotalAmount(){
         let total = 0;
         let count = 0;
@@ -176,7 +175,7 @@
         });
     }
 
-    function getUsersAppoints(){
+    function getUsersAppoints(userId){
         let elem = $("#selectUser").serialize();
         $.ajax({
             type: 'GET',
@@ -203,6 +202,7 @@
                     btn.className = "btncancel";
                     btn.type = "button";
                     btn.style = "margin-top: 0; padding: 3px";
+                    btn.setAttribute("onclick", "deleteAppoint(" + data[i].testId + ", " + userId + ")");
                     btn.innerText = "Удалить";
 
                     td4.append(btn);
@@ -216,6 +216,20 @@
             },
             error: function () {
                 alert('Ошибка!');
+            }
+        });
+    }
+
+    function deleteAppoint(userId, testId){
+        $.ajax({
+           type: 'POST',
+           data: {userId: userId, testId: testId},
+           url: '/exam/deleteAppoint',
+           success: function (data){
+               getUsersAppoints(userId);
+           },
+            error: function (){
+               alert("Ошибка удаления записи! \n function deleteAppoint(userId, testId)");
             }
         });
     }

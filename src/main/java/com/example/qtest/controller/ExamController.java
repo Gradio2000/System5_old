@@ -141,4 +141,12 @@ public class ExamController {
         model.addAttribute("sort", sort);
         return "qtest/journalBase";
     }
+
+    @PostMapping("/deleteAppoint")
+    @ResponseBody
+    public HttpStatus deleteAppoint(@RequestParam Integer userId,
+                                    @RequestParam Integer testId){
+        appointTestRepository.deleteByUserAndTest(userId, testId);
+        return HttpStatus.OK;
+    }
 }
