@@ -2,6 +2,7 @@ package com.example.qtest.controller;
 
 import com.example.qtest.dto.AppointTestDto;
 import com.example.qtest.dto.GroupTestDto;
+import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.AppointTest;
 import com.example.qtest.model.Test;
 import com.example.qtest.repository.AppointTestRepository;
@@ -72,15 +73,18 @@ public class ExamController {
 
     @GetMapping("/getUsersAppoints")
     @ResponseBody
-    public List<Integer> getUsersAppoints(@RequestParam Integer userId, @AuthenticationPrincipal AuthUser authUser){
+    public List<TestDto> getUsersAppoints(@RequestParam Integer userId, @AuthenticationPrincipal AuthUser authUser){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
-        return appointTestRepository
+
+        List<Test> testList = appointTestRepository
                 .findAllByUser(userRepository.findById(userId).orElse(null))
                 .stream()
                 .filter(appointTest -> !appointTest.getFinished())
-                .map(appointTest -> appointTest.getTest().getTestId())
+                .map(AppointTest::getTest)
                 .collect(Collectors.toList());
+
+        return DtoUtils.convertToListDto(testList);
     }
 
     @PostMapping("/appointExam")

@@ -19,17 +19,17 @@
 </head>
 <body>
 <div class="main">
-
-    <form id="selectUser">
-        <select class="select-css" id="userIdSelect" name="userId" onchange="getUsersAppoints()"
-                style="width: max-content;">
-            <option value="" disabled selected>Выберите работника</option>
-            <c:forEach var="user" items="${userDtoList}">
-                <option value="${user.userId}">${user.name}</option>
-            </c:forEach>
-        </select>
-    </form>
-
+    <div style="margin-top: 90px">
+        <form id="selectUser">
+            <select class="select-css" id="userIdSelect" name="userId" onchange="getUsersAppoints()"
+                    style="width: max-content;">
+                <option value="" disabled selected>Выберите работника</option>
+                <c:forEach var="user" items="${userDtoList}">
+                    <option value="${user.userId}">${user.name}</option>
+                </c:forEach>
+            </select>
+        </form>
+    </div>
     <table id="color_table" style="width: 100%">
         <tbody>
         <tr>
@@ -74,11 +74,19 @@
     <div style="margin: 10px">
         <button class="btn">Назначить</button>
     </div>
+    <div id="divTable" style="margin-top: 20px; display: none">
+        <table id="color_table2" style="width: 100%">
+            <tr>
+                <th>Назначенные тесты</th>
+                <th style="width: 10%">Статус</th>
+                <th style="width: 10%">Удалить</th>
+            </tr>
+        </table>
+    </div>
 </div>
 
-
-
 <form id="examAppointForm"></form>
+
 </body>
 </html>
 <script>
@@ -154,7 +162,6 @@
     }
 
     function appointExam() {
-        document.location='#close';
         const msg = $('#examAppointForm').serialize();
         $.ajax({
             type: 'POST',
@@ -176,15 +183,35 @@
             url: '/exam/getUsersAppoints',
             data: elem,
             success: function (data) {
-                let elem = document.getElementsByClassName("appointCheck");
-                for (let i = 0; i < elem.length; i++) {
-                    elem[i].removeAttribute("disabled");
-                    elem[i].checked = false;
-                }
-
+                let divTable = $('#divTable');
+                divTable.hide();
+                $('.trTable').remove();
                 for (let i = 0; i < data.length; i++) {
-                    let el = document.getElementById(data[i]);
-                    el.checked = true;
+                    let tr = document.createElement("tr");
+                    tr.className = "trTable";
+
+                    let td2 = document.createElement("td");
+                    td2.innerText = data[i].testName;
+                    td2.style = "text-align: left";
+
+                    let td3 = document.createElement("td");
+                    td3.innerText = "назначен";
+
+                    let td4 = document.createElement("td");
+
+                    let btn = document.createElement("button");
+                    btn.className = "btncancel";
+                    btn.type = "button";
+                    btn.style = "margin-top: 0; padding: 3px";
+                    btn.innerText = "Удалить";
+
+                    td4.append(btn);
+                    tr.append(td2);
+                    tr.append(td3);
+                    tr.append(td4);
+
+                    document.getElementById("color_table2").append(tr);
+                    divTable.show();
                 }
             },
             error: function () {
