@@ -35,51 +35,102 @@
         <tr>
             <th>Название теста</th>
             <th>Назначить</th>
+            <th>Количество вопросов</th>
         </tr>
         <c:forEach var="groupTest" items="${groupTestDtoList}">
             <tr>
-                <th colspan="2">группа: ${groupTest.name}</th>
+                <th colspan="3">группа: ${groupTest.name}</th>
             </tr>
             <c:forEach var="test" items="${groupTest.testDtoList}">
                 <tr>
                     <td>${test.testName}</td>
-                    <td><input type="checkbox" class="appointCheck" id="${test.testId}" disabled
-                               onchange="getModalView(${test.testId})"/></td>
+                    <td><input type="checkbox" class="appointCheck" id="${test.testId}"
+                               value="${test.quesAmount}" disabled onchange="getModalView(${test.testId})"/>
+                    </td>
+                    <td><input type="number" id="checkQuesAmount${test.testId}" class="myinput" value="${test.quesAmount}"
+                               onchange="check(${test.quesAmount}, this.value, ${test.testId})"
+                               style="padding: 0; margin: 0" disabled/>
+                    </td>
                 </tr>
             </c:forEach>
         </c:forEach>
         </tbody>
     </table>
-</div>
-
-
-<div id="openModal" class="modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title">Основание</h3>
-                <a href="#close" title="Close" class="close">×</a>
-            </div>
-            <div class="modal-body my-modal">
-                <label>Введите номер и дату распорядительного документа</label>
-                <input form="examAppointForm" type="text" name="base"/>
-            </div>
-            <div>
-                <input form="examAppointForm" type="checkbox" name="eko" style="margin-left: 10px"/>
-                <a> проверка знания порядка ведения ЭКО</a>
-            </div>
-            <div>
-                <button form="examAppointForm" type="button" class="btn" onclick="appointExam()" style="margin: 10px">Отправить</button>
-            </div>
-        </div>
+    <div style="margin-top: 20px;">
+        <a>Всего выбрано: <span id="totalQuesAmount"></span> вопросов</a>
+    </div>
+    <div style="margin-top: 20px; display: none">
+        <label>Введите наименование сводного теста</label>
+        <input id="testNameTr" class="myinput" form="examAppointForm" type="text" name="base" style="height: 0; margin-top: 0"/>
+    </div>
+    <div style="margin-top: 20px">
+        <label>Введите номер и дату распорядительного документа</label>
+        <input class="myinput" form="examAppointForm" type="text" name="base" style="height: 0; margin-top: 0"/>
+    </div>
+    <div style="margin-top: 20px">
+        <input form="examAppointForm" type="checkbox" name="eko" style="margin-left: 10px"/>
+        <a> проверка знания порядка ведения ЭКО</a>
+    </div>
+    <div>
+        <button class="btn">Назначить</button>
     </div>
 </div>
+
+
+
 <form id="examAppointForm"></form>
 </body>
 </html>
 <script>
+    const elems = document.body.querySelectorAll('.appointCheck');
+
+    for (let x = 0; x < elems.length; x++) {
+        elems[x].addEventListener("click", listener)
+    }
+
+    function check(quesAmont, value, id){
+        console.log(quesAmont, value, id);
+        if (value > quesAmont){
+            alert("Превышено допустимое значение количества вопросов для теста: " + quesAmont);
+            document.getElementById("checkQuesAmount" + id).value = quesAmont;
+            return;
+        }
+        printTotalAmount();
+    }
+
+
+    function printTotalAmount(){
+        let total = 0;
+        let count = 0;
+        for (let i = 0; i < elems.length; i++) {
+            let elem = document.getElementById("checkQuesAmount" + elems[i].id);
+            if (elems[i].checked){
+                count++;
+                elem.disabled = false;
+                let quesAmount = Number(elem.value);
+                total = total + quesAmount;
+            }
+            else{
+                elem.disabled = true;
+            }
+        }
+        if(count > 1){
+            $('#testNameTr').show();
+        }
+        else {
+            $('#testNameTr').hide();
+        }
+        document.getElementById("totalQuesAmount").innerText = total;
+    }
 
     function getModalView(testId){
+        printTotalAmount();
+
+
+        let checkTest = document.getElementById(testId);
+        let checkQuesAmount = document.getElementById("checkQuesAmount" + testId);
+        checkQuesAmount.disabled = !checkTest.checked;
+
         let form =  $('#examAppointForm');
         $('.inpClass').remove();
 
@@ -100,13 +151,6 @@
         inpUserId.value = document.getElementById("userIdSelect").value;
         form.append(inpUserId);
 
-        let el = document.getElementById(testId);
-        if(el.checked){
-            document.location='#openModal';
-        }
-        else {
-            appointExam();
-        }
     }
 
     function appointExam() {

@@ -76,6 +76,15 @@
     elems[x].addEventListener("click", listener)
   }
 
+  function check(quesAmont, value, id){
+    if (value > quesAmont){
+      alert("Превышено допустимое значение количества вопросов для теста: " + quesAmont);
+      document.getElementById(id).value = quesAmont;
+      return;
+    }
+    listener();
+  }
+
   function listener(){
     let total = 0;
     let count = 0;
@@ -100,14 +109,7 @@
     document.getElementById("totalQuesAmount").innerText = total;
   }
 
-  function check(quesAmont, value, id){
-    if (value > quesAmont){
-      alert("Превышено допустимое значение количества вопросов для теста: " + quesAmont);
-      document.getElementById(id).value = quesAmont;
-      return;
-    }
-    listener();
-  }
+
 
 </script>
 </html>
