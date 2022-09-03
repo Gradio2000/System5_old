@@ -34,18 +34,18 @@
         <tbody>
         <tr>
             <th>Название теста</th>
-            <th>Назначить</th>
-            <th>Количество вопросов</th>
+            <th style="width: 10%">Назначить</th>
+            <th style="width: 10%">Количество вопросов</th>
         </tr>
         <c:forEach var="groupTest" items="${groupTestDtoList}">
             <tr>
-                <th colspan="3">группа: ${groupTest.name}</th>
+                <th colspan="3" style="text-align: left">группа: ${groupTest.name}</th>
             </tr>
             <c:forEach var="test" items="${groupTest.testDtoList}">
                 <tr>
-                    <td>${test.testName}</td>
+                    <td style="text-align: left">${test.testName}</td>
                     <td><input type="checkbox" class="appointCheck" id="${test.testId}"
-                               value="${test.quesAmount}" disabled onchange="getModalView(${test.testId})"/>
+                               value="${test.quesAmount}" disabled onchange="selectTest(${test.testId})"/>
                     </td>
                     <td><input type="number" id="checkQuesAmount${test.testId}" class="myinput" value="${test.quesAmount}"
                                onchange="check(${test.quesAmount}, this.value, ${test.testId})"
@@ -56,22 +56,22 @@
         </c:forEach>
         </tbody>
     </table>
-    <div style="margin-top: 20px;">
+    <div id="totQuesAm" class="hidEl" style="margin: 10px; font-size: small; font-weight: bold; font-style: italic; display: none">
         <a>Всего выбрано: <span id="totalQuesAmount"></span> вопросов</a>
     </div>
-    <div style="margin-top: 20px; display: none">
+    <div id="testNameTr"  style="margin: 10px; margin-top: 30px; font-size: small; display: none">
         <label>Введите наименование сводного теста</label>
-        <input id="testNameTr" class="myinput" form="examAppointForm" type="text" name="base" style="height: 0; margin-top: 0"/>
+        <input class="myinput" form="examAppointForm" type="text" name="base" style="height: 0; margin-top: 0"/>
     </div>
-    <div style="margin-top: 20px">
+    <div id="baseDoc" class="hidEl" style="margin: 10px; font-size: small; display: none">
         <label>Введите номер и дату распорядительного документа</label>
         <input class="myinput" form="examAppointForm" type="text" name="base" style="height: 0; margin-top: 0"/>
     </div>
-    <div style="margin-top: 20px">
+    <div id="eko" class="hidEl" style="font-size: small; display: none">
         <input form="examAppointForm" type="checkbox" name="eko" style="margin-left: 10px"/>
         <a> проверка знания порядка ведения ЭКО</a>
     </div>
-    <div>
+    <div style="margin: 10px">
         <button class="btn">Назначить</button>
     </div>
 </div>
@@ -123,9 +123,9 @@
         document.getElementById("totalQuesAmount").innerText = total;
     }
 
-    function getModalView(testId){
+    function selectTest(testId){
+        $('.hidEl').show();
         printTotalAmount();
-
 
         let checkTest = document.getElementById(testId);
         let checkQuesAmount = document.getElementById("checkQuesAmount" + testId);
