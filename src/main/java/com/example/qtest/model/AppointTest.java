@@ -35,6 +35,9 @@ public class AppointTest {
     @Column
     private String testName;
 
+    @Column
+    private Integer criteria;
+
     @OneToOne
     @JoinColumn(name = "attempt_test_id", referencedColumnName = "attempt_id")
     private Attempttest attempttest;
