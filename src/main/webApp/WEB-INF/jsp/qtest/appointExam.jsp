@@ -63,20 +63,20 @@
         <a>Всего выбрано: <span id="totalQuesAmount"></span> вопросов</a>
     </div>
     <div id="criteria" class="hidEl" style="margin: 10px; margin-top: 30px; font-size: small; display: none">
-        <label>Установите критерий в процентах</label>
-        <input class="myinput" form="examAppointForm" type="number" name="criteria" style="height: 0; margin-top: 0"/>
+        <input class="myinput" form="examAppointForm" type="number" min="0" max="100" name="criteria"
+               placeholder="Установите критерий в процентах" style="height: 0; margin-top: 0"/>
     </div>
     <div id="testNameTr"  style="margin: 10px; margin-top: 30px; font-size: small; display: none">
-        <label>Введите наименование сводного теста</label>
-        <input class="myinput" form="examAppointForm" type="text" name="consolidTestName" style="height: 0; margin-top: 0"/>
+        <input class="myinput" form="examAppointForm" type="text" name="consolidTestName"
+               placeholder="Введите наименование сводного теста" style="height: 0; margin-top: 0"/>
     </div>
     <div id="baseDoc" class="hidEl" style="margin: 10px; font-size: small; display: none">
-        <label>Введите номер и дату распорядительного документа</label>
-        <input class="myinput" form="examAppointForm" type="text" name="baseDocName" style="height: 0; margin-top: 0"/>
+        <input class="myinput" form="examAppointForm" type="text" name="baseDocName"
+               placeholder="Введите номер и дату распорядительного документа" style="height: 0; margin-top: 0"/>
     </div>
     <div id="eko" class="hidEl" style="font-size: small; display: none">
-        <input form="examAppointForm" type="checkbox" name="eko" style="margin-left: 10px"/>
-        <a> проверка знания порядка ведения ЭКО</a>
+        <input id="ecoinp" form="examAppointForm" type="checkbox" name="eko" style="margin-left: 10px"/>
+        <label for="ecoinp"> проверка знания порядка ведения ЭКО</label>
     </div>
     <div style="margin: 10px">
         <button class="btn" onclick="appointExam()">Назначить</button>
