@@ -80,7 +80,7 @@
     <div id="divTable" style="margin-top: 20px; display: none">
         <table id="color_table2" style="width: 100%">
             <tr>
-                <th>Назначенные тесты</th>
+                <th>Назначенные зачёты</th>
                 <th style="width: 10%">Статус</th>
                 <th style="width: 10%">Удалить</th>
             </tr>
@@ -94,9 +94,9 @@
 <script>
     const elems = document.body.querySelectorAll('.appointCheck');
 
-    for (let x = 0; x < elems.length; x++) {
-        elems[x].addEventListener("click", listener)
-    }
+    // for (let x = 0; x < elems.length; x++) {
+    //     elems[x].addEventListener("click", listener)
+    // }
 
     function check(quesAmont, value, id){
         if (value > quesAmont){
@@ -157,6 +157,7 @@
         const msg = $('#examAppointForm').serializeArray();
         const userId = msg.find(el => el.name === "userId").value;
         $('.hidEl').hide();
+        $('#testNameTr').hide();
         $.ajax({
             type: 'POST',
             url: '/exam/appointExam',
@@ -171,7 +172,6 @@
     }
 
     function getUsersAppoints(userId){
-        console.log(userId);
         let elem = $("#selectUser").serialize();
         $.ajax({
             type: 'GET',
@@ -230,6 +230,7 @@
            url: '/exam/deleteAppoint',
            success: function (data){
                $('.hidEl').hide();
+               $('#testNameTr').hide();
                getUsersAppoints(userId);
            },
             error: function (){
