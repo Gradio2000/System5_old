@@ -1,7 +1,6 @@
 package com.example.qtest.repository;
 
 import com.example.qtest.model.AppointTest;
-import com.example.qtest.model.Test;
 import com.example.system5.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -21,7 +20,6 @@ public interface AppointTestRepository extends JpaRepository<AppointTest, Intege
     value = "UPDATE q_appoint_tests SET finished = true WHERE id_appoint_test = :appointTestId")
     void setAppointTrue(Integer appointTestId);
 
-    AppointTest findByUserAndTestAndFinished(User user, Test test, Boolean finished);
 
     @Modifying
     @Transactional

@@ -2,9 +2,10 @@ package com.example.qtest.controller;
 
 import com.example.qtest.dto.AppointTestDto;
 import com.example.qtest.dto.GroupTestDto;
-import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.AppointTest;
+import com.example.qtest.model.AppointTestAmount;
 import com.example.qtest.model.Test;
+import com.example.qtest.repository.AppointTestAmountRepository;
 import com.example.qtest.repository.AppointTestRepository;
 import com.example.qtest.repository.GroupTestRepository;
 import com.example.qtest.repository.TestReposytory;
@@ -25,7 +26,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -38,17 +42,19 @@ public class ExamController {
     private final GroupTestRepository groupTestRepository;
     private final DtoUtils dtoUtils;
     private final TestReposytory testReposytory;
+    private final AppointTestAmountRepository appointTestAmountRepository;
 
 
 
     public ExamController(AppointTestRepository appointTestRepository, UserRepository userRepository,
                           GroupTestRepository groupTestRepository, DtoUtils dtoUtils,
-                          TestReposytory testReposytory) {
+                          TestReposytory testReposytory, AppointTestAmountRepository appointTestAmountRepository) {
         this.appointTestRepository = appointTestRepository;
         this.userRepository = userRepository;
         this.groupTestRepository = groupTestRepository;
         this.dtoUtils = dtoUtils;
         this.testReposytory = testReposytory;
+        this.appointTestAmountRepository = appointTestAmountRepository;
     }
 
     @GetMapping("/exam")
@@ -73,18 +79,14 @@ public class ExamController {
 
     @GetMapping("/getUsersAppoints")
     @ResponseBody
-    public List<TestDto> getUsersAppoints(@RequestParam Integer userId, @AuthenticationPrincipal AuthUser authUser){
+    public List<AppointTest> getUsersAppoints(@RequestParam Integer userId, @AuthenticationPrincipal AuthUser authUser){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
-        List<Test> testList = appointTestRepository
-                .findAllByUser(userRepository.findById(userId).orElse(null))
+        return appointTestRepository.findAllByUser(userRepository.findById(userId).orElse(null))
                 .stream()
                 .filter(appointTest -> !appointTest.getFinished())
-                .map(AppointTest::getTest)
                 .collect(Collectors.toList());
-
-        return DtoUtils.convertToListDto(testList);
     }
 
     @PostMapping("/appointExam")
@@ -98,15 +100,42 @@ public class ExamController {
                                   @AuthenticationPrincipal AuthUser authUser){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
-        User user = userRepository.findById(userId).orElse(null);
-        if (testIds.length == 1){
-            Test test = testReposytory.findById(testIds[0]).orElse(null);
-            AppointTest appointTest = new AppointTest(user, test, false, baseDocName, eko);
-            appointTestRepository.save(appointTest);
-        }
-        else if (testIds.length > 1){
 
+        User user = userRepository.findById(userId).orElse(null);
+        Map<Integer, Integer> quesAmountAndTestMap = new HashMap<>();
+        int amountQues = 0;
+        for (int i = 0; i < testIds.length; i++) {
+            amountQues = +quesAmounts[i];
+            quesAmountAndTestMap.put(testIds[i], quesAmounts[i]);
         }
+
+        AppointTest appointTest = new AppointTest();
+        appointTest.setUser(user);
+        appointTest.setBase(baseDocName);
+        if (quesAmountAndTestMap.size() > 1){
+            appointTest.setTestName(consolidTestName);
+        }
+        else if (quesAmountAndTestMap.size() == 1){
+            Test test = testReposytory.findById(testIds[0]).orElse(null);
+            assert test != null;
+            appointTest.setTestName(test.getTestName());
+        }
+        appointTest.setAmountQues(amountQues);
+        appointTest.setFinished(false);
+        appointTest.setEko(eko);
+        appointTestRepository.save(appointTest);
+
+        List<AppointTestAmount> appointTestAmountList = new ArrayList<>();
+        for (Integer key: quesAmountAndTestMap.keySet()) {
+            AppointTestAmount appointTestAmount = new AppointTestAmount();
+            appointTestAmount.setAppointId(appointTest.getId());
+            appointTestAmount.setTestId(key);
+            appointTestAmount.setQuesAmount(quesAmountAndTestMap.get(key));
+            appointTestAmountList.add(appointTestAmount);
+        }
+
+        appointTestAmountRepository.saveAll(appointTestAmountList);
+
         return HttpStatus.OK;
     }
 
@@ -147,9 +176,9 @@ public class ExamController {
 
     @PostMapping("/deleteAppoint")
     @ResponseBody
-    public HttpStatus deleteAppoint(@RequestParam Integer userId,
-                                    @RequestParam Integer testId){
-        appointTestRepository.deleteByUserAndTest(userId, testId);
+    public HttpStatus deleteAppoint(@RequestParam Integer appointId){
+        appointTestRepository.deleteById(appointId);
+        appointTestAmountRepository.deleteAllByAppointId(appointId);
         return HttpStatus.OK;
     }
 }

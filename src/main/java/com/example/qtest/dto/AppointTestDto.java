@@ -7,15 +7,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AppointTestDto {
-    private TestDto testDto;
     private UserDto userDto;
     private Boolean finished;
     private String base;
     private AttempttestDto attempttestDto;
 
-    public AppointTestDto(TestDto testDto, UserDto userDto, Boolean finished, String base,
+    public AppointTestDto(UserDto userDto, Boolean finished, String base,
                           AttempttestDto attempttestDto) {
-        this.testDto = testDto;
         this.userDto = userDto;
         this.finished = finished;
         this.base = base;

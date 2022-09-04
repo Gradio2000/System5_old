@@ -213,7 +213,7 @@
                     btn.className = "btncancel";
                     btn.type = "button";
                     btn.style = "margin-top: 0; padding: 3px";
-                    btn.setAttribute("onclick", "deleteAppoint(" + data[i].testId + ", " + userId + ")");
+                    btn.setAttribute("onclick", "deleteAppoint(" + data[i].id + ", " + userId + ")");
                     btn.innerText = "Удалить";
 
                     td4.append(btn);
@@ -231,10 +231,10 @@
         });
     }
 
-    function deleteAppoint(testId, userId){
+    function deleteAppoint(appointId, userId){
         $.ajax({
            type: 'POST',
-           data: {testId: testId, userId: userId},
+           data: {appointId: appointId},
            url: '/exam/deleteAppoint',
            success: function (data){
                getUsersAppoints(userId);

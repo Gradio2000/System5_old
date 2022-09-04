@@ -36,7 +36,6 @@ public class DtoUtils {
         List<AppointTestDto> appointTestDtoList = new ArrayList<>();
         for (AppointTest appointTest: appointTestList){
             AppointTestDto appointTestDto = new AppointTestDto();
-            appointTestDto.setTestDto(TestDto.getInstance(appointTest.getTest()));
             appointTestDto.setUserDto(UserDto.getInstance(appointTest.getUser()));
             appointTestDto.setFinished(appointTest.getFinished());
             appointTestDto.setBase(appointTest.getBase());
