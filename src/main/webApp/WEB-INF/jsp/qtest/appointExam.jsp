@@ -99,7 +99,6 @@
     }
 
     function check(quesAmont, value, id){
-        console.log(quesAmont, value, id);
         if (value > quesAmont){
             alert("Превышено допустимое значение количества вопросов для теста: " + quesAmont);
             document.getElementById("checkQuesAmount" + id).value = quesAmont;
@@ -143,14 +142,6 @@
         let form =  $('#examAppointForm');
         $('.inpClass').remove();
 
-        // let inptestId = document.createElement("input");
-        // inptestId.type = "hidden";
-        // inptestId.className = "inpClass";
-        // inptestId.form = "examAppointForm";
-        // inptestId.name = "testId";
-        // inptestId.value = testId;
-        // form.append(inptestId);
-
 
         let inpUserId = document.createElement("input");
         inpUserId.type = "hidden";
@@ -163,15 +154,15 @@
     }
 
     function appointExam() {
-        const msg = $('#examAppointForm').serialize();
-        usId = msg.userId;
-        console.log(msg);
+        const msg = $('#examAppointForm').serializeArray();
+        const userId = msg.find(el => el.name === "userId").value;
+        $('.hidEl').hide();
         $.ajax({
             type: 'POST',
             url: '/exam/appointExam',
             data: msg,
             success: function (data) {
-                getUsersAppoints(usId);
+                getUsersAppoints(userId);
             },
             error: function () {
                 alert('Ошибка!');
@@ -180,6 +171,7 @@
     }
 
     function getUsersAppoints(userId){
+        console.log(userId);
         let elem = $("#selectUser").serialize();
         $.ajax({
             type: 'GET',
@@ -237,6 +229,7 @@
            data: {appointId: appointId},
            url: '/exam/deleteAppoint',
            success: function (data){
+               $('.hidEl').hide();
                getUsersAppoints(userId);
            },
             error: function (){
