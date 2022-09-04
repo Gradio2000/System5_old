@@ -35,12 +35,6 @@ public class AppointTestController {
         List<AppointTest> appointTestList = appointTestRepository.findAllByUser(authUser.getUser()).stream()
                 .filter(appointTest -> !appointTest.getFinished())
                 .collect(Collectors.toList());
-//        Map<Integer, TestDto> testDtoMap = new HashMap<>();
-//        for (AppointTest appointTest: appointTestList){
-//            testDtoMap.put(appointTest.getId(), TestDto.getInstance(appointTest.getTest()));
-//        }
-//
-//        model.addAttribute("testDtoMap", testDtoMap);
         model.addAttribute("appointTestList", appointTestList);
         return "qtest/userAppoint";
     }

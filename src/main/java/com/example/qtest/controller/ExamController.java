@@ -97,6 +97,7 @@ public class ExamController {
                                   @RequestParam (required = false) String baseDocName,
                                   @RequestParam (required = false) String consolidTestName,
                                   @RequestParam (required = false) Boolean eko,
+                                  @RequestParam (required = false) Integer criteria,
                                   @AuthenticationPrincipal AuthUser authUser){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
@@ -123,6 +124,12 @@ public class ExamController {
         appointTest.setAmountQues(amountQues);
         appointTest.setFinished(false);
         appointTest.setEko(eko);
+        if (criteria == null){
+            appointTest.setCriteria(0);
+        }
+        else {
+            appointTest.setCriteria(criteria);
+        }
         appointTestRepository.save(appointTest);
 
         List<AppointTestAmount> appointTestAmountList = new ArrayList<>();
