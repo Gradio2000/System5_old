@@ -2,14 +2,10 @@ package com.example.qtest.controller;
 
 import com.example.qtest.dto.AppointTestDto;
 import com.example.qtest.dto.GroupTestDto;
-import com.example.qtest.model.AppointTest;
-import com.example.qtest.model.AppointTestAmount;
-import com.example.qtest.model.Test;
-import com.example.qtest.repository.AppointTestAmountRepository;
-import com.example.qtest.repository.AppointTestRepository;
-import com.example.qtest.repository.GroupTestRepository;
-import com.example.qtest.repository.TestReposytory;
+import com.example.qtest.model.*;
+import com.example.qtest.repository.*;
 import com.example.qtest.service.DtoUtils;
+import com.example.qtest.service.TestService;
 import com.example.system5.dto.UserDto;
 import com.example.system5.model.User;
 import com.example.system5.repository.UserRepository;
@@ -26,10 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -43,18 +36,25 @@ public class ExamController {
     private final DtoUtils dtoUtils;
     private final TestReposytory testReposytory;
     private final AppointTestAmountRepository appointTestAmountRepository;
-
+    private final TestService testService;
+    private final AttemptestReporitory attemptestReporitory;
+    private final QuestionForAttemptRepository questionForAttemptRepository;
 
 
     public ExamController(AppointTestRepository appointTestRepository, UserRepository userRepository,
                           GroupTestRepository groupTestRepository, DtoUtils dtoUtils,
-                          TestReposytory testReposytory, AppointTestAmountRepository appointTestAmountRepository) {
+                          TestReposytory testReposytory, AppointTestAmountRepository appointTestAmountRepository,
+                          TestService testService, AttemptestReporitory attemptestReporitory,
+                          QuestionForAttemptRepository questionForAttemptRepository) {
         this.appointTestRepository = appointTestRepository;
         this.userRepository = userRepository;
         this.groupTestRepository = groupTestRepository;
         this.dtoUtils = dtoUtils;
         this.testReposytory = testReposytory;
         this.appointTestAmountRepository = appointTestAmountRepository;
+        this.testService = testService;
+        this.attemptestReporitory = attemptestReporitory;
+        this.questionForAttemptRepository = questionForAttemptRepository;
     }
 
     @GetMapping("/exam")
@@ -106,7 +106,7 @@ public class ExamController {
         Map<Integer, Integer> quesAmountAndTestMap = new HashMap<>();
         int amountQues = 0;
         for (int i = 0; i < testIds.length; i++) {
-            amountQues = +quesAmounts[i];
+            amountQues = amountQues + quesAmounts[i];
             quesAmountAndTestMap.put(testIds[i], quesAmounts[i]);
         }
 
@@ -187,5 +187,66 @@ public class ExamController {
         appointTestRepository.deleteById(appointId);
         appointTestAmountRepository.deleteAllByAppointId(appointId);
         return HttpStatus.OK;
+    }
+
+    @GetMapping("/startExam")
+    public String startExam(@AuthenticationPrincipal AuthUser authUser,
+                            @RequestParam Integer appointTestId,
+                            Model model){
+
+        AppointTest appointTest = appointTestRepository.findById(appointTestId).orElse(null);
+        List<AppointTestAmount> appointTestAmountList = appointTestAmountRepository.findAllByAppointId(appointTestId);
+
+        Attempttest attempttest = new Attempttest();
+        attempttest.setDateTime(new Date());
+        assert appointTest != null;
+        attempttest.setUser(appointTest.getUser());
+        attempttest.setCriteria(appointTest.getCriteria());
+        attempttest.setTestResult("Не завершен");
+
+        Set<Question> allQuestionsForTesting = new HashSet<>();
+        if (appointTestAmountList.size() > 1){
+            attempttest.setConsolidTest(true);
+            attempttest.setTestName(appointTest.getTestName());
+            List<Test> testList = testReposytory.findByAllByIds(appointTestAmountList.stream()
+                    .map(AppointTestAmount::getTestId)
+                    .collect(Collectors.toList()));
+
+            for (Test test: testList){
+                int quesAmount = Objects.requireNonNull(appointTestAmountList.stream()
+                                .filter(appointTestAmount -> Objects.equals(appointTestAmount.getTestId(), test.getTestId()))
+                                .findFirst().orElse(null))
+                        .getQuesAmount();
+                Set<Question> questionSet = new HashSet<>(test.getQuestions());
+                questionSet = testService.getShuffleTest(questionSet, quesAmount);
+                allQuestionsForTesting.addAll(questionSet);
+            }
+            allQuestionsForTesting = testService.getShuffleTest(allQuestionsForTesting, allQuestionsForTesting.size());
+        }
+        else {
+            attempttest.setConsolidTest(false);
+            Test test = testReposytory.findById(appointTestAmountList.get(0).getTestId()).orElse(null);
+            assert test != null;
+            attempttest.setTestName(test.getTestName());
+            allQuestionsForTesting  = testService.getShuffleTest(test.getQuestions(), appointTestAmountList.get(0).getQuesAmount());
+        }
+
+        attemptestReporitory.save(attempttest);
+
+        List<QuestionsForAttempt> questionsForAttemptList =
+                testService.convertTestForSaveBeforeTesting(allQuestionsForTesting, attempttest.getId());
+
+        questionForAttemptRepository.saveAll(questionsForAttemptList);
+
+        appointTest.setAttempttest(attempttest);
+        appointTestRepository.save(appointTest);
+
+        model.addAttribute("questionList", questionsForAttemptList);
+        model.addAttribute("attemptId", attempttest.getId());
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("appointTestId", appointTestId);
+        model.addAttribute("criteria", appointTest.getCriteria());
+
+        return "qtest/process";
     }
 }
