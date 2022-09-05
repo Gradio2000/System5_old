@@ -1,5 +1,6 @@
 package com.example.qtest.controller;
 
+import com.example.qtest.dto.AttempttestDto;
 import com.example.qtest.dto.GroupTestDto;
 import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.Attempttest;
@@ -10,10 +11,7 @@ import com.example.qtest.service.DtoUtils;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,32 +58,6 @@ public class ProcessTestController {
         return "qtest/forTesting/allTestsForTesting";
     }
 
-//    @PostMapping("/listForTesting/test")
-//    public String getTestForTesting(@AuthenticationPrincipal AuthUser authUser, Model model,
-//                                    @RequestParam (required = false) Integer[] testIds,
-//                                    @RequestParam Integer quesAmount, @RequestParam Integer criteria,
-//                                    @RequestParam (required = false) String testName){
-//        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
-//                authUser.getUser().getName());
-//        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-//
-//        if (testIds.length > 1){
-//            model.addAttribute("testIds", Arrays.stream(testIds).collect(Collectors.toList()));
-//            model.addAttribute("consolidTest", true);
-//            model.addAttribute("testName", testName);
-//        }
-//        else {
-//            TestDto testDto = TestDto.getInstance(Objects.requireNonNull(testReposytory.findById(testIds[0]).orElse(null)));
-//            model.addAttribute("testDto", testDto);
-//            model.addAttribute("consolidTest", false);
-//        }
-//
-//        model.addAttribute("quesAmount", quesAmount);
-//        model.addAttribute("criteria", criteria);
-//
-//        return "qtest/forTesting/testForTesting";
-//    }
-
 
     @GetMapping("/mytests")
     public String getUserAttempts(@AuthenticationPrincipal AuthUser authUser, Model model,
@@ -105,7 +77,11 @@ public class ProcessTestController {
         else {
             pageable = PageRequest.of(page, size, Sort.by("dateTime").ascending());
         }
-        Page<Attempttest> attemptsList = attemptestReporitory.findAllByUser(authUser.getUser(), pageable);
+        Page<Attempttest> fullAttemptsList = attemptestReporitory.findAllByUser(authUser.getUser(), pageable);
+
+        Page<AttempttestDto> attemptsList = new PageImpl<>(fullAttemptsList.getContent().stream()
+                .map(AttempttestDto::getInstance)
+                .collect(Collectors.toList()), pageable, fullAttemptsList.getTotalElements());
         model.addAttribute("attemptsList", attemptsList);
         model.addAttribute("sort", sort);
         return "qtest/myTestsList";
