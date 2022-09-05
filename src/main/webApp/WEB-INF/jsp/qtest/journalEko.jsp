@@ -43,7 +43,7 @@
                     <fmt:formatDate value="${appointTestDto.attempttestDto.dateTime}" pattern="dd.MM.yyyy"/>
                     тестирование
                 </td>
-                <td>${appointTestDto.userDto.name} ${appointTestDto.userDto.position.position}</td>
+                <td>${appointTestDto.userDtoNameOnlyWithPositionDto.name} ${appointTestDto.userDtoNameOnlyWithPositionDto.positionDtoNameOnly.position}</td>
                 <td>${appointTestDto.attempttestDto.amountTrueAnswers} из ${appointTestDto.attempttestDto.amountQues}</td>
                 <td>${appointTestDto.attempttestDto.testResult}</td>
             </tr>

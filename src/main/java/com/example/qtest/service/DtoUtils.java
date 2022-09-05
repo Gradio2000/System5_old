@@ -8,8 +8,8 @@ import com.example.qtest.model.AppointTest;
 import com.example.qtest.model.GroupTest;
 import com.example.qtest.model.Test;
 import com.example.system5.dto.PositionDtoNameOnly;
-import com.example.system5.dto.UserDto;
 import com.example.system5.dto.UserDtoNameOnly;
+import com.example.system5.dto.UserDtoNameOnlyWithPositionDto;
 import com.example.system5.model.Position;
 import com.example.system5.model.User;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class DtoUtils {
         List<AppointTestDto> appointTestDtoList = new ArrayList<>();
         for (AppointTest appointTest: appointTestList){
             AppointTestDto appointTestDto = new AppointTestDto();
-            appointTestDto.setUserDto(UserDto.getInstance(appointTest.getUser()));
+            appointTestDto.setUserDtoNameOnlyWithPositionDto(UserDtoNameOnlyWithPositionDto.getInstance(appointTest.getUser()));
             appointTestDto.setFinished(appointTest.getFinished());
             appointTestDto.setBase(appointTest.getBase());
             if (appointTest.getAttempttest() != null){
@@ -46,6 +46,7 @@ public class DtoUtils {
         }
         return appointTestDtoList;
     }
+
 
     public static List<UserDtoNameOnly> convertToUserDtoNameOnlyList(List<User> userList){
         return userList.stream()

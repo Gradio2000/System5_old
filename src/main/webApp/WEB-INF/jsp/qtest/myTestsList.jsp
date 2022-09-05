@@ -55,18 +55,18 @@
                 <th>Результат</th>
                 <th>Протокол</th>
             </tr>
-        <c:forEach var="attempt" items="${attemptsList.content}">
+        <c:forEach var="appointTestDto" items="${attemptsList.content}">
             <tr>
                 <td>
-                    <fmt:formatDate value="${attempt.dateTime}" pattern="dd.MM.yyyy  HH:mm"/>
+                    <fmt:formatDate value="${appointTestDto.dateTime}" pattern="dd.MM.yyyy  HH:mm"/>
                 </td>
-                <td>${attempt.testName}</td>
-                <td>${attempt.testResult}</td>
-                <c:if test="${attempt.testResult != 'Не завершен'}">
-                    <td><a href="/qtest/report/${attempt.id}">Протокол</a></td>
+                <td>${appointTestDto.testName}</td>
+                <td>${appointTestDto.testResult}</td>
+                <c:if test="${appointTestDto.testResult != 'Не завершен'}">
+                    <td><a href="/qtest/report/${appointTestDto.id}">Протокол</a></td>
                 </c:if>
-                <c:if test="${attempt.testResult == 'Не завершен'}">
-                    <td><a href="/processing/continue/${attempt.id}">Продолжить</a></td>
+                <c:if test="${appointTestDto.testResult == 'Не завершен'}">
+                    <td><a href="/processing/continue/${appointTestDto.id}">Продолжить</a></td>
                 </c:if>
             </tr>
         </c:forEach>

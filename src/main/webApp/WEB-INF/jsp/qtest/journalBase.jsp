@@ -21,11 +21,11 @@
 <div class="main">
     <div style="display: flex; justify-content: space-between">
         <div class="pagination">
-            <a onclick="pagin(${attemptsList.previousOrFirstPageable().pageNumber}, ${attemptsList.size})">«</a>
-            <c:forEach begin="1" end="${attemptsList.totalPages}" varStatus="count">
-                <a id="pag${count.count - 1}" onclick="pagin(${count.count - 1}, ${attemptsList.size})">${count.count}</a>
+            <a onclick="pagin(${appointTestDtoPage.previousOrFirstPageable().pageNumber}, ${appointTestDtoPage.size})">«</a>
+            <c:forEach begin="1" end="${appointTestDtoPage.totalPages}" varStatus="count">
+                <a id="pag${count.count - 1}" onclick="pagin(${count.count - 1}, ${appointTestDtoPage.size})">${count.count}</a>
             </c:forEach>
-            <a onclick="pagin(${attemptsList.nextOrLastPageable().pageNumber}, ${attemptsList.size})">»</a>
+            <a onclick="pagin(${appointTestDtoPage.nextOrLastPageable().pageNumber}, ${appointTestDtoPage.size})">»</a>
         </div>
         <div class="sort" style="margin-right: 20px; margin-top: 6px">
             <label>Сортировать по:
@@ -56,18 +56,18 @@
             <th>Результат</th>
             <th>Протокол</th>
         </tr>
-        <c:forEach var="attempt" items="${attemptsList.content}">
+        <c:forEach var="appointTestDto" items="${appointTestDtoPage.content}">
             <tr>
                 <td>
-                    <fmt:formatDate value="${attempt.attempttest.dateTime}" pattern="dd.MM.yyyy  HH:mm"/>
+                    <fmt:formatDate value="${appointTestDto.attempttestDto.dateTime}" pattern="dd.MM.yyyy  HH:mm"/>
                 </td>
-                <td>${attempt.user.name} ${attempt.attempttest.user.position.position}</td>
-                <td>${attempt.attempttest.test.testName}</td>
-                <td>${attempt.attempttest.testResult}</td>
-                <c:if test="${attempt.attempttest.testResult != 'Не завершен'}">
-                    <td><a href="/qtest/report/${attempt.attempttest.id}">Протокол</a></td>
+                <td>${appointTestDto.userDtoNameOnlyWithPositionDto.name} ${appointTestDto.userDtoNameOnlyWithPositionDto.positionDtoNameOnly.position}</td>
+                <td>${appointTestDto.testName}</td>
+                <td>${appointTestDto.attempttestDto.testResult}</td>
+                <c:if test="${appointTestDto.attempttestDto.testResult != 'Не завершен'}">
+                    <td><a href="/qtest/report/${appointTestDto.attempttestDto.id}">Протокол</a></td>
                 </c:if>
-                <c:if test="${attempt.attempttest.testResult == 'Не завершен'}">
+                <c:if test="${appointTestDto.attempttestDto.testResult == 'Не завершен'}">
                     <td></td>
                 </c:if>
             </tr>

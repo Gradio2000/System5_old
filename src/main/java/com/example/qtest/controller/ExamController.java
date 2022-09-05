@@ -11,10 +11,7 @@ import com.example.system5.model.User;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -175,8 +172,13 @@ public class ExamController {
             pageable = PageRequest.of(page, size, Sort.by("attempttest.dateTime").ascending());
         }
 
-        Page<AppointTest> attemptsList = appointTestRepository.findAll(pageable);
-        model.addAttribute("attemptsList", attemptsList);
+        Page<AppointTest> appointTestList = appointTestRepository.findAll(pageable);
+
+        Page<AppointTestDto> appointTestDtoPage = new PageImpl<>(appointTestList.getContent().stream()
+                .map(AppointTestDto::getInstance)
+                .collect(Collectors.toList()), pageable, appointTestList.getTotalElements());
+
+        model.addAttribute("appointTestDtoPage", appointTestDtoPage);
         model.addAttribute("sort", sort);
         return "qtest/journalBase";
     }
