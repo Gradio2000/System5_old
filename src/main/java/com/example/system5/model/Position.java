@@ -33,7 +33,7 @@ public class Position {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "sys_commander_employee",
             joinColumns =
-                    { @JoinColumn(name = "commander_position_id")},
+                    { @JoinColumn(name = "commander_position_id", referencedColumnName = "position_id")},
         inverseJoinColumns =
                     { @JoinColumn(name = "position_id", referencedColumnName = "position_id")})
     List<Position> employersList;

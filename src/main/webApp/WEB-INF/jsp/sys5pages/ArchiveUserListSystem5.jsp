@@ -56,17 +56,17 @@
             <tr>
                 <td>${system5.month}</td>
                 <td>${system5.res1}</td>
-                <td>${system5.system5empl.resempl1}</td>
+                <td class="resempl">${system5.system5empl.resempl1}</td>
                 <td>${system5.res2}</td>
-                <td>${system5.system5empl.resempl2}</td>
+                <td class="resempl">${system5.system5empl.resempl2}</td>
                 <td>${system5.res3}</td>
-                <td>${system5.system5empl.resempl3}</td>
+                <td class="resempl">${system5.system5empl.resempl3}</td>
                 <td>${system5.res4}</td>
-                <td>${system5.system5empl.resempl4}</td>
+                <td class="resempl">${system5.system5empl.resempl4}</td>
                 <td>${system5.res5}</td>
-                <td>${system5.system5empl.resempl5}</td>
+                <td class="resempl">${system5.system5empl.resempl5}</td>
                 <td>${system5.totalMark5.totalMark}</td>
-                <td>${system5.totalMark5.totalMarkEmpl}</td>
+                <td class="resempl" style="font-weight: bold">${system5.totalMark5.totalMarkEmpl}</td>
             </tr>
         </c:forEach>
         </tbody>
