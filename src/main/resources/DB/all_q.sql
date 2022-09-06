@@ -143,5 +143,19 @@ create table q_false_users_answers
 create unique index false_users_answers_id_uindex
     on q_false_users_answers (id);
 
+drop table if exists q_appoint_test_amount;
+create table q_appoint_test_amount
+(
+    id          serial
+        constraint q_appoint_test_amount_pk
+            primary key,
+    appoint_id  integer not null,
+    test_id     integer not null,
+    ques_amount integer not null
+);
+
+create unique index q_appoint_test_amount_id_uindex
+    on q_appoint_test_amount (id);
+
 
 

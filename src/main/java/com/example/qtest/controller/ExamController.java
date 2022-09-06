@@ -185,7 +185,10 @@ public class ExamController {
 
     @PostMapping("/deleteAppoint")
     @ResponseBody
-    public HttpStatus deleteAppoint(@RequestParam Integer appointId){
+    public HttpStatus deleteAppoint(@RequestParam Integer appointId,
+                                    @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
         appointTestRepository.deleteById(appointId);
         appointTestAmountRepository.deleteAllByAppointId(appointId);
         return HttpStatus.OK;
@@ -195,6 +198,8 @@ public class ExamController {
     public String startExam(@AuthenticationPrincipal AuthUser authUser,
                             @RequestParam Integer appointTestId,
                             Model model){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         AppointTest appointTest = appointTestRepository.findById(appointTestId).orElse(null);
         List<AppointTestAmount> appointTestAmountList = appointTestAmountRepository.findAllByAppointId(appointTestId);

@@ -9,6 +9,7 @@ import com.example.system5.dto.UserDtoNameOnly;
 import com.example.system5.model.User;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +25,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/kanban")
+@Slf4j
 public class KanbanController {
     private final KanbanRepository kanbanRepository;
     private final UserRepository userRepository;
@@ -37,6 +39,9 @@ public class KanbanController {
     @GetMapping("/kanban")
     public String getAllKanban(@AuthenticationPrincipal AuthUser authUser,
                                Model model){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         List<KanbanDto> kanbanList = kanbanRepository.findAll(Sort.by("id")).stream()
                 .map(KanbanDto::getInstance)
@@ -48,7 +53,12 @@ public class KanbanController {
 
     @PostMapping("/move")
     @ResponseBody
-    public HttpStatus moveKanbanTask(@RequestParam String columnId, @RequestParam Integer kanbanId){
+    public HttpStatus moveKanbanTask(@RequestParam String columnId,
+                                     @RequestParam Integer kanbanId,
+                                     @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         Kanban kanban = kanbanRepository.findById(kanbanId).orElse(null);
         assert kanban != null;
         switch (columnId){
@@ -78,6 +88,9 @@ public class KanbanController {
     public String addNewCanban(@ModelAttribute Kanban kanban,
                                @AuthenticationPrincipal AuthUser authUser,
                                @RequestParam String date){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         kanban.setUser(authUser.getUser());
         Date date1 = java.sql.Date.valueOf(LocalDate.parse(date));
         kanban.setTaskEndDate(date1);
@@ -87,20 +100,32 @@ public class KanbanController {
 
     @PostMapping("/delete")
     @ResponseBody
-    public HttpStatus deleteKanban(@RequestParam Integer kanbanId){
+    public HttpStatus deleteKanban(@RequestParam Integer kanbanId,
+                                   @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         kanbanRepository.deleteById(kanbanId);
         return HttpStatus.OK;
     }
 
     @GetMapping("getKanban")
     @ResponseBody
-    public KanbanDto getKanbanById(@RequestParam Integer kanId){
+    public KanbanDto getKanbanById(@RequestParam Integer kanId,
+                                   @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         return KanbanDto.getInstance(Objects.requireNonNull(kanbanRepository.findById(kanId).orElse(null)));
     }
 
     @PostMapping("/editName")
     @ResponseBody
-    public HttpStatus editName(@RequestParam String kanbanName, @RequestParam Integer kanbanId){
+    public HttpStatus editName(@RequestParam String kanbanName, @RequestParam Integer kanbanId,
+                               @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         Kanban kanban = kanbanRepository.findById(kanbanId).orElse(null);
         assert kanban != null;
         kanban.setKanbanName(kanbanName);
@@ -110,7 +135,11 @@ public class KanbanController {
 
     @PostMapping("/editDescribe")
     @ResponseBody
-    public HttpStatus editDescribe(@RequestParam String describe, @RequestParam Integer kanbanId){
+    public HttpStatus editDescribe(@RequestParam String describe, @RequestParam Integer kanbanId,
+                                   @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         Kanban kanban = kanbanRepository.findById(kanbanId).orElse(null);
         assert kanban != null;
         kanban.setDescribe(describe);
@@ -121,7 +150,11 @@ public class KanbanController {
 
     @PostMapping("/editDate")
     @ResponseBody
-    public HttpStatus editDate(@RequestParam String endDate, @RequestParam Integer kanbanId){
+    public HttpStatus editDate(@RequestParam String endDate, @RequestParam Integer kanbanId,
+                               @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         Kanban kanban = kanbanRepository.findById(kanbanId).orElse(null);
         assert kanban != null;
         Date date = java.sql.Date.valueOf(LocalDate.parse(endDate));
@@ -132,7 +165,11 @@ public class KanbanController {
 
     @GetMapping("/getUserDtoList")
     @ResponseBody
-    public List<UserDtoNameOnly> getUserDtoList(@RequestParam Integer kanId, Model model){
+    public List<UserDtoNameOnly> getUserDtoList(@RequestParam Integer kanId, Model model,
+                                                @AuthenticationPrincipal AuthUser authUser){
+
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
 
         List<Integer> userDtoNameOnlyListIds = Objects.requireNonNull(kanbanRepository
                         .findById(kanId).orElse(null)).getUserList().stream()
@@ -147,7 +184,11 @@ public class KanbanController {
 
     @PostMapping("/editMembers")
     @ResponseBody
-    public UserDtoNameOnly editMembers(@RequestParam Integer memberSelect, @RequestParam Integer kanbanId){
+    public UserDtoNameOnly editMembers(@RequestParam Integer memberSelect, @RequestParam Integer kanbanId,
+                                       @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         User user = userRepository.findById(memberSelect).orElse(null);
         Kanban kanban = kanbanRepository.findById(kanbanId).orElse(null);
         assert kanban != null;
@@ -160,7 +201,11 @@ public class KanbanController {
 
     @PostMapping("/delMember")
     @ResponseBody
-    public UserDtoNameOnly delMember(@RequestParam Integer userId, @RequestParam Integer kanId){
+    public UserDtoNameOnly delMember(@RequestParam Integer userId, @RequestParam Integer kanId,
+                                     @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         Kanban kanban = kanbanRepository.findById(kanId).orElse(null);
         assert kanban != null;
         List<User> userList = kanban.getUserList();
