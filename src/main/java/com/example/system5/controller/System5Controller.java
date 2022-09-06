@@ -181,7 +181,17 @@ public class System5Controller {
         system5empl.setSystem5(system5);
 
         system5Repository.save(system5);
+
+        List<System5> system5List = system5Repository.findAllByUserId(userId);
+        for (System5 system51 : system5List){
+            if (system51.getSystem5empl() == null){
+                return "redirect:/list/" + userId;
+            }
+        }
+        userRepository.deleteCommEmpl(authUser.getUser().getPosition().getPosition_id(), system5.getUser().getPosition().getPosition_id());
         return "redirect:/list/" + userId;
+
+
     }
 
 

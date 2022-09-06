@@ -42,4 +42,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(nativeQuery = true,
             value = "UPDATE sys_commander_employee SET commander_position_id = :comm_id WHERE position_id = :position_id")
     void updateCommanderPosition(int comm_id, int position_id);
+
+    @Modifying
+    @Transactional
+    @Query(nativeQuery = true,
+    value = "DELETE FROM sys_commander_employee WHERE commander_position_id = :comPositionId AND position_id = :positionId")
+    void deleteCommEmpl(int comPositionId, int positionId);
 }
