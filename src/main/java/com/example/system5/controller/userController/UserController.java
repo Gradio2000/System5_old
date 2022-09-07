@@ -1,8 +1,8 @@
 package com.example.system5.controller.userController;
 
 import com.example.system5.dto.UserDto;
+import com.example.system5.dto.UserDtoNameOnlyWithPositionDto;
 import com.example.system5.model.ChangePasswordForm;
-import com.example.system5.model.Position;
 import com.example.system5.model.User;
 import com.example.system5.repository.UserRepository;
 import com.example.system5.util.AuthUser;
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -27,6 +28,7 @@ public class UserController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ChangePasswordFormValidator changePasswordFormValidator;
+
 
     public UserController(UserRepository userRepository, PasswordEncoder passwordEncoder,
                           ChangePasswordFormValidator changePasswordFormValidator) {
@@ -42,16 +44,17 @@ public class UserController {
 
     @GetMapping(value = "/my_employers")
     public String getEmployersList(@AuthenticationPrincipal AuthUser authUser, Model model){
-        User user = authUser.getUser();
-        List<Position> positionList;
-        try {
-            positionList = user.getPosition().getEmployersList();
-        } catch (Exception e) {
-            return "sys5pages/employers";
-        }
-        model.addAttribute("positionList", positionList);
-        model.addAttribute("user", UserDto.getInstance(user));
+
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+
+        List<Integer> emplUserList = userRepository.getEmplUserIdList(authUser.getUser().getUserId());
+        List<UserDtoNameOnlyWithPositionDto> userEmplList = userRepository.findAllById(emplUserList).stream()
+                .map(UserDtoNameOnlyWithPositionDto::getInstance)
+                .collect(Collectors.toList());
+        model.addAttribute("userEmplList", userEmplList);
+
         return "sys5pages/employers";
+
     }
 
     @GetMapping("/getUser")

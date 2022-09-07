@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @RepositoryRestResource(exported = false)
@@ -24,28 +25,17 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Transactional
     @Query(nativeQuery = true,
-    value = "delete from sys_position_user where position_id = :id")
+            value = "delete from sys_position_user where position_id = :id")
     void deleteUser(int id);
 
-    @Modifying
-    @Transactional
-    @Query(nativeQuery = true,
-            value = "INSERT INTO sys_commander_employee (commander_position_id, position_id) VALUES (:comm_id, :position_id)")
-    void commEmpAdd(int comm_id, int position_id);
 
     @Query(nativeQuery = true,
-            value = "SELECT EXISTS(SELECT commander_position_id FROM sys_commander_employee WHERE position_id = :position_id)")
-    boolean existsCommanderPosition(Integer position_id);
+            value = "SELECT empl_id FROM sys_com_empl WHERE comm_id = :commId")
+    List<Integer> getEmplUserIdList(int commId);
 
     @Modifying
     @Transactional
     @Query(nativeQuery = true,
-            value = "UPDATE sys_commander_employee SET commander_position_id = :comm_id WHERE position_id = :position_id")
-    void updateCommanderPosition(int comm_id, int position_id);
-
-    @Modifying
-    @Transactional
-    @Query(nativeQuery = true,
-    value = "DELETE FROM sys_commander_employee WHERE commander_position_id = :comPositionId AND position_id = :positionId")
-    void deleteCommEmpl(int comPositionId, int positionId);
+    value = "DELETE FROM sys_com_empl WHERE empl_id = :emplId AND comm_id = :commId")
+    void deleteCommEmpl(int emplId, int commId);
 }

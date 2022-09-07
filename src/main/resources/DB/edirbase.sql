@@ -26,3 +26,18 @@ create table q_appoint_test_amount
 create unique index q_appoint_test_amount_id_uindex
     on q_appoint_test_amount (id);
 
+drop table if exists sys_com_empl;
+create table sys_com_empl
+(
+    id      serial
+        constraint sys_com_empl_pk
+            primary key,
+    empl_id integer not null,
+    comm_id integer not null
+);
+
+create unique index sys_com_empl_id_uindex
+    on sys_com_empl (id);
+
+
+

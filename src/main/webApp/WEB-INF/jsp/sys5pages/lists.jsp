@@ -95,7 +95,7 @@
                             <label>Выберите руководителя, которому отправите самооценку</label>
                             <select class="select-css" name="comm_id">
                                 <c:forEach items="${userList}" var="user">
-                                    <option value="${user.position.position_id}">${user.name}</option>
+                                    <option value="${user.userId}">${user.name}</option>
                                 </c:forEach>
                             </select>
                             <br/>

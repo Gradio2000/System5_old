@@ -3,6 +3,7 @@ package com.example.system5.controller;
 
 import com.example.system5.dto.UserDto;
 import com.example.system5.model.*;
+import com.example.system5.repository.CommEmplRepository;
 import com.example.system5.repository.PositionRepository;
 import com.example.system5.repository.System5Repository;
 import com.example.system5.repository.UserRepository;
@@ -36,12 +37,15 @@ public class System5Controller {
     private final SortService sortService;
     private final PositionRepository positionRepository;
 
+    private final CommEmplRepository commEmplRepository;
 
-    public System5Controller(System5Repository system5Repository, UserRepository userRepository,
-                             GetTotalMarkService getTotalMarkService,
+
+    public System5Controller(System5Repository system5Repository,
+                             UserRepository userRepository, GetTotalMarkService getTotalMarkService,
                              SaveOrUpdateSystem5Service saveOrUpdateSystem5Service,
-                             SaveOrUpdateCommEmplService saveOrUpdateCommEmplService, SortService sortService,
-                             PositionRepository positionRepository) {
+                             SaveOrUpdateCommEmplService saveOrUpdateCommEmplService,
+                             SortService sortService, PositionRepository positionRepository,
+                             CommEmplRepository commEmplRepository) {
         this.system5Repository = system5Repository;
         this.userRepository = userRepository;
         this.getTotalMarkService = getTotalMarkService;
@@ -49,6 +53,7 @@ public class System5Controller {
         this.saveOrUpdateCommEmplService = saveOrUpdateCommEmplService;
         this.sortService = sortService;
         this.positionRepository = positionRepository;
+        this.commEmplRepository = commEmplRepository;
     }
 
     @GetMapping(value = "/list")
@@ -145,7 +150,11 @@ public class System5Controller {
             saveOrUpdateSystem5Service.saveSystem5(system5);
         }
 
-        saveOrUpdateCommEmplService.saveOrUpdateCommEmpl(comm_id, authUser.getUser());
+        User commUser = userRepository.findById(comm_id).orElse(null);
+
+        if (!commEmplRepository.existsByEmplUserAndCommUser(authUser.getUser(), commUser)){
+            commEmplRepository.save(new CommEmpl(authUser.getUser(), commUser));
+        }
         return "redirect:/list";
     }
 
@@ -188,7 +197,11 @@ public class System5Controller {
                 return "redirect:/list/" + userId;
             }
         }
-        userRepository.deleteCommEmpl(authUser.getUser().getPosition().getPosition_id(), system5.getUser().getPosition().getPosition_id());
+
+        User emplUser = system5.getUser();
+        if (system5.getSystem5empl() != null){
+            commEmplRepository.deleteByEmplUserAndCommUser(emplUser, authUser.getUser());
+        }
         return "redirect:/list/" + userId;
 
 

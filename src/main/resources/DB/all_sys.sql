@@ -8,12 +8,6 @@ create table sys_position_user
     user_id     integer
 );
 
-DROP TABLE IF EXISTS sys_commander_employee cascade;
-create table sys_commander_employee
-(
-    commander_position_id integer,
-    position_id           integer
-);
 
 DROP TABLE IF EXISTS sys_system5empl cascade;
 create table sys_system5empl
@@ -117,3 +111,15 @@ create table sys_system5
 create unique index system5_system5_id_uindex
     on sys_system5 (system5_id);
 
+drop table if exists sys_com_empl;
+create table sys_com_empl
+(
+    id      serial
+        constraint sys_com_empl_pk
+            primary key,
+    empl_id integer not null,
+    comm_id integer not null
+);
+
+create unique index sys_com_empl_id_uindex
+    on sys_com_empl (id);
