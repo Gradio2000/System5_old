@@ -98,10 +98,6 @@
 <script>
     const elems = document.body.querySelectorAll('.appointCheck');
 
-    // for (let x = 0; x < elems.length; x++) {
-    //     elems[x].addEventListener("click", listener)
-    // }
-
     function check(quesAmont, value, id){
         if (value > quesAmont){
             alert("Превышено допустимое значение количества вопросов для теста: " + quesAmont);

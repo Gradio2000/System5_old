@@ -48,7 +48,7 @@
     </table>
     </div>
     <div>
-        <form action="/exam/startExam" method="get">
+        <form action="/processing/startExam" method="get">
             <input type="hidden" name="appointTestId" value="${test.id}">
             <button type="submit" class="btn" STYLE="margin-top: 1em">Начать</button>
         </form>

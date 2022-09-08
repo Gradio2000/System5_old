@@ -30,11 +30,13 @@ public class TestProcessingController {
     private final ResultTestService resultTestService;
     private final AppointTestRepository appointTestRepository;
     private final TestProcessingService testProcessingService;
+    private final AppointTestAmountRepository appointTestAmountRepository;
 
     public TestProcessingController(AttemptestReporitory attemptestReporitory, TestReposytory testReposytory,
                                     TestService testService, QuestionForAttemptRepository questionForAttemptRepository,
                                     ResultTestRepository resultTestRepository, ResultTestService resultTestService,
-                                    AppointTestRepository appointTestRepository, TestProcessingService testProcessingService) {
+                                    AppointTestRepository appointTestRepository, TestProcessingService testProcessingService,
+                                    AppointTestAmountRepository appointTestAmountRepository) {
         this.attemptestReporitory = attemptestReporitory;
         this.testReposytory = testReposytory;
         this.testService = testService;
@@ -43,6 +45,7 @@ public class TestProcessingController {
         this.resultTestService = resultTestService;
         this.appointTestRepository = appointTestRepository;
         this.testProcessingService = testProcessingService;
+        this.appointTestAmountRepository = appointTestAmountRepository;
     }
 
     @PostMapping("/start")
@@ -164,6 +167,69 @@ public class TestProcessingController {
         model.addAttribute("resultTestQuestionsIdsList", resultTestQuestionsIdsList);
         model.addAttribute("resultTestAnswerIdsList", resultTestAnswerIdsList);
         model.addAttribute("criteria", criteria);
+        return "qtest/process";
+    }
+
+    @GetMapping("/startExam")
+    public String startExam(@AuthenticationPrincipal AuthUser authUser,
+                            @RequestParam Integer appointTestId,
+                            Model model){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
+        AppointTest appointTest = appointTestRepository.findById(appointTestId).orElse(null);
+        List<AppointTestAmount> appointTestAmountList = appointTestAmountRepository.findAllByAppointId(appointTestId);
+
+        Attempttest attempttest = new Attempttest();
+        attempttest.setDateTime(new Date());
+        assert appointTest != null;
+        attempttest.setUser(appointTest.getUser());
+        attempttest.setCriteria(appointTest.getCriteria());
+        attempttest.setTestResult("Не завершен");
+
+        Set<Question> allQuestionsForTesting = new HashSet<>();
+        if (appointTestAmountList.size() > 1){
+            attempttest.setConsolidTest(true);
+            attempttest.setTestName(appointTest.getTestName());
+            List<Test> testList = testReposytory.findByAllByIds(appointTestAmountList.stream()
+                    .map(AppointTestAmount::getTestId)
+                    .collect(Collectors.toList()));
+
+            for (Test test: testList){
+                int quesAmount = Objects.requireNonNull(appointTestAmountList.stream()
+                                .filter(appointTestAmount -> Objects.equals(appointTestAmount.getTestId(), test.getTestId()))
+                                .findFirst().orElse(null))
+                        .getQuesAmount();
+                Set<Question> questionSet = new HashSet<>(test.getQuestions());
+                questionSet = testService.getShuffleTest(questionSet, quesAmount);
+                allQuestionsForTesting.addAll(questionSet);
+            }
+            allQuestionsForTesting = testService.getShuffleTest(allQuestionsForTesting, allQuestionsForTesting.size());
+        }
+        else {
+            attempttest.setConsolidTest(false);
+            Test test = testReposytory.findById(appointTestAmountList.get(0).getTestId()).orElse(null);
+            assert test != null;
+            attempttest.setTestName(test.getTestName());
+            allQuestionsForTesting  = testService.getShuffleTest(test.getQuestions(), appointTestAmountList.get(0).getQuesAmount());
+        }
+
+        attemptestReporitory.save(attempttest);
+
+        List<QuestionsForAttempt> questionsForAttemptList =
+                testService.convertTestForSaveBeforeTesting(allQuestionsForTesting, attempttest.getId());
+
+        questionForAttemptRepository.saveAll(questionsForAttemptList);
+
+        appointTest.setAttempttest(attempttest);
+        appointTestRepository.save(appointTest);
+
+        model.addAttribute("questionList", questionsForAttemptList);
+        model.addAttribute("attemptId", attempttest.getId());
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("appointTestId", appointTestId);
+        model.addAttribute("criteria", appointTest.getCriteria());
+
         return "qtest/process";
     }
 }

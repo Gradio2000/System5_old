@@ -23,11 +23,11 @@
         <table>
             <tr>
                 <td>Работник</td>
-                <td>${user.name}</td>
+                <td>${userDtoNameOnlyWithPositionDto.name}</td>
             </tr>
             <tr>
                 <td>Должность</td>
-                <td>${user.position.position}</td>
+                <td>${userDtoNameOnlyWithPositionDto.positionDtoNameOnly.position}</td>
             </tr>
             <tr>
                 <td>Дата и время</td>

@@ -1,5 +1,6 @@
 package com.example.qtest.controller;
 
+import com.example.qtest.model.Attempttest;
 import com.example.qtest.model.FalseUsersAnswer;
 import com.example.qtest.model.Question;
 import com.example.qtest.model.ResultTest;
@@ -8,6 +9,7 @@ import com.example.qtest.repository.FalseUsersAnswerRepository;
 import com.example.qtest.repository.QuestionRepository;
 import com.example.qtest.repository.ResultTestRepository;
 import com.example.qtest.service.ResultTestService;
+import com.example.system5.dto.UserDtoNameOnlyWithPositionDto;
 import com.example.system5.util.AuthUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -48,7 +50,6 @@ public class TestReportController {
                 authUser.getUser().getName());
 
         model.addAttribute("user", authUser.getUser());
-        model.addAttribute("attempt", attemptestReporitory.findById(attemptId).orElse(null));
 
         List<ResultTest> resultTestList = resultTestRepository.findAllByAttemptIdOrderById(attemptId);
         Map<Integer, List<Integer>> mapOfUserAnswers = resultTestService.getMapOfAnswers(resultTestList);
@@ -58,9 +59,15 @@ public class TestReportController {
         List<Integer> falseUserAnswers = falseUsersAnswerRepository.findAllByAttemptId(attemptId).stream()
                 .map(FalseUsersAnswer::getQuestionId)
                 .collect(Collectors.toList());
+
+        Attempttest attempt = attemptestReporitory.findById(attemptId).orElse(null);
+        UserDtoNameOnlyWithPositionDto userDtoNameOnlyWithPositionDto = UserDtoNameOnlyWithPositionDto.getInstance(attempt.getUser());
         model.addAttribute("falseUserAnswers", falseUserAnswers);
         model.addAttribute("quesList", quesList);
         model.addAttribute("listOfUsersAnswers", listOfUsersAnswers);
+        model.addAttribute("userDtoNameOnlyWithPositionDto", userDtoNameOnlyWithPositionDto);
+        model.addAttribute("attempt", attempt);
+
         return "qtest/report";
     }
 }
