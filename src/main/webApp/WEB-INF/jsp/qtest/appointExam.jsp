@@ -70,13 +70,13 @@
         <input class="myinput" form="examAppointForm" type="text" name="consolidTestName"
                placeholder="Введите наименование сводного теста" style="height: 0; margin-top: 0"/>
     </div>
-    <div id="baseDoc" class="hidEl" style="margin: 10px; font-size: small; display: none">
+    <div id="eko" class="hidEl" style="font-size: small; margin: 10px 0px 20px; display: none">
+        <input id="ecoinp" form="examAppointForm" type="checkbox" name="eko" onchange="checkEko()" style="margin-left: 10px"/>
+        <label for="ecoinp"> проверка знания порядка ведения ЭКО</label>
+    </div>
+    <div id="baseDoc" class="hidElch" style="margin: 10px; font-size: small; display: none">
         <input id="baseDocInput" class="myinput" form="examAppointForm" type="text" name="baseDocName"
                placeholder="Введите номер и дату распорядительного документа" style="height: 0; margin-top: 0"/>
-    </div>
-    <div id="eko" class="hidEl" style="font-size: small; display: none">
-        <input id="ecoinp" form="examAppointForm" type="checkbox" name="eko" style="margin-left: 10px"/>
-        <label for="ecoinp"> проверка знания порядка ведения ЭКО</label>
     </div>
     <div style="margin: 10px">
         <button class="btn" onclick="appointExam()">Назначить</button>
@@ -154,8 +154,9 @@
     }
 
     function appointExam() {
+        let ecoinp = document.getElementById("ecoinp");
         let val = document.getElementById("baseDocInput").value;
-        if(val === ""){
+        if(ecoinp.checked === true && val === ""){
             alert("Заполните реквизиты распорядительного документа");
             return;
         }
@@ -243,6 +244,19 @@
                alert("Ошибка удаления записи! \n function deleteAppoint(userId, testId)");
             }
         });
+    }
+
+    function checkEko() {
+        let ecoinp = document.getElementById("ecoinp");
+        let baseDoc = $('#baseDoc');
+        if(ecoinp.checked === true){
+            baseDoc.show();
+        }
+        else {
+            baseDoc.hide();
+            ecoinp.value = "";
+        }
+
     }
 
 </script>
