@@ -71,7 +71,7 @@
                placeholder="Введите наименование сводного теста" style="height: 0; margin-top: 0"/>
     </div>
     <div id="baseDoc" class="hidEl" style="margin: 10px; font-size: small; display: none">
-        <input class="myinput" form="examAppointForm" type="text" name="baseDocName"
+        <input id="baseDocInput" class="myinput" form="examAppointForm" type="text" name="baseDocName"
                placeholder="Введите номер и дату распорядительного документа" style="height: 0; margin-top: 0"/>
     </div>
     <div id="eko" class="hidEl" style="font-size: small; display: none">
@@ -154,6 +154,12 @@
     }
 
     function appointExam() {
+        let val = document.getElementById("baseDocInput").value;
+        if(val === ""){
+            alert("Заполните реквизиты распорядительного документа");
+            return;
+        }
+
         const msg = $('#examAppointForm').serializeArray();
         const userId = msg.find(el => el.name === "userId").value;
         $('.hidEl').hide();

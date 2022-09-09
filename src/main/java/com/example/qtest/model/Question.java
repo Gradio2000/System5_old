@@ -29,7 +29,6 @@ public class Question implements Serializable {
     @OneToMany(targetEntity = Answer.class, cascade = CascadeType.ALL,
     fetch = FetchType.EAGER, mappedBy = "question")
     @OrderBy("id")
-
     private List<Answer> answers;
 
 
