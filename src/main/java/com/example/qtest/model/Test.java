@@ -26,6 +26,9 @@ public class Test {
     @Column(name = "group_id")
     private Integer groupId;
 
+    @Column
+    private Boolean used;
+
     @OneToMany(targetEntity = Question.class, cascade = CascadeType.ALL,
     fetch = FetchType.EAGER, mappedBy = "testId")
     @OrderBy("id")

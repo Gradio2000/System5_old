@@ -62,27 +62,29 @@ public class AdminTestController {
         }
 
         test.setDeleted(false);
+        test.setUsed(false);
         testReposytory.save(test);
         return "redirect:/tests/list/" + test.getGroupId();
     }
 
     @PostMapping("/delete")
-    public String deleteGroupTest(@RequestParam (required = false) Integer[] check,
+    public String deleteGroupTest(@RequestParam (required = false, name = "check") Integer[] checkTestIds,
                                   @RequestParam Integer testGroupId, @AuthenticationPrincipal AuthUser authUser){
 
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
-        if (check == null){
+        if (checkTestIds == null){
             return "redirect:/tests/list/" + testGroupId + "?error=100";
         }
 
-        testReposytory.makeTestsDeletedTrue(check);
+        testReposytory.makeTestsDeletedTrue(checkTestIds);
 
-        Set<Integer> testIdsUsingInAttempts = attemptestReporitory.findAllTestId();
-        Set<Integer> checks = new HashSet<>(Arrays.asList(check));
-        checks.removeIf(testIdsUsingInAttempts::contains);
-        testReposytory.deleteAllById(checks);
+        List<Test> testList = testReposytory.findAllById(Arrays.asList(checkTestIds)).stream()
+                .filter(test -> !test.getUsed())
+                .collect(Collectors.toList());
+
+        testReposytory.deleteAll(testList);
 
         return "redirect:/tests/list/" + testGroupId;
     }

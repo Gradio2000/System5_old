@@ -53,23 +53,27 @@ public class TestProcessingController {
                                       @RequestParam Integer[] testIds,
                                       @RequestParam Integer[] quesAmounts,
                                       @RequestParam (required = false) Integer appointTestId,
-                                      @RequestParam Integer criteria,
+                                      @RequestParam (required = false) Integer criteria,
                                       @RequestParam (required = false) String testName){
 
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
         Map<Integer, Integer> idsQuesAmountMap = new HashMap<>();
-        int sumQuesAmount = 0;
         for (int i = 0; i < testIds.length; i++) {
             idsQuesAmountMap.put(testIds[i], quesAmounts[i]);
-            sumQuesAmount =+ quesAmounts[i];
         }
 
             Attempttest attempttest = new Attempttest();
             attempttest.setDateTime(new Date());
             attempttest.setUser(authUser.getUser());
-            attempttest.setCriteria(criteria);
+            if (criteria != null){
+                attempttest.setCriteria(criteria);
+            }
+            else {
+                attempttest.setCriteria(0);
+            }
+
             attempttest.setTestResult("Не завершен");
 
             Set<Question> allQuestionsForTesting = new HashSet<>();
@@ -83,8 +87,10 @@ public class TestProcessingController {
                     Set<Question> questionSet = new HashSet<>(test.getQuestions());
                     questionSet = testService.getShuffleTest(questionSet, quesAmount);
                     allQuestionsForTesting.addAll(questionSet);
+                    test.setUsed(true);
                 }
                 allQuestionsForTesting = testService.getShuffleTest(allQuestionsForTesting, allQuestionsForTesting.size());
+                testReposytory.saveAll(testList);
             }
             else {
                 attempttest.setConsolidTest(false);
@@ -92,6 +98,8 @@ public class TestProcessingController {
                 assert test != null;
                 attempttest.setTestName(test.getTestName());
                 allQuestionsForTesting  = testService.getShuffleTest(test.getQuestions(), quesAmounts[0]);
+                test.setUsed(true);
+                testReposytory.save(test);
             }
 
             attemptestReporitory.save(attempttest);
@@ -108,6 +116,8 @@ public class TestProcessingController {
                 appointTest.setAttempttest(attempttest);
                 appointTestRepository.save(appointTest);
             }
+
+
 
         model.addAttribute("questionList", questionsForAttemptList);
         model.addAttribute("attemptId", attempttest.getId());
@@ -159,7 +169,7 @@ public class TestProcessingController {
                 .map(ResultTest::getAnswerId)
                 .collect(Collectors.toSet());
 
-        int criteria = attemptestReporitory.findById(attemptId).orElse(null).getCriteria();
+        int criteria = Objects.requireNonNull(attemptestReporitory.findById(attemptId).orElse(null)).getCriteria();
 
         model.addAttribute("attemptId", attemptId);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
@@ -203,8 +213,10 @@ public class TestProcessingController {
                 Set<Question> questionSet = new HashSet<>(test.getQuestions());
                 questionSet = testService.getShuffleTest(questionSet, quesAmount);
                 allQuestionsForTesting.addAll(questionSet);
+                test.setUsed(true);
             }
             allQuestionsForTesting = testService.getShuffleTest(allQuestionsForTesting, allQuestionsForTesting.size());
+            testReposytory.saveAll(testList);
         }
         else {
             attempttest.setConsolidTest(false);
@@ -212,6 +224,8 @@ public class TestProcessingController {
             assert test != null;
             attempttest.setTestName(test.getTestName());
             allQuestionsForTesting  = testService.getShuffleTest(test.getQuestions(), appointTestAmountList.get(0).getQuesAmount());
+            test.setUsed(true);
+            testReposytory.save(test);
         }
 
         attemptestReporitory.save(attempttest);
