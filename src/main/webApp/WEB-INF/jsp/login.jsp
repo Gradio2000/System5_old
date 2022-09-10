@@ -17,6 +17,9 @@
 <body>
 <div class="log-form">
     <h2>Вход в систему</h2>
+    <div>
+        <a style="font-size: x-small; margin-left: 30px">версия ${version}</a>
+    </div>
     <form action="/perform_login" method="post">
         <label style="color: crimson"><c:if test="${param.get('error')}">Ошибка логина и пароля</c:if></label>
         <input type="text" title="Логин" placeholder="логин" name="login"/>

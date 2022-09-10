@@ -1,5 +1,6 @@
 package com.example.system5.controller;
 
+import com.example.System5Application;
 import com.example.system5.dto.UserDto;
 import com.example.system5.model.*;
 import com.example.system5.repository.PositionRepository;
@@ -58,6 +59,11 @@ public class RegistrationController {
         binder.addValidators(formFinishRegValidator);
     }
 
+    @GetMapping("/login")
+    public String login(Model model){
+        model.addAttribute("version", System5Application.VERSION);
+        return "login";
+    }
 
     @GetMapping("/registration")
     public ModelAndView registration(){
