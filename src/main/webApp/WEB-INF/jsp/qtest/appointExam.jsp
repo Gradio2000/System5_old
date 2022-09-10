@@ -67,7 +67,7 @@
                placeholder="Установите критерий в процентах" style="height: 0; margin-top: 0"/>
     </div>
     <div id="testNameTr"  style="margin: 10px; margin-top: 30px; font-size: small; display: none">
-        <input class="myinput" form="examAppointForm" type="text" name="consolidTestName"
+        <input id="consolidTestName" class="myinput" form="examAppointForm" type="text" name="consolidTestName"
                placeholder="Введите наименование сводного теста" style="height: 0; margin-top: 0"/>
     </div>
     <div id="eko" class="hidEl" style="font-size: small; margin: 10px 0px 20px; display: none">
@@ -157,9 +157,18 @@
         let ecoinp = document.getElementById("ecoinp");
         let val = document.getElementById("baseDocInput").value;
         if(ecoinp.checked === true && val === ""){
-            alert("Заполните реквизиты распорядительного документа");
+            alert("Заполните реквизиты распорядительного документа!");
             return;
         }
+
+        let appointChecks = $("input[type='checkbox']:checked");
+        let consolidTestName = document.getElementById("consolidTestName").value;
+        if(appointChecks.length > 1 && consolidTestName === ""){
+            alert("Заполните название сводного теста!");
+            return;
+        }
+
+
 
         const msg = $('#examAppointForm').serializeArray();
         const userId = msg.find(el => el.name === "userId").value;
