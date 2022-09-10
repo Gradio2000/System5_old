@@ -123,7 +123,7 @@ public class TestProcessingController {
         model.addAttribute("attemptId", attempttest.getId());
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("appointTestId", appointTestId);
-        model.addAttribute("criteria", criteria);
+        model.addAttribute("criteria", attempttest.getCriteria());
         return "qtest/process";
     }
 
@@ -146,7 +146,6 @@ public class TestProcessingController {
                              @RequestParam Integer criteria){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
-
         resultTestService.mainCheck(attemptId, criteria);
         if (appointTestId != null){
             appointTestRepository.setAppointTrue(appointTestId);
