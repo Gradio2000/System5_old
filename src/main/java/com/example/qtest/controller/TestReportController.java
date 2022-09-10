@@ -9,6 +9,7 @@ import com.example.qtest.repository.FalseUsersAnswerRepository;
 import com.example.qtest.repository.QuestionRepository;
 import com.example.qtest.repository.ResultTestRepository;
 import com.example.qtest.service.ResultTestService;
+import com.example.system5.dto.UserDto;
 import com.example.system5.dto.UserDtoNameOnlyWithPositionDto;
 import com.example.system5.util.AuthUser;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +50,7 @@ public class TestReportController {
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
-        model.addAttribute("user", authUser.getUser());
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
         List<ResultTest> resultTestList = resultTestRepository.findAllByAttemptIdOrderById(attemptId);
         Map<Integer, List<Integer>> mapOfUserAnswers = resultTestService.getMapOfAnswers(resultTestList);
