@@ -2,9 +2,9 @@ package com.example.qtest.controller;
 
 import com.example.qtest.dto.TestDto;
 import com.example.qtest.model.Test;
-import com.example.qtest.repository.AttemptestReporitory;
 import com.example.qtest.repository.GroupTestRepository;
 import com.example.qtest.repository.TestReposytory;
+import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Controller
@@ -25,15 +27,12 @@ public class AdminTestController {
 
     private final GroupTestRepository groupTestRepository;
     private final TestReposytory testReposytory;
-    private final AttemptestReporitory attemptestReporitory;
     
 
     public AdminTestController(GroupTestRepository groupTestRepository,
-                               TestReposytory testReposytory,
-                               AttemptestReporitory attemptestReporitory) {
+                               TestReposytory testReposytory) {
         this.groupTestRepository = groupTestRepository;
         this.testReposytory = testReposytory;
-        this.attemptestReporitory = attemptestReporitory;
     }
 
     @GetMapping("/list/{id}")
@@ -41,7 +40,7 @@ public class AdminTestController {
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
-        model.addAttribute("user", authUser.getUser());
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("groupTestId", id);
         model.addAttribute("groupTestName", Objects.requireNonNull(groupTestRepository.findById(id).orElse(null)).getName());
         List<TestDto> testDtoList = testReposytory.findAllByGroupIdOrderByTestId(id).stream()

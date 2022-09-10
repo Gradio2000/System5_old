@@ -1,7 +1,8 @@
 package com.example.qtest.controller;
 
-import com.example.qtest.model.AppointTest;
+import com.example.qtest.dto.AppointTestDto;
 import com.example.qtest.repository.AppointTestRepository;
+import com.example.qtest.service.DtoUtils;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +20,12 @@ import java.util.stream.Collectors;
 @Slf4j
 public class AppointTestController {
     private final AppointTestRepository appointTestRepository;
+    private final DtoUtils dtoUtils;
 
 
-    public AppointTestController(AppointTestRepository appointTestRepository) {
+    public AppointTestController(AppointTestRepository appointTestRepository, DtoUtils dtoUtils) {
         this.appointTestRepository = appointTestRepository;
+        this.dtoUtils = dtoUtils;
     }
 
     @GetMapping("/getUserAppoint")
@@ -32,9 +35,10 @@ public class AppointTestController {
 
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
-        List<AppointTest> appointTestList = appointTestRepository.findAllByUser(authUser.getUser()).stream()
+        List<AppointTestDto> appointTestList = dtoUtils.convertToAppointTestDtoList(
+                appointTestRepository.findAllByUser(authUser.getUser()).stream()
                 .filter(appointTest -> !appointTest.getFinished())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
         model.addAttribute("appointTestList", appointTestList);
         return "qtest/userAppoint";
     }

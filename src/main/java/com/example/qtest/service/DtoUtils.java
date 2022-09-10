@@ -36,9 +36,14 @@ public class DtoUtils {
         List<AppointTestDto> appointTestDtoList = new ArrayList<>();
         for (AppointTest appointTest: appointTestList){
             AppointTestDto appointTestDto = new AppointTestDto();
+            appointTestDto.setId(appointTest.getId());
             appointTestDto.setUserDtoNameOnlyWithPositionDto(UserDtoNameOnlyWithPositionDto.getInstance(appointTest.getUser()));
-            appointTestDto.setFinished(appointTest.getFinished());
             appointTestDto.setBase(appointTest.getBase());
+            appointTestDto.setEko(appointTest.getEko());
+            appointTestDto.setAmountQues(appointTest.getAmountQues());
+            appointTestDto.setTestName(appointTest.getTestName());
+            appointTestDto.setCriteria(appointTest.getCriteria());
+            appointTestDto.setFinished(appointTest.getFinished());
             if (appointTest.getAttempttest() != null){
                 appointTestDto.setAttempttestDto(AttempttestDto.getInstance(appointTest.getAttempttest()));
             }
