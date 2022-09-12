@@ -33,16 +33,6 @@
         color: black;
     }
 
-    /*input[type=text], select, textarea {*/
-    /*    width: 100%;*/
-    /*    padding: 12px;*/
-    /*    border: 1px solid #ccc;*/
-    /*    border-radius: 4px;*/
-    /*    box-sizing: border-box;*/
-    /*    margin-top: 6px;*/
-    /*    margin-bottom: 16px;*/
-    /*    resize: vertical;*/
-    /*}*/
 
     input[type=submit] {
         background-color: #4CAF50;
@@ -94,9 +84,9 @@
         padding: 5px;
     }
     .column {
-        flex-basis: 20%;
+        flex-basis: 25%;
         background: #f1f1f1;
-        min-height: 90vh;
+        min-height: 87vh;
         /*padding: 5px;*/
         border-radius: 10px;
     }
@@ -256,9 +246,9 @@
                 </c:if>
             </c:forEach>
         </div>
-        <div style="width: 40%">
+        <div style="width: 25%">
             <button class="collapsible">Новая задача</button>
-            <div class="content">
+            <div class="content" style="padding: 0;">
                 <div class="container-form">
                     <form:form id="newCanbanForm" action="/kanban/addNewKanban" method="post" modelAttribute="kanban" >
                         <label class="mylabel-forkanban" for="kanbanName">Название</label>

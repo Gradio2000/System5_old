@@ -43,7 +43,7 @@ public class KanbanController {
                 authUser.getUser().getName());
 
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        List<KanbanDto> kanbanList = kanbanRepository.findAll(Sort.by("id")).stream()
+        List<KanbanDto> kanbanList = kanbanRepository.findAll(Sort.by("taskEndDate")).stream()
                 .map(KanbanDto::getInstance)
                 .collect(Collectors.toList());
         model.addAttribute("kanbanList", kanbanList);

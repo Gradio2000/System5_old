@@ -29,21 +29,21 @@
     <table class="table">
       <tbody>
       <tr>
-        <th style="width: 8%">Работник</th>
-        <th>Должность</th>
-          <th>ЯНВАРЬ</th>
-          <th>ФЕВРАЛЬ</th>
-          <th>МАРТ</th>
-          <th>АПРЕЛЬ</th>
-          <th>МАЙ</th>
-          <th>ИЮНЬ</th>
-          <th>ИЮЛЬ</th>
-          <th>АВГУСТ</th>
-          <th>СЕНТЯБРЬ</th>
-          <th>ОКТЯБРЬ</th>
-          <th>НОЯБРЬ</th>
-          <th>ДЕКАБРЬ</th>
-        <th>ИТОГО</th>
+        <th style="width: 15%">Работник</th>
+        <th style="width: 15%">Должность</th>
+          <th><b>ЯНВАРЬ</b></th>
+          <th><b>ФЕВРАЛЬ</b></th>
+          <th><b>МАРТ</b></th>
+          <th><b>АПРЕЛЬ</b></th>
+          <th><b>МАЙ</b></th>
+          <th><b>ИЮНЬ</b></th>
+          <th><b>ИЮЛЬ</b></th>
+          <th><b>АВГУСТ</b></th>
+          <th><b>СЕНТЯБРЬ</b></th>
+          <th><b>ОКТЯБРЬ</b></th>
+          <th><b>НОЯБРЬ</b></th>
+          <th><b>ДЕКАБРЬ</b></th>
+        <th><b>ИТОГО</b></th>
       </tr>
       <c:forEach var="userDtoList" items="${modelMap}" varStatus="count">
         <tr>

@@ -393,6 +393,12 @@ table th {
     font-weight: normal;
 }
 
+table  b {
+    writing-mode: vertical-rl; /* поворачивает всю таблицу, но не содержимое отдельной ячейки, поэтому нужен вложенный элемент */
+    transform: scale(-1);
+    font-weight: normal;
+}
+
 
 /* стилизация содержимого страницы */
 body {
@@ -640,7 +646,7 @@ body {
 
 .sidenav {
     height: 100%;
-    width: 200px;
+    width: 220px;
     position: fixed;
     z-index: 1;
     top: 72px;
@@ -664,7 +670,7 @@ body {
 }
 
 .main {
-    margin-left: 200px; /* Same as the width of the sidenav */
+    margin-left: 220px; /* Same as the width of the sidenav */
     padding-left: 5px;
     margin-top: 72px;
 }
