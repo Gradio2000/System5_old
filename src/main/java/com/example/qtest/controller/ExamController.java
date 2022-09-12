@@ -2,7 +2,10 @@ package com.example.qtest.controller;
 
 import com.example.qtest.dto.AppointTestDto;
 import com.example.qtest.dto.GroupTestDto;
-import com.example.qtest.model.*;
+import com.example.qtest.model.AppointTest;
+import com.example.qtest.model.AppointTestAmount;
+import com.example.qtest.model.GroupTest;
+import com.example.qtest.model.Test;
 import com.example.qtest.repository.*;
 import com.example.qtest.service.DtoUtils;
 import com.example.qtest.service.TestService;
@@ -19,7 +22,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
@@ -62,7 +68,9 @@ public class ExamController {
 
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
-        List<GroupTestDto> groupTestDtoList = groupTestRepository.findAll().stream()
+        List<GroupTest> groupTestList = groupTestRepository.findAll();
+        groupTestList.forEach(groupTest -> groupTest.getTests().removeIf(Test::getDeleted));
+        List< GroupTestDto> groupTestDtoList = groupTestList.stream()
                 .map(dtoUtils::convertToGroupTestDtoWithTestName)
                 .collect(Collectors.toList());
         model.addAttribute("groupTestDtoList", groupTestDtoList);

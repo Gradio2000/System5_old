@@ -161,9 +161,10 @@
             return;
         }
 
-        let appointChecks = $("input[type='checkbox']:checked");
+        let appointChecks = $("input[class='appointCheck']:checked");
         let consolidTestName = document.getElementById("consolidTestName").value;
         if(appointChecks.length > 1 && consolidTestName === ""){
+            console.log(appointChecks);
             alert("Заполните название сводного теста!");
             return;
         }

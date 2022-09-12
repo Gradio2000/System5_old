@@ -3,7 +3,6 @@ package com.example.qtest.dto;
 
 import com.example.qtest.model.Attempttest;
 import lombok.Getter;
-
 import lombok.Setter;
 
 import java.io.Serializable;
