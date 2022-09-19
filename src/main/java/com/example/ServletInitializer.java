@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ServletInitializer extends SpringBootServletInitializer {
     public static final String VERSION = Version.getVersion();
+
+
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(System5Application.class);
