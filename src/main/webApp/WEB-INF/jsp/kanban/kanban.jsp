@@ -354,20 +354,22 @@
 
       function deleteKanban(id){
           event.stopPropagation();
-          let el = document.getElementById(id);
-          el.setAttribute("hidden", true);
-          $.ajax({
-              type: 'POST',
-              url: '/kanban/delete',
-              data: { kanbanId: id },
-              success: function (data) {
-                  // запустится при успешном выполнении запроса и в data будет ответ скрипта
-              },
-              error: function () {
-                  el.removeAttribute("hidden");
-                  alert('Ошибка удаления задачи!');
-              }
-          });
+          if ( confirm("Вы уверены?")){
+              let el = document.getElementById(id);
+              el.setAttribute("hidden", true);
+              $.ajax({
+                  type: 'POST',
+                  url: '/kanban/delete',
+                  data: { kanbanId: id },
+                  success: function (data) {
+                      // запустится при успешном выполнении запроса и в data будет ответ скрипта
+                  },
+                  error: function () {
+                      el.removeAttribute("hidden");
+                      alert('Ошибка удаления задачи!');
+                  }
+              });
+          }
       }
 
       function submitForm(){
