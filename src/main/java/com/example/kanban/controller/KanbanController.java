@@ -44,6 +44,7 @@ public class KanbanController {
 
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         List<KanbanDto> kanbanList = kanbanRepository.findAll(Sort.by("taskEndDate")).stream()
+                .filter(kanban -> !kanban.getArch())
                 .map(KanbanDto::getInstance)
                 .collect(Collectors.toList());
         model.addAttribute("kanbanList", kanbanList);
@@ -85,7 +86,7 @@ public class KanbanController {
     }
 
     @PostMapping("/addNewKanban")
-    public String addNewCanban(@ModelAttribute Kanban kanban,
+    public String addNewKanban(@ModelAttribute Kanban kanban,
                                @AuthenticationPrincipal AuthUser authUser,
                                @RequestParam String date){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
@@ -94,6 +95,7 @@ public class KanbanController {
         kanban.setUser(authUser.getUser());
         Date date1 = java.sql.Date.valueOf(LocalDate.parse(date));
         kanban.setTaskEndDate(date1);
+        kanban.setArch(false);
         kanbanRepository.save(kanban);
         return "redirect:kanban";
     }
@@ -104,8 +106,15 @@ public class KanbanController {
                                    @AuthenticationPrincipal AuthUser authUser){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
-
-        kanbanRepository.deleteById(kanbanId);
+        Kanban kanban = kanbanRepository.findById(kanbanId).orElse(null);
+        assert kanban != null;
+        if (kanban.getFinished()){
+            kanban.setArch(true);
+            kanbanRepository.save(kanban);
+        }
+        else {
+            kanbanRepository.deleteById(kanbanId);
+        }
         return HttpStatus.OK;
     }
 

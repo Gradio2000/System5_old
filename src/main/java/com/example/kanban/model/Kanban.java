@@ -42,6 +42,9 @@ public class Kanban {
     @Column(name = "taskenddate")
     private Date taskEndDate;
 
+    @Column
+    private Boolean arch;
+
     @OneToMany
     @JoinTable(name = "kan_kanban_users",
             joinColumns = {@JoinColumn(name = "kanban_id")},
