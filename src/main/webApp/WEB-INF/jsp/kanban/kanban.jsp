@@ -269,6 +269,18 @@
                     </form:form>
                 </div>
             </div>
+            <div style="margin-top: 10px">
+                <button class="collapsible">Архив задач</button>
+                <div class="content" style="padding: 0">
+                    <div class="container-form">
+                        <c:forEach var="kanban" items="${kanbanArch}">
+                            <c:if test="${kanban.arch == true}">
+                                <a>${kanban.kanbanName}</a>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -355,14 +367,13 @@
       function deleteKanban(id){
           event.stopPropagation();
           if ( confirm("Вы уверены?")){
-              let el = document.getElementById(id);
-              el.setAttribute("hidden", true);
               $.ajax({
                   type: 'POST',
                   url: '/kanban/delete',
                   data: { kanbanId: id },
                   success: function (data) {
                       // запустится при успешном выполнении запроса и в data будет ответ скрипта
+                      document.location = "/kanban/kanban";
                   },
                   error: function () {
                       el.removeAttribute("hidden");

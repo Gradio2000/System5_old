@@ -21,11 +21,12 @@ public class KanbanDto implements Serializable {
     private UserDtoNameOnlyWithPositionDto userDtoNameOnlyWithPositionDto;
     private Date taskEndDate;
     private List<UserDtoNameOnly> userDtoNameOnlyList;
+    private Boolean arch;
 
     public KanbanDto(Integer id, String kanbanName, Boolean started,
                      Boolean continues, Boolean finished,
                      String describe, UserDtoNameOnlyWithPositionDto userDtoNameOnlyWithPositionDto,
-                     Date taskEndDate, List<UserDtoNameOnly> userDtoNameOnlyList) {
+                     Date taskEndDate, List<UserDtoNameOnly> userDtoNameOnlyList, Boolean arch) {
         this.id = id;
         this.kanbanName = kanbanName;
         this.started = started;
@@ -35,6 +36,7 @@ public class KanbanDto implements Serializable {
         this.userDtoNameOnlyWithPositionDto = userDtoNameOnlyWithPositionDto;
         this.taskEndDate = taskEndDate;
         this.userDtoNameOnlyList = userDtoNameOnlyList;
+        this.arch = arch;
     }
 
     public KanbanDto() {
@@ -44,6 +46,6 @@ public class KanbanDto implements Serializable {
         return new KanbanDto(kanban.getId(), kanban.getKanbanName(), kanban.getStarted(),
                 kanban.getContinues(), kanban.getFinished(), kanban.getDescribe(),
                 UserDtoNameOnlyWithPositionDto.getInstance(kanban.getUser()), kanban.getTaskEndDate(),
-                DtoUtils.convertToUserDtoNameOnlyList(kanban.getUserList()));
+                DtoUtils.convertToUserDtoNameOnlyList(kanban.getUserList()), kanban.getArch());
     }
 }

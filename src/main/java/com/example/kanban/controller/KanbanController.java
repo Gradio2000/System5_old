@@ -43,10 +43,19 @@ public class KanbanController {
                 authUser.getUser().getName());
 
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        List<KanbanDto> kanbanList = kanbanRepository.findAll(Sort.by("taskEndDate")).stream()
+        List<Kanban> kanbans = kanbanRepository.findAll(Sort.by("taskEndDate"));
+
+        List<KanbanDto> kanbanList = kanbans.stream()
                 .filter(kanban -> !kanban.getArch())
                 .map(KanbanDto::getInstance)
                 .collect(Collectors.toList());
+
+        List<KanbanDto> kanbanArch = kanbans.stream()
+                .filter(Kanban::getArch)
+                .map(KanbanDto::getInstance)
+                .collect(Collectors.toList());
+
+        model.addAttribute("kanbanArch", kanbanArch);
         model.addAttribute("kanbanList", kanbanList);
         model.addAttribute("kanban", new Kanban());
         return "kanban/kanban";
