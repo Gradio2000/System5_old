@@ -235,27 +235,11 @@ public class KanbanController {
 
     @PostMapping("/delArch")
     @ResponseBody
-    public Map<String, List<KanbanDto>> delArch(@RequestParam Integer kanId){
+    public HttpStatus delArch(@RequestParam Integer kanId){
         Kanban kanban = kanbanRepository.findById(kanId).orElse(null);
         assert kanban != null;
         kanban.setArch(false);
         kanbanRepository.save(kanban);
-
-        List<Kanban> kanbans = kanbanRepository.findAll(Sort.by("taskEndDate"));
-
-        List<KanbanDto> kanbanList = kanbans.stream()
-                .filter(k -> !k.getArch())
-                .map(KanbanDto::getInstance)
-                .collect(Collectors.toList());
-
-        List<KanbanDto> kanbanArch = kanbans.stream()
-                .filter(Kanban::getArch)
-                .map(KanbanDto::getInstance)
-                .collect(Collectors.toList());
-
-        Map<String, List<KanbanDto>> result = new HashMap<>();
-        result.put("kanbanList", kanbanList);
-        result.put("kanbanArch", kanbanArch);
-        return result;
+        return HttpStatus.OK;
     }
 }

@@ -579,7 +579,6 @@
               url: '/kanban/editMembers',
               data: msg,
               success: function (data){
-                  console.log(data);
                   let contain = document.createElement("div");
                   contain.className = "contain";
                   contain.id = "cont" + data.userId;
@@ -645,9 +644,7 @@
               url: '/kanban/delArch',
               data: {"kanId": kanId},
               success: function (data){
-                  console.log(data);
-                  $('#arch' + kanId).remove();
-                  $('#col3').append("dddd");
+                  document.location = "/kanban/kanban";
               },
               error: function (){
                   alert('Ошибка отправки данных на сервер! \n deleteArch(kanId)')
