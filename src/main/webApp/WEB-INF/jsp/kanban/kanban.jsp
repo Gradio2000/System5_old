@@ -275,9 +275,9 @@
                     <div class="container-form">
                         <c:forEach var="kanban" items="${kanbanArch}">
                             <c:if test="${kanban.arch == true}">
-                                <div>
+                                <div id="arch${kanban.id}">
                                     <label>
-                                        <input type="checkbox" checked>
+                                        <input type="checkbox" checked onchange="deleteArch(${kanban.id})">
                                         <a class="arch">${kanban.kanbanName}</a>
                                     </label>
                                 </div>
@@ -635,6 +635,22 @@
               },
               error: function (){
                   alert('Ошибка отправки данных на сервер! \n function delMember(id)')
+              }
+          });
+      }
+
+      function deleteArch(kanId){
+          $.ajax({
+              type: 'POST',
+              url: '/kanban/delArch',
+              data: {"kanId": kanId},
+              success: function (data){
+                  console.log(data);
+                  $('#arch' + kanId).remove();
+                  $('#col3').append("dddd");
+              },
+              error: function (){
+                  alert('Ошибка отправки данных на сервер! \n deleteArch(kanId)')
               }
           });
       }
