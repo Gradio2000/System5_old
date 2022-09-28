@@ -275,7 +275,12 @@
                     <div class="container-form">
                         <c:forEach var="kanban" items="${kanbanArch}">
                             <c:if test="${kanban.arch == true}">
-                                <a>${kanban.kanbanName}</a>
+                                <div>
+                                    <label>
+                                        <input type="checkbox" checked>
+                                        <a class="arch">${kanban.kanbanName}</a>
+                                    </label>
+                                </div>
                             </c:if>
                         </c:forEach>
                     </div>

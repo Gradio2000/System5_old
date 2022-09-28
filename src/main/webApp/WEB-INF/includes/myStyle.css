@@ -750,3 +750,9 @@ body {
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+.arch {
+    font-size: smaller;
+    text-decoration: line-through;
+    color: grey;
+}
