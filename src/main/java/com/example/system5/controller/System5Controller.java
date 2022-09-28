@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -57,7 +58,8 @@ public class System5Controller {
     }
 
     @GetMapping(value = "/list")
-    public String getAll(@AuthenticationPrincipal AuthUser authUser, Model model, HttpServletRequest request){
+    public String getAll(@AuthenticationPrincipal AuthUser authUser, Model model, HttpServletRequest request,
+                         @RequestParam (required = false) Integer year){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
@@ -68,7 +70,14 @@ public class System5Controller {
             return "sys5pages/registrationnext";
         }
 
-        List<System5> system5List = system5Repository.findAllByUserId(authUser.getUser().getUserId());
+        if (year == null){
+            year = LocalDate.now().getYear();
+        }
+
+        Integer finalYear = year;
+        List<System5> system5List = system5Repository.findAllByUserId(authUser.getUser().getUserId()).stream()
+                .filter(system5 -> Objects.equals(system5.getYear(), finalYear))
+                .collect(Collectors.toList());
         model.addAttribute("system5List", sortService.sortSystem5(system5List));
 
         List<Month> monthList = Arrays.stream(Month.values()).collect(Collectors.toList());
@@ -140,6 +149,9 @@ public class System5Controller {
         if (bindingResult.hasErrors()){
             return "redirect:/list?error=1";
         }
+
+        LocalDate localDate = LocalDate.now();
+        system5.setYear(localDate.getYear());
 
         System5 systemForUpdate = system5Repository.findByMonthAndUserId(system5.getMonth(), authUser.getUser().getUserId());
         if (systemForUpdate != null){

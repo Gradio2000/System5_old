@@ -235,7 +235,11 @@ public class KanbanController {
 
     @PostMapping("/delArch")
     @ResponseBody
-    public HttpStatus delArch(@RequestParam Integer kanId){
+    public HttpStatus delArch(@RequestParam Integer kanId, @AuthenticationPrincipal AuthUser authUser){
+
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+
         Kanban kanban = kanbanRepository.findById(kanId).orElse(null);
         assert kanban != null;
         kanban.setArch(false);

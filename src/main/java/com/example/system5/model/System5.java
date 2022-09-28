@@ -50,6 +50,9 @@ public class System5 extends RepresentationModel<System5> {
     @Column(name = "rated")
     private int rated;
 
+    @Column
+    private Integer year;
+
     @OneToOne(mappedBy = "system5", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     @JsonManagedReference
