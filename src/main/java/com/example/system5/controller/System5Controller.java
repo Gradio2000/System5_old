@@ -63,6 +63,8 @@ public class System5Controller {
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+
         if (authUser.getUser().getName() == null){
             model.addAttribute("formFinishReg", new FormFinishReg());
             request.setAttribute("error", "Не завершена процедура регистрации");
@@ -70,12 +72,22 @@ public class System5Controller {
             return "sys5pages/registrationnext";
         }
 
+        List<System5> system5ListAll = system5Repository.findAllByUserId(authUser.getUser().getUserId());
+
+        List<Integer> years = system5ListAll.stream()
+                .map(System5::getYear)
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+        model.addAttribute("years", years);
+
         if (year == null){
             year = LocalDate.now().getYear();
         }
 
+
         Integer finalYear = year;
-        List<System5> system5List = system5Repository.findAllByUserId(authUser.getUser().getUserId()).stream()
+        List<System5> system5List = system5ListAll.stream()
                 .filter(system5 -> Objects.equals(system5.getYear(), finalYear))
                 .collect(Collectors.toList());
         model.addAttribute("system5List", sortService.sortSystem5(system5List));
@@ -99,8 +111,6 @@ public class System5Controller {
                 .filter(u -> !Objects.equals(u.getUserId(), authUser.getUser().getUserId()))
                 .collect(Collectors.toList());
         model.addAttribute(userList);
-
-        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
 
         return "sys5pages/lists";
     }
