@@ -160,10 +160,10 @@ public class System5Controller {
             return "redirect:/list?error=1";
         }
 
-        LocalDate localDate = LocalDate.now();
-        system5.setYear(localDate.getYear());
+        Integer year = LocalDate.now().getYear();
+        system5.setYear(year);
 
-        System5 systemForUpdate = system5Repository.findByMonthAndUserId(system5.getMonth(), authUser.getUser().getUserId());
+        System5 systemForUpdate = system5Repository.findByMonthAndUserIdAndYear(system5.getMonth(), authUser.getUser().getUserId(),year);
         if (systemForUpdate != null){
             saveOrUpdateSystem5Service.updateSystem5(systemForUpdate, system5);
         }

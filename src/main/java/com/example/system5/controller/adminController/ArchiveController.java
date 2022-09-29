@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -97,7 +98,10 @@ public class ArchiveController {
             return "redirect:/admin/getUserSystem5Archive/" + system5.getUserId() + "?error=1";
         }
 
-        System5 systemForUpdate = system5Repository.findByMonthAndUserId(system5.getMonth(), system5.getUserId());
+        Integer year = LocalDate.now().getYear();
+        system5.setYear(year);
+
+        System5 systemForUpdate = system5Repository.findByMonthAndUserIdAndYear(system5.getMonth(), system5.getUserId(),year);
         if (systemForUpdate != null){
             saveOrUpdateSystem5Service.updateSystem5(systemForUpdate, system5);
         }
