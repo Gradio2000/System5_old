@@ -34,6 +34,7 @@
                 <option value="${year}">${year}</option>
             </c:forEach>
         </select>
+        <label for="userIdSelect"> ${selectedYear}</label>
     </div>
     <table class="table" style="margin-top: 10px">
         <tbody>

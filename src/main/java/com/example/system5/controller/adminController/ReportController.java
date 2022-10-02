@@ -130,10 +130,6 @@ public class ReportController {
     }
 
     public List<Integer> getYear(){
-        return system5Repository.findAll().stream()
-                .map(System5::getYear)
-                .distinct()
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
+        return system5Repository.getYears();
     }
 }

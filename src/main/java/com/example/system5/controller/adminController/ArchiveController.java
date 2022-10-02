@@ -68,15 +68,6 @@ public class ArchiveController {
         }
         Integer finalYear = year;
 
-        List<System5> system5ListAll = system5Repository.findAllByUserId(authUser.getUser().getUserId());
-
-        List<Integer> years = system5ListAll.stream()
-                .map(System5::getYear)
-                .distinct()
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
-        model.addAttribute("years", years);
-
         List<String> monthList = Arrays.stream(Month.values())
                 .map(Enum::name)
                 .collect(Collectors.toList());
@@ -84,7 +75,7 @@ public class ArchiveController {
 
         User user = userRepository.findById(id).orElse(null);
         assert user != null;
-        List<System5> system5List = system5ListAll.stream()
+        List<System5> system5List = user.getSystem5List().stream()
                 .filter(s -> Objects.equals(s.getYear(), finalYear))
                 .collect(Collectors.toList());
         model.addAttribute("system5List", sortService.sortSystem5(system5List));
@@ -95,8 +86,9 @@ public class ArchiveController {
             monthListFromSystem5List.put(system51.getSystem5Id(), Month.valueOf(system51.getMonth()));
         }
         model.addAttribute("monthListForEditSystem5Empl", monthListFromSystem5List);
-
+        model.addAttribute("years", system5Repository.getYears());
         model.addAttribute("userId", id);
+        model.addAttribute("selectedYear", finalYear);
         return "sys5pages/ArchiveUserListSystem5";
     }
 

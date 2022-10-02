@@ -7,7 +7,6 @@ import com.example.system5.repository.CommEmplRepository;
 import com.example.system5.repository.PositionRepository;
 import com.example.system5.repository.System5Repository;
 import com.example.system5.repository.UserRepository;
-import com.example.system5.service.commanderEmployeeService.SaveOrUpdateCommEmplService;
 import com.example.system5.service.system5Service.GetTotalMarkService;
 import com.example.system5.service.system5Service.SaveOrUpdateSystem5Service;
 import com.example.system5.service.system5Service.SortService;
@@ -34,7 +33,6 @@ public class System5Controller {
     private final UserRepository userRepository;
     private final GetTotalMarkService getTotalMarkService;
     private final SaveOrUpdateSystem5Service saveOrUpdateSystem5Service;
-    private final SaveOrUpdateCommEmplService saveOrUpdateCommEmplService;
     private final SortService sortService;
     private final PositionRepository positionRepository;
 
@@ -44,14 +42,12 @@ public class System5Controller {
     public System5Controller(System5Repository system5Repository,
                              UserRepository userRepository, GetTotalMarkService getTotalMarkService,
                              SaveOrUpdateSystem5Service saveOrUpdateSystem5Service,
-                             SaveOrUpdateCommEmplService saveOrUpdateCommEmplService,
                              SortService sortService, PositionRepository positionRepository,
                              CommEmplRepository commEmplRepository) {
         this.system5Repository = system5Repository;
         this.userRepository = userRepository;
         this.getTotalMarkService = getTotalMarkService;
         this.saveOrUpdateSystem5Service = saveOrUpdateSystem5Service;
-        this.saveOrUpdateCommEmplService = saveOrUpdateCommEmplService;
         this.sortService = sortService;
         this.positionRepository = positionRepository;
         this.commEmplRepository = commEmplRepository;
@@ -76,20 +72,8 @@ public class System5Controller {
             year = LocalDate.now().getYear();
         }
         Integer finalYear = year;
-        model.addAttribute("selectedYear", finalYear);
-        model.addAttribute("currentYear", LocalDate.now().getYear());
 
-        List<System5> system5ListAll = system5Repository.findAllByUserId(authUser.getUser().getUserId());
-
-        List<Integer> years = system5ListAll.stream()
-                .map(System5::getYear)
-                .distinct()
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
-        model.addAttribute("years", years);
-
-
-        List<System5> system5List = system5ListAll.stream()
+        List<System5> system5List = system5Repository.findAllByUserId(authUser.getUser().getUserId()).stream()
                 .filter(system5 -> Objects.equals(system5.getYear(), finalYear))
                 .collect(Collectors.toList());
         model.addAttribute("system5List", sortService.sortSystem5(system5List));
@@ -114,6 +98,10 @@ public class System5Controller {
                 .collect(Collectors.toList());
         model.addAttribute(userList);
 
+
+        model.addAttribute("selectedYear", finalYear);
+        model.addAttribute("currentYear", LocalDate.now().getYear());
+        model.addAttribute("years", system5Repository.getYears());
         return "sys5pages/lists";
     }
 
