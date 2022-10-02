@@ -31,12 +31,14 @@ public class UserListTransformer {
                 .collect(Collectors.toList()).contains(newMonth);
     }
 
-    public Map<UserDto, String[]> getUserDtoListMapForFirstHalf(List<User> userList){
+    public Map<UserDto, String[]> getUserDtoListMapForFirstHalf(List<User> userList, Integer finalYear){
         Map<UserDto, String[]> userDtoListMap = new HashMap<>();
         for (User user : userList) {
             UserDto userDto = UserDto.getInstance(user);
             String[] strings = {"", "", "", "", "", ""};
-            List<System5> system5List = user.getSystem5List();
+            List<System5> system5List = user.getSystem5List().stream()
+                        .filter(system5 -> system5.getYear().equals(finalYear))
+                        .collect(Collectors.toList());
             for (System5 system5 : system5List) {
                 String totalMarkEmpl = system5.getTotalMark5().getTotalMarkEmpl() != null ? system5.getTotalMark5().getTotalMarkEmpl() : "";
                 switch (system5.getMonth()) {
@@ -68,13 +70,15 @@ public class UserListTransformer {
         return userDtoListMap;
     }
 
-    public Map<UserDto, String[]> getUserDtoListMapForSecondHalf(List<User> userList){
+    public Map<UserDto, String[]> getUserDtoListMapForSecondHalf(List<User> userList, Integer finalYear){
         Map<UserDto, String[]> userDtoListMap = new HashMap<>();
         for (User user : userList) {
             UserDto userDto = UserDto.getInstance(user);
             String[] strings = new String[6];
             Arrays.fill(strings, "");
-            List<System5> system5List = user.getSystem5List();
+            List<System5> system5List = user.getSystem5List().stream()
+                    .filter(system5 -> system5.getYear().equals(finalYear))
+                    .collect(Collectors.toList());
             for (System5 system5 : system5List) {
                 String totalMarkEmpl = system5.getTotalMark5().getTotalMarkEmpl() != null ? system5.getTotalMark5().getTotalMarkEmpl() : "";
                 switch (system5.getMonth()) {

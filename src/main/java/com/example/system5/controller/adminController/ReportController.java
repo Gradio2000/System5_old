@@ -53,6 +53,8 @@ public class ReportController {
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
+        model.addAttribute("years", getYear());
+
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         return "sys5pages/prepareHalfYearReport";
     }
@@ -75,10 +77,17 @@ public class ReportController {
     @GetMapping("/halfYearReport")
     public String getHalfYearReport(@AuthenticationPrincipal AuthUser authUser,
                                     @RequestParam Integer half,
+                                    @RequestParam (required = false) Integer year,
                                     Model model) {
 
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+
+        if (year == null){
+            year = LocalDate.now().getYear();
+        }
+        Integer finalYear = year;
 
         List<User> userList = userRepository.findAll().stream()
                 .filter(user -> user.getSystem5List().size() != 0)
@@ -86,23 +95,15 @@ public class ReportController {
 
         Map<UserDto, String[]> userDtoMap = new HashMap<>();
         if(half == 1) {
-            for (User user : userList) {
-                List<System5> system5List = user.getSystem5List();
-                system5List.removeIf(system5 -> !userListTransformer.getFirstHalf(system5.getMonth()));
-            }
-             userDtoMap = userListTransformer.getUserDtoListMapForFirstHalf(userList);
+             userDtoMap = userListTransformer.getUserDtoListMapForFirstHalf(userList, finalYear);
         }
         else if (half == 2){
-            for (User user : userList) {
-                List<System5> system5List = user.getSystem5List();
-                system5List.removeIf(system5 -> !userListTransformer.getSecondHalf(system5.getMonth()));
-            }
-            userDtoMap = userListTransformer.getUserDtoListMapForSecondHalf(userList);
+            userDtoMap = userListTransformer.getUserDtoListMapForSecondHalf(userList, finalYear);
         }
 
         model.addAttribute("modelMap", userDtoMap);
-        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         model.addAttribute("half", half);
+        model.addAttribute("selectedYear", year);
         return "sys5pages/reportHalfYear";
     }
 
@@ -116,15 +117,7 @@ public class ReportController {
             year = LocalDate.now().getYear();
         }
         model.addAttribute("selectedYear", year);
-
-        List<System5> system5ListAll = system5Repository.findAllByUserId(authUser.getUser().getUserId());
-
-        List<Integer> years = system5ListAll.stream()
-                .map(System5::getYear)
-                .distinct()
-                .sorted(Comparator.reverseOrder())
-                .collect(Collectors.toList());
-        model.addAttribute("years", years);
+        model.addAttribute("years", getYear());
 
 
         List<User> userList = userRepository.findAll().stream()
@@ -134,5 +127,13 @@ public class ReportController {
         model.addAttribute("modelMap", userListTransformer.getUserDtoListMapForYear(userList, year));
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         return "sys5pages/reportYear";
+    }
+
+    public List<Integer> getYear(){
+        return system5Repository.findAll().stream()
+                .map(System5::getYear)
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
     }
 }

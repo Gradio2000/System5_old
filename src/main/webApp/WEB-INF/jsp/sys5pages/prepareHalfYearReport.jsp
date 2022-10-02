@@ -25,7 +25,16 @@
 <body>
 <div class="main">
   <form method="get" action="/admin/halfYearReport">
-    <select name="half" class="select-css" style="width: max-content;">
+    <div style="margin-top: 80px">
+      <select class="select-css" name="year" onchange="setYear(this.value)"
+              style="width: max-content;">
+        <option disabled selected>Год</option>
+        <c:forEach var="year" items="${years}">
+          <option value="${year}">${year}</option>
+        </c:forEach>
+      </select>
+    </div>
+    <select name="half" class="select-css" style="width: max-content">
       <option value="1">За 1 полугодие</option>
       <option value="2">За 2 полугодие</option>
     </select>
