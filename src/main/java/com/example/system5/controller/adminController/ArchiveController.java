@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -64,30 +61,40 @@ public class ArchiveController {
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+
         if (year == null){
             year = LocalDate.now().getYear();
         }
         Integer finalYear = year;
 
-        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
-        User user = userRepository.findById(id).orElse(null);
+        List<System5> system5ListAll = system5Repository.findAllByUserId(authUser.getUser().getUserId());
+
+        List<Integer> years = system5ListAll.stream()
+                .map(System5::getYear)
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+        model.addAttribute("years", years);
 
         List<String> monthList = Arrays.stream(Month.values())
                 .map(Enum::name)
                 .collect(Collectors.toList());
         model.addAttribute("monthList", monthList);
 
+        User user = userRepository.findById(id).orElse(null);
         assert user != null;
-        List<System5> system5List = system5Repository.findAllByUserIdAndYear(user.getUserId(), finalYear);
+        List<System5> system5List = system5ListAll.stream()
+                .filter(s -> Objects.equals(s.getYear(), finalYear))
+                .collect(Collectors.toList());
         model.addAttribute("system5List", sortService.sortSystem5(system5List));
 
 
-        Map<Integer, Month> monthListFromSystem5List = new HashMap();
+        Map<Integer, Month> monthListFromSystem5List = new HashMap<>();
         for (System5 system51 : system5List){
             monthListFromSystem5List.put(system51.getSystem5Id(), Month.valueOf(system51.getMonth()));
         }
         model.addAttribute("monthListForEditSystem5Empl", monthListFromSystem5List);
-
 
         model.addAttribute("userId", id);
         return "sys5pages/ArchiveUserListSystem5";
