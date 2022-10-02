@@ -209,7 +209,9 @@
             </c:if>
         </c:forEach>
         <c:if test="${let != 0}">
-            <button type="button" class="buttonch" onclick="editSelfRated(${param.get('year')})">Изменить</button>
+            <c:if test="${selectedYear == currentYear}">
+                <button type="button" class="buttonch" onclick="editSelfRated(${param.get('year')})">Изменить</button>
+            </c:if>
         </c:if>
     </c:if>
     <%--    кнопка изменить--%>

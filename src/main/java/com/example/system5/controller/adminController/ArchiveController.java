@@ -120,7 +120,7 @@ public class ArchiveController {
             saveOrUpdateSystem5Service.saveSystem5(system5);
         }
 
-        return "redirect:/admin/getUserSystem5Archive/" + system5.getUserId();
+        return "redirect:/admin/getUserSystem5Archive/" + system5.getUserId() + "?year=" + system5.getYear();
     }
 
 
@@ -148,6 +148,6 @@ public class ArchiveController {
 
         system5Repository.save(system5);
 
-        return "redirect:/admin/getUserSystem5Archive/" + system5.getUserId();
+        return "redirect:/admin/getUserSystem5Archive/" + system5.getUserId() + "?year=" + system5.getYear();
     }
 }
