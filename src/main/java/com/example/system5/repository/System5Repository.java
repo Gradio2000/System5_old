@@ -9,6 +9,7 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface System5Repository extends JpaRepository<System5, Integer> {
+    List<System5> findAllByUserIdAndYear(Integer user_id, Integer year);
     List<System5> findAllByUserId(Integer user_id);
     List<System5> findByUserIdOrderBySystem5Id(int id);
     List<System5> findAllByMonth(String month);

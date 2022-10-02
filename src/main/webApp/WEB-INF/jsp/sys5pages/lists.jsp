@@ -207,7 +207,7 @@
             </c:if>
         </c:forEach>
         <c:if test="${let != 0}">
-            <button type="button" class="buttonch" onclick="editSelfRated()">Изменить</button>
+            <button type="button" class="buttonch" onclick="editSelfRated(${param.get('year')})">Изменить</button>
         </c:if>
     </c:if>
     <%--    кнопка изменить--%>
@@ -230,10 +230,13 @@
 
 <script>
 
-    function editSelfRated(){
+    function editSelfRated(year){
+        if (year === undefined){
+            year = 0;
+        }
         $.ajax({
             type: 'GET',
-            url: '/getMonths',
+            url: '/getMonths?year=' + year,
             success: function (data) {
                 let elem = document.getElementById('selectMonthForEdit');
                 for (let i = 0; i < data.length; i++) {

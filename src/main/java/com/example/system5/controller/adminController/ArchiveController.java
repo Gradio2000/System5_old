@@ -59,9 +59,15 @@ public class ArchiveController {
                                      Model model, @ModelAttribute @Valid System5 system5,
                                      BindingResult bindingResult,
                                      @ModelAttribute @Valid System5empl system5empl,
-                                     BindingResult bindingResult1){
+                                     BindingResult bindingResult1,
+                                     @RequestParam (required = false) Integer year){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
+
+        if (year == null){
+            year = LocalDate.now().getYear();
+        }
+        Integer finalYear = year;
 
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         User user = userRepository.findById(id).orElse(null);
@@ -72,7 +78,7 @@ public class ArchiveController {
         model.addAttribute("monthList", monthList);
 
         assert user != null;
-        List<System5> system5List = system5Repository.findAllByUserId(user.getUserId());
+        List<System5> system5List = system5Repository.findAllByUserIdAndYear(user.getUserId(), finalYear);
         model.addAttribute("system5List", sortService.sortSystem5(system5List));
 
 
