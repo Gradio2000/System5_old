@@ -11,7 +11,8 @@ create table kan_kanban
     finished       boolean,
     describe       varchar,
     author_user_id integer,
-    taskenddate     date
+    taskenddate     date,
+    arch           boolean
 );
 
 drop table if exists kan_kanban_users;

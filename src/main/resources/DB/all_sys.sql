@@ -105,7 +105,8 @@ create table sys_system5
     res3       char              not null,
     res4       char              not null,
     res5       char              not null,
-    rated      integer default 0 not null
+    rated      integer default 0 not null,
+    year       integer
 );
 
 create unique index system5_system5_id_uindex
