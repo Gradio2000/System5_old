@@ -21,7 +21,7 @@
 
     <div class="main" >
         <div id="printableArea" style="text-align: center">
-            <p>Форма оценки работников полевого учреждения Банка России № 42667 за ${month}</p>
+            <p>Форма оценки работников полевого учреждения Банка России № 42667 за ${month} ${year} года</p>
             <div>
                 <table class="table">
                     <tbody>

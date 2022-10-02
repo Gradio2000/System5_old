@@ -45,6 +45,7 @@ public class ReportController {
                 .collect(Collectors.toList());
         model.addAttribute("months", months);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("years", getYear());
         return "sys5pages/prepareReport";
     }
 
@@ -54,7 +55,6 @@ public class ReportController {
                 authUser.getUser().getName());
 
         model.addAttribute("years", getYear());
-
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         return "sys5pages/prepareHalfYearReport";
     }
@@ -62,15 +62,22 @@ public class ReportController {
     @GetMapping("/report")
     public String getMonthReport(@AuthenticationPrincipal AuthUser authUser,
                                  @RequestParam String month,
+                                 @RequestParam (required = false) Integer year,
                                  Model model) {
 
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
-        List<System5> system5List = system5Repository.findAllByMonth(month);
+        if (year == null){
+            year = LocalDate.now().getYear();
+        }
+        Integer finalYear = year;
+
+        List<System5> system5List = system5Repository.findAllByMonthAndYear(month, finalYear);
         model.addAttribute(system5List);
         model.addAttribute("month", month);
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("year", year);
         return "sys5pages/report";
     }
 

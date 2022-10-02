@@ -22,6 +22,15 @@
 <jsp:include page="../../includes/menu.jsp"/>
 <div class="main">
     <form id="monsel" method="get" action="/admin/report">
+        <div style="margin-top: 80px">
+            <select class="select-css" name="year" onchange="setYear(this.value)"
+                    style="width: max-content;">
+                <option disabled selected>Год</option>
+                <c:forEach var="year" items="${years}">
+                    <option value="${year}">${year}</option>
+                </c:forEach>
+            </select>
+        </div>
         <select name="month" class="select-css" style="width: max-content;">
             <c:forEach var="month" items="${months}">
                 <option>${month}</option>
