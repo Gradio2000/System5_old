@@ -6,10 +6,7 @@ import com.example.system5.model.System5;
 import com.example.system5.model.User;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -109,13 +106,15 @@ public class UserListTransformer {
         return userDtoListMap;
     }
 
-    public Map<UserDto, String[]> getUserDtoListMapForYear(List<User> userList){
+    public Map<UserDto, String[]> getUserDtoListMapForYear(List<User> userList, Integer year){
         Map<UserDto, String[]> userDtoListMap = new HashMap<>();
         for (User user : userList) {
             UserDto userDto = UserDto.getInstance(user);
             String[] strings = new String[12];
             Arrays.fill(strings, "");
-            List<System5> system5List = user.getSystem5List();
+            List<System5> system5List = user.getSystem5List().stream()
+                    .filter(system5 -> Objects.equals(system5.getYear(), year))
+                    .collect(Collectors.toList());
             for (System5 system5 : system5List) {
                 String totalMarkEmpl = system5.getTotalMark5().getTotalMarkEmpl() != null ? system5.getTotalMark5().getTotalMarkEmpl() : "";
                 switch (system5.getMonth()) {

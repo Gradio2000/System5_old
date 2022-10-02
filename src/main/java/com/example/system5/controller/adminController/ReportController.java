@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -110,15 +108,30 @@ public class ReportController {
 
     @GetMapping("/prepareYearReport")
     public String prepareYearReport(@AuthenticationPrincipal AuthUser authUser,
-                                    Model model){
+                                    Model model, @RequestParam (required = false) Integer year){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
+
+        if (year == null){
+            year = LocalDate.now().getYear();
+        }
+        model.addAttribute("selectedYear", year);
+
+        List<System5> system5ListAll = system5Repository.findAllByUserId(authUser.getUser().getUserId());
+
+        List<Integer> years = system5ListAll.stream()
+                .map(System5::getYear)
+                .distinct()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+        model.addAttribute("years", years);
+
 
         List<User> userList = userRepository.findAll().stream()
                 .filter(user -> user.getSystem5List().size() != 0)
                 .collect(Collectors.toList());
 
-        model.addAttribute("modelMap", userListTransformer.getUserDtoListMapForYear(userList));
+        model.addAttribute("modelMap", userListTransformer.getUserDtoListMapForYear(userList, year));
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         return "sys5pages/reportYear";
     }

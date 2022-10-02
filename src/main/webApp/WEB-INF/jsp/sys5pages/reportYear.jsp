@@ -24,8 +24,17 @@
 </head>
 <body>
 <div class="main">
-  <div id="printableArea" style="text-align: center">
-    <p>Оценка работников полевого учреждения Банка России № 42667 за год</p>
+  <div style="margin-top: 80px">
+    <select class="select-css" id="userIdSelect" name="userId" onchange="setYear(this.value)"
+            style="width: max-content;">
+      <option disabled selected>Год</option>
+      <c:forEach var="year" items="${years}">
+        <option value="${year}">${year}</option>
+      </c:forEach>
+    </select>
+  </div>
+  <div id="printableArea" style="text-align: center; margin-top: 10px">
+    <p>Оценка работников полевого учреждения Банка России № 42667 за ${selectedYear} год</p>
     <table class="table">
       <tbody>
       <tr>
@@ -76,4 +85,9 @@
 
     document.body.innerHTML = originalContents;
   }
+
+  function setYear(year){
+    document.location = "prepareYearReport?year=" + year;
+  }
+
 </script>
