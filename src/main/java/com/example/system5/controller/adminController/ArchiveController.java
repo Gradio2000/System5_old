@@ -111,10 +111,7 @@ public class ArchiveController {
             return "redirect:/admin/getUserSystem5Archive/" + system5.getUserId() + "?error=1";
         }
 
-        Integer year = LocalDate.now().getYear();
-        system5.setYear(year);
-
-        System5 systemForUpdate = system5Repository.findByMonthAndUserIdAndYear(system5.getMonth(), system5.getUserId(),year);
+        System5 systemForUpdate = system5Repository.findByMonthAndUserId(system5.getMonth(), system5.getUserId());
         if (systemForUpdate != null){
             saveOrUpdateSystem5Service.updateSystem5(systemForUpdate, system5);
         }

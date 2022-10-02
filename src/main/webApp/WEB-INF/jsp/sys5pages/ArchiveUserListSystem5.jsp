@@ -92,6 +92,7 @@
                     <div class="modal-body my-modal">
                         <form:form method="post" action="/admin/addFromAdminModule" modelAttribute="system5">
                             <label>Выберите месяц</label>
+                            <form:input path="year" type="hidden" />
                             <form:input path="userId" value="${userId}" type="hidden"/>
                             <form:select cssClass="select-css" path="month" items="${monthList}"/>
                             <form:input path="res1" placeholder="Личная результативность"/>
