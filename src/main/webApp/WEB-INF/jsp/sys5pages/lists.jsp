@@ -188,7 +188,9 @@
 
     <!-- openModal - id модального окна (элемента div) -->
     <c:if test="${employer == false}">
-        <button type="button" class="btn" onclick="document.location='#openModal'">Добавить самооценку</button>
+        <c:if test="${selectedYear == currentYear}">
+            <button type="button" class="btn" onclick="document.location='#openModal'">Добавить самооценку</button>
+        </c:if>
     </c:if>
     <c:if test="${employer == true}">
         <c:if test="${months.size() != 0}">

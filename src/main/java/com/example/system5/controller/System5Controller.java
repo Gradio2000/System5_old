@@ -76,6 +76,8 @@ public class System5Controller {
             year = LocalDate.now().getYear();
         }
         Integer finalYear = year;
+        model.addAttribute("selectedYear", finalYear);
+        model.addAttribute("currentYear", LocalDate.now().getYear());
 
         List<System5> system5ListAll = system5Repository.findAllByUserId(authUser.getUser().getUserId());
 
@@ -184,7 +186,7 @@ public class System5Controller {
     @PostMapping("/addsempl")
     public String addempl(@AuthenticationPrincipal AuthUser authUser,
                           @ModelAttribute @Valid System5empl system5empl,
-                          BindingResult bindingResult, @RequestParam (required = false) Integer year){
+                          BindingResult bindingResult){
         log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
                 authUser.getUser().getName());
 
@@ -192,11 +194,6 @@ public class System5Controller {
         if (bindingResult.hasErrors()){
             return "redirect:/list/" + userId + "?error=2";
         }
-
-        if (year == null){
-            year = LocalDate.now().getYear();
-        }
-        Integer finalYear = year;
 
         system5empl.setResempl1(system5empl.getResempl1().toUpperCase());
         system5empl.setResempl2(system5empl.getResempl2().toUpperCase());
@@ -218,7 +215,7 @@ public class System5Controller {
 
         system5Repository.save(system5);
 
-        List<System5> system5List = system5Repository.findAllByUserIdAndYear(userId, finalYear);
+        List<System5> system5List = system5Repository.findAllByUserId(userId);
         for (System5 system51 : system5List){
             if (system51.getSystem5empl() == null){
                 return "redirect:/list/" + userId;
