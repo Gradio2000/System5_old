@@ -15,7 +15,7 @@ public interface System5Repository extends JpaRepository<System5, Integer> {
     List<System5> findByUserIdOrderBySystem5Id(int id);
     List<System5> findAllByMonthAndYear(String month, Integer year);
     System5 findByMonthAndUserIdAndYear(String month, Integer id, Integer year);
-    System5 findByMonthAndUserId(String month, Integer id);
+    System5 findByMonthAndYearAndUserId(String month, Integer year, Integer id);
 
     @Query(nativeQuery = true,
     value = "SELECT DISTINCT year FROM sys_system5")
