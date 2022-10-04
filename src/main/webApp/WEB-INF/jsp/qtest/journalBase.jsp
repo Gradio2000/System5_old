@@ -80,9 +80,9 @@
 <script>
     document.addEventListener("DOMContentLoaded", ready);
     function ready(){
-        $('#pag${attemptsList.pageable.pageNumber}').addClass("active");
+        $('#pag${appointTestDtoPage.pageable.pageNumber}').addClass("active");
         $('.chosen-select')
-            .find(`option[data-value="${attemptsList.size}"]`)
+            .find(`option[data-value="${appointTestDtoPage.size}"]`)
             .prop('selected', true)
             .end()
 
@@ -101,7 +101,7 @@
     }
 
     function changeSort(value){
-        let size = ${attemptsList.size};
+        let size = ${appointTestDtoPage.size};
         document.location='/exam/journalBase?page=0&size=' + size + '&sort=' + value;
     }
 </script>
