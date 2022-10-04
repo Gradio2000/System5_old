@@ -33,6 +33,8 @@
 </c:forEach>
     <a href="/kanban/kanban">Канбан</a>
     <br/>
+    <a href="/search">Поиск</a>
+    <br/>
     <a href="/logout">Выйти</a>
 </div>
 
