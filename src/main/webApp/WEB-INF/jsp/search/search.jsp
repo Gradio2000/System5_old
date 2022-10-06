@@ -32,20 +32,22 @@
 </html>
 <script>
   function getReq(value){
-    $.ajax({
-      type: 'POST',
-      url: '/searchPost',
-      data: {"value": value},
-      success: function (data) {
-        // запустится при успешном выполнении запроса и в data будет ответ скрипта
-        alert("OK")
-      },
-      error: function () {
-        alert('Ошибка!');
-        console.log(msg);
-      }
-    });
+    if (value.length > 2){
+      $.ajax({
+        type: 'POST',
+        url: '/searchPost',
+        data: {"value": value},
+        success: function (data) {
+          // запустится при успешном выполнении запроса и в data будет ответ скрипта
 
+
+        },
+        error: function () {
+          alert('Ошибка!');
+          console.log(msg);
+        }
+      });
+    }
   }
 </script>
 
