@@ -39,7 +39,7 @@
         data: {"value": value},
         success: function (data) {
           // запустится при успешном выполнении запроса и в data будет ответ скрипта
-
+          console.log(data);
 
         },
         error: function () {
