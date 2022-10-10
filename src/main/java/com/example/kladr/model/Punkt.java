@@ -21,13 +21,13 @@ public class Punkt {
     private Integer regCode;
 
     @Column(name = "area_code")
-    private String areaCode;
+    private Integer areaCode;
 
     @Column(name = "city_code")
-    private String cityCode;
+    private Integer cityCode;
 
     @Column(name = "punkt_code")
-    private String punktCode;
+    private Integer punktCode;
 
     @Column
     private String name;

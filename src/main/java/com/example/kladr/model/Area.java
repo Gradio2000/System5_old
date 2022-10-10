@@ -3,6 +3,8 @@ package com.example.kladr.model;
 import com.example.kladr.config.AreaId;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,10 +30,19 @@ public class Area {
     @Column
     private String socr;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany
     @JoinColumns({
             @JoinColumn(name = "reg_code", referencedColumnName = "reg_code"),
             @JoinColumn(name = "area_code", referencedColumnName = "area_code")
     })
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<City> cityList;
+
+    @OneToMany
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinColumns({
+            @JoinColumn(name = "reg_code", referencedColumnName = "reg_code"),
+            @JoinColumn(name = "area_code", referencedColumnName = "area_code")
+    })
+    private List<Punkt> punktList;
 }
