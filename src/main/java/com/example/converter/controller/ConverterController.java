@@ -26,8 +26,8 @@ public class ConverterController {
             LoadFile.loadFile(file);
         } catch (Exception e) {
             e.printStackTrace();
-            return "redirect:/converter/converter?error=100";
+            return "redirect:/converter?error=100";
         }
-        return "redirect:/converter/converter?error=0";
+        return "redirect:/converter?error=0";
     }
 }

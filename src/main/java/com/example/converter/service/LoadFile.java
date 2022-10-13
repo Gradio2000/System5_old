@@ -2,6 +2,7 @@ package com.example.converter.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.swing.filechooser.FileSystemView;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -16,8 +17,7 @@ public class LoadFile {
         File newFile = File.createTempFile("temp", null, null);
         file.transferTo(newFile);
 
-        Path path = newFile.toPath();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(path), "WINDOWS-1251"));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(newFile.toPath()), "WINDOWS-1251"));
         String line;
         Map<Integer, Map<String, String>> fullMap = new HashMap<>();
         Map<String, String> propertyMap = null;
@@ -47,6 +47,6 @@ public class LoadFile {
             assert propertyMap != null;
             propertyMap.put(mass[0], mass[1].replaceAll("\"", ""));
         }
-        Service.createClientList(fullMap, path);
+        Service.createClientList(fullMap);
     }
 }

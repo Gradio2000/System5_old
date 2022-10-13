@@ -20,6 +20,10 @@ spring:
     password: admin
 
     #  https://docs.spring.io/spring-data/rest/docs/current/reference/html/#getting-started.basic-settings
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 #  data.rest:
 #    basePath: /api
 #    defaultPageSize: 20
@@ -53,4 +57,3 @@ server.servlet:
 
 # https://stackoverflow.com/questions/70036953/springboot-2-6-0-spring-fox-3-failed-to-start-bean-documentationpluginsboot:
 spring.mvc.pathmatch.matching-strategy: ant_path_matcher
-

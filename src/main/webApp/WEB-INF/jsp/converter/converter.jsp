@@ -34,6 +34,7 @@
   </a>
   <form id="load" method="POST" action="/converter/fileUpload" enctype="multipart/form-data">
     <input type="file" name="file"><br />
+    <button class="btn" type="submit" value="Upload">Загрузить</button>
   </form>
 </div>
 </body>
