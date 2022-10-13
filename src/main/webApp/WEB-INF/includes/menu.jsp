@@ -33,6 +33,7 @@
 </c:forEach>
     <a href="/kanban/kanban">Канбан</a>
     <br/>
+    <a href="/converter">Конвертер ОИСФЛ</a>
     <a href="/logout">Выйти</a>
 </div>
 
