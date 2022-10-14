@@ -15,7 +15,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class ImportExcel {
-    public static void importToExcel(List<Client> clientList) throws IOException, ClassNotFoundException {
+    public static void importToExcel(List<Client> clientList) throws IOException {
 
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet("oisfl");
@@ -115,12 +115,16 @@ public class ImportExcel {
             cell.setCellValue(client.getDT_KPAN());
 
         }
-        String pathName = FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/oisfl.xlsx";
+        String pathName = getPath();
         File file = new File(pathName);
 
         FileOutputStream outFile = new FileOutputStream(file);
         workbook.write(outFile);
         outFile.close();
 
+    }
+
+    public static String getPath(){
+        return FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/oisfl.xlsx";
     }
 }
