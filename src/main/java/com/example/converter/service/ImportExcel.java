@@ -125,6 +125,6 @@ public class ImportExcel {
     }
 
     public static String getPath(){
-        return FileSystemView.getFileSystemView().getDefaultDirectory().getPath() + "/oisfl.xlsx";
+        return FileSystemView.getFileSystemView().getHomeDirectory().getPath() + File.separator + "oisfl.xlsx";
     }
 }

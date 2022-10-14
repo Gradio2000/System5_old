@@ -33,3 +33,24 @@
 2022-10-14 12:51:43.760  INFO 3801 --- [http-nio-8080-exec-2] c.e.q.controller.ProcessTestController   : getUserAttempts Иванов С.Н.
 2022-10-14 12:51:46.203  INFO 3801 --- [http-nio-8080-exec-6] c.e.s.controller.System5Controller       : getAll Иванов С.Н.
 2022-10-14 12:51:49.699  INFO 3801 --- [http-nio-8080-exec-7] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-14 13:00:56.661  INFO 4096 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4096 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-14 13:00:56.666 DEBUG 4096 --- [main] com.example.System5Application           : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-10-14 13:00:56.667  INFO 4096 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-14 13:01:06.083  INFO 4096 --- [main] com.example.System5Application           : Started System5Application in 10.342 seconds (JVM running for 13.891)
+2022-10-14 13:01:17.917  INFO 4096 --- [http-nio-8080-exec-3] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-14 13:02:15.887  INFO 4137 --- [main] c.e.system5.System5ApplicationTests      : Starting System5ApplicationTests using Java 15.0.2 on MacBook-Air.local with PID 4137 (started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-14 13:02:15.889 DEBUG 4137 --- [main] c.e.system5.System5ApplicationTests      : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-10-14 13:02:15.891  INFO 4137 --- [main] c.e.system5.System5ApplicationTests      : No active profile set, falling back to 1 default profile: "default"
+2022-10-14 13:02:24.937  INFO 4137 --- [main] c.e.system5.System5ApplicationTests      : Started System5ApplicationTests in 9.632 seconds (JVM running for 11.38)
+2022-10-14 13:29:16.647  WARN 4096 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=19m16s221ms).
+2022-10-14 13:41:12.902  WARN 4096 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m56s262ms).
+2022-10-14 13:52:44.056  INFO 4705 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4705 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-14 13:52:44.060 DEBUG 4705 --- [main] com.example.System5Application           : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-10-14 13:52:44.062  INFO 4705 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-14 13:52:50.830  INFO 4705 --- [main] com.example.System5Application           : Started System5Application in 8.022 seconds (JVM running for 9.741)
+2022-10-14 13:53:09.622  INFO 4705 --- [http-nio-8080-exec-3] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-14 13:55:30.246  INFO 4769 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4769 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-14 13:55:30.250 DEBUG 4769 --- [main] com.example.System5Application           : Running with Spring Boot v2.6.6, Spring v5.3.18
+2022-10-14 13:55:30.256  INFO 4769 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-14 13:55:37.028  INFO 4769 --- [main] com.example.System5Application           : Started System5Application in 7.802 seconds (JVM running for 9.872)
+2022-10-14 13:55:47.220  INFO 4769 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
