@@ -28,12 +28,12 @@
     <a href="/exam/exam">Назначение зачётов</a>
     <a href="/exam/journal">Журнал зачётов (ЭКР)</a>
     <a href="/exam/journalBase">Журнал зачетов (общий)</a>
-    <br/>
+    </br>
     </c:if>
 </c:forEach>
     <a href="/kanban/kanban">Канбан</a>
-    <br/>
-    <a href="/converter">Конвертер ОИСФЛ</a>
+    <a href="/converter/converter">Конвертер ОИСФЛ</a>
+    </br>
     <a href="/logout">Выйти</a>
 </div>
 

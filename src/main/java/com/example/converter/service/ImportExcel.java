@@ -7,7 +7,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -115,16 +114,11 @@ public class ImportExcel {
             cell.setCellValue(client.getDT_KPAN());
 
         }
-        String pathName = getPath();
-        File file = new File(pathName);
 
+        String pathName = "src/main/resources/downloads/oisfl.xlsx";
+        File file = new File(pathName);
         FileOutputStream outFile = new FileOutputStream(file);
         workbook.write(outFile);
         outFile.close();
-
-    }
-
-    public static String getPath(){
-        return FileSystemView.getFileSystemView().getHomeDirectory().getPath() + File.separator + "oisfl.xlsx";
     }
 }

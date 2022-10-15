@@ -30,7 +30,9 @@
     <c:if test="${param.get('error') == 100}">Произошла ошибка при загрузке файла с вопросами. Проверьте его структуру!</c:if>
   </a>
   <a style="color: #144ddc; font: bold italic 110% serif">
-    <c:if test="${param.get('error') == 0}">Конвертация произошла успешно. Путь к файлу ${path}</c:if>
+    <c:if test="${param.get('error') == 0}">Конвертация произошла успешно
+      <a href="/converter/download">Скачать</a>
+    </c:if>
   </a>
   <form id="load" method="POST" action="/converter/fileUpload" enctype="multipart/form-data">
     <input type="file" name="file"><br />
