@@ -14,6 +14,12 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 public class ImportExcel {
+    private static String filename;
+
+    public static String getFilename() {
+        return filename;
+    }
+
     public static void importToExcel(List<Client> clientList) throws IOException {
 
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -115,10 +121,10 @@ public class ImportExcel {
 
         }
 
-        String pathName = "src/main/resources/downloads/oisfl.xlsx";
-        File file = new File(pathName);
+        File file = File.createTempFile("oisfl",".xlsx", null);
         FileOutputStream outFile = new FileOutputStream(file);
         workbook.write(outFile);
         outFile.close();
+        filename = file.getPath();
     }
 }

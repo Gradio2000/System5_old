@@ -26,14 +26,13 @@
 </head>
 <body>
 <div class="main">
-  <a style="margin-top: 10px; color: crimson; font: bold italic 110% serif">
-    <c:if test="${param.get('error') == 100}">Произошла ошибка при загрузке файла. Проверьте его структуру!</c:if>
-  </a>
+  <div style="margin-top: 80px;">
+    <a style=" color: blue">Конвертация прошла успешно</a>
+  </div>
 
-  <form id="load" method="POST" action="/converter/fileUpload" enctype="multipart/form-data">
-    <input type="file" name="file" style="margin-top: 10px"><br />
-    <button class="btn" type="submit" value="Upload">Загрузить</button>
-  </form>
+  <div>
+    <button class="btn" type="button" onclick="document.location='/converter/download'">Скачать</button>
+  </div>
 </div>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.example.converter.controller;
 
+import com.example.converter.service.ImportExcel;
 import com.example.converter.service.LoadFile;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
@@ -26,24 +27,27 @@ public class ConverterController {
     @GetMapping("/converter")
     public String getConverterPage(@AuthenticationPrincipal AuthUser authUser, Model model){
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        model.addAttribute("filePath", ImportExcel.getFilename());
         return "/converter/converter";
     }
 
     @PostMapping("/fileUpload")
-    public String fileUpload(@RequestParam MultipartFile file, Model model){
+    public String fileUpload(@RequestParam MultipartFile file, @AuthenticationPrincipal AuthUser authUser,
+                             Model model){
         try {
             LoadFile.loadFile(file);
         } catch (Exception e) {
             e.printStackTrace();
             return "redirect:/converter/converter?error=100";
         }
-        return "redirect:/converter/converter?error=0";
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
+        return "/converter/download";
     }
 
     @GetMapping("/download")
     public ResponseEntity<InputStreamResource> downloadFile() throws IOException {
 
-        File file = new File("src/main/resources/downloads/oisfl.xlsx");
+        File file = new File(ImportExcel.getFilename());
         InputStreamResource resource = new InputStreamResource(Files.newInputStream(file.toPath()));
 
         return ResponseEntity.ok()
