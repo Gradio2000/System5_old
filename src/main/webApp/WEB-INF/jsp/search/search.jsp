@@ -51,7 +51,7 @@
           div.id = "div";
           for (let i = 0; i < data.length; i++) {
             let a = document.createElement("li");
-            a.innerText = data[i].socr + " " + data[i].name + " " + data[i].code
+            a.innerText = data[i].name
             a.style = "list-style-type: none"
             div.append(a);
           }

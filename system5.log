@@ -4,3 +4,77 @@
 2022-10-17 09:00:08.401  WARN 10374 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=28m13s627ms).
 2022-10-17 10:23:39.436  WARN 10374 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h23m31s35ms).
 2022-10-17 10:24:08.917  WARN 10374 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Retrograde clock change detected (housekeeper delta=29s480ms), soft-evicting connections from pool.
+2022-10-17 19:18:49.805  INFO 13727 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 13727 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-17 19:18:49.850 DEBUG 13727 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-17 19:18:49.860  INFO 13727 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-17 19:19:10.222  WARN 13727 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-10-17 19:19:10.320 ERROR 13727 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-10-17 19:52:38.704  INFO 14052 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 14052 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-17 19:52:38.713 DEBUG 14052 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-17 19:52:38.715  INFO 14052 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-17 19:52:55.214  WARN 14052 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-10-17 19:52:55.354 ERROR 14052 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-10-17 19:53:43.097  INFO 14080 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 14080 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-17 19:53:43.107 DEBUG 14080 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-17 19:53:43.112  INFO 14080 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-17 19:53:54.097  WARN 14080 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'; nested exception is org.springframework.boot.web.server.PortInUseException: Port 8080 is already in use
+2022-10-17 19:53:54.184 ERROR 14080 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2022-10-17 19:56:27.213  INFO 14153 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 14153 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-17 19:56:27.219 DEBUG 14153 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-17 19:56:27.221  INFO 14153 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-17 19:56:36.853  INFO 14153 --- [main] com.example.System5Application           : Started System5Application in 10.854 seconds (JVM running for 13.802)
+2022-10-17 19:56:49.865  INFO 14153 --- [http-nio-8080-exec-3] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-17 19:58:26.083  INFO 14198 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 14198 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-17 19:58:26.092 DEBUG 14198 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-17 19:58:26.094  INFO 14198 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-17 19:58:43.664  INFO 14198 --- [main] com.example.System5Application           : Started System5Application in 20.313 seconds (JVM running for 24.451)
+2022-10-17 19:58:59.533  INFO 14198 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-17 20:05:43.085  INFO 14293 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 14293 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-17 20:05:43.096 DEBUG 14293 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-17 20:05:43.098  INFO 14293 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-17 20:05:58.655  INFO 14293 --- [main] com.example.System5Application           : Started System5Application in 18.81 seconds (JVM running for 24.083)
+2022-10-17 20:06:16.345  INFO 14293 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-17 20:07:39.834  INFO 14328 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 14328 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-17 20:07:39.838 DEBUG 14328 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-17 20:07:39.839  INFO 14328 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-17 20:07:50.020  INFO 14328 --- [main] com.example.System5Application           : Started System5Application in 11.491 seconds (JVM running for 13.903)
+2022-10-17 20:07:58.246  INFO 14328 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
