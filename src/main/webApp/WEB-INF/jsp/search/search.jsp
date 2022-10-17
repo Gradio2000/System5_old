@@ -27,6 +27,8 @@
 <body>
 <div class="main">
   <input type="text" oninput="getReq(this.value)"/>
+  <div id="ins">
+</div>
 </div>
 </body>
 </html>
@@ -40,7 +42,20 @@
         success: function (data) {
           // запустится при успешном выполнении запроса и в data будет ответ скрипта
           console.log(data);
+          let el = document.getElementById("div")
+          if (el != null){
+            el.remove();
+          }
 
+          let div = document.createElement("ul");
+          div.id = "div";
+          for (let i = 0; i < data.length; i++) {
+            let a = document.createElement("li");
+            a.innerText = data[i].socr + " " + data[i].name + " " + data[i].code
+            a.style = "list-style-type: none"
+            div.append(a);
+          }
+          document.getElementById("ins").append(div);
         },
         error: function () {
           alert('Ошибка!');
