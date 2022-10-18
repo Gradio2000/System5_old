@@ -26,7 +26,7 @@
 </head>
 <body>
 <div class="main">
-  <input type="text" oninput="getReq(this.value)"/>
+  <input id="inp" type="text" oninput="getReq(this.value)" style="width: 400px"/>
   <div id="ins">
 </div>
 </div>
@@ -42,6 +42,7 @@
         success: function (data) {
           // запустится при успешном выполнении запроса и в data будет ответ скрипта
           console.log(data);
+
           let el = document.getElementById("div")
           if (el != null){
             el.remove();
@@ -52,6 +53,13 @@
           for (let i = 0; i < data.length; i++) {
             let a = document.createElement("li");
             a.innerText = data[i].name
+            a.className = "punkt"
+            a.id = data[i].regCode.toString() + data[i].areaCode + data[i].cityCode + data[i].punktCode;
+            a.setAttribute("onclick", "punktChoose(this.id)");
+            a.setAttribute("regCode", data[i].regCode);
+            a.setAttribute("areaCode", data[i].areaCode);
+            a.setAttribute("cityCode", data[i].cityCode);
+            a.setAttribute("punktCode", data[i].punktCode);
             a.style = "list-style-type: none"
             div.append(a);
           }
@@ -59,10 +67,48 @@
         },
         error: function () {
           alert('Ошибка!');
-          console.log(msg);
         }
       });
     }
+  }
+
+  function punktChoose(id){
+    let el = document.getElementById(id);
+    let regCode = el.getAttribute("regCode");
+    let areaCode = el.getAttribute("areaCode");
+    let cityCode = el.getAttribute("cityCode");
+    let punktCode = el.getAttribute("punktCode");
+
+    let inp = document.getElementById("inp");
+    inp.value = el.innerText;
+
+    $.ajax({
+      type: 'POST',
+      url: '/searchStreet',
+      data: {"regCode": regCode, "areaCode": areaCode, "cityCode": cityCode, "punktCode": punktCode},
+      success: function (data) {
+        // запустится при успешном выполнении запроса и в data будет ответ скрипта
+        let el = document.getElementById("div")
+        if (el != null){
+          el.remove();
+        }
+
+        let div = document.createElement("ul");
+        div.id = "div";
+
+        for (let i = 0; i < data.length; i++) {
+          let a = document.createElement("li");
+          a.innerText = data[i].name
+          a.className = "punkt"
+          a.style = "list-style-type: none"
+          div.append(a);
+        }
+        document.getElementById("ins").append(div);
+      },
+      error: function () {
+        alert('Ошибка!');
+      }
+    });
   }
 </script>
 

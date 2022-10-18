@@ -1,27 +1,27 @@
 package com.example.kladr.controlller;
 
 import com.example.kladr.model.KladrAll;
+import com.example.kladr.model.Street;
 import com.example.kladr.repository.KladrAllRepository;
-import com.example.kladr.repository.KladrRepository;
-import com.example.kladr.repository.RegionRepository;
-import org.springframework.data.domain.PageRequest;
+import com.example.kladr.repository.StreetRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
 @Controller
 public class RegionController {
-    private final RegionRepository regionRepository;
-    private final KladrRepository kladrRepository;
-    private final KladrAllRepository kladrAllRepository;
 
-    public RegionController(RegionRepository regionRepository, KladrRepository kladrRepository, KladrAllRepository kladrAllRepository) {
-        this.regionRepository = regionRepository;
-        this.kladrRepository = kladrRepository;
+    private final KladrAllRepository kladrAllRepository;
+    private final StreetRepository streetRepository;
+
+    public RegionController(KladrAllRepository kladrAllRepository, StreetRepository streetRepository) {
         this.kladrAllRepository = kladrAllRepository;
+        this.streetRepository = streetRepository;
     }
 
     @GetMapping("/search")
@@ -31,10 +31,43 @@ public class RegionController {
 
     @PostMapping("/searchPost")
     @ResponseBody
+    @Cacheable("regions")
     public List<KladrAll> getRegion(String value){
 //        List<Region> regions = regionRepository.getRegion(value);
 //        List<Kladr> kladrList = kladrRepository.findAllByNameContainingIgnoreCase(value);
-        List<KladrAll> kladrList = kladrAllRepository.findAllByNameContainingIgnoreCase(value, PageRequest.of(0,10));
-        return kladrList;
+//        return Collections.unmodifiableList(kladrAllRepository.findAllByNameContainingIgnoreCase(value, PageRequest.of(0, 10)));
+
+
+        String[] mass = value.split(" ");
+        String value1 = "";
+        String value2 = "";
+        String value3 = "";
+        if (mass.length == 1){
+            return kladrAllRepository.selectAll(mass[0]);
+        }
+        if (mass.length == 2){
+            value1 = mass[0];
+            value2 = mass[1];
+            return kladrAllRepository.selectAll(value1, value2);
+        }
+        if (mass.length == 3){
+            value1 = mass[0];
+            value2 = mass[1];
+            value3 = mass[2];
+            return kladrAllRepository.selectAll(value1, value2, value3);
+        }
+        else {
+            return null;
+        }
+    }
+
+    @PostMapping("/searchStreet")
+    @ResponseBody
+    public List<Street> getStreetList(@RequestParam Integer regCode,
+                                      @RequestParam Integer areaCode,
+                                      @RequestParam Integer cityCode,
+                                      @RequestParam Integer punktCode){
+        List<Street> streetList = streetRepository.getStreet(regCode, areaCode, cityCode, punktCode);
+        return streetList;
     }
 }
