@@ -67,7 +67,8 @@ public class RegionController {
                                       @RequestParam Integer areaCode,
                                       @RequestParam Integer cityCode,
                                       @RequestParam Integer punktCode){
-        List<Street> streetList = streetRepository.getStreet(regCode, areaCode, cityCode, punktCode);
-        return streetList;
+//        List<Street> streetList = streetRepository.getStreet(regCode, areaCode, cityCode, punktCode);
+        return streetRepository.findAllByRegCodeAndAreaCodeAndCityCodeAndPunktCode(
+                regCode, areaCode, cityCode, punktCode);
     }
 }

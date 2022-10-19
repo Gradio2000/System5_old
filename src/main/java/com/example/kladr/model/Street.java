@@ -22,16 +22,16 @@ public class Street {
     private Integer regCode;
 
     @Column(name = "area_code")
-    private String areaCode;
+    private Integer areaCode;
 
     @Column(name = "city_code")
-    private String cityCode;
+    private Integer cityCode;
 
     @Column(name = "punkt_code")
-    private String punktCode;
+    private Integer punktCode;
 
     @Column(name = "street_code")
-    private String streetCode;
+    private Integer streetCode;
 
     @Column
     private String name;

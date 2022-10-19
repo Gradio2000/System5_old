@@ -27,13 +27,24 @@
 <body>
 <div class="main">
   <input id="inp" type="text" oninput="getReq(this.value)" style="width: 400px"/>
-  <div id="ins">
+  <div id="adressDiv"></div>
+  <input id="inpStr" type="text" oninput="" placeholder="улица" style="width: 400px; display: none"/>
+  <div id="ins"></div>
+  <div id="indexDiv"></div>
 </div>
 </div>
 </body>
 </html>
 <script>
   function getReq(value){
+    let el = document.getElementById("adressElement");
+    if (el != null){
+      el.remove();
+    }
+    let elem = document.getElementById("indexElement");
+    if (elem != null){
+      elem.remove();
+    }
     if (value.length > 2){
       $.ajax({
         type: 'POST',
@@ -41,8 +52,6 @@
         data: {"value": value},
         success: function (data) {
           // запустится при успешном выполнении запроса и в data будет ответ скрипта
-          console.log(data);
-
           let el = document.getElementById("div")
           if (el != null){
             el.remove();
@@ -73,14 +82,21 @@
   }
 
   function punktChoose(id){
+    $('#inp').hide();
+    $('#inpStr').show();
+
     let el = document.getElementById(id);
     let regCode = el.getAttribute("regCode");
     let areaCode = el.getAttribute("areaCode");
     let cityCode = el.getAttribute("cityCode");
     let punktCode = el.getAttribute("punktCode");
 
-    let inp = document.getElementById("inp");
-    inp.value = el.innerText;
+    let adressElement = document.createElement("a");
+    adressElement.className = "punkt";
+    adressElement.innerText = el.innerText;
+    adressElement.id = "adressElement";
+    adressElement.setAttribute("onclick", "setInputVisible()");
+    document.getElementById("adressDiv").append(adressElement);
 
     $.ajax({
       type: 'POST',
@@ -88,7 +104,7 @@
       data: {"regCode": regCode, "areaCode": areaCode, "cityCode": cityCode, "punktCode": punktCode},
       success: function (data) {
         // запустится при успешном выполнении запроса и в data будет ответ скрипта
-        let el = document.getElementById("div")
+        let el = document.getElementById("div");
         if (el != null){
           el.remove();
         }
@@ -98,8 +114,11 @@
 
         for (let i = 0; i < data.length; i++) {
           let a = document.createElement("li");
-          a.innerText = data[i].name
-          a.className = "punkt"
+          a.id = data[i].id;
+          a.innerText = data[i].name + " " + data[i].socr;
+          a.className = "punkt";
+          a.setAttribute("index", data[i].index);
+          a.setAttribute("onclick", "getIndex(this.id)");
           a.style = "list-style-type: none"
           div.append(a);
         }
@@ -109,6 +128,27 @@
         alert('Ошибка!');
       }
     });
+  }
+
+  function getIndex(id){
+    let elem = document.getElementById("indexElement");
+    if (elem != null){
+      elem.remove();
+    }
+    let streetElement = document.getElementById(id);
+    let index = streetElement.getAttribute("index");
+    let indexElement = document.createElement("a");
+    indexElement.id = "indexElement";
+    indexElement.innerText = "Индекс: " + index;
+    document.getElementById("indexDiv").append(indexElement);
+    let adressElement = document.getElementById("adressElement");
+    adressElement.innerText = adressElement.innerText + ", " + streetElement.innerText;
+  }
+
+  function setInputVisible(){
+    $('#adressElement').hide();
+    $('#inp').show();
+    $('#inpStr').hide();
   }
 </script>
 
