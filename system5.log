@@ -257,3 +257,7 @@ Caused by: java.lang.IllegalStateException: Using named parameters for method pu
 2022-10-19 15:52:14.052  INFO 27045 --- [http-nio-8080-exec-2] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
 2022-10-19 15:52:17.292  INFO 27045 --- [http-nio-8080-exec-5] c.e.qtest.controller.ExamController      : getJournalBase Иванов С.Н.
 2022-10-19 15:52:23.471  INFO 27045 --- [http-nio-8080-exec-10] c.e.s.controller.System5Controller       : getAll Иванов С.Н.
+2022-10-19 17:23:51.849  WARN 27045 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=35m46s119ms).
+2022-10-19 20:00:32.975  WARN 27045 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2h36m41s128ms).
+2022-10-19 20:25:08.306  WARN 27045 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m27s181ms).
+2022-10-19 20:27:10.856  WARN 27045 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m31s932ms).
