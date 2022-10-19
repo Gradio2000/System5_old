@@ -28,14 +28,19 @@
 <div class="main">
   <input id="inp" type="text" oninput="getReq(this.value)" style="width: 400px"/>
   <div id="adressDiv"></div>
-  <input id="inpStr" type="text" oninput="" placeholder="улица" style="width: 400px; display: none"/>
+  <input id="inpStr" type="text" oninput="findStreet(this.value)" placeholder="улица" style="width: 400px; display: none"/>
   <div id="ins"></div>
   <div id="indexDiv"></div>
-</div>
 </div>
 </body>
 </html>
 <script>
+
+  let regCodeId;
+  let areaCodeId;
+  let cityCodeId;
+  let punktCodeId;
+
   function getReq(value){
     let el = document.getElementById("adressElement");
     if (el != null){
@@ -98,6 +103,11 @@
     adressElement.setAttribute("onclick", "setInputVisible()");
     document.getElementById("adressDiv").append(adressElement);
 
+    regCodeId = el.getAttribute("regCode");
+    areaCodeId = el.getAttribute("areaCode");
+    cityCodeId = el.getAttribute("cityCode");
+    punktCodeId = el.getAttribute("punktCode");
+
     $.ajax({
       type: 'POST',
       url: '/searchStreet',
@@ -147,6 +157,49 @@
     $('#adressElement').hide();
     $('#inp').show();
     $('#inpStr').hide();
+    $('#div').remove();
+    $('#indexElement').remove();
+  }
+
+  function findStreet(value){
+    $.ajax({
+      type: 'POST',
+      url: '/findStreet',
+      data: ({
+        "regCodeId": regCodeId,
+        "areaCodeId": areaCodeId,
+        "cityCodeId": cityCodeId,
+        "punktCodeId":punktCodeId,
+        "value": value}),
+      success: function (data) {
+        // запустится при успешном выполнении запроса и в data будет ответ скрипта
+        console.log(data);
+        let el = document.getElementById("div");
+        if (el != null){
+          el.remove();
+        }
+
+        let div = document.createElement("ul");
+        div.id = "div";
+
+        for (let i = 0; i < data.length; i++) {
+          let a = document.createElement("li");
+          a.id = data[i].id;
+          a.innerText = data[i].name + " " + data[i].socr;
+          a.className = "punkt";
+          a.setAttribute("index", data[i].index);
+          a.setAttribute("onclick", "getIndex(this.id)");
+          a.style = "list-style-type: none"
+          div.append(a);
+        }
+        document.getElementById("ins").append(div);
+      },
+      error: function () {
+        alert('Ошибка!');
+        console.log(msg);
+      }
+    });
+
   }
 </script>
 
