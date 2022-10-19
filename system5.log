@@ -132,3 +132,20 @@
 2022-10-19 12:44:47.834  INFO 26100 --- [main] com.example.System5Application           : Started System5Application in 13.208 seconds (JVM running for 15.864)
 2022-10-19 12:44:58.146  WARN 26100 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [102] milliseconds.
 2022-10-19 12:45:02.162  INFO 26100 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-19 12:51:10.025  INFO 26211 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 26211 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-19 12:51:10.032 DEBUG 26211 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-19 12:51:10.035  INFO 26211 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-19 12:51:20.184  INFO 26211 --- [main] com.example.System5Application           : Started System5Application in 11.259 seconds (JVM running for 12.877)
+2022-10-19 12:51:24.054  WARN 26211 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [137] milliseconds.
+2022-10-19 12:51:32.336  INFO 26211 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-19 12:52:49.707  INFO 26274 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 26274 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-19 12:52:49.716 DEBUG 26274 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-19 12:52:49.717  INFO 26274 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-19 12:53:04.826  INFO 26274 --- [main] com.example.System5Application           : Started System5Application in 17.399 seconds (JVM running for 20.392)
+2022-10-19 12:53:12.783  INFO 26274 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-19 12:56:45.569  INFO 26352 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 26352 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-19 12:56:45.581 DEBUG 26352 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-19 12:56:45.583  INFO 26352 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-19 12:57:03.034  INFO 26352 --- [main] com.example.System5Application           : Started System5Application in 19.464 seconds (JVM running for 22.15)
+2022-10-19 12:57:09.037  WARN 26352 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [154] milliseconds.
+2022-10-19 12:57:12.386  INFO 26352 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.

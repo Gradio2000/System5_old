@@ -5,6 +5,7 @@ import com.example.kladr.model.Street;
 import com.example.kladr.repository.KladrAllRepository;
 import com.example.kladr.repository.StreetRepository;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -69,6 +70,6 @@ public class RegionController {
                                       @RequestParam Integer punktCode){
 //        List<Street> streetList = streetRepository.getStreet(regCode, areaCode, cityCode, punktCode);
         return streetRepository.findAllByRegCodeAndAreaCodeAndCityCodeAndPunktCode(
-                regCode, areaCode, cityCode, punktCode);
+                regCode, areaCode, cityCode, punktCode, PageRequest.of(0, 10));
     }
 }

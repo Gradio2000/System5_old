@@ -141,8 +141,6 @@
     indexElement.id = "indexElement";
     indexElement.innerText = "Индекс: " + index;
     document.getElementById("indexDiv").append(indexElement);
-    let adressElement = document.getElementById("adressElement");
-    adressElement.innerText = adressElement.innerText + ", " + streetElement.innerText;
   }
 
   function setInputVisible(){
