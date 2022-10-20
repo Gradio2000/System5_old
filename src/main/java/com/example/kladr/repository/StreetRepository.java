@@ -16,6 +16,6 @@ public interface StreetRepository extends JpaRepository<Street, Integer> {
             value = "SELECT * FROM kl_street WHERE reg_code = :regCodeId " +
                     "AND area_code = :areaCodeId " +
                     "AND city_code = :cityCodeId " +
-                    "AND punkt_code = :punktCodeId AND name ~ :value")
+                    "AND punkt_code = :punktCodeId AND name ~ :value LIMIT 10")
     List<Street> getStreet(Integer regCodeId, Integer areaCodeId, Integer cityCodeId, Integer punktCodeId, String value);
 }
