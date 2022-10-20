@@ -68,8 +68,9 @@ public class RegionController {
                                       @RequestParam Integer areaCode,
                                       @RequestParam Integer cityCode,
                                       @RequestParam Integer punktCode){
-        return streetRepository.findAllByRegCodeAndAreaCodeAndCityCodeAndPunktCode(
-                regCode, areaCode, cityCode, punktCode, PageRequest.of(0, 10));
+            List<Street> streetList = streetRepository.findAllByRegCodeAndAreaCodeAndCityCodeAndPunktCode(
+                    regCode, areaCode, cityCode, punktCode, PageRequest.of(0, 10));
+        return streetList;
     }
 
     @PostMapping("/findStreet")

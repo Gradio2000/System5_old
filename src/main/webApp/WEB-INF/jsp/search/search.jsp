@@ -29,6 +29,7 @@
   <input id="inp" type="text" oninput="getReq(this.value)" style="width: 400px"/>
   <div id="adressDiv"></div>
   <input id="inpStr" type="text" oninput="findStreet(this.value)" placeholder="улица" style="width: 400px; display: none"/>
+  <input id="inpHouse" type="text" oninput="findHouse(this.value)" placeholder="дом" style="width: 400px; display: none"/>
   <div id="ins"></div>
   <div id="indexDiv"></div>
 </div>
@@ -147,10 +148,22 @@
     }
     let streetElement = document.getElementById(id);
     let index = streetElement.getAttribute("index");
-    let indexElement = document.createElement("a");
-    indexElement.id = "indexElement";
-    indexElement.innerText = "Индекс: " + index;
-    document.getElementById("indexDiv").append(indexElement);
+    if(index !== "      "){
+      console.log(index);
+      let indexElement = document.createElement("a");
+      indexElement.id = "indexElement";
+      indexElement.innerText = "Индекс: " + index;
+      document.getElementById("indexDiv").append(indexElement);
+    }
+    else {
+      console.log(streetElement);
+      let adressElement = document.getElementById("adressElement")
+      adressElement.innerText = adressElement.innerText + ", " + streetElement.innerText;
+      document.getElementById("div").remove();
+      $('#inpStr').hide();
+      $('#inpHouse').show();
+    }
+
   }
 
   function setInputVisible(){
@@ -173,7 +186,6 @@
         "value": value}),
       success: function (data) {
         // запустится при успешном выполнении запроса и в data будет ответ скрипта
-        console.log(data);
         let el = document.getElementById("div");
         if (el != null){
           el.remove();
@@ -196,9 +208,12 @@
       },
       error: function () {
         alert('Ошибка!');
-        console.log(msg);
       }
     });
+
+  }
+
+  function findHouse(id){
 
   }
 </script>
