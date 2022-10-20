@@ -80,6 +80,7 @@ public class RegionController {
                                    @RequestParam Integer cityCodeId,
                                    @RequestParam Integer punktCodeId,
                                    @RequestParam String value){
-       return streetRepository.getStreet(regCodeId, areaCodeId, cityCodeId, punktCodeId, value);
+       List<Street> streetList = streetRepository.getStreet(regCodeId, areaCodeId, cityCodeId, punktCodeId, value);
+       return streetList;
     }
 }

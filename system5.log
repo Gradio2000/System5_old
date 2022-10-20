@@ -122,3 +122,58 @@
 2022-10-20 17:51:12.016  INFO 4083 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
 2022-10-20 17:51:25.405  INFO 4083 --- [main] com.example.System5Application           : Started System5Application in 14.818 seconds (JVM running for 17.55)
 2022-10-20 17:51:32.057  INFO 4083 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 18:15:33.055  WARN 4083 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=20m46s55ms).
+2022-10-20 18:18:36.560  WARN 4083 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=3m3s506ms).
+2022-10-20 18:28:17.936  INFO 4083 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 18:33:08.630  INFO 4389 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4389 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 18:33:08.684 DEBUG 4389 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 18:33:08.706  INFO 4389 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 18:33:22.621  INFO 4389 --- [main] com.example.System5Application           : Started System5Application in 14.998 seconds (JVM running for 17.199)
+2022-10-20 18:33:28.742  INFO 4389 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 18:37:12.891  INFO 4440 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4440 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 18:37:12.906 DEBUG 4440 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 18:37:12.908  INFO 4440 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 18:37:25.249  INFO 4440 --- [main] com.example.System5Application           : Started System5Application in 14.013 seconds (JVM running for 16.794)
+2022-10-20 18:37:31.046  INFO 4440 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 18:39:55.780  INFO 4478 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4478 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 18:39:55.788 DEBUG 4478 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 18:39:55.790  INFO 4478 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 18:40:09.365  INFO 4478 --- [main] com.example.System5Application           : Started System5Application in 15.371 seconds (JVM running for 18.851)
+2022-10-20 18:40:15.156  INFO 4478 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 18:50:15.893  WARN 4478 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m45s387ms).
+2022-10-20 18:51:58.045  INFO 4553 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4553 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 18:51:58.054 DEBUG 4553 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 18:51:58.056  INFO 4553 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 18:52:14.690  INFO 4553 --- [main] com.example.System5Application           : Started System5Application in 19.442 seconds (JVM running for 22.716)
+2022-10-20 18:52:21.303  INFO 4572 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4572 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 18:52:21.310 DEBUG 4572 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 18:52:21.312  INFO 4572 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 18:52:31.977  INFO 4572 --- [main] com.example.System5Application           : Started System5Application in 11.965 seconds (JVM running for 14.324)
+2022-10-20 18:54:25.181  INFO 4572 --- [http-nio-8080-exec-6] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 18:55:49.127  INFO 4605 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4605 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 18:55:49.132 DEBUG 4605 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 18:55:49.134  INFO 4605 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 18:55:59.261  INFO 4605 --- [main] com.example.System5Application           : Started System5Application in 11.403 seconds (JVM running for 13.009)
+2022-10-20 18:56:06.738  INFO 4605 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 19:03:07.914  INFO 4605 --- [http-nio-8080-exec-5] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 19:04:29.681  INFO 4710 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4710 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 19:04:29.689 DEBUG 4710 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 19:04:29.691  INFO 4710 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 19:04:42.119  INFO 4710 --- [main] com.example.System5Application           : Started System5Application in 14.152 seconds (JVM running for 17.215)
+2022-10-20 19:04:48.242  INFO 4710 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 19:11:16.363  INFO 4797 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4797 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 19:11:16.374 DEBUG 4797 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 19:11:16.376  INFO 4797 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 19:11:28.941  INFO 4797 --- [main] com.example.System5Application           : Started System5Application in 14.282 seconds (JVM running for 17.695)
+2022-10-20 19:11:35.913  INFO 4797 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 19:19:38.934  WARN 4797 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=7m17s539ms).
+2022-10-20 19:20:57.109  INFO 4875 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4875 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 19:20:57.124 DEBUG 4875 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 19:20:57.126  INFO 4875 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 19:21:05.757  INFO 4875 --- [main] com.example.System5Application           : Started System5Application in 9.783 seconds (JVM running for 12.237)
+2022-10-20 19:21:20.691  INFO 4875 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 19:26:26.939  INFO 4934 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 4934 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 19:26:26.947 DEBUG 4934 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 19:26:26.949  INFO 4934 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 19:26:39.498  INFO 4934 --- [main] com.example.System5Application           : Started System5Application in 14.67 seconds (JVM running for 18.565)
+2022-10-20 19:29:35.980  INFO 4934 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.

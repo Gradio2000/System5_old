@@ -41,6 +41,7 @@
   let areaCodeId;
   let cityCodeId;
   let punktCodeId;
+  let streetCodeId;
 
   function getReq(value){
     let el = document.getElementById("adressElement");
@@ -115,25 +116,7 @@
       data: {"regCode": regCode, "areaCode": areaCode, "cityCode": cityCode, "punktCode": punktCode},
       success: function (data) {
         // запустится при успешном выполнении запроса и в data будет ответ скрипта
-        let el = document.getElementById("div");
-        if (el != null){
-          el.remove();
-        }
-
-        let div = document.createElement("ul");
-        div.id = "div";
-
-        for (let i = 0; i < data.length; i++) {
-          let a = document.createElement("li");
-          a.id = data[i].id;
-          a.innerText = data[i].name + " " + data[i].socr;
-          a.className = "punkt";
-          a.setAttribute("index", data[i].index);
-          a.setAttribute("onclick", "getIndex(this.id)");
-          a.style = "list-style-type: none"
-          div.append(a);
-        }
-        document.getElementById("ins").append(div);
+        getStreetList(data);
       },
       error: function () {
         alert('Ошибка!');
@@ -146,6 +129,7 @@
     if (elem != null){
       elem.remove();
     }
+    console.log(elem);
     let streetElement = document.getElementById(id);
     let index = streetElement.getAttribute("index");
     if(index !== "      "){
@@ -159,6 +143,7 @@
       console.log(streetElement);
       let adressElement = document.getElementById("adressElement")
       adressElement.innerText = adressElement.innerText + ", " + streetElement.innerText;
+      streetCodeId = streetElement.getAttribute("streetCode");
       document.getElementById("div").remove();
       $('#inpStr').hide();
       $('#inpHouse').show();
@@ -170,6 +155,7 @@
     $('#adressElement').hide();
     $('#inp').show();
     $('#inpStr').hide();
+    $('#inpHouse').hide();
     $('#div').remove();
     $('#indexElement').remove();
   }
@@ -186,25 +172,7 @@
         "value": value}),
       success: function (data) {
         // запустится при успешном выполнении запроса и в data будет ответ скрипта
-        let el = document.getElementById("div");
-        if (el != null){
-          el.remove();
-        }
-
-        let div = document.createElement("ul");
-        div.id = "div";
-
-        for (let i = 0; i < data.length; i++) {
-          let a = document.createElement("li");
-          a.id = data[i].id;
-          a.innerText = data[i].name + " " + data[i].socr;
-          a.className = "punkt";
-          a.setAttribute("index", data[i].index);
-          a.setAttribute("onclick", "getIndex(this.id)");
-          a.style = "list-style-type: none"
-          div.append(a);
-        }
-        document.getElementById("ins").append(div);
+        getStreetList(data);
       },
       error: function () {
         alert('Ошибка!');
@@ -213,8 +181,43 @@
 
   }
 
-  function findHouse(id){
+  function getStreetList(data){
+    let el = document.getElementById("div");
+    if (el != null){
+      el.remove();
+    }
 
+    let div = document.createElement("ul");
+    div.id = "div";
+
+    for (let i = 0; i < data.length; i++) {
+      let a = document.createElement("li");
+      a.id = data[i].id;
+      a.innerText = data[i].name + " " + data[i].socr;
+      a.className = "punkt";
+      a.setAttribute("index", data[i].index);
+      a.setAttribute("onclick", "getIndex(this.id)");
+      a.setAttribute("streetCode", data[i].streetCode);
+      a.style = "list-style-type: none";
+      div.append(a);
+    }
+    document.getElementById("ins").append(div);
+  }
+
+  function findHouse(id){
+    console.log(regCodeId, areaCodeId, cityCodeId, punktCodeId, streetCodeId)
+    // $.ajax({
+    //   type: 'POST',
+    //   url: '/admin/division',
+    //   data: msg,
+    //   success: function (data) {
+    //     // запустится при успешном выполнении запроса и в data будет ответ скрипта
+    //   },
+    //   error: function () {
+    //     alert('Ошибка!');
+    //     console.log(msg);
+    //   }
+    // });
   }
 </script>
 
