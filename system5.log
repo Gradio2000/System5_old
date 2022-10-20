@@ -253,3 +253,22 @@
 2022-10-20 21:32:28.138  INFO 6374 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
 2022-10-20 21:32:37.763  INFO 6374 --- [main] com.example.System5Application           : Started System5Application in 10.875 seconds (JVM running for 12.487)
 2022-10-20 21:32:45.627  INFO 6374 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 21:59:37.504  INFO 6672 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 6672 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 21:59:37.513 DEBUG 6672 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 21:59:37.516  INFO 6672 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 21:59:50.237  INFO 6672 --- [main] com.example.System5Application           : Started System5Application in 14.31 seconds (JVM running for 16.605)
+2022-10-20 21:59:57.992  INFO 6672 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 22:03:38.540  INFO 6672 --- [http-nio-8080-exec-10] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 22:05:11.977  WARN 6672 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m34s204ms).
+2022-10-20 22:06:10.254  WARN 6672 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m2s116ms).
+2022-10-20 22:14:31.961  INFO 6820 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 6820 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 22:14:31.972 DEBUG 6820 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 22:14:31.975  INFO 6820 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 22:14:44.546  INFO 6820 --- [main] com.example.System5Application           : Started System5Application in 14.149 seconds (JVM running for 17.456)
+2022-10-20 22:14:51.119  INFO 6820 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-20 22:15:30.221  WARN 6820 --- [http-nio-8080-exec-3] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'streetCodeId' for method parameter type Integer is present but converted to null]
+2022-10-20 22:34:25.108  INFO 7008 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 7008 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-20 22:34:25.129 DEBUG 7008 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-20 22:34:25.139  INFO 7008 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-20 22:34:35.457  INFO 7008 --- [main] com.example.System5Application           : Started System5Application in 11.57 seconds (JVM running for 13.617)
+2022-10-20 22:34:43.138  INFO 7008 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.

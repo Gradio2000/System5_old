@@ -1,5 +1,6 @@
 package com.example.kladr.controlller;
 
+import com.example.dto.HouseDto;
 import com.example.kladr.model.House;
 import com.example.kladr.model.KladrAll;
 import com.example.kladr.model.Street;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -92,7 +94,7 @@ public class RegionController {
 
     @PostMapping("/searchHouse")
     @ResponseBody
-    public List<House> searchHouse(@RequestParam Integer regCodeId,
+    public List<HouseDto> searchHouse(@RequestParam Integer regCodeId,
                                    @RequestParam Integer areaCodeId,
                                    @RequestParam Integer cityCodeId,
                                    @RequestParam Integer punktCodeId,
@@ -100,6 +102,18 @@ public class RegionController {
         List<House> houseList =
                 houseRepository.findAllByRegCodeAndAreaCodeAndCityCodeAndPunktCodeAndStreetCode(
                         regCodeId, areaCodeId, cityCodeId, punktCodeId, streetCodeId, PageRequest.of(0, 10));
-        return houseList;
+        List<HouseDto> houseDtoList = new ArrayList<>();
+        int id = 1;
+        for (House house: houseList){
+            if (id == 11) break;
+            String[] houseMass = house.getName().split(",");
+            for (int i = 0; i < houseMass.length; i++) {
+                HouseDto houseDto = HouseDto.getInstance(id, houseMass[i], house.getIndex());
+                houseDtoList.add(houseDto);
+                id++;
+                if (id == 11) break;
+            }
+        }
+        return houseDtoList;
     }
 }
