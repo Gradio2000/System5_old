@@ -244,7 +244,44 @@
   }
 
   function findHouse(value){
+    $('#indexElement').remove();
+    $.ajax({
+      type: 'POST',
+      url: '/findHouse',
+      data: ({
+        "regCodeId": regCodeId,
+        "areaCodeId": areaCodeId,
+        "cityCodeId": cityCodeId,
+        "punktCodeId":punktCodeId,
+        "streetCodeId": streetCodeId,
+        "value": value}),
+      success: function (data) {
+        // запустится при успешном выполнении запроса и в data будет ответ скрипта
+        console.log(data);
+        let el = document.getElementById("div");
+        if (el != null){
+          el.remove();
+        }
 
+        let div = document.createElement("ul");
+        div.id = "div";
+
+        for (let i = 0; i < data.length; i++) {
+          let a = document.createElement("li");
+          a.id = data[i].id;
+          a.innerText = data[i].name;
+          a.className = "punkt";
+          a.setAttribute("index", data[i].index);
+          a.setAttribute("onclick", "getIndex(this.id)");
+          a.style = "list-style-type: none";
+          div.append(a);
+        }
+        document.getElementById("ins").append(div);
+      },
+      error: function () {
+        alert('Ошибка!');
+      }
+    });
   }
 </script>
 

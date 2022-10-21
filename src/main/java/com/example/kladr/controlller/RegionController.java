@@ -7,9 +7,13 @@ import com.example.kladr.model.Street;
 import com.example.kladr.repository.HouseRepository;
 import com.example.kladr.repository.KladrAllRepository;
 import com.example.kladr.repository.StreetRepository;
+import com.example.system5.dto.UserDto;
+import com.example.system5.util.AuthUser;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class RegionController {
@@ -34,7 +39,8 @@ public class RegionController {
     }
 
     @GetMapping("/search")
-    public String getSearchPage(){
+    public String getSearchPage(@AuthenticationPrincipal AuthUser authUser, Model model){
+        model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         return "search/search";
     }
 
@@ -42,11 +48,6 @@ public class RegionController {
     @ResponseBody
     @Cacheable("regions")
     public List<KladrAll> getRegion(String value){
-//        List<Region> regions = regionRepository.getRegion(value);
-//        List<Kladr> kladrList = kladrRepository.findAllByNameContainingIgnoreCase(value);
-//        return Collections.unmodifiableList(kladrAllRepository.findAllByNameContainingIgnoreCase(value, PageRequest.of(0, 10)));
-
-
         String[] mass = value.split(" ");
         String value1 = "";
         String value2 = "";
@@ -94,26 +95,52 @@ public class RegionController {
 
     @PostMapping("/searchHouse")
     @ResponseBody
-    public List<HouseDto> searchHouse(@RequestParam Integer regCodeId,
-                                   @RequestParam Integer areaCodeId,
-                                   @RequestParam Integer cityCodeId,
-                                   @RequestParam Integer punktCodeId,
-                                   @RequestParam Integer streetCodeId){
+    public List<HouseDto> getHouseList (@RequestParam Integer regCodeId,
+                                        @RequestParam Integer areaCodeId,
+                                        @RequestParam Integer cityCodeId,
+                                        @RequestParam Integer punktCodeId,
+                                        @RequestParam Integer streetCodeId){
         List<House> houseList =
                 houseRepository.findAllByRegCodeAndAreaCodeAndCityCodeAndPunktCodeAndStreetCode(
                         regCodeId, areaCodeId, cityCodeId, punktCodeId, streetCodeId, PageRequest.of(0, 10));
         List<HouseDto> houseDtoList = new ArrayList<>();
         int id = 1;
         for (House house: houseList){
-            if (id == 11) break;
             String[] houseMass = house.getName().split(",");
-            for (int i = 0; i < houseMass.length; i++) {
-                HouseDto houseDto = HouseDto.getInstance(id, houseMass[i], house.getIndex());
+            for (String mass : houseMass) {
+                HouseDto houseDto = HouseDto.getInstance(id, mass, house.getIndex());
                 houseDtoList.add(houseDto);
                 id++;
-                if (id == 11) break;
             }
         }
-        return houseDtoList;
+        return houseDtoList.stream().limit(10).collect(Collectors.toList());
+    }
+
+    @PostMapping("/findHouse")
+    @ResponseBody
+    public List<HouseDto> findHouse (@RequestParam Integer regCodeId,
+                                   @RequestParam Integer areaCodeId,
+                                   @RequestParam Integer cityCodeId,
+                                   @RequestParam Integer punktCodeId,
+                                   @RequestParam Integer streetCodeId,
+                                   @RequestParam String value){
+        List<House> houseList =
+                houseRepository.getHouses(
+                        regCodeId, areaCodeId, cityCodeId, punktCodeId, streetCodeId, value);
+        List<HouseDto> houseDtoList = new ArrayList<>();
+        int id = 1;
+        for (House house: houseList){
+            String[] houseMass = house.getName().split(",");
+            for (String mass : houseMass) {
+                HouseDto houseDto = HouseDto.getInstance(id, mass, house.getIndex());
+                houseDtoList.add(houseDto);
+                id++;
+            }
+        }
+
+        return houseDtoList.stream().
+                filter(houseDto -> houseDto.getName().contains(value))
+                .limit(10)
+                .collect(Collectors.toList());
     }
 }
