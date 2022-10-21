@@ -7,6 +7,7 @@ import com.example.kladr.model.Street;
 import com.example.kladr.repository.HouseRepository;
 import com.example.kladr.repository.KladrAllRepository;
 import com.example.kladr.repository.StreetRepository;
+import com.example.kladr.service.KladrService;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,11 +31,14 @@ public class RegionController {
 
     private final HouseRepository houseRepository;
 
-    public RegionController(KladrAllRepository kladrAllRepository,
-                            StreetRepository streetRepository, HouseRepository houseRepository) {
+    private final KladrService kladrService;
+
+    public RegionController(KladrAllRepository kladrAllRepository, StreetRepository streetRepository,
+                            HouseRepository houseRepository, KladrService kladrService) {
         this.kladrAllRepository = kladrAllRepository;
         this.streetRepository = streetRepository;
         this.houseRepository = houseRepository;
+        this.kladrService = kladrService;
     }
 
     @GetMapping("/search")
@@ -103,43 +106,26 @@ public class RegionController {
         List<House> houseList =
                 houseRepository.findAllByRegCodeAndAreaCodeAndCityCodeAndPunktCodeAndStreetCode(
                         regCodeId, areaCodeId, cityCodeId, punktCodeId, streetCodeId, PageRequest.of(0, 10));
-        List<HouseDto> houseDtoList = new ArrayList<>();
-        int id = 1;
-        for (House house: houseList){
-            String[] houseMass = house.getName().split(",");
-            for (String mass : houseMass) {
-                HouseDto houseDto = HouseDto.getInstance(id, mass, house.getIndex());
-                houseDtoList.add(houseDto);
-                id++;
-            }
-        }
-        return houseDtoList.stream().limit(10).collect(Collectors.toList());
+
+        return kladrService.getHouseDtoList(houseList).stream()
+                .limit(10)
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/findHouse")
     @ResponseBody
-    public List<HouseDto> findHouse (@RequestParam Integer regCodeId,
-                                   @RequestParam Integer areaCodeId,
-                                   @RequestParam Integer cityCodeId,
-                                   @RequestParam Integer punktCodeId,
-                                   @RequestParam Integer streetCodeId,
-                                   @RequestParam String value){
+    public List<HouseDto> findHouse(@RequestParam Integer regCodeId,
+                                    @RequestParam Integer areaCodeId,
+                                    @RequestParam Integer cityCodeId,
+                                    @RequestParam Integer punktCodeId,
+                                    @RequestParam Integer streetCodeId,
+                                    @RequestParam String value){
         List<House> houseList =
                 houseRepository.getHouses(
                         regCodeId, areaCodeId, cityCodeId, punktCodeId, streetCodeId, value);
-        List<HouseDto> houseDtoList = new ArrayList<>();
-        int id = 1;
-        for (House house: houseList){
-            String[] houseMass = house.getName().split(",");
-            for (String mass : houseMass) {
-                HouseDto houseDto = HouseDto.getInstance(id, mass, house.getIndex());
-                houseDtoList.add(houseDto);
-                id++;
-            }
-        }
 
-        return houseDtoList.stream().
-                filter(houseDto -> houseDto.getName().contains(value))
+        return kladrService.getHouseDtoList(houseList).stream()
+                .filter(houseDto -> houseDto.getName().contains(value))
                 .limit(10)
                 .collect(Collectors.toList());
     }

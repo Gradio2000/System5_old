@@ -82,7 +82,7 @@
           document.getElementById("ins").append(div);
         },
         error: function () {
-          alert('Ошибка!');
+          alert('Ошибка! function getReq');
         }
       });
     }
@@ -119,7 +119,7 @@
         getStreetList(data);
       },
       error: function () {
-        alert('Ошибка!');
+        alert('Ошибка! function punktChoose');
       }
     });
   }
@@ -129,18 +129,15 @@
     if (elem != null){
       elem.remove();
     }
-    console.log(elem);
     let streetElement = document.getElementById(id);
     let index = streetElement.getAttribute("index");
     if(index !== "      "){
-      console.log(index);
       let indexElement = document.createElement("a");
       indexElement.id = "indexElement";
       indexElement.innerText = "Индекс: " + index;
       document.getElementById("indexDiv").append(indexElement);
     }
     else {
-      console.log(streetElement);
       let adressElement = document.getElementById("adressElement")
       adressElement.innerText = adressElement.innerText + ", " + streetElement.innerText;
       streetCodeId = streetElement.getAttribute("streetCode");
@@ -160,29 +157,10 @@
         },
         success: function (data) {
           // запустится при успешном выполнении запроса и в data будет ответ скрипта
-          console.log(data);
-          let el = document.getElementById("div");
-          if (el != null){
-            el.remove();
-          }
-
-          let div = document.createElement("ul");
-          div.id = "div";
-
-          for (let i = 0; i < data.length; i++) {
-            let a = document.createElement("li");
-            a.id = data[i].id;
-            a.innerText = data[i].name;
-            a.className = "punkt";
-            a.setAttribute("index", data[i].index);
-            a.setAttribute("onclick", "getIndex(this.id)");
-            a.style = "list-style-type: none";
-            div.append(a);
-          }
-          document.getElementById("ins").append(div);
+          getHouseList(data);
         },
         error: function () {
-          alert('Ошибка!');
+          alert('Ошибка! function getIndex');
         }
       });
 
@@ -214,11 +192,36 @@
         getStreetList(data);
       },
       error: function () {
-        alert('Ошибка!');
+        alert('Ошибка! function findStreet');
       }
     });
 
   }
+
+
+
+  function findHouse(value){
+    $('#indexElement').remove();
+    $.ajax({
+      type: 'POST',
+      url: '/findHouse',
+      data: ({
+        "regCodeId": regCodeId,
+        "areaCodeId": areaCodeId,
+        "cityCodeId": cityCodeId,
+        "punktCodeId":punktCodeId,
+        "streetCodeId": streetCodeId,
+        "value": value}),
+      success: function (data) {
+        // запустится при успешном выполнении запроса и в data будет ответ скрипта
+        getHouseList(data);
+      },
+      error: function () {
+        alert('Ошибка! function findHouse');
+      }
+    });
+  }
+
 
   function getStreetList(data){
     let el = document.getElementById("div");
@@ -243,45 +246,26 @@
     document.getElementById("ins").append(div);
   }
 
-  function findHouse(value){
-    $('#indexElement').remove();
-    $.ajax({
-      type: 'POST',
-      url: '/findHouse',
-      data: ({
-        "regCodeId": regCodeId,
-        "areaCodeId": areaCodeId,
-        "cityCodeId": cityCodeId,
-        "punktCodeId":punktCodeId,
-        "streetCodeId": streetCodeId,
-        "value": value}),
-      success: function (data) {
-        // запустится при успешном выполнении запроса и в data будет ответ скрипта
-        console.log(data);
-        let el = document.getElementById("div");
-        if (el != null){
-          el.remove();
-        }
+  function getHouseList(data){
+    let el = document.getElementById("div");
+    if (el != null){
+      el.remove();
+    }
 
-        let div = document.createElement("ul");
-        div.id = "div";
+    let div = document.createElement("ul");
+    div.id = "div";
 
-        for (let i = 0; i < data.length; i++) {
-          let a = document.createElement("li");
-          a.id = data[i].id;
-          a.innerText = data[i].name;
-          a.className = "punkt";
-          a.setAttribute("index", data[i].index);
-          a.setAttribute("onclick", "getIndex(this.id)");
-          a.style = "list-style-type: none";
-          div.append(a);
-        }
-        document.getElementById("ins").append(div);
-      },
-      error: function () {
-        alert('Ошибка!');
-      }
-    });
+    for (let i = 0; i < data.length; i++) {
+      let a = document.createElement("li");
+      a.id = data[i].id;
+      a.innerText = data[i].name;
+      a.className = "punkt";
+      a.setAttribute("index", data[i].index);
+      a.setAttribute("onclick", "getIndex(this.id)");
+      a.style = "list-style-type: none";
+      div.append(a);
+    }
+    document.getElementById("ins").append(div);
   }
 </script>
 
