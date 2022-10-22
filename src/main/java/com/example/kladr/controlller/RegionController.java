@@ -10,6 +10,7 @@ import com.example.kladr.repository.StreetRepository;
 import com.example.kladr.service.KladrService;
 import com.example.system5.dto.UserDto;
 import com.example.system5.util.AuthUser;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@Slf4j
 public class RegionController {
 
     private final KladrAllRepository kladrAllRepository;
@@ -43,6 +45,8 @@ public class RegionController {
 
     @GetMapping("/search")
     public String getSearchPage(@AuthenticationPrincipal AuthUser authUser, Model model){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
         model.addAttribute("user", UserDto.getInstance(authUser.getUser()));
         return "search/search";
     }
@@ -50,7 +54,9 @@ public class RegionController {
     @PostMapping("/searchPost")
     @ResponseBody
     @Cacheable("regions")
-    public List<KladrAll> getRegion(String value){
+    public List<KladrAll> getRegion(String value, @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
         String[] mass = value.split(" ");
         String value1 = "";
         String value2 = "";
@@ -79,10 +85,12 @@ public class RegionController {
     public List<Street> getStreetList(@RequestParam Integer regCode,
                                       @RequestParam Integer areaCode,
                                       @RequestParam Integer cityCode,
-                                      @RequestParam Integer punktCode){
-            List<Street> streetList = streetRepository.findAllByRegCodeAndAreaCodeAndCityCodeAndPunktCode(
-                    regCode, areaCode, cityCode, punktCode, PageRequest.of(0, 10));
-        return streetList;
+                                      @RequestParam Integer punktCode,
+                                      @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+        return streetRepository.findAllByRegCodeAndAreaCodeAndCityCodeAndPunktCode(
+                regCode, areaCode, cityCode, punktCode, PageRequest.of(0, 10));
     }
 
     @PostMapping("/findStreet")
@@ -91,9 +99,10 @@ public class RegionController {
                                    @RequestParam Integer areaCodeId,
                                    @RequestParam Integer cityCodeId,
                                    @RequestParam Integer punktCodeId,
-                                   @RequestParam String value){
-       List<Street> streetList = streetRepository.getStreet(regCodeId, areaCodeId, cityCodeId, punktCodeId, value);
-       return streetList;
+                                   @RequestParam String value, @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
+        return streetRepository.getStreet(regCodeId, areaCodeId, cityCodeId, punktCodeId, value);
     }
 
     @PostMapping("/searchHouse")
@@ -102,7 +111,9 @@ public class RegionController {
                                         @RequestParam Integer areaCodeId,
                                         @RequestParam Integer cityCodeId,
                                         @RequestParam Integer punktCodeId,
-                                        @RequestParam Integer streetCodeId){
+                                        @RequestParam Integer streetCodeId, @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
         List<House> houseList =
                 houseRepository.findAllByRegCodeAndAreaCodeAndCityCodeAndPunktCodeAndStreetCode(
                         regCodeId, areaCodeId, cityCodeId, punktCodeId, streetCodeId, PageRequest.of(0, 10));
@@ -119,7 +130,9 @@ public class RegionController {
                                     @RequestParam Integer cityCodeId,
                                     @RequestParam Integer punktCodeId,
                                     @RequestParam Integer streetCodeId,
-                                    @RequestParam String value){
+                                    @RequestParam String value, @AuthenticationPrincipal AuthUser authUser){
+        log.info(new Object(){}.getClass().getEnclosingMethod().getName() + " " +
+                authUser.getUser().getName());
         List<House> houseList =
                 houseRepository.getHouses(
                         regCodeId, areaCodeId, cityCodeId, punktCodeId, streetCodeId, value);
