@@ -1,6 +1,6 @@
 package com.example.kladr.service;
 
-import com.example.dto.HouseDto;
+import com.example.kladr.dto.HouseDto;
 import com.example.kladr.model.House;
 
 import java.util.ArrayList;

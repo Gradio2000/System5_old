@@ -15,7 +15,7 @@ spring:
         jdbc.batch_size: 20
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc:postgresql://localhost:5432/system5DB_branch
+    url: jdbc:postgresql://localhost:5432/system5DB
     username: admin
     password: admin
 

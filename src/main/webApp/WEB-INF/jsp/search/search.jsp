@@ -140,13 +140,7 @@
       document.getElementById("indexDiv").append(indexElement);
     }
     else {
-      let adressElement = document.getElementById("adressElement")
-      adressElement.innerText = adressElement.innerText + ", " + streetElement.innerText;
       streetCodeId = streetElement.getAttribute("streetCode");
-      document.getElementById("div").remove();
-      $('#inpStr').hide();
-      $('#inpHouse').show();
-
       $.ajax({
         type: 'POST',
         url: '/searchHouse',
@@ -159,6 +153,11 @@
         },
         success: function (data) {
           // запустится при успешном выполнении запроса и в data будет ответ скрипта
+          let adressElement = document.getElementById("adressElement")
+          adressElement.innerText = adressElement.innerText + ", " + streetElement.innerText;
+          document.getElementById("div").remove();
+          $('#inpStr').hide();
+          $('#inpHouse').show();
           getHouseList(data);
         },
         error: function () {

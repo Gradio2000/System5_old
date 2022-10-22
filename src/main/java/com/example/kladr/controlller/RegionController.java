@@ -1,6 +1,6 @@
 package com.example.kladr.controlller;
 
-import com.example.dto.HouseDto;
+import com.example.kladr.dto.HouseDto;
 import com.example.kladr.model.House;
 import com.example.kladr.model.KladrAll;
 import com.example.kladr.model.Street;

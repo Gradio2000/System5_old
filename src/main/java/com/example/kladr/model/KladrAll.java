@@ -33,13 +33,4 @@ public class KladrAll implements Serializable {
     @Column
     private String name;
 
-//    @OneToMany(targetEntity = Street.class, fetch = FetchType.EAGER)
-//    @JoinColumns({
-//            @JoinColumn(name = "reg_code", referencedColumnName = "reg_code"),
-//            @JoinColumn(name = "area_code", referencedColumnName = "area_code"),
-//            @JoinColumn(name = "city_code", referencedColumnName = "city_code"),
-//            @JoinColumn(name = "punkt_code", referencedColumnName = "punkt_code")
-//    })
-//    private List<Street> streetList;
-
 }

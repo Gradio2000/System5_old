@@ -1175,3 +1175,474 @@ java.util.NoSuchElementException: null
 2022-08-22 16:34:42.677 DEBUG 4543 --- [main] com.example.System5Application           : Running with Spring Boot v2.6.6, Spring v5.3.18
 2022-08-22 16:34:42.678  INFO 4543 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
 2022-08-22 16:34:50.114  INFO 4543 --- [main] com.example.System5Application           : Started System5Application in 8.699 seconds (JVM running for 10.503)
+2022-10-22 12:58:22.537  INFO 16062 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 16062 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-22 12:58:22.543 DEBUG 16062 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-22 12:58:22.546  INFO 16062 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-22 12:58:31.746  INFO 16062 --- [main] com.example.System5Application           : Started System5Application in 10.452 seconds (JVM running for 14.082)
+2022-10-22 13:04:46.815  INFO 16062 --- [http-nio-8080-exec-3] c.e.kanban.controller.KanbanController   : getAllKanban Петрова И.Н.
+2022-10-22 13:04:55.988  INFO 16062 --- [http-nio-8080-exec-9] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 13:05:47.248  INFO 16062 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 13:05:49.539  INFO 16062 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 13:05:56.118  INFO 16062 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 13:05:59.913  INFO 16062 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 13:16:13.438  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m46s691ms).
+2022-10-22 13:17:48.286  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m34s850ms).
+2022-10-22 13:27:57.609  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=9m39s321ms).
+2022-10-22 13:44:30.264  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m2s645ms).
+2022-10-22 14:03:13.399  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m13s138ms).
+2022-10-22 14:20:34.857  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m51s447ms).
+2022-10-22 14:38:44.389  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m9s513ms).
+2022-10-22 14:56:09.402  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m25s13ms).
+2022-10-22 15:23:24.284  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=26m44s893ms).
+2022-10-22 16:39:05.900  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1h13m41s586ms).
+2022-10-22 16:55:40.241  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m34s341ms).
+2022-10-22 17:06:15.830  WARN 16062 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=8m35s561ms).
+2022-10-22 17:09:57.397  INFO 16558 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 16558 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-22 17:09:57.406 DEBUG 16558 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-22 17:09:57.408  INFO 16558 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-22 17:10:11.471  INFO 16558 --- [main] com.example.System5Application           : Started System5Application in 15.242 seconds (JVM running for 17.982)
+2022-10-22 17:10:20.063  INFO 16558 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 17:10:22.105  INFO 16558 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 17:10:24.179  INFO 16558 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 17:10:24.298  WARN 16558 --- [http-nio-8080-exec-9] o.h.engine.jdbc.spi.SqlExceptionHelper   : SQL Error: 0, SQLState: 42P01
+2022-10-22 17:10:24.298 ERROR 16558 --- [http-nio-8080-exec-9] o.h.engine.jdbc.spi.SqlExceptionHelper   : ERROR: relation "kladr_all" does not exist
+  Позиция: 15
+2022-10-22 17:10:24.319 ERROR 16558 --- [http-nio-8080-exec-9] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed; nested exception is org.springframework.dao.InvalidDataAccessResourceUsageException: could not extract ResultSet; SQL [n/a]; nested exception is org.hibernate.exception.SQLGrammarException: could not extract ResultSet] with root cause
+
+org.postgresql.util.PSQLException: ERROR: relation "kladr_all" does not exist
+  Позиция: 15
+	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2675) ~[postgresql-42.3.7.jar:42.3.7]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2365) ~[postgresql-42.3.7.jar:42.3.7]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:355) ~[postgresql-42.3.7.jar:42.3.7]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:490) ~[postgresql-42.3.7.jar:42.3.7]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:408) ~[postgresql-42.3.7.jar:42.3.7]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:167) ~[postgresql-42.3.7.jar:42.3.7]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:119) ~[postgresql-42.3.7.jar:42.3.7]
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeQuery(ProxyPreparedStatement.java:52) ~[HikariCP-4.0.3.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeQuery(HikariProxyPreparedStatement.java) ~[HikariCP-4.0.3.jar:na]
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.extract(ResultSetReturnImpl.java:57) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.loader.Loader.getResultSet(Loader.java:2322) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:2075) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.loader.Loader.executeQueryStatement(Loader.java:2037) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.loader.Loader.doQuery(Loader.java:956) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.loader.Loader.doQueryAndInitializeNonLazyCollections(Loader.java:357) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.loader.Loader.doList(Loader.java:2868) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.loader.Loader.doList(Loader.java:2850) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.loader.Loader.listIgnoreQueryCache(Loader.java:2682) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.loader.Loader.list(Loader.java:2677) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.loader.custom.CustomLoader.list(CustomLoader.java:338) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.internal.SessionImpl.listCustomQuery(SessionImpl.java:2186) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.internal.AbstractSharedSessionContract.list(AbstractSharedSessionContract.java:1204) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.query.internal.NativeQueryImpl.doList(NativeQueryImpl.java:177) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.query.internal.AbstractProducedQuery.list(AbstractProducedQuery.java:1617) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at org.hibernate.query.Query.getResultList(Query.java:165) ~[hibernate-core-5.6.11.Final.jar:5.6.11.Final]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564) ~[na:na]
+	at org.springframework.orm.jpa.SharedEntityManagerCreator$DeferredQueryInvocationHandler.invoke(SharedEntityManagerCreator.java:406) ~[spring-orm-5.3.23.jar:5.3.23]
+	at com.sun.proxy.$Proxy192.getResultList(Unknown Source) ~[na:na]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution$CollectionExecution.doExecute(JpaQueryExecution.java:128) ~[spring-data-jpa-2.7.3.jar:2.7.3]
+	at org.springframework.data.jpa.repository.query.JpaQueryExecution.execute(JpaQueryExecution.java:90) ~[spring-data-jpa-2.7.3.jar:2.7.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.doExecute(AbstractJpaQuery.java:156) ~[spring-data-jpa-2.7.3.jar:2.7.3]
+	at org.springframework.data.jpa.repository.query.AbstractJpaQuery.execute(AbstractJpaQuery.java:144) ~[spring-data-jpa-2.7.3.jar:2.7.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:137) ~[spring-data-commons-2.7.3.jar:2.7.3]
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:121) ~[spring-data-commons-2.7.3.jar:2.7.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:160) ~[spring-data-commons-2.7.3.jar:2.7.3]
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:139) ~[spring-data-commons-2.7.3.jar:2.7.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:81) ~[spring-data-commons-2.7.3.jar:2.7.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:123) ~[spring-tx-5.3.23.jar:5.3.23]
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:388) ~[spring-tx-5.3.23.jar:5.3.23]
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119) ~[spring-tx-5.3.23.jar:5.3.23]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:137) ~[spring-tx-5.3.23.jar:5.3.23]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:145) ~[spring-data-jpa-2.7.3.jar:2.7.3]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:97) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:215) ~[spring-aop-5.3.23.jar:5.3.23]
+	at com.sun.proxy.$Proxy155.selectAll(Unknown Source) ~[na:na]
+	at com.example.kladr.controlller.RegionController.getRegion(RegionController.java:70) ~[classes/:na]
+	at com.example.kladr.controlller.RegionController$$FastClassBySpringCGLIB$$16756605.invoke(<generated>) ~[classes/:na]
+	at org.springframework.cglib.proxy.MethodProxy.invoke(MethodProxy.java:218) ~[spring-core-5.3.23.jar:5.3.23]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.invokeJoinpoint(CglibAopProxy.java:793) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.cache.interceptor.CacheInterceptor.lambda$invoke$0(CacheInterceptor.java:54) ~[spring-context-5.3.23.jar:5.3.23]
+	at org.springframework.cache.interceptor.CacheAspectSupport.invokeOperation(CacheAspectSupport.java:366) ~[spring-context-5.3.23.jar:5.3.23]
+	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:421) ~[spring-context-5.3.23.jar:5.3.23]
+	at org.springframework.cache.interceptor.CacheAspectSupport.execute(CacheAspectSupport.java:345) ~[spring-context-5.3.23.jar:5.3.23]
+	at org.springframework.cache.interceptor.CacheInterceptor.invoke(CacheInterceptor.java:64) ~[spring-context-5.3.23.jar:5.3.23]
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:186) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.aop.framework.CglibAopProxy$CglibMethodInvocation.proceed(CglibAopProxy.java:763) ~[spring-aop-5.3.23.jar:5.3.23]
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:708) ~[spring-aop-5.3.23.jar:5.3.23]
+	at com.example.kladr.controlller.RegionController$$EnhancerBySpringCGLIB$$31e6d4d2.getRegion(<generated>) ~[classes/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:64) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564) ~[na:na]
+	at org.springframework.web.method.support.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:205) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:150) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:117) ~[spring-webmvc-5.3.23.jar:5.3.23]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:895) ~[spring-webmvc-5.3.23.jar:5.3.23]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:808) ~[spring-webmvc-5.3.23.jar:5.3.23]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.3.23.jar:5.3.23]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1071) ~[spring-webmvc-5.3.23.jar:5.3.23]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:964) ~[spring-webmvc-5.3.23.jar:5.3.23]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1006) ~[spring-webmvc-5.3.23.jar:5.3.23]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:909) ~[spring-webmvc-5.3.23.jar:5.3.23]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:681) ~[tomcat-embed-core-9.0.65.jar:4.0.FR]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:883) ~[spring-webmvc-5.3.23.jar:5.3.23]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:764) ~[tomcat-embed-core-9.0.65.jar:4.0.FR]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:227) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.65.jar:9.0.65]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:337) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:115) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:81) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:122) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:116) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:126) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:81) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:109) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:149) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.authentication.www.BasicAuthenticationFilter.doFilterInternal(BasicAuthenticationFilter.java:166) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:223) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter.doFilter(AbstractAuthenticationProcessingFilter.java:217) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:103) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:89) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:112) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.context.SecurityContextPersistenceFilter.doFilter(SecurityContextPersistenceFilter.java:82) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:55) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:346) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:221) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:186) ~[spring-security-web-5.7.3.jar:5.7.3]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:354) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:267) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:117) ~[spring-web-5.3.23.jar:5.3.23]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:189) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:162) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:197) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:541) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:135) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:360) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:399) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:890) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1789) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-9.0.65.jar:9.0.65]
+	at java.base/java.lang.Thread.run(Thread.java:832) ~[na:na]
+
+2022-10-22 17:38:29.782  WARN 16558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=2m26s182ms).
+2022-10-22 17:49:22.629  WARN 16558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=10m22s769ms).
+2022-10-22 19:13:16.680  WARN 16558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=30m23s774ms).
+2022-10-22 19:32:27.445  WARN 16558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=17m40s731ms).
+2022-10-22 19:52:41.044  WARN 16558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m13s583ms).
+2022-10-22 20:09:58.052  WARN 16558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=16m46s985ms).
+2022-10-22 20:10:51.981  WARN 16558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=53s929ms).
+2022-10-22 20:29:40.353  WARN 16558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=18m18s366ms).
+2022-10-22 20:31:20.139  WARN 16558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m9s796ms).
+2022-10-22 21:05:44.924  WARN 16558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=11m24s672ms).
+2022-10-22 21:11:07.145  INFO 16558 --- [http-nio-8080-exec-7] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 21:11:11.777  INFO 16558 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 21:11:14.870  INFO 16558 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:11:17.360  INFO 16558 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 21:11:22.049  INFO 16558 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:11:24.214  INFO 16558 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 21:19:20.879  INFO 16558 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:22.311  INFO 16558 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:22.973  INFO 16558 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:25.061  INFO 16558 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:25.331  INFO 16558 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:25.537  INFO 16558 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:25.693  INFO 16558 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:27.030  INFO 16558 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:29.035  INFO 16558 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:29.980  INFO 16558 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:30.431  INFO 16558 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:30.875  INFO 16558 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:31.033  INFO 16558 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:19:34.511  INFO 16558 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 21:19:51.715  INFO 16558 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:19:52.291  INFO 16558 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:19:52.866  INFO 16558 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:19:55.026  INFO 16558 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 21:19:59.596  INFO 16558 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : findHouse Иванов С.Н.
+2022-10-22 21:22:03.213  INFO 16558 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:22:13.035  INFO 16558 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 21:22:18.446  INFO 16558 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:22:18.618  INFO 16558 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:22:18.822  INFO 16558 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:22:20.664  INFO 16558 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 21:22:45.792  INFO 16558 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 21:22:48.308  INFO 16558 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:22:48.414  INFO 16558 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:22:48.564  INFO 16558 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:24:54.360  INFO 18454 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18454 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-22 21:24:54.368 DEBUG 18454 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-22 21:24:54.370  INFO 18454 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-22 21:25:20.823  INFO 18454 --- [main] com.example.System5Application           : Started System5Application in 28.931 seconds (JVM running for 33.197)
+2022-10-22 21:25:34.846  INFO 18454 --- [http-nio-8080-exec-3] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 21:25:37.791  INFO 18454 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 21:25:40.376  INFO 18454 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:25:44.080  INFO 18454 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 21:25:47.127  INFO 18454 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:25:47.295  INFO 18454 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:25:47.458  INFO 18454 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:25:49.019  INFO 18454 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 21:27:33.118  INFO 18485 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18485 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-22 21:27:33.142 DEBUG 18485 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-22 21:27:33.146  INFO 18485 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-22 21:27:58.716  INFO 18485 --- [main] com.example.System5Application           : Started System5Application in 29.79 seconds (JVM running for 36.254)
+2022-10-22 21:28:10.963  INFO 18485 --- [http-nio-8080-exec-5] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 21:28:13.196  INFO 18485 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 21:28:16.309  INFO 18485 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:17.092  INFO 18485 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:17.543  INFO 18485 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:17.789  INFO 18485 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:18.072  INFO 18485 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:19.928  INFO 18485 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:20.742  INFO 18485 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:21.282  INFO 18485 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:21.420  INFO 18485 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:23.368  INFO 18485 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:24.017  INFO 18485 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:24.982  INFO 18485 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:25.465  INFO 18485 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:26.286  INFO 18485 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:26.450  INFO 18485 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:28:30.330  INFO 18485 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 21:28:34.406  INFO 18485 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:28:34.738  INFO 18485 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:28:35.142  INFO 18485 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:28:38.615  WARN 18485 --- [http-nio-8080-exec-9] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'streetCodeId' for method parameter type Integer is not present]
+2022-10-22 21:29:01.446  INFO 18485 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 21:29:04.202  INFO 18485 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:29:06.590  INFO 18485 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 21:29:09.184  INFO 18485 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:29:09.320  INFO 18485 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:29:09.471  INFO 18485 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:29:13.520  WARN 18485 --- [http-nio-8080-exec-8] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required request parameter 'streetCodeId' for method parameter type Integer is not present]
+2022-10-22 21:30:01.946  INFO 18537 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 18537 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-22 21:30:01.953 DEBUG 18537 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-22 21:30:01.955  INFO 18537 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-22 21:30:16.599  INFO 18537 --- [main] com.example.System5Application           : Started System5Application in 17.183 seconds (JVM running for 21.856)
+2022-10-22 21:30:24.278  WARN 18537 --- [http-nio-8080-exec-1] o.a.c.util.SessionIdGeneratorBase        : Creation of SecureRandom instance for session ID generation using [SHA1PRNG] took [243] milliseconds.
+2022-10-22 21:30:29.870  INFO 18537 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 21:30:32.207  INFO 18537 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 21:30:35.246  INFO 18537 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:35.468  INFO 18537 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:36.197  INFO 18537 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:36.592  INFO 18537 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:37.263  INFO 18537 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:37.340  INFO 18537 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:37.546  INFO 18537 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:37.792  INFO 18537 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:46.381  INFO 18537 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:47.427  INFO 18537 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:47.911  INFO 18537 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:48.070  INFO 18537 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:30:51.138  INFO 18537 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 21:30:53.795  INFO 18537 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:30:54.029  INFO 18537 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:30:54.367  INFO 18537 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:30:56.819  INFO 18537 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 21:31:07.507  INFO 18537 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 21:31:11.712  INFO 18537 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:31:12.054  INFO 18537 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:31:13.117  INFO 18537 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:31:13.633  INFO 18537 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:31:14.741  INFO 18537 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:31:15.425  INFO 18537 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:31:15.644  INFO 18537 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:31:16.206  INFO 18537 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:31:20.181  INFO 18537 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 21:31:24.614  INFO 18537 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:31:25.363  INFO 18537 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:31:25.838  INFO 18537 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:31:27.064  INFO 18537 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:31:28.069  INFO 18537 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:31:40.557  INFO 18537 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 21:41:44.327  INFO 18537 --- [http-nio-8080-exec-9] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 21:41:45.392  INFO 18537 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 21:41:49.760  INFO 18537 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:41:51.296  INFO 18537 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:41:52.545  INFO 18537 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:41:53.053  INFO 18537 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:41:53.494  INFO 18537 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:41:54.342  INFO 18537 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:41:54.631  INFO 18537 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:41:55.180  INFO 18537 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:41:55.650  INFO 18537 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:41:56.070  INFO 18537 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:41:56.422  INFO 18537 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:42:06.739  INFO 18537 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 21:42:10.822  INFO 18537 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:42:11.121  INFO 18537 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:42:11.300  INFO 18537 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:42:16.046  INFO 18537 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 21:42:43.354  INFO 18537 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:42:45.809  INFO 18537 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 21:42:51.765  INFO 18537 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 21:43:04.244  INFO 18537 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:43:05.823  INFO 18537 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:43:06.145  INFO 18537 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 21:43:06.364  INFO 18537 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:15:24.019  INFO 19024 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 19024 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-22 22:15:24.108 DEBUG 19024 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-22 22:15:24.137  INFO 19024 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-22 22:15:50.482  INFO 19024 --- [main] com.example.System5Application           : Started System5Application in 34.199 seconds (JVM running for 41.472)
+2022-10-22 22:19:29.073  INFO 19024 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 22:19:31.452  INFO 19024 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 22:19:37.973  INFO 19024 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:38.407  INFO 19024 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:38.928  INFO 19024 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:40.961  INFO 19024 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:41.325  INFO 19024 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:41.672  INFO 19024 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:41.931  INFO 19024 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:42.354  INFO 19024 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:42.884  INFO 19024 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:44.053  INFO 19024 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:44.216  INFO 19024 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:47.666  INFO 19024 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:49.166  INFO 19024 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:49.676  INFO 19024 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:49.932  INFO 19024 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:19:58.321  INFO 19024 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 22:20:02.550  INFO 19024 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:20:05.387  INFO 19024 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 22:20:07.336  INFO 19024 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 22:20:11.816  INFO 19024 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:20:16.889  INFO 19024 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 22:20:19.065  INFO 19024 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:20:20.667  INFO 19024 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 22:20:52.113  INFO 19024 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:20:52.825  INFO 19024 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:20:55.215  INFO 19024 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:20:56.086  INFO 19024 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:20:56.669  INFO 19024 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:20:59.954  INFO 19024 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:21:02.707  INFO 19024 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:21:04.987  INFO 19024 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:21:17.582  INFO 19024 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 22:21:19.695  INFO 19024 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:21:25.254  INFO 19024 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:21:25.649  INFO 19024 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:21:26.026  INFO 19024 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:21:27.465  INFO 19024 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 22:21:31.618  INFO 19024 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : findHouse Иванов С.Н.
+2022-10-22 22:21:31.938  INFO 19024 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : findHouse Иванов С.Н.
+2022-10-22 22:24:22.936  INFO 19024 --- [http-nio-8080-exec-3] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 22:24:25.322  INFO 19024 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 22:24:38.875  INFO 19024 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:25:00.090  INFO 19156 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 19156 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-22 22:25:00.101 DEBUG 19156 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-22 22:25:00.103  INFO 19156 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-22 22:25:16.775  INFO 19156 --- [main] com.example.System5Application           : Started System5Application in 18.854 seconds (JVM running for 23.773)
+2022-10-22 22:25:53.042  INFO 19156 --- [http-nio-8080-exec-3] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 22:25:58.933  INFO 19156 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 22:26:03.143  INFO 19156 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:26:07.914  INFO 19156 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 22:26:12.087  INFO 19156 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:26:15.238  INFO 19156 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 22:26:32.557  INFO 19156 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:26:39.599  INFO 19156 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:26:39.977  INFO 19156 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:26:48.327  INFO 19156 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 22:26:50.939  INFO 19156 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:26:51.984  INFO 19156 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:26:52.240  INFO 19156 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:26:53.375  INFO 19156 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:26:54.742  INFO 19156 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:26:55.035  INFO 19156 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:27:11.969  INFO 19156 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:27:12.226  INFO 19156 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:27:12.526  INFO 19156 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:27:13.769  INFO 19156 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:27:14.250  INFO 19156 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:27:18.478  INFO 19156 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:27:18.818  INFO 19156 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:27:19.228  INFO 19156 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:27:20.751  INFO 19156 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:27:20.985  INFO 19156 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:27:21.530  INFO 19156 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:27:23.460  INFO 19156 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 22:37:10.943  INFO 19156 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:37:11.462  INFO 19156 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:37:11.976  INFO 19156 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:37:13.478  INFO 19156 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:37:13.846  INFO 19156 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:37:15.114  INFO 19156 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:37:15.678  INFO 19156 --- [http-nio-8080-exec-3] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:37:18.921  INFO 19156 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 22:37:21.836  INFO 19156 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:37:22.513  INFO 19156 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:37:22.741  INFO 19156 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:37:22.932  INFO 19156 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:37:23.214  INFO 19156 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:37:24.575  INFO 19156 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getHouseList Иванов С.Н.
+2022-10-22 22:37:29.529  INFO 19156 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : findHouse Иванов С.Н.
+2022-10-22 22:37:29.727  INFO 19156 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : findHouse Иванов С.Н.
+2022-10-22 22:38:29.935  INFO 19156 --- [http-nio-8080-exec-8] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 22:38:31.516  INFO 19156 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 22:40:00.437  INFO 19341 --- [main] com.example.System5Application           : Starting System5Application using Java 15.0.2 on MacBook-Air.local with PID 19341 (/Users/aleksejlaskin/IdeaProjects/System5/target/classes started by aleksejlaskin in /Users/aleksejlaskin/IdeaProjects/System5)
+2022-10-22 22:40:00.443 DEBUG 19341 --- [main] com.example.System5Application           : Running with Spring Boot v2.7.4, Spring v5.3.23
+2022-10-22 22:40:00.445  INFO 19341 --- [main] com.example.System5Application           : No active profile set, falling back to 1 default profile: "default"
+2022-10-22 22:40:17.579  INFO 19341 --- [main] com.example.System5Application           : Started System5Application in 19.379 seconds (JVM running for 22.987)
+2022-10-22 22:40:47.447  INFO 19341 --- [http-nio-8080-exec-4] c.e.kanban.controller.KanbanController   : getAllKanban Иванов С.Н.
+2022-10-22 22:40:49.659  INFO 19341 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getSearchPage Иванов С.Н.
+2022-10-22 22:40:52.961  INFO 19341 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:41:02.815  INFO 19341 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:41:24.206  INFO 19341 --- [http-nio-8080-exec-2] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 22:41:33.775  INFO 19341 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:41:34.091  INFO 19341 --- [http-nio-8080-exec-5] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:41:34.232  INFO 19341 --- [http-nio-8080-exec-4] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:41:34.355  INFO 19341 --- [http-nio-8080-exec-7] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:41:34.764  INFO 19341 --- [http-nio-8080-exec-8] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:41:43.980  INFO 19341 --- [http-nio-8080-exec-9] c.e.kladr.controlller.RegionController   : getRegion Иванов С.Н.
+2022-10-22 22:41:46.925  INFO 19341 --- [http-nio-8080-exec-10] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
+2022-10-22 22:41:49.316  INFO 19341 --- [http-nio-8080-exec-1] c.e.kladr.controlller.RegionController   : findStreet Иванов С.Н.
+2022-10-22 22:42:13.906  INFO 19341 --- [http-nio-8080-exec-6] c.e.kladr.controlller.RegionController   : getStreetList Иванов С.Н.
