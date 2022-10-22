@@ -28,7 +28,6 @@ public class KanbanController {
     private final KanbanRepository kanbanRepository;
     private final UserRepository userRepository;
 
-
     public KanbanController(KanbanRepository kanbanRepository, UserRepository userRepository) {
         this.kanbanRepository = kanbanRepository;
         this.userRepository = userRepository;
