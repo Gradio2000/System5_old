@@ -26,12 +26,14 @@
 </head>
 <body>
 <div class="main">
-  <input id="inp" type="text" oninput="getReq(this.value)" style="width: 400px"/>
-  <div id="adressDiv"></div>
-  <input id="inpStr" type="text" oninput="findStreet(this.value)" placeholder="улица" style="width: 400px; display: none"/>
-  <input id="inpHouse" type="text" oninput="findHouse(this.value)" placeholder="дом" style="width: 400px; display: none"/>
-  <div id="ins"></div>
-  <div id="indexDiv"></div>
+  <div style="margin-left: 100px; margin-right: 100px; position: static">
+    <input id="inp" type="text" class="myinput" oninput="getReq(this.value)" placeholder="Начните вводить адрес..." />
+    <input id="inpStr" type="text" class="myinput" oninput="findStreet(this.value)" placeholder="Улица..." style="display: none"/>
+    <input id="inpHouse" type="text" class="myinput" oninput="findHouse(this.value)" placeholder="Дом..." style="display: none"/>
+    <div id="ins"></div>
+  </div>
+  <div id="adressDiv" style="margin-left: 100px; margin-right: 100px; font-style: italic"></div>
+  <div id="indexDiv" style="margin-top: 10px; margin-left: 100px; font-size: larger; font-weight: 500"></div>
 </div>
 </body>
 </html>
@@ -169,10 +171,10 @@
   }
 
   function setInputVisible(){
-    $('#adressElement').hide();
-    $('#inp').show();
-    $('#inpStr').hide();
-    $('#inpHouse').hide();
+    $('#adressElement').hide().val('');
+    let inp = $('#inp').show().val('');
+    $('#inpStr').hide().val('');
+    $('#inpHouse').hide().val('');
     $('#div').remove();
     $('#indexElement').remove();
   }
@@ -197,8 +199,6 @@
     });
 
   }
-
-
 
   function findHouse(value){
     $('#indexElement').remove();
