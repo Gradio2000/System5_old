@@ -29,6 +29,7 @@
     <div style="margin-top: 80px">
         <select class="select-css" id="userIdSelect" name="userId" onchange="setYear(this.value)"
                 style="width: max-content;">
+            <option disabled selected>Год</option>
             <c:forEach var="year" items="${years}">
                 <option value="${year}">${year}</option>
             </c:forEach>
